@@ -2,23 +2,37 @@ from Piece import *
 class Board:
   def __init__(self):
     self.board = [[None for _ in range(8)] for _ in range(8)]
+  
   def __getitem__(self, index):
-      row, col = index
-      return self.board[row][col]
+    """Pro možnost přstupovat k poli board jako board[row,col] místo board.board[row][col]
+    Args:
+        index: Tuple dvou integerů, (row, col), oba 0-7
+    Returns:
+        Figuru na určeném místě na šachovnici, případně None, pokud je prázdné
+    """
+    row, col = index
+    return self.board[row][col]
   def __setitem__(self, index, value):
+    """Nastaví políčko na šachovnici jako board[row,col] namísto board.board[row][col] 
+    Args:
+        index: Tuple dvou integerů, (row, col), oba 0-7
+        value: Instance třídy Piece, nebo None, pokud má být políčko prázdné
+    """
     row, col = index
     self.board[row][col] = value
   def __str__(self):
+    """Vrací string reprezentaci šachovnice. Každé políčko je reprezentováno jako string, který je tvořen z informací o barvě a symbolu figury, nebo jako string "__", pokud je políčko prázdné. Políčka jsou oddělena mezerou a jednotlivé řádky jsou odděleny znakem nového řádku (\n)."""
     result = ""
     for i in range(8):
       for j in range(8):
         try:
           result += str(self.board[i][j].color) + str(self.board[i][j].symbol) + " "
         except:
-          result += str(self.board[i][j]) + " "
+          result +=  "__"
       result += "\n"
     return result
   def setupNormalBoard(self):
+    """Nastaví šachovnici do normálního stavu. Všichni pěšáci jsou v druhém a sedmém řádku, všechny ostatní figury jsou v prvním a osmém řádku. Barva figurek je v souladu s konvencí, že bílý je dole a černý nahoře."""
     for i in range(8):
       self.board[1][i] = Pawn(Colors.BLACK, [1,i])
       self.board[6][i] = Pawn(Colors.WHITE, [6,i])
@@ -39,21 +53,50 @@ class Board:
     self.board[7][3] = Queen(Colors.WHITE, [7,3])
     self.board[7][4] = King(Colors.WHITE, [7,4])
   def pieceList(self, color):
+    """Vrací list všech figurek dané barvy na šachovnici.
+    
+    color: Barva figurek, které chceme najít (Colors.WHITE nebo Colors.BLACK)
+    _return_: List.figurek dané barvy
+    """
     pieceList = []
     for i in range(8):
       for j in range(8):
         if self.board[i][j] is not None and self.board[i][j].color == color:
           pieceList.append(self.board[i][j])
     return pieceList
-  def isKingInCheck(self, color):
+  def copy(self):
+    """Vrátí kopii šachovnice. Každá figura z originální šachovnice je nahrazena její kopií."""
+    newBoard = Board()
+    for i in range(8):
+      for j in range(8):
+        if self[i,j] is not None:
+          newBoard[i,j] = self[i,j].copy()
+    return newBoard
+  def wouldKingBeInCheck(self, color, moveFrom, moveTo):
+    """Vrátí True, pokud by se král dané barvy dostal do šachu po provedení daného tahu, jinak False.
+  
+    color: Barva krále, pro kterého chceme zkontrolovat šach (Colors.WHITE nebo Colors.BLACK)
+    moveFrom: Pole, odkud se figura pohybuje
+    moveTo: Pole, kam se figura pohybuje
+    _return_: True, pokud by se král dostal do šachu, jinak False
+    """
     king = None
     for piece in self.pieceList(color):
       if piece.symbol == "K":
         king = piece
-    
-board = Board()
-board.setupNormalBoard()
-print(board)
+        break
+    boardCopy = self.copy()
+    kingCopy = boardCopy[king.row,king.col]
+    boardCopy[moveFrom].move(boardCopy, moveTo)
+    enemyPieceList = self.pieceList(Colors.WHITE) if color == Colors.BLACK else self.pieceList(Colors.BLACK)
+    possibleMoves = []
+    for enemyPiece in enemyPieceList:
+      possibleMoves += enemyPiece.possibleMoves(boardCopy)
+    if [kingCopy.row, kingCopy.col] in possibleMoves:
+      return True
+    else:
+      return False
+
 
 
 
