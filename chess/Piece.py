@@ -6,6 +6,12 @@ class Piece:
     self.hasMoved = False
     self.lastMoveWasDouble = False
   def move(self, board, end):
+    """
+    Metoda provede tah figurek.
+    Tato metoda provede tah z aktualni pozice figurek na pozici end. Rozhodne se podle typu figurek, zda se ma nastavit lastMoveWasDouble na True.
+    _param_ board: Sachovnice, na ktere se tah provede
+    _param_ end: Konecna pozice, na kterou se ma figura presunout
+    """
     if not self.hasMoved:
       self.hasMoved = True
     if abs(end[0] - self.position[0]) == 2:
@@ -22,6 +28,20 @@ class Piece:
   @property
   def col (self):
     return self.position[1]
+  def possibleMoves(self, board):
+    """
+    Metoda vraci list vsech moznosti, na ktere se figura muze presunout.
+    Tato metoda vraci list vsech moznosti, na ktere se figura muze presunout. V listu jsou pouze ty pozice, na ktere se figura muze presunout, protoze jsou volne, nebo jsou obsazene figurou opacne barvy.
+    _param_ board: Sachovnice, na ktere se presouvame
+    _return_: List pozic, na ktere se figura muze presunout
+    """
+    pass
+  def copy(self):
+    """
+    Vraci kopii objektu. Pouziva se, kdybychom chteli mit kopii objektu, bez toho, aby se menil puvodni objekt.
+    _return_: Kopia objektu
+    """
+    pass
 
 
 class Pawn(Piece):
@@ -222,6 +242,7 @@ class King(Piece):
     return copy
   def possibleMoves(self, board):
     possibleMoves = []
+    # normalni tahy
     possibleMoves.append([self.row-1, self.col])
     possibleMoves.append([self.row-1, self.col+1])
     possibleMoves.append([self.row, self.col+1])
@@ -233,4 +254,18 @@ class King(Piece):
     possibleMoves = [x for x in possibleMoves if (x[0] >= 0 and x[0] <= 7 and x[1] >= 0 and x[1] <= 7)]
     possibleMoves = [x for x in possibleMoves if board[x] is None or board[x].color != self.color]
     possibleMoves = [x for x in possibleMoves if not board.wouldKingBeInCheck(self.color, self.position, x)]
+    # rosady
+    if not self.hasMoved:
+      if board[self.row, self.col+1] is None and \
+          board[self.row, self.col+2] is None and \
+          not board.wouldKingBeInCheck(self.color, self.position, [self.row, self.col+2]) and \
+          not board.wouldKingBeInCheck(self.color, self.position, [self.row, self.col+1]) and \
+          not board[self.row, 7].hasMoved:
+        possibleMoves.append([self.row, self.col+2])
+      if board[self.row, self.col-1] is None and \
+          board[self.row, self.col-2] is None and \
+          not board.wouldKingBeInCheck(self.color, self.position, [self.row, self.col-2]) and \
+          not board.wouldKingBeInCheck(self.color, self.position, [self.row, self.col-1]) and\
+          not board[self.row, 0].hasMoved:
+        possibleMoves.append([self.row, self.col-2])
     return possibleMoves
