@@ -1,4 +1,4 @@
-from Piece import *
+from .Piece import *
 class Board:
   def __init__(self):
     self.board = [[None for _ in range(8)] for _ in range(8)]
@@ -28,7 +28,7 @@ class Board:
         try:
           result += str(self.board[i][j].color) + str(self.board[i][j].symbol) + " "
         except:
-          result +=  "__"
+          result +=  "__ "
       result += "\n"
     return result
   def setupNormalBoard(self):
@@ -91,7 +91,7 @@ class Board:
     enemyPieceList = self.pieceList(Colors.WHITE) if color == Colors.BLACK else self.pieceList(Colors.BLACK)
     possibleMoves = []
     for enemyPiece in enemyPieceList:
-      possibleMoves += enemyPiece.possibleMoves(boardCopy)
+      possibleMoves += enemyPiece.possibleMovesWithoutChecking(boardCopy)
     if [kingCopy.row, kingCopy.col] in possibleMoves:
       return True
     else:
