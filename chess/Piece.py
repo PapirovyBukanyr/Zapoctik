@@ -61,6 +61,18 @@ class Pawn(Piece):
     copy.hasMoved = self.hasMoved
     copy.lastMoveWasDouble = self.lastMoveWasDouble
     return copy
+  def move(self, board, end):
+    if not (end[1] == self.col or board[end] is not None):
+      board[end] = board[self.position]
+      board[self.position] = None
+      if self.color == Colors.WHITE:
+        board[end[0]+1, end[1]] = None
+      else:
+        board[end[0]-1, end[1]] = None
+      self.position = end
+    else:
+      super().move(board, end)
+    
   def possibleMovesWithoutChecking(self, board):
     possibleMoves = []
     # bílá
@@ -281,6 +293,12 @@ class King(Piece):
     copy = King(self.color, self.position)
     copy.hasMoved = self.hasMoved
     return copy
+  def move(self, board, end):
+    if end[1] - self.col == 2:
+      board[self.row, 7].move(board, [self.row, 5])
+    if end[1] - self.col == -2:
+      board[self.row, 0].move(board, [self.row, 3])
+    super().move(board, end)
   def possibleMovesWithoutChecking(self, board):
     possibleMoves = []
     # normalni tahy
