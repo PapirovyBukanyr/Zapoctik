@@ -1,4 +1,10 @@
-from .Piece import *
+from chess.pieces.Piece import *
+from chess.pieces.Pawn import *
+from chess.pieces.Rook import *
+from chess.pieces.Knight import *
+from chess.pieces.Bishop import *
+from chess.pieces.Queen import *
+from chess.pieces.King import *
 class Board:
   def __init__(self):
     self.board = [[None for _ in range(8)] for _ in range(8)]
