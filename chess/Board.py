@@ -103,5 +103,38 @@ class Board:
     else:
       return False
 
-
-
+  def isKingInCheck(self, color):
+    """Vrátí True, pokud je král dané barvy v šachu, jinak False.
+    
+    color: Barva krále, pro kterého chceme zkontrolovat šach (Colors.WHITE nebo Colors.BLACK)
+    _return_: True, pokud je král v šachu, jinak False
+    """
+    king = None
+    for piece in self.pieceList(color):
+      if piece.symbol == "K":
+        king = piece
+        break
+    enemyPieceList = self.pieceList(Colors.WHITE) if color == Colors.BLACK else self.pieceList(Colors.BLACK)
+    possibleMoves = []
+    for enemyPiece in enemyPieceList:
+      possibleMoves += enemyPiece.possibleMovesWithoutChecking(self)
+    if [king.row, king.col] in possibleMoves:
+      return True
+    else:
+      return False
+  def compare(self, board):
+    """Porovná dvě šachovnice.
+    
+    Tato metoda porovná dvě šachovnice a vrátí True, pokud jsou stejné. Jinak vrátí False.
+    _param_ board: Šachovnice, která se má porovnat s aktuální šachovnicí
+    _return_: True, pokud jsou šachovnice stejné, jinak False
+    """
+    for i in range(8):
+      for j in range(8):
+        if self[i,j] is None or board[i,j] is None:
+          if self[i,j] is None and board[i,j] is None:
+            continue
+          return False
+        if self[i,j].__dict__ != board[i,j].__dict__:
+          return False
+    return True
