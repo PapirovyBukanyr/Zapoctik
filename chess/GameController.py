@@ -18,6 +18,9 @@ class GameController:
     self.play()
     
   def play(self):
+    """
+    Metoda play provede kolo hry. Vyzve hrace, aby provedli tah, a pak kontroluje, zda hra skoncila. Pokud hra skoncila, vypise vysledek a ukonci kolo. Pokud hra neskoncila, vypise novou pozici sachovnice, prenese hru na druhého hrace a opakuje kolo.
+    """
     print(self.board)
     while True:
       self.makeMove()
@@ -33,17 +36,18 @@ class GameController:
 
   def makeMove(self):
     #vsechno tohle do budoucna zmenit za klikani a zobrazovani v GUI, zatim v konzolovce
+    """
+    Metoda makeMove provede tah hrace. Vyzve hrace, aby zvolil figuru, kterou chce tahnout, a pak zvolil, kam chce tahnout. Pokud je tah platny, provede ho a zapise si novou pozici sachovnice do historie. Pokud je tah neplatny, vyzve hrace znovu. Pokud je tahnuta pesaka na druhe strane sachovnice, vyvolava se metoda promote.
+    """
     playedPiecePosition = None
     playedMove = None
     while True:
       try:
         playedPiecePosition = input("Zvolte figuru, kterou chcete táhnout: ")
-        if playedPiecePosition == "QUIT":
+        if playedPiecePosition.upper() == "QUIT":
           quit()
         playedPiecePosition = [int(x) for x in playedPiecePosition.split(",")]
       except:
-        if playedPiecePosition == "QUIT":
-          quit()
         print("Neplatné pole, zkuste to znovu")
         continue
       if self.board[playedPiecePosition] is not None and self.board[playedPiecePosition].color == self.makingMove and self.board[playedPiecePosition].possibleMoves(self.board) != []:
@@ -53,13 +57,11 @@ class GameController:
     playedPiece = self.board[playedPiecePosition]
     while True:
       playedMove = input("Zvolte, kam chcete táhnout: ")
-      if playedMove == "QUIT":
+      if playedMove.upper() == "QUIT":
         quit()
       try:
         playedMove = [int(x) for x in playedMove.split(",")]
       except:
-        if playedPiecePosition == "QUIT":
-          quit()
         print("Neplatné pole, zkuste to znovu")
         continue
       if playedMove in self.board[playedPiecePosition].possibleMoves(self.board):
@@ -73,16 +75,20 @@ class GameController:
     if isinstance(playedPiece, Pawn) and playedPiece.row == (0 if playedPiece.color == Colors.WHITE else 7):
       self.promote(playedPiece)
   def changePlayer(self):
+    """
+    Metoda changePlayer zmeni hrace, ktery ma tahnout. Pokud je self.makingMove Colors.WHITE, zmeni se na Colors.BLACK, jinak se zmeni na Colors.WHITE.
+    """
     if self.makingMove == Colors.WHITE:
       self.makingMove = Colors.BLACK
     else:
       self.makingMove = Colors.WHITE
   def promote(self, pawn):
-    while True:
-      choice = input("Zvolte figurku, kterou chcete zvolit: ")
-      if choice in ["Q", "R", "B", "N"]:
-        break
-      print("Neplatný vstup, zkuste to znovu")
+    """
+    Metoda promote provede promote (nevim, jak se to rekne cesky) peshaka, ktery dosahl posledniho radku.
+    Metoda se vola, pokud pesak dosahl posledniho radku a hráč muze zvolit, na kterou figurku se pesak zmeni.
+    _param_ pawn: Pesak, ktery se ma promotovat
+    """
+    choice = input("Zvolte figurku, kterou chcete zvolit: ")  
     match(choice):
       case "Q":
         self.board[pawn.position] = Queen(pawn.color, pawn.position)
@@ -92,6 +98,9 @@ class GameController:
         self.board[pawn.position] = Bishop(pawn.color, pawn.position)
       case "N":
         self.board[pawn.position] = Knight(pawn.color, pawn.position)
+      case _:
+        print("Neplatné pole, zkuste to znovu")
+        self.promote(pawn)
 
   def checkGameOver(self):
     """

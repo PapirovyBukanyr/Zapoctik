@@ -6,8 +6,8 @@ class Colors(Enum):
 
   def __str__(self):
     if self == Colors.WHITE:
-      return "W"
+      return "Bily"
     elif self == Colors.BLACK:
-      return "B"
+      return "Cerny"
     else:
       return "NULL"
