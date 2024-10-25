@@ -1,7 +1,7 @@
 import numpy as np
 import sympy as sp
 import random
-from Question import Question
+from questions.Question import Question
 
 class MatrixQuestionGenerator(Question):  
     """Generátor otázek na matice

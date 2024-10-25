@@ -27,3 +27,11 @@ class Question:
         except:
             self.answer = self.answer.__str__()
         return answer.strip() == self.answer.strip()
+    
+    def generateQuestion(self):
+        """Funkce na generování otázky
+
+        Returns:
+            Vrací otázku ve formát string
+        """
+        return self.question

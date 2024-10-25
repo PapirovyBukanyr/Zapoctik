@@ -1,5 +1,5 @@
 import random
-from Question import Question
+from questions.Question import Question
 
 class FractionQuestionGenerator(Question):
     def generateFraction(self):

@@ -1,6 +1,6 @@
 import random
 import sympy as sp
-from Question import Question
+from questions.Question import Question
 
 class DerivativeQuestionGenerator(Question):    
     def generatePolynomial(self, degree):

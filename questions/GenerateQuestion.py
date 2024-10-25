@@ -1,11 +1,11 @@
 import random as rand
 import sympy as sp
 from IPython.display import display,Latex
-from Question import Question
-from generators.MatrixQuestionGenerator import MatrixQuestionGenerator
-from generators.FractionQuestionGenerator import FractionQuestionGenerator
-from generators.DerivativeQuestionGenerator import DerivativeQuestionGenerator
-from generators.LinearEquationSystemQuestionGenerator import LinearEquationSystemQuestionGenerator
+from questions.Question import Question
+from questions.generators.MatrixQuestionGenerator import MatrixQuestionGenerator
+from questions.generators.FractionQuestionGenerator import FractionQuestionGenerator
+from questions.generators.DerivativeQuestionGenerator import DerivativeQuestionGenerator
+from questions.generators.LinearEquationSystemQuestionGenerator import LinearEquationSystemQuestionGenerator
 
 class GenerateQuestion (Question):
     """Třída na generování otázek
