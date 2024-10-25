@@ -37,8 +37,13 @@ class GameController:
     playedMove = None
     while True:
       try:
-        playedPiecePosition = [int(x) for x in input("Zvolte figuru, kterou chcete táhnout: ").split(",")]
+        playedPiecePosition = input("Zvolte figuru, kterou chcete táhnout: ")
+        if playedPiecePosition == "QUIT":
+          quit()
+        playedPiecePosition = [int(x) for x in playedPiecePosition.split(",")]
       except:
+        if playedPiecePosition == "QUIT":
+          quit()
         print("Neplatné pole, zkuste to znovu")
         continue
       if self.board[playedPiecePosition] is not None and self.board[playedPiecePosition].color == self.makingMove and self.board[playedPiecePosition].possibleMoves(self.board) != []:
@@ -48,9 +53,13 @@ class GameController:
     playedPiece = self.board[playedPiecePosition]
     while True:
       playedMove = input("Zvolte, kam chcete táhnout: ")
+      if playedMove == "QUIT":
+        quit()
       try:
         playedMove = [int(x) for x in playedMove.split(",")]
       except:
+        if playedPiecePosition == "QUIT":
+          quit()
         print("Neplatné pole, zkuste to znovu")
         continue
       if playedMove in self.board[playedPiecePosition].possibleMoves(self.board):
