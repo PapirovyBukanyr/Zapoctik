@@ -28,6 +28,14 @@ class Question:
             self.answer = self.answer.__str__()
         return answer.strip() == self.answer.strip()
     
+    def doupovcuvOperator(self):
+        """Metoda na získání odpovědi
+
+        Returns:
+            odpověď ve formátu string
+        """
+        return self.answer.__str__()
+    
     def generateQuestion(self):
         """Funkce na generování otázky
 

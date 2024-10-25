@@ -1,6 +1,4 @@
 import random as rand
-import sympy as sp
-from IPython.display import display,Latex
 from questions.Question import Question
 from questions.generators.MatrixQuestionGenerator import MatrixQuestionGenerator
 from questions.generators.FractionQuestionGenerator import FractionQuestionGenerator

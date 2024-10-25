@@ -52,7 +52,7 @@ class LinearEquationSystemQuestionGenerator(Question):
         # Za tuto rekurzi už se pro mě v pekle chystá kotel, ale nic lepšího mě teď nenapadá
         try:
             solution = sp.linsolve(equations, variables)
-            self.answer = sum(next(iter(solution))) 
+            self.answer = sum(next(iter(solution))).__str__()
             self.question = f"Vyřeš soustavu rovnic, jako výsledek zapiš součet, pro zlomky ve tvaru a/b: {self.convert_to_latex(equations)}"
         except:
             self.generateQuestion()
