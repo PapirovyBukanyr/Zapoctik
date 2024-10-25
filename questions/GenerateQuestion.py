@@ -1,8 +1,11 @@
 import random as rand
-import Question 
+import sympy as sp
+from IPython.display import display,Latex
 from Question import Question
-from MatrixQuestionGenerator import MatrixQuestionGenerator
-from FractionQuestionGenerator import FractionQuestionGenerator
+from generators.MatrixQuestionGenerator import MatrixQuestionGenerator
+from generators.FractionQuestionGenerator import FractionQuestionGenerator
+from generators.DerivativeQuestionGenerator import DerivativeQuestionGenerator
+from generators.LinearEquationSystemQuestionGenerator import LinearEquationSystemQuestionGenerator
 
 class GenerateQuestion (Question):
     """Třída na generování otázek
@@ -22,7 +25,7 @@ class GenerateQuestion (Question):
         Returns:
             otázka ve formátu string
         """
-        randomQuestion = rand.randint(1, 2)
+        randomQuestion = rand.randint(1, 4)
         
         if randomQuestion == 1: # Generování otázky na matice
             question = MatrixQuestionGenerator() 
@@ -30,11 +33,11 @@ class GenerateQuestion (Question):
         elif randomQuestion == 2: # Generování otázky na zlomky
             question = FractionQuestionGenerator()
             
-        elif randomQuestion == 3:
-            """TODO"""
+        elif randomQuestion == 3: # Generování otázky na derivace
+            question = DerivativeQuestionGenerator()
             
-        else:
-            """TODO"""
+        else: # Generování otázky na soustavu lineárních rovnic
+            question = LinearEquationSystemQuestionGenerator()
             
         
         question.generateQuestion()
@@ -47,10 +50,11 @@ class GenerateQuestion (Question):
     
 if __name__ == "__main__":
     gq = GenerateQuestion()
-    gq.generateQuestion()
-    if gq.checkAnswer(input("Zadej odpověď: ")):
-        print("Odpověď je správná")
-    else:
-        print("Odpověď je špatná")
-    
+    while True:
+        gq.generateQuestion()
+        if gq.checkAnswer(input("Zadej odpověď: ")):
+            print("Odpověď je správná")
+        else:
+            print("Odpověď je špatná")
+        print("Další otázka")
     

@@ -6,13 +6,15 @@ from Question import Question
 class MatrixQuestionGenerator(Question):  
     """Generátor otázek na matice
     """  
-    def generateRegularMatrix(self):
+    def generateRegularMatrix(self, n = random.randint(2, 4)):
         """Generování regulární matice
+        
+        Args:
+            n: Velikost matice, defaultně náhodně mezi 2 a 4
 
         Returns:
             Náhodná regulární matice, ve tvaru numpy array intů
         """
-        n = random.randint(2, 4)
         matrix = np.zeros((n,n))
         while self.calculateDeterminant(matrix) == 0:
             matrix = np.random.randint(1, 10, (n, n))
@@ -66,9 +68,9 @@ class MatrixQuestionGenerator(Question):
         """
         if matrix.shape[0] != matrix.shape[1]:
             return 0
-        return np.linalg.eig(matrix)
+        return sum(np.linalg.eigvals(matrix))
     
-    def vypis(self, matrix):
+    def getLatexMatrix(self, matrix):
         """Metoda pro vygenerování matice ve formátu LaTeX
 
         Args:
@@ -93,20 +95,26 @@ class MatrixQuestionGenerator(Question):
         Returns:
             Vrací sebe sama
         """
-        randomQuestion = np.random.randint(1, 4)
+        randomQuestion = random.randint(1, 4)
         matice = self.generateRegularMatrix()
+        
         if randomQuestion == 1:
-            self.question ="Vypočti determinant matice: " + self.vypis(matice)
+            matice = self.generateRegularMatrix(2)
+            self.question ="Vypočti determinant matice: " + self.getLatexMatrix(matice)
             self.answer =self.calculateDeterminant(matice)
+            
         elif randomQuestion == 2:
-            self.question ="Vypočti determinant inverzní matice: " + self.vypis(matice)
+            self.question ="Vypočti determinant inverzní matice: " + self.getLatexMatrix(matice)
             self.answer =self.calculateDeterminant(self.calculateInverseMatrix(matice))
+            
         elif randomQuestion == 3:
-            self.question ="Vypočti hodnost matice: " + self.vypis(matice)
+            self.question ="Vypočti hodnost matice: " + self.getLatexMatrix(matice)
             self.answer =self.calculateRank(matice)
+            
         else:
-            self.question ="Vypočti součet vlastních čísel matice: " + self.vypis(matice)
-            self.answer = sum(self.calculateEigenvalues(matice))
+            matice = self.generateRegularMatrix(2)
+            self.question ="Vypočti součet vlastních čísel matice: " + self.getLatexMatrix(matice)
+            self.answer = self.calculateEigenvalues(matice)
         return self
             
     

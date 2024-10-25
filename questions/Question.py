@@ -26,7 +26,4 @@ class Question:
             self.answer = round(self.answer).__str__()
         except:
             self.answer = self.answer.__str__()
-        if answer.strip() == self.answer:
-            return True
-        else:
-            return False
+        return answer.strip() == self.answer.strip()

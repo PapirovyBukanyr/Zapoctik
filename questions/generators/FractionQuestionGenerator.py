@@ -24,6 +24,17 @@ class FractionQuestionGenerator(Question):
         gcd = self.greatestCommonDivisor(numerator, denominator)
         return numerator // gcd, denominator // gcd
     
+    def lowestCommonMultiple(self, a, b):
+        """Výpočet nejmenšího společného násobku
+        
+        Args:
+            a: první číslo
+            b: druhé číslo
+        Returns:
+            Nejmenší společný násobek
+        """
+        return a * b // self.greatestCommonDivisor(a, b)
+    
     def greatestCommonDivisor(self, a, b):
         """Výpočet největšího společného dělitele
         
@@ -46,7 +57,7 @@ class FractionQuestionGenerator(Question):
         Returns:
             String reprezentace zlomku
         """
-        return f"\\frac{ {numerator} }{ {denominator} }"
+        return f"$$\\frac{ {numerator} }{ {denominator} }$$"
     
     def fractionToAnswer(self, numerator, denominator):
         """Převedení zlomku na string
@@ -65,21 +76,29 @@ class FractionQuestionGenerator(Question):
         Returns:
             Samo sebe s vygenerovanou otázkou a odpovědí
         """
-        randomQuestion = random.randint(1, 3)
+        randomQuestion = random.randint(1, 5)
         numerator, denominator = self.generateFraction()
         
         if randomQuestion == 1:
-            self.question = f"Zjednodušte tento zlomek: {self.fractionToString(numerator, denominator)}"
+            self.question = f"Zjednodušte tento zlomek: {self.fractionToString(numerator, denominator)} Odpověď zadejte ve tvaru čitatel/jmenovatel"
             simplified_numerator, simplified_denominator = self.simplifyFraction(numerator, denominator)
             self.answer = self.fractionToAnswer(simplified_numerator, simplified_denominator)
         
         elif randomQuestion == 2:
-            self.question = f"Jaký je nejmenší společný násobek {numerator} and {denominator}?"
+            self.question = f"Jaký je největší společný dělitel {numerator} and {denominator}?"
             self.answer = self.greatestCommonDivisor(numerator, denominator)
         
         elif randomQuestion == 3:
             self.question = f"Odhadni výsledek {self.fractionToString(numerator, denominator)} "
             self.answer = numerator / denominator
+        
+        elif randomQuestion == 4:
+            self.question = f"Jaký je zbytek po dělení {numerator} číslem {denominator}?"
+            self.answer = numerator % denominator
+            
+        else:
+            self.question = f"Jaký je nejmenší společný násobek {numerator} and {denominator}?"
+            self.answer = self.lowestCommonMultiple(numerator, denominator)
         
         return self
 
