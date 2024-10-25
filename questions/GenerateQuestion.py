@@ -1,35 +1,58 @@
 import random as rand
+from questions.Question import Question
+from questions.generators.MatrixQuestionGenerator import MatrixQuestionGenerator
+from questions.generators.FractionQuestionGenerator import FractionQuestionGenerator
+from questions.generators.DerivativeQuestionGenerator import DerivativeQuestionGenerator
+from questions.generators.LinearEquationSystemQuestionGenerator import LinearEquationSystemQuestionGenerator
 
-class GenerateQuestion:
-    """_summary_ Třída na generování otázek
+class GenerateQuestion (Question):
+    """Třída na generování otázek
     Pro generování otázek použij metodu generateQuestion
+    Pro kontrolu odpovědí použij metodu checkAnswer s parametrem answer
+    Výsledky se zaokrouhlují na celá čísla!!!
     """
     def __init__(self):
-        self.loadQuestions()
+        """Konstruktor třídy GenerateQuestion
+        """
+        super().__init__()
         print("Otázky jsou připraveny ke generování")
         
-    def loadQuestions(self):
-        """_summary_ Metoda na načtení otázek
-        """
-        self.questions = ["Kolik je 2+2?", "Kolik je 3*3?", "Kolik je 4-2?", "Kolik je 5/5?"]
-        self.answers = [4,9,2,1]
-        
     def generateQuestion(self):
-        """_summary_ Metoda na generování otázek
-        Metoda náhodně vybere náhodnou otázku ze seznamu a vrátí ji
-        _return_ otázka ve formátu string
+        """Metoda na generování otázek
+        
+        Returns:
+            otázka ve formátu string
         """
-        self.numberOfChosenQustion = rand.randint(0, self.questions.count()-1) 
-        return self.questions[self.numberOfChosenQustion]
+        randomQuestion = rand.randint(1, 4)
+        
+        if randomQuestion == 1: # Generování otázky na matice
+            question = MatrixQuestionGenerator() 
+            
+        elif randomQuestion == 2: # Generování otázky na zlomky
+            question = FractionQuestionGenerator()
+            
+        elif randomQuestion == 3: # Generování otázky na derivace
+            question = DerivativeQuestionGenerator()
+            
+        else: # Generování otázky na soustavu lineárních rovnic
+            question = LinearEquationSystemQuestionGenerator()
+            
+        
+        question.generateQuestion()
+        self.answer = question.answer
+        self.question = question.question
+            
+        print(self)
+        
+        return self.question
     
-    def checkAnswer(self, answer):
-        """_summary_ Metoda na kontrolu odpovědi
-        Metoda zkontroluje zda je zadaná odpověď správná
-        _param_ answer - zadaná odpověď
-        _return_ True - pokud je odpověď správná
-        """
-        if answer == self.answers[self.numberOfChosenQustion]:
-            return True
+if __name__ == "__main__":
+    gq = GenerateQuestion()
+    while True:
+        gq.generateQuestion()
+        if gq.checkAnswer(input("Zadej odpověď: ")):
+            print("Odpověď je správná")
         else:
-            return False
+            print("Odpověď je špatná")
+        print("Další otázka")
     
