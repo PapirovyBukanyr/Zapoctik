@@ -6,6 +6,7 @@ class Queen(Piece):
   def __init__(self, color, position):
     super().__init__(color, position)
     self.symbol = "Q"
+    self.value = 9
   def copy(self):
     return Queen(self.color, self.position)
   def possibleMovesWithoutChecking(self, board):

@@ -5,6 +5,7 @@ class Piece:
     self.position = position
     self.hasMoved = False
     self.lastMoveWasDouble = False
+    self.value = 0
   def move(self, board, end):
     """
     Metoda provede tah figurek.

@@ -4,6 +4,7 @@ class Bishop(Piece):
   def __init__(self, color, position):
     super().__init__(color, position)
     self.symbol = "B"
+    self.value = 3
   def copy(self):
     return Bishop(self.color, self.position)
   def possibleMovesWithoutChecking(self, board):

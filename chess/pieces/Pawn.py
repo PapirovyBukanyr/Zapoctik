@@ -5,6 +5,7 @@ class Pawn(Piece):
   def __init__(self, color, position):
     super().__init__(color, position)
     self.symbol = "P"
+    self.value = 1
   def copy(self):
     copy = Pawn(self.color, self.position)
     copy.hasMoved = self.hasMoved

@@ -4,6 +4,7 @@ class Knight(Piece):
   def __init__(self, color, position):
     super().__init__(color, position)
     self.symbol = "N"
+    self.value = 3
   def copy(self):
     return Knight(self.color, self.position)
   def possibleMovesWithoutChecking(self, board):
