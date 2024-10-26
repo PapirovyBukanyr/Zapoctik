@@ -4,23 +4,26 @@ class Question:
     def __init__(self):
         """Konstruktor třídy Question
         """
-        self.question = ""
+        self.questionText = ""
+        self.questionLatex = ""
         self.answer = ""
 
     def __str__(self):
         """Metoda na výpis otázky s odpovědí
+        
         Returns:
-            Vrátí otázku a odpověď ve formátu string
+            string: Vrátí otázku a odpověď 
         """
-        return f"Otázka: {self.question}\nOdpověď: {self.answer}"
+        return f"Otázka: {self.questionText}{self.questionLatex}\nOdpověď: {self.answer}"
     
     def checkAnswer(self, answer):
         """Metoda na kontrolu odpovědi
         
         Args:
-            answer - zadaná odpověď
+            string: answer - zadaná odpověď
+            
         Returns:
-            bool, true pokud je odpověď správná
+            bool: true pokud je odpověď správná
         """
         try:
             self.answer = round(self.answer).__str__()
@@ -32,7 +35,7 @@ class Question:
         """Metoda na získání odpovědi
 
         Returns:
-            odpověď ve formátu string
+            string: odpověď
         """
         return self.answer.__str__()
     
@@ -40,6 +43,6 @@ class Question:
         """Funkce na generování otázky
 
         Returns:
-            Vrací otázku ve formát string
+            string, string: Vrací otázku
         """
-        return self.question
+        raise NotImplementedError

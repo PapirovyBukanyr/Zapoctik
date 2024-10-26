@@ -8,11 +8,11 @@ class LinearEquationSystemQuestionGenerator(Question):
         """Vygenerování lineární soustavy rovnic
 
         Args:
-            nuum_equations: počet chtěných rovnic
-            num_variables: počet chtěných proměnných
+            num_equations (int): počet chtěných rovnic
+            num_variables (int): počet chtěných proměnných
 
         Returns:
-            Vygenerované rovnice a jejich proměnné
+            sympy equations, sympy symbols: Vygenerované rovnice a jejich proměnné
         """
         variables = sp.symbols(f'x1:{num_variables+1}')
         equations = []
@@ -27,23 +27,23 @@ class LinearEquationSystemQuestionGenerator(Question):
         """Metoda na konverzi rovnic do latexu
 
         Args:
-            equations: vstupní rovnice
+            equations (sympy equations): vstupní rovnice
 
         Returns:
-            latexový zápis rovnic ve formátu string
+            string: latexový zápis rovnic ve formátu string
         """
-        result = "\n\\begin{align*}\n"
+        result = "\\begin{align*}"
         for eq in equations:
             lhs = eq.lhs
             rhs = eq.rhs
-            result += f"{sp.latex(lhs)} &= {sp.latex(rhs)}\\\\ \n"
+            result += f"{sp.latex(lhs)} &= {sp.latex(rhs)}\\\\ "
         return result + "\\end{align*}"
     
     def generateQuestion(self):
         """Metoda na generování otázky
 
         Returns:
-            Funkce vrací sebe sama
+            LinearEquationSystemQuestionGenerator: Funkce vrací sebe sama s vygenerovanou otázkou
         """
         num_equations = random.randint(2, 4)
         num_variables = num_equations 
@@ -53,7 +53,8 @@ class LinearEquationSystemQuestionGenerator(Question):
         try:
             solution = sp.linsolve(equations, variables)
             self.answer = sum(next(iter(solution))).__str__()
-            self.question = f"Vyřeš soustavu rovnic, jako výsledek zapiš součet, pro zlomky ve tvaru a/b: {self.convert_to_latex(equations)}"
+            self.questionText = "Vyřeš soustavu rovnic, jako výsledek zapiš součet, pro zlomky ve tvaru a/b: "
+            self.questionLatex = self.convert_to_latex(equations)
         except:
             self.generateQuestion()
             

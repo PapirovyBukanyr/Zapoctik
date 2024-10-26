@@ -21,7 +21,7 @@ class GenerateQuestion (Question):
         """Metoda na generování otázek
         
         Returns:
-            otázka ve formátu string
+            string, string (questionText, questionLatex): otázka
         """
         randomQuestion = rand.randint(1, 4)
         
@@ -40,11 +40,12 @@ class GenerateQuestion (Question):
         
         question.generateQuestion()
         self.answer = question.answer
-        self.question = question.question
+        self.questionText = question.questionText
+        self.questionLatex = question.questionLatex
             
         print(self)
         
-        return self.question
+        return self.questionText, self.questionLatex
     
 if __name__ == "__main__":
     gq = GenerateQuestion()

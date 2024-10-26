@@ -7,10 +7,10 @@ class DerivativeQuestionGenerator(Question):
         """Generování náhodného polynomu
         
         Args:
-            degree: stupeň polynomu
+            degree (int): stupeň polynomu
             
         Returns:
-            polynom ve tvaru sympy
+            sympy symbol: polynom 
         """
         x = sp.symbols('x')
         polynomial = sum(random.randint(-10, 10) * x**i for i in range(0,degree + 1))
@@ -20,7 +20,7 @@ class DerivativeQuestionGenerator(Question):
         """Generování náhodné otázky na derivace
 
         Returns:
-            Vrací samo sebe s vygenerovanou otázkou a odpovědí
+            DerivativeQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovědí
         """
         randomQuestion = random.randint(1, 3)
         degree = random.randint(1, 4)
@@ -29,15 +29,18 @@ class DerivativeQuestionGenerator(Question):
         i = random.randint(-5, 5)
         
         if randomQuestion == 1:
-            self.question = f"Urči hodnotu první derivace ${sp.latex(polynomial)}$ v bodě $x = {i}$"
+            self.questionText = f"Urči hodnotu první derivace v bodě x = {i}"
+            self.questionLatex = sp.latex(polynomial)
             self.answer = sp.diff(polynomial, x).subs(x, i)
         
         elif randomQuestion == 2:
-            self.question = f"Urči hodnotu druhé derivace ${sp.latex(polynomial)}$ v bodě $x = {i}$"
+            self.questionText = f"Urči hodnotu druhé derivace v bodě x = {i}"
+            self.questionLatex = sp.latex(polynomial)
             self.answer = sp.diff(polynomial, x, 2).subs(x, i)
         
         else:
-            self.question = f"Urči hodnotu třetí derivace ${sp.latex(polynomial)}$ v bodě $x = {i}$"
+            self.questionText = f"Urči hodnotu třetí derivace v bodě x = {i}"
+            self.questionLatex = sp.latex(polynomial)
             self.answer = sp.diff(polynomial, x, 3).subs(x, i)
         
         return self

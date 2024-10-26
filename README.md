@@ -28,6 +28,12 @@ Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky 
 
 ## Složky a Soubory
 
+### Backend šachů
+
+ - TODO, Filip doplní
+
+### Generování otázek
+
 Otázky se generují v modulech `questions`, kde je třída `questions/Question.py`, ze které všechny otázky dědí a která poskytuje základní představu o struktuře generátorů. Další důležitá třída je `questions/GenerateQuestion.py`, která slouží k obecnému vygenerování otázky. Otázky na konkrétní témata se pak generují v souborech:
 - `questions/generators/MatrixQuestionGenerator.py`: Generátor otázek na maticové operace.
 - `questions/generators/FractionQuestionGenerator.py`: Generátor otázek na zlomky a obecně dvojice čísel.
