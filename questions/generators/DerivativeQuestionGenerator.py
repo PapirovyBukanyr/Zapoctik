@@ -7,10 +7,10 @@ class DerivativeQuestionGenerator(Question):
         """Generování náhodného polynomu
         
         Args:
-            degree: stupeň polynomu
+            degree (int): stupeň polynomu
             
         Returns:
-            polynom ve tvaru sympy
+            sympy symbol: polynom 
         """
         x = sp.symbols('x')
         polynomial = sum(random.randint(-10, 10) * x**i for i in range(0,degree + 1))
@@ -20,7 +20,7 @@ class DerivativeQuestionGenerator(Question):
         """Generování náhodné otázky na derivace
 
         Returns:
-            Vrací samo sebe s vygenerovanou otázkou a odpovědí
+            DerivativeQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovědí
         """
         randomQuestion = random.randint(1, 3)
         degree = random.randint(1, 4)

@@ -21,7 +21,7 @@ class GenerateQuestion (Question):
         """Metoda na generování otázek
         
         Returns:
-            otázka ve formátu string
+            string, string (questionText, questionLatex): otázka
         """
         randomQuestion = rand.randint(1, 4)
         

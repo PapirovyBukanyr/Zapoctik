@@ -11,16 +11,18 @@ class GameController:
     self.positionsList = [self.board.copy()]  
     self.isMoving = Colors.WHITE
   
-  def playedPiecePosition (self, positionToPlay):
+  def playedPiecePosition (self, positionToPlay, color = None):
     """Funkce pro zjisteni moznych tahu hrace
 
     Args:
-        color (Enum Colors): Barva hrace, ktery chce hrat
         positionToPlay ([int, int]): pozice figurky, kterou chce hrac hrat
+        color (Enum Colors): Barva hrace, ktery chce hrat
 
     Returns:
         (list of [int, int]): dostupne pozice, kam muze hrac hrat
     """
+    if color is not None:
+      self.isMoving = color
     try:
       if self.isMoving != self.board[positionToPlay].color:
         return []
@@ -106,6 +108,7 @@ class GameController:
       return result
 
     self.isMoving = Colors.BLACK if self.isMoving == Colors.WHITE else Colors.WHITE
+    
     return True
 
 
@@ -115,7 +118,7 @@ class GameController:
     Returns:
         string: "Draw by fifty-move rule" pokud bylo 50 tahu bez pohybu pesaku nebo braneni
         string: "Draw by threefold repetition" pokud se stejna pozice opakovala 3x
-        tuple: ("Checkmate", color) pokud byl sach mat
+        string: "Checkmate {color} won" pokud byl vyhozen kral
     """
     if self.movesSinceLastImportantMove >= 100:
       return "Draw by fifty-move rule"
@@ -139,5 +142,5 @@ class GameController:
           color = Colors.BLACK
         else: 
           color = Colors.WHITE
-        return "Checkmate", color
+        return f"Checkmate {color} won"
     

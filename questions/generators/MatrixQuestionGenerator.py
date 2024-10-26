@@ -10,10 +10,10 @@ class MatrixQuestionGenerator(Question):
         """Generování regulární matice
         
         Args:
-            n: Velikost matice, defaultně náhodně mezi 2 a 4
+            n (int): Velikost matice, defaultně náhodně mezi 2 a 4
 
         Returns:
-            Náhodná regulární matice, ve tvaru numpy array intů
+            numpy array int: Náhodná regulární matice
         """
         matrix = np.zeros((n,n))
         while self.calculateDeterminant(matrix) == 0:
@@ -24,10 +24,10 @@ class MatrixQuestionGenerator(Question):
         """Výpočet determinantu matice
         
         Args:
-            matrix: matice, ve tvaru numpy array intů
+            matrix (numpy array int):  matice, ve tvaru numpy array intů
             
         Returns:
-            Hodnota determinantu matice
+            float: Hodnota determinantu matice
         """
         if matrix.shape[0] != matrix.shape[1]:
             return 0
@@ -37,10 +37,10 @@ class MatrixQuestionGenerator(Question):
         """Výpočet inverzní matice
 
         Args:
-            matrix: matice, ve tvaru numpy array intů
+            matrix (numpy array int): matice
 
         Returns:
-            matice, ve tvaru numpy array intů
+            numpy array int: inverzní matice
         """
         if matrix.shape[0] != matrix.shape[1]:
             return 0
@@ -50,7 +50,7 @@ class MatrixQuestionGenerator(Question):
         """Výpočet řádu matice
 
         Args:
-            matrix: matice ve tvaru numpy array intů
+            matrix (numpy array int): matice
 
         Returns:
             int: řád matice
@@ -61,10 +61,10 @@ class MatrixQuestionGenerator(Question):
         """Výpočet vlastních čísel matice
 
         Args:
-            matrix: matice, ve tvaru numpy array intů
+            matrix (numpy array int): matice
 
         Returns:
-            numpy list: vlastní čísla matice
+            float: součet vlastní čísla matice
         """
         if matrix.shape[0] != matrix.shape[1]:
             return 0
@@ -74,7 +74,7 @@ class MatrixQuestionGenerator(Question):
         """Metoda pro vygenerování matice ve formátu LaTeX
 
         Args:
-            matrix: matice, ve tvaru numpy array intů
+            matrix (numpy array int): matice
 
         Returns:
             string: matice ve formátu LaTeX
@@ -93,7 +93,7 @@ class MatrixQuestionGenerator(Question):
         """Metoda na generování otázek na matice
 
         Returns:
-            Vrací sebe sama
+            MatrixQuestionGenerator: Vrací sebe sama s vygenerovanými otázkami
         """
         randomQuestion = random.randint(1, 4)
         matice = self.generateRegularMatrix()

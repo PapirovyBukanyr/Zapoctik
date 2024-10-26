@@ -8,11 +8,11 @@ class LinearEquationSystemQuestionGenerator(Question):
         """Vygenerování lineární soustavy rovnic
 
         Args:
-            nuum_equations: počet chtěných rovnic
-            num_variables: počet chtěných proměnných
+            num_equations (int): počet chtěných rovnic
+            num_variables (int): počet chtěných proměnných
 
         Returns:
-            Vygenerované rovnice a jejich proměnné
+            sympy equations, sympy symbols: Vygenerované rovnice a jejich proměnné
         """
         variables = sp.symbols(f'x1:{num_variables+1}')
         equations = []
@@ -27,10 +27,10 @@ class LinearEquationSystemQuestionGenerator(Question):
         """Metoda na konverzi rovnic do latexu
 
         Args:
-            equations: vstupní rovnice
+            equations (sympy equations): vstupní rovnice
 
         Returns:
-            latexový zápis rovnic ve formátu string
+            string: latexový zápis rovnic ve formátu string
         """
         result = "\\begin{align*}"
         for eq in equations:
@@ -43,7 +43,7 @@ class LinearEquationSystemQuestionGenerator(Question):
         """Metoda na generování otázky
 
         Returns:
-            Funkce vrací sebe sama
+            LinearEquationSystemQuestionGenerator: Funkce vrací sebe sama s vygenerovanou otázkou
         """
         num_equations = random.randint(2, 4)
         num_variables = num_equations 
