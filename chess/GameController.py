@@ -8,11 +8,10 @@ class GameController:
     self.board = Board()
     self.playedPiece = None
     self.board.setupNormalBoard()
-    self.positionsList = [self.board.copy()]
-    print(self.board)
+    self.positionsList = [self.board.copy()]  
+    self.isMoving = Colors.WHITE
   
-  
-  def playedPiecePosition (self, color, positionToPlay):
+  def playedPiecePosition (self, positionToPlay):
     """Funkce pro zjisteni moznych tahu hrace
 
     Args:
@@ -23,7 +22,7 @@ class GameController:
         (list of [int, int]): dostupne pozice, kam muze hrac hrat
     """
     try:
-      if color != self.board[positionToPlay].color:
+      if self.isMoving != self.board[positionToPlay].color:
         return []
       self.playedPiece = self.board[positionToPlay]
       return  self.playedPiece.possibleMoves(self.board)
@@ -52,7 +51,7 @@ class GameController:
       return None
 
     if isinstance(self.playedPiece,Pawn) or self.board[playedMove] is not None:
-     self.movesSinceLastImportantMove = -1
+      self.movesSinceLastImportantMove = -1
     self.playedPiece.move(self.board, playedMove)
     self.movesSinceLastImportantMove += 1
     self.positionsList.append(self.board.copy())
@@ -60,7 +59,7 @@ class GameController:
     if isinstance(self.playedPiece, Pawn) and self.playedPiece.row == (0 if self.playedPiece.color == Colors.WHITE else 7):
       return "Promote"
       
-    self.endOfMove()
+    return self.endOfMove()
 
 
   def promote(self, newFigure):
@@ -102,12 +101,12 @@ class GameController:
         tuple: (board, string) pokud hra skoncila
     """
     self.playedPiece = None
-    self.positionsList.append(self.board.copy())
     
     result = self.checkGameOver()
     if result is not None:
       return self.board, result
-    
+
+    self.isMoving = Colors.BLACK if self.isMoving == Colors.WHITE else Colors.WHITE
     return self.board
 
 

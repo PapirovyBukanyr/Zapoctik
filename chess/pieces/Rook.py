@@ -9,7 +9,7 @@ class Rook(Piece):
     copy = Rook(self.color, self.position)
     copy.hasMoved = self.hasMoved
     return copy
-  def possibleMovesWithoutChecking(self, board):
+  def possibleMoves(self, board):
     possibleMoves = []
     i = 1
     while self.row - i >= 0:
@@ -43,8 +43,4 @@ class Rook(Piece):
         break 
       possibleMoves.append([self.row, self.col+i])
       i += 1
-    return possibleMoves
-  def possibleMoves(self, board):
-    possibleMoves = self.possibleMovesWithoutChecking(board)
-    possibleMoves = [x for x in possibleMoves if not board.wouldKingBeInCheck(self.color, self.position, x)]
     return possibleMoves

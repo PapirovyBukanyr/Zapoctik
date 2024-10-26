@@ -8,10 +8,11 @@ class Piece:
     self.value = 0
   def move(self, board, end):
     """
-    Metoda provede tah figurek.
-    Tato metoda provede tah z aktualni pozice figurek na pozici end. Rozhodne se podle typu figurek, zda se ma nastavit lastMoveWasDouble na True.
-    _param_ board: Sachovnice, na ktere se tah provede
-    _param_ end: Konecna pozice, na kterou se ma figura presunout
+    Metoda pro pohnutí figurky po šachovnici
+
+    Args:
+        board (Board): Sachovnice, na kterou se tah províde
+        end ([row, col]): Policko, kam se tah províde
     """
     if not self.hasMoved:
       self.hasMoved = True
@@ -31,45 +32,19 @@ class Piece:
     return self.position[1]
   def possibleMoves(self, board):
     """
-    Metoda vraci list vsech moznosti, na ktere se figura muze presunout.
-    Tato metoda vraci list vsech moznosti, na ktere se figura muze presunout. V listu jsou pouze ty pozice, na ktere se figura muze presunout, protoze jsou volne, nebo jsou obsazene figurou opacne barvy.
-    _param_ board: Sachovnice, na ktere se presouvame
-    _return_: List pozic, na ktere se figura muze presunout
-    """
-    pass
-  def possibleMovesWithoutChecking(self, board):
-    """
-    Metoda vraci list vsech moznosti, na ktere se figura muze presunout, nehlede na to, zda by kral byl v sachu.
-    Tato metoda vraci list vsech moznosti, na ktere se figura muze presunout. V listu jsou vsechny pozice, na ktere se figura muze presunout, nezalezi na tom, zda by kral byl po provedeni tahu v sachu.
-    _param_ board: Sachovnice, na ktere se presouvame
-    _return_: List pozic, na ktere se figura muze presunout
+    Funkce pro vypsání všech možných tahů danou figurkou
+
+    Args:
+        board (Board): Sachovnice, na kterou se tah províde
+
+    Returns:
+        (list of [row, col]): Seznam všech možných tahů ve formátu
     """
     pass
   def copy(self):
     """
     Vraci kopii objektu. Pouziva se, kdybychom chteli mit kopii objektu, bez toho, aby se menil puvodni objekt.
-    _return_: Kopia objektu
+    Returns:
+        (Piece): Kopie objektu
     """
     pass
-
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-    
- 
-  
-
-
-  
-
-

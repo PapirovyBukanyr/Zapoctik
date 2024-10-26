@@ -14,7 +14,7 @@ class King(Piece):
     if end[1] - self.col == -2:
       board[self.row, 0].move(board, [self.row, 3])
     super().move(board, end)
-  def possibleMovesWithoutChecking(self, board):
+  def possibleMoves(self, board):
     possibleMoves = []
     # normalni tahy
     possibleMoves.append([self.row-1, self.col])
@@ -37,17 +37,4 @@ class King(Piece):
           board[self.row, self.col-2] is None and \
           not board[self.row, 0].hasMoved:
         possibleMoves.append([self.row, self.col-2])
-    return possibleMoves
-    
-  def possibleMoves(self, board):
-    possibleMoves = self.possibleMovesWithoutChecking(board)
-    possibleMoves = [x for x in possibleMoves if not board.wouldKingBeInCheck(self.color, self.position, x)]
-    if [self.row, self.col-2] in possibleMoves:
-      if board.wouldKingBeInCheck(self.color, self.position, [self.row, self.col-2]) or \
-        board.wouldKingBeInCheck(self.color, self.position, [self.row, self.col-1]):
-        possibleMoves.remove([self.row, self.col-2])
-    if [self.row, self.col+2] in possibleMoves:
-      if board.wouldKingBeInCheck(self.color, self.position, [self.row, self.col+2]) or \
-        board.wouldKingBeInCheck(self.color, self.position, [self.row, self.col+1]):
-        possibleMoves.remove([self.row, self.col+2])
     return possibleMoves

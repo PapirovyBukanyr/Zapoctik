@@ -7,7 +7,7 @@ class Bishop(Piece):
     self.value = 3
   def copy(self):
     return Bishop(self.color, self.position)
-  def possibleMovesWithoutChecking(self, board):
+  def possibleMoves(self, board):
     possibleMoves = []
     i = 1
     while self.row - i >= 0 and self.col - i >= 0:
@@ -41,8 +41,4 @@ class Bishop(Piece):
         break
       possibleMoves.append([self.row+i, self.col+i])
       i += 1
-    return possibleMoves
-  def possibleMoves(self, board):
-    possibleMoves = self.possibleMovesWithoutChecking(board)
-    possibleMoves = [x for x in possibleMoves if not board.wouldKingBeInCheck(self.color, self.position, x)]
     return possibleMoves

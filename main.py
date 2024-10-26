@@ -9,7 +9,7 @@ qg = GenerateQuestion()
 #ukazka prace s backendem
 while True:
     print(game.board)
-    print(game.playedPiecePosition(Colors.WHITE, [int(input("zadejte radek: ")), int(input("zadejte sloupec: "))]))
+    print(game.playedPiecePosition([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))]))
     print(game.makeMove([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))]))
     print(game.promote("Q"))
 
@@ -19,4 +19,3 @@ while True:
         print("Správně")
     else:
         print("Špatně")
-    

@@ -78,50 +78,6 @@ class Board:
         if self[i,j] is not None:
           newBoard[i,j] = self[i,j].copy()
     return newBoard
-  def wouldKingBeInCheck(self, color, moveFrom, moveTo):
-    """Vrátí True, pokud by se král dané barvy dostal do šachu po provedení daného tahu, jinak False.
-  
-    color: Barva krále, pro kterého chceme zkontrolovat šach (Colors.WHITE nebo Colors.BLACK)
-    moveFrom: Pole, odkud se figura pohybuje
-    moveTo: Pole, kam se figura pohybuje
-    _return_: True, pokud by se král dostal do šachu, jinak False
-    """
-    king = None
-    for piece in self.pieceList(color):
-      if piece.symbol == "K":
-        king = piece
-        break
-    boardCopy = self.copy()
-    kingCopy = boardCopy[king.row,king.col]
-    boardCopy[moveFrom].move(boardCopy, moveTo)
-    enemyPieceList = self.pieceList(Colors.WHITE) if color == Colors.BLACK else self.pieceList(Colors.BLACK)
-    possibleMoves = []
-    for enemyPiece in enemyPieceList:
-      possibleMoves += enemyPiece.possibleMovesWithoutChecking(boardCopy)
-    if [kingCopy.row, kingCopy.col] in possibleMoves:
-      return True
-    else:
-      return False
-
-  def isKingInCheck(self, color):
-    """Vrátí True, pokud je král dané barvy v šachu, jinak False.
-    
-    color: Barva krále, pro kterého chceme zkontrolovat šach (Colors.WHITE nebo Colors.BLACK)
-    _return_: True, pokud je král v šachu, jinak False
-    """
-    king = None
-    for piece in self.pieceList(color):
-      if piece.symbol == "K":
-        king = piece
-        break
-    enemyPieceList = self.pieceList(Colors.WHITE) if color == Colors.BLACK else self.pieceList(Colors.BLACK)
-    possibleMoves = []
-    for enemyPiece in enemyPieceList:
-      possibleMoves += enemyPiece.possibleMovesWithoutChecking(self)
-    if [king.row, king.col] in possibleMoves:
-      return True
-    else:
-      return False
   def compare(self, board):
     """Porovná dvě šachovnice.
     

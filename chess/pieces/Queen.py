@@ -9,12 +9,8 @@ class Queen(Piece):
     self.value = 9
   def copy(self):
     return Queen(self.color, self.position)
-  def possibleMovesWithoutChecking(self, board):
-    possibleMoves = []
-    possibleMoves += Rook(self.color, self.position).possibleMovesWithoutChecking(board)
-    possibleMoves += Bishop(self.color, self.position).possibleMovesWithoutChecking(board)
-    return possibleMoves
   def possibleMoves(self, board):
-    possibleMoves = self.possibleMovesWithoutChecking(board)
-    possibleMoves = [x for x in possibleMoves if not board.wouldKingBeInCheck(self.color, self.position, x)]
+    possibleMoves = []
+    possibleMoves += Rook(self.color, self.position).possibleMoves(board)
+    possibleMoves += Bishop(self.color, self.position).possibleMoves(board)
     return possibleMoves
