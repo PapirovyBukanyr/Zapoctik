@@ -2,145 +2,126 @@ from .Board import Board
 from .pieces import *
 
 class GameController:
+  
   def __init__(self):
-    self.board = None
-    self.makingMove = Colors.WHITE
     self.movesSinceLastImportantMove = 0
-    self.positionsList = []
-
-  def startGame(self):
-    """
-    Metoda startGame zapne hru. Vytvori sachovnici, nastavi ji do normalniho stavu a zapne smycku, ktera bude volat metodu makeMove, dokud hra neskonci.
-    """
     self.board = Board()
+    self.playedPiece = None
     self.board.setupNormalBoard()
-    self.positionsList.append(self.board.copy())
-    self.play()
-    
-  def play(self):
-    """
-    Metoda play provede kolo hry. Vyzve hrace, aby provedli tah, a pak kontroluje, zda hra skoncila. Pokud hra skoncila, vypise vysledek a ukonci kolo. Pokud hra neskoncila, vypise novou pozici sachovnice, prenese hru na druhého hrace a opakuje kolo.
-    """
+    self.positionsList = [self.board.copy()]
     print(self.board)
-    while True:
-      self.makeMove()
-      result = self.checkGameOver()
-      if result is not None:
-        print(self.board)
-        print(result)
-        break
-      print(self.board)
-      self.changePlayer()
-      print(f"Hraje {self.makingMove}")
+  
+  
+  def playedPiecePosition (self, color, positionToPlay):
+    """Funkce pro zjisteni moznych tahu hrace
+
+    Args:
+        color (Enum Colors): Barva hrace, ktery chce hrat
+        positionToPlay ([int, int]): pozice figurky, kterou chce hrac hrat
+
+    Returns:
+        (list of [int, int]): dostupne pozice, kam muze hrac hrat
+    """
+    try:
+      if color != self.board[positionToPlay].color:
+        return []
+      self.playedPiece = self.board[positionToPlay]
+      return  self.playedPiece.possibleMoves(self.board)
+    except:
+      return []
 
 
-  def makeMove(self):
-    #vsechno tohle do budoucna zmenit za klikani a zobrazovani v GUI, zatim v konzolovce
+  def makeMove(self, playedMove):
+    """Provedení tahu hrace
+
+    Args:
+        playedMove ([int, int]): pozice, kam chce hrac hrat
+
+    Returns:
+        none: nekde doslo k chybe nebo byl neplatny tah
+        string: "Promote" pokud je potreba provest vylepseni pesaka
+        board: novy stav sachovnice po tahu
+        tuple: (board, string) pokud hra skoncila
     """
-    Metoda makeMove provede tah hrace. Vyzve hrace, aby zvolil figuru, kterou chce tahnout, a pak zvolil, kam chce tahnout. Pokud je tah platny, provede ho a zapise si novou pozici sachovnice do historie. Pokud je tah neplatny, vyzve hrace znovu. Pokud je tahnuta pesaka na druhe strane sachovnice, vyvolava se metoda promote.
+    
+    if self.playedPiece is None:
+      return None
+    if playedMove is None:
+      return None
+    if playedMove not in self.playedPiece.possibleMoves(self.board):
+      return None
+
+    if isinstance(self.playedPiece,Pawn) or self.board[playedMove] is not None:
+     self.movesSinceLastImportantMove = -1
+    self.playedPiece.move(self.board, playedMove)
+    self.movesSinceLastImportantMove += 1
+    self.positionsList.append(self.board.copy())
+    
+    if isinstance(self.playedPiece, Pawn) and self.playedPiece.row == (0 if self.playedPiece.color == Colors.WHITE else 7):
+      return "Promote"
+      
+    self.endOfMove()
+
+
+  def promote(self, newFigure):
+    """Promote pesaka
+
+    Args:
+        newFigure (string): figurka, na kterou se ma pesak zmenit ("Q", "R", "B", "N")
+        
+    Returns:
+        none: nekde doslo k chybe nebo byl neplatny tah
+        board: novy stav sachovnice po tahu
+        tuple: (board, string) pokud hra skoncila
     """
-    playedPiecePosition = None
-    playedMove = None
-    while True:
-      try:
-        playedPiecePosition = input("Zvolte figuru, kterou chcete táhnout: ")
-        if playedPiecePosition.upper() == "QUIT":
-          quit()
-        playedPiecePosition = [int(x) for x in playedPiecePosition.split(",")]
-      except:
-        print("Neplatné pole, zkuste to znovu")
-        continue
-      if self.board[playedPiecePosition] is not None and self.board[playedPiecePosition].color == self.makingMove and self.board[playedPiecePosition].possibleMoves(self.board) != []:
-        print(self.board[playedPiecePosition].possibleMoves(self.board))
-        break
-      print("Neplatné pole, zkuste to znovu")
-    playedPiece = self.board[playedPiecePosition]
-    while True:
-      playedMove = input("Zvolte, kam chcete táhnout: ")
-      if playedMove.upper() == "QUIT":
-        quit()
-      try:
-        playedMove = [int(x) for x in playedMove.split(",")]
-      except:
-        print("Neplatné pole, zkuste to znovu")
-        continue
-      if playedMove in self.board[playedPiecePosition].possibleMoves(self.board):
-        if isinstance(self.board[playedPiecePosition],Pawn) or self.board[playedMove] is not None:
-          self.movesSinceLastImportantMove = -1
-        self.board[playedPiecePosition].move(self.board, playedMove)
-        self.movesSinceLastImportantMove += 1
-        self.positionsList.append(self.board.copy())
-        break
-      print("Neplatné pole, zkuste to znovu")
-    if isinstance(playedPiece, Pawn) and playedPiece.row == (0 if playedPiece.color == Colors.WHITE else 7):
-      self.promote(playedPiece)
-  def changePlayer(self):
-    """
-    Metoda changePlayer zmeni hrace, ktery ma tahnout. Pokud je self.makingMove Colors.WHITE, zmeni se na Colors.BLACK, jinak se zmeni na Colors.WHITE.
-    """
-    if self.makingMove == Colors.WHITE:
-      self.makingMove = Colors.BLACK
-    else:
-      self.makingMove = Colors.WHITE
-  def promote(self, pawn):
-    """
-    Metoda promote provede promote (nevim, jak se to rekne cesky) peshaka, ktery dosahl posledniho radku.
-    Metoda se vola, pokud pesak dosahl posledniho radku a hráč muze zvolit, na kterou figurku se pesak zmeni.
-    _param_ pawn: Pesak, ktery se ma promotovat
-    """
-    choice = input("Zvolte figurku, kterou chcete zvolit: ")  
-    match(choice):
+    
+    if not isinstance(self.playedPiece, Pawn):
+      print("Promote can be called only on pawn")
+      return None
+    
+    match(newFigure):
       case "Q":
-        self.board[pawn.position] = Queen(pawn.color, pawn.position)
+        self.board[self.playedPiece.position] = Queen(self.playedPiece.color, self.playedPiece.position)
       case "R":
-        self.board[pawn.position] = Rook(pawn.color, pawn.position)
+        self.board[self.playedPiece.position] = Rook(self.playedPiece.color, self.playedPiece.position)
       case "B":
-        self.board[pawn.position] = Bishop(pawn.color, pawn.position)
+        self.board[self.playedPiece.position] = Bishop(self.playedPiece.color, self.playedPiece.position)
       case "N":
-        self.board[pawn.position] = Knight(pawn.color, pawn.position)
+        self.board[self.playedPiece.position] = Knight(self.playedPiece.color, self.playedPiece.position)
       case _:
-        print("Neplatné pole, zkuste to znovu")
-        self.promote(pawn)
+        return None
+      
+    return self.endOfMove()
+    
+    
+  def endOfMove(self):
+    """Konec tahu
+    
+    Returns:
+        board: novy stav sachovnice po tahu
+        tuple: (board, string) pokud hra skoncila
+    """
+    self.playedPiece = None
+    self.positionsList.append(self.board.copy())
+    
+    result = self.checkGameOver()
+    if result is not None:
+      return self.board, result
+    
+    return self.board
+
 
   def checkGameOver(self):
+    """Kontrola konce hry
+    
+    Returns:
+        string: "Draw by fifty-move rule" pokud bylo 50 tahu bez pohybu pesaku nebo braneni
+        string: "Draw by threefold repetition" pokud se stejna pozice opakovala 3x
+        tuple: ("Checkmate", color) pokud byl sach mat
     """
-    Zkontroluje, zda hra skoncila.
-    Metoda zkontroluje, zda je remiza, nebo checkmate. Pokud je remiza, vrati string "Draw by ...", jinak vrati None. Pokud je checkmate, vrati string "Checkmate {color} won", kde {color} je barva vitezne strany.
-    """
-    def isInsufficientMaterial():
-      """
-      Kontroluje, zda jsou na sachovnici insufficient material, tedy situace, kdy hra skonci remizou, protoze nelze dat mat.
-      Vraci True, pokud je insufficient material, jinak False.
-      """
-      whitePieces = self.board.pieceList(Colors.WHITE)
-      blackPieces = self.board.pieceList(Colors.BLACK)
-      #kral vs kral
-      if len(whitePieces) < 2 and len(blackPieces) < 2:
-        return True
-      #kral vs kun nebo strelec
-      if (len(whitePieces) == 1 and len(blackPieces) == 2):
-        for piece in blackPieces:
-          if piece.symbol == "K":
-            continue
-          if piece.symbol == "N" or piece.symbol == "B":
-            return True
-      if (len(whitePieces) == 2 and len(blackPieces) == 1):
-        for piece in whitePieces:
-          if piece.symbol == "K":
-            continue
-          if piece.symbol == "N" or piece.symbol == "B":
-            return True
-      #strelec vs strelec stejne barvy
-      if (len(whitePieces) == 2 and len(blackPieces) == 2):
-        whitePieces = [piece for piece in whitePieces if piece.symbol != "K"]
-        blackPieces = [piece for piece in blackPieces if piece.symbol != "K"]
-        if whitePieces[0].symbol == "B" and blackPieces[0].symbol == "B":
-          if abs(whitePieces[0].col - whitePieces[0].row) % 2 == abs(blackPieces[0].col - blackPieces[0].row) % 2:
-            return True
-      return False
-
-    if self.movesSinceLastImportantMove == 100:
+    if self.movesSinceLastImportantMove >= 100:
       return "Draw by fifty-move rule"
+    
     for i in range(0,len(self.positionsList)-1):
       count = 0
       for j in range(i+1, len(self.positionsList)):
@@ -148,14 +129,17 @@ class GameController:
           count += 1
       if count >= 3:
         return "Draw by threefold repetition"
-    if isInsufficientMaterial():
-      return "Draw by insufficient material"
-    enemyColor = Colors.WHITE if self.makingMove == Colors.BLACK else Colors.BLACK
-    for piece in self.board.pieceList(enemyColor):
-      if piece.possibleMoves(self.board) != []:
-        return None
-    if self.board.isKingInCheck(enemyColor):
-      return f"Checkmate {self.makingMove} won"
-    else:
-      return "Draw by stalemate"
+      
+    for color in [Colors.WHITE, Colors.BLACK]:
+      isKing = False
+      for piece in self.board.pieceList(color):
+        if piece.symbol == "K":
+          isKing = True
+          break
+      if not isKing:
+        if color == Colors.WHITE:
+          color = Colors.BLACK
+        else: 
+          color = Colors.WHITE
+        return "Checkmate", color
     

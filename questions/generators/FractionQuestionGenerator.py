@@ -80,24 +80,26 @@ class FractionQuestionGenerator(Question):
         numerator, denominator = self.generateFraction()
         
         if randomQuestion == 1:
-            self.question = f"Zjednodušte tento zlomek: {self.fractionToString(numerator, denominator)} Odpověď zadejte ve tvaru čitatel/jmenovatel"
+            self.questionText = f"Zjednodušte tento zlomek. Odpověď zadejte ve tvaru čitatel/jmenovatel"
+            self.questionLatex = self.fractionToString(numerator, denominator)
             simplified_numerator, simplified_denominator = self.simplifyFraction(numerator, denominator)
             self.answer = self.fractionToAnswer(simplified_numerator, simplified_denominator)
         
         elif randomQuestion == 2:
-            self.question = f"Jaký je největší společný dělitel {numerator} and {denominator}?"
+            self.questionText = f"Jaký je největší společný dělitel {numerator} and {denominator}?"
             self.answer = self.greatestCommonDivisor(numerator, denominator)
         
         elif randomQuestion == 3:
-            self.question = f"Odhadni výsledek {self.fractionToString(numerator, denominator)} "
+            self.questionText = "Odhadni výsledek zlomku "
+            self.questionLatex = self.fractionToString(numerator, denominator)
             self.answer = numerator / denominator
         
         elif randomQuestion == 4:
-            self.question = f"Jaký je zbytek po dělení {numerator} číslem {denominator}?"
+            self.questionText = f"Jaký je zbytek po dělení {numerator} číslem {denominator}?"
             self.answer = numerator % denominator
             
         else:
-            self.question = f"Jaký je nejmenší společný násobek {numerator} and {denominator}?"
+            self.questionText = f"Jaký je nejmenší společný násobek {numerator} and {denominator}?"
             self.answer = self.lowestCommonMultiple(numerator, denominator)
         
         return self

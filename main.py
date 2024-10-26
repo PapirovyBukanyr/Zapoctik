@@ -2,17 +2,21 @@
 from chess import *
 from questions.GenerateQuestion import GenerateQuestion
 
-# Zde se to pak celé spustí
 
-# ukázka použití generátoru otázek, odpovědi se zaokrouhlují na celá čísla
+game = GameController()
 qg = GenerateQuestion()
-qg.generateQuestion() # automaticky vypíše otázku i s odpovědí do terminálu, nechal bych to kvůli debugování, klidně to odstraním. Marek
-print("Odpověď: "+qg.doupovcuvOperator()) 
-if qg.checkAnswer(input("Zadej odpověď: ")):
-    print("Správně")
-else:
-    print("Špatně")
+
+#ukazka prace s backendem
+while True:
+    print(game.board)
+    print(game.playedPiecePosition(Colors.WHITE, [int(input("zadejte radek: ")), int(input("zadejte sloupec: "))]))
+    print(game.makeMove([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))]))
+    print(game.promote("Q"))
+
+    qg.generateQuestion() # automaticky vypíše otázku i s odpovědí do terminálu, nechal bych to kvůli debugování, klidně to odstraním. Marek
+    print("Odpověď: "+qg.doupovcuvOperator()) 
+    if qg.checkAnswer(input("Zadej odpověď: ")):
+        print("Správně")
+    else:
+        print("Špatně")
     
-# ukazka spusteni sachu
-gc = GameController()
-gc.startGame()

@@ -4,7 +4,8 @@ class Question:
     def __init__(self):
         """Konstruktor třídy Question
         """
-        self.question = ""
+        self.questionText = ""
+        self.questionLatex = ""
         self.answer = ""
 
     def __str__(self):
@@ -12,7 +13,7 @@ class Question:
         Returns:
             Vrátí otázku a odpověď ve formátu string
         """
-        return f"Otázka: {self.question}\nOdpověď: {self.answer}"
+        return f"Otázka: {self.questionText}{self.questionLatex}\nOdpověď: {self.answer}"
     
     def checkAnswer(self, answer):
         """Metoda na kontrolu odpovědi
@@ -42,4 +43,4 @@ class Question:
         Returns:
             Vrací otázku ve formát string
         """
-        return self.question
+        raise NotImplementedError

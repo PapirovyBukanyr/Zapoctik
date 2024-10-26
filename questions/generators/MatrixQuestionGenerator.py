@@ -100,20 +100,24 @@ class MatrixQuestionGenerator(Question):
         
         if randomQuestion == 1:
             matice = self.generateRegularMatrix(2)
-            self.question ="Vypočti determinant matice: " + self.getLatexMatrix(matice)
+            self.questionText ="Vypočti determinant matice: " 
+            self.questionLatex = self.getLatexMatrix(matice)
             self.answer =self.calculateDeterminant(matice)
             
         elif randomQuestion == 2:
-            self.question ="Vypočti determinant inverzní matice: " + self.getLatexMatrix(matice)
+            self.questionText ="Vypočti determinant inverzní matice: " 
+            self.questionLatex = self.getLatexMatrix(matice)
             self.answer =self.calculateDeterminant(self.calculateInverseMatrix(matice))
             
         elif randomQuestion == 3:
-            self.question ="Vypočti hodnost matice: " + self.getLatexMatrix(matice)
+            self.questionText ="Vypočti hodnost matice: " 
+            self.questionLatex = self.getLatexMatrix(matice)
             self.answer =self.calculateRank(matice)
             
         else:
             matice = self.generateRegularMatrix(2)
-            self.question ="Vypočti součet vlastních čísel matice: " + self.getLatexMatrix(matice)
+            self.questionText ="Vypočti součet vlastních čísel matice: " 
+            self.questionLatex = self.getLatexMatrix(matice)
             self.answer = self.calculateEigenvalues(matice)
         return self
             

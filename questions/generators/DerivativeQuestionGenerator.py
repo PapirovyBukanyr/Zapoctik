@@ -29,15 +29,18 @@ class DerivativeQuestionGenerator(Question):
         i = random.randint(-5, 5)
         
         if randomQuestion == 1:
-            self.question = f"Urči hodnotu první derivace ${sp.latex(polynomial)}$ v bodě $x = {i}$"
+            self.questionText = f"Urči hodnotu první derivace v bodě x = {i}"
+            self.questionLatex = sp.latex(polynomial)
             self.answer = sp.diff(polynomial, x).subs(x, i)
         
         elif randomQuestion == 2:
-            self.question = f"Urči hodnotu druhé derivace ${sp.latex(polynomial)}$ v bodě $x = {i}$"
+            self.questionText = f"Urči hodnotu druhé derivace v bodě $x = {i}$"
+            self.questionLatex = sp.latex(polynomial)
             self.answer = sp.diff(polynomial, x, 2).subs(x, i)
         
         else:
-            self.question = f"Urči hodnotu třetí derivace ${sp.latex(polynomial)}$ v bodě $x = {i}$"
+            self.questionText = f"Urči hodnotu třetí derivace v bodě $x = {i}$"
+            self.questionLatex = sp.latex(polynomial)
             self.answer = sp.diff(polynomial, x, 3).subs(x, i)
         
         return self
