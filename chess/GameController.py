@@ -59,7 +59,7 @@ class GameController:
     if isinstance(self.playedPiece, Pawn) and self.playedPiece.row == (0 if self.playedPiece.color == Colors.WHITE else 7):
       return "Promote"
       
-    return self.endOfMove()
+    self.endOfMove()
 
 
   def promote(self, newFigure):
