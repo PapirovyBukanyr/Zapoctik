@@ -57,7 +57,7 @@ class FractionQuestionGenerator(Question):
         Returns:
             String reprezentace zlomku
         """
-        return f"$$\\frac{ {numerator} }{ {denominator} }$$"
+        return f"\\frac{ {numerator} }{ {denominator} }"
     
     def fractionToAnswer(self, numerator, denominator):
         """Převedení zlomku na string

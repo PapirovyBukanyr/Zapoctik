@@ -37,18 +37,18 @@ class GameController:
         playedMove ([int, int]): pozice, kam chce hrac hrat
 
     Returns:
-        none: nekde doslo k chybe nebo byl neplatny tah
-        string: "Promote" pokud je potreba provest vylepseni pesaka
+        bool: tah se zdařil nebo ne
+        string: "Promote" pokud je potreba provest vylepseni pesaka, jinak konec hry
         board: novy stav sachovnice po tahu
         tuple: (board, string) pokud hra skoncila
     """
     
     if self.playedPiece is None:
-      return None
+      return False
     if playedMove is None:
-      return None
+      return False
     if playedMove not in self.playedPiece.possibleMoves(self.board):
-      return None
+      return False
 
     if isinstance(self.playedPiece,Pawn) or self.board[playedMove] is not None:
       self.movesSinceLastImportantMove = -1
@@ -69,14 +69,13 @@ class GameController:
         newFigure (string): figurka, na kterou se ma pesak zmenit ("Q", "R", "B", "N")
         
     Returns:
-        none: nekde doslo k chybe nebo byl neplatny tah
-        board: novy stav sachovnice po tahu
-        tuple: (board, string) pokud hra skoncila
+        bool: podle toho zda se tah podaril nebo ne
+        string: pokud hra skoncila
     """
     
     if not isinstance(self.playedPiece, Pawn):
       print("Promote can be called only on pawn")
-      return None
+      return False
     
     match(newFigure):
       case "Q":
@@ -88,7 +87,7 @@ class GameController:
       case "N":
         self.board[self.playedPiece.position] = Knight(self.playedPiece.color, self.playedPiece.position)
       case _:
-        return None
+        return False
       
     return self.endOfMove()
     
@@ -97,17 +96,17 @@ class GameController:
     """Konec tahu
     
     Returns:
-        board: novy stav sachovnice po tahu
-        tuple: (board, string) pokud hra skoncila
+        True: novy stav sachovnice po tahu
+        string: string pokud hra skoncila
     """
     self.playedPiece = None
     
     result = self.checkGameOver()
     if result is not None:
-      return self.board, result
+      return result
 
     self.isMoving = Colors.BLACK if self.isMoving == Colors.WHITE else Colors.WHITE
-    return self.board
+    return True
 
 
   def checkGameOver(self):

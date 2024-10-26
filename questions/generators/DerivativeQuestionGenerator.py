@@ -34,12 +34,12 @@ class DerivativeQuestionGenerator(Question):
             self.answer = sp.diff(polynomial, x).subs(x, i)
         
         elif randomQuestion == 2:
-            self.questionText = f"Urči hodnotu druhé derivace v bodě $x = {i}$"
+            self.questionText = f"Urči hodnotu druhé derivace v bodě x = {i}"
             self.questionLatex = sp.latex(polynomial)
             self.answer = sp.diff(polynomial, x, 2).subs(x, i)
         
         else:
-            self.questionText = f"Urči hodnotu třetí derivace v bodě $x = {i}$"
+            self.questionText = f"Urči hodnotu třetí derivace v bodě x = {i}"
             self.questionLatex = sp.latex(polynomial)
             self.answer = sp.diff(polynomial, x, 3).subs(x, i)
         

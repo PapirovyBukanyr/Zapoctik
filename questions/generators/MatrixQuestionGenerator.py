@@ -79,14 +79,14 @@ class MatrixQuestionGenerator(Question):
         Returns:
             string: matice ve formátu LaTeX
         """
-        vypis = "$$\\begin{pmatrix}\n"
+        vypis = "\\begin{pmatrix}\n"
         for i in range(matrix.shape[0]):
             for j in range(matrix.shape[1]):
                 vypis+= matrix[i][j].__str__() 
                 if j != matrix.shape[1]-1:
                     vypis+="&"
             vypis+="\\\\\n"
-        vypis+="\\end{pmatrix}$$"
+        vypis+="\\end{pmatrix}"
         return vypis
     
     def generateQuestion(self):
