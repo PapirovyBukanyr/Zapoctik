@@ -30,7 +30,13 @@ Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky 
 
 ### Backend šachů
 
- - TODO, Filip doplní
+Celá logika se nachází ve složce `chess`. Řízení chodu celé hry má na starosti třída `chess/GameController.py`, která zajišťuje výběr figurky, provedení tahu, střídání tahů a případné zjištění konce hry a její ukončení. Hlubší funkcionalitu jednak zajišťuje třída `chess/Board.py`, která představuje šachovnici, primárně tedy slouží k ukládání pozic figur při hře. A jednak složka `chess/pieces`, ve které se nachází právě funkcionalita všech šachových figur. Všechny figury dědí z jedné mateřské třídy `chess/pieces/Piece.py`, která předepisuje základní vlastnosti všech figur (např. pohyb po šachovnici). Konkrétní implementace jednotlivých figur, obsahující informace o možnosti tahů, symbolu dané figury v notaci nebo materiálové hodnoty figury, se pak nachází v souborech:
+- `chess/pieces/King.py`: Král
+- `chess/pieces/Queen.py`: Dáma
+- `chess/pieces/Rook.py`: Věž
+- `chess/pieces/Knight.py`: Jezdec
+- `chess/pieces/Bishop.py`: Střelec
+- `chess/pieces/Pawn.py`: Pěšec
 
 ### Generování otázek
 
