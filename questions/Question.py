@@ -29,7 +29,7 @@ class Question:
             self.answer = round(self.answer).__str__()
         except:
             self.answer = self.answer.__str__()
-        return answer.strip() == self.answer.strip()
+        return answer.strip().lower() == self.answer.strip().lower()
     
     def doupovcuvOperator(self):
         """Metoda na získání odpovědi

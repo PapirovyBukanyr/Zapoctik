@@ -4,6 +4,10 @@ from questions.generators.MatrixQuestionGenerator import MatrixQuestionGenerator
 from questions.generators.FractionQuestionGenerator import FractionQuestionGenerator
 from questions.generators.DerivativeQuestionGenerator import DerivativeQuestionGenerator
 from questions.generators.LinearEquationSystemQuestionGenerator import LinearEquationSystemQuestionGenerator
+from questions.generators.InfinitiveSeriesQuestionGenerator import InfinitiveSeriesQuestionGenerator
+from questions.generators.IntegralQuestionGenerator import IntegralQuestionGenerator
+from questions.generators.AnalyticGeometryQuestionGenerator import AnalyticGeometryQuestionGenerator
+
 
 class GenerateQuestion (Question):
     """Třída na generování otázek
@@ -23,7 +27,7 @@ class GenerateQuestion (Question):
         Returns:
             string, string (questionText, questionLatex): otázka
         """
-        randomQuestion = rand.randint(1, 4)
+        randomQuestion = rand.randint(1, 7)
         
         if randomQuestion == 1: # Generování otázky na matice
             question = MatrixQuestionGenerator() 
@@ -34,10 +38,18 @@ class GenerateQuestion (Question):
         elif randomQuestion == 3: # Generování otázky na derivace
             question = DerivativeQuestionGenerator()
             
-        else: # Generování otázky na soustavu lineárních rovnic
+        elif randomQuestion == 4: # Generování otázky na soustavu lineárních rovnic
             question = LinearEquationSystemQuestionGenerator()
             
+        elif randomQuestion == 5: # Generování otázky na konvergenci nekonečných řad
+            question = InfinitiveSeriesQuestionGenerator()
         
+        elif randomQuestion == 6: # Generování otázky na určení hodnoty integrálu
+            question = IntegralQuestionGenerator()
+            
+        else: # Generování otázky na analytickou geometrii
+            question = AnalyticGeometryQuestionGenerator()
+            
         question.generateQuestion()
         self.answer = question.answer
         self.questionText = question.questionText
