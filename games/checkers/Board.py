@@ -4,9 +4,9 @@ from Enums import Colors
 class Board:
     def __init__(self):
         self.board = [[None for _ in range(8)] for _ in range(8)]
-        self.populate_board()
+        self.__populateBoard()
         
-    def populate_board(self):
+    def __populateBoard(self):
         for i in range(8):
             for j in range(8):
                 if (i + j) % 2 == 1:
@@ -14,6 +14,8 @@ class Board:
                         self.board[i][j] = Pawn(Colors.BLACK, (i, j))
                     elif i > 4:
                         self.board[i][j] = Pawn(Colors.WHITE, (i, j))
+                    else:
+                        self.board[i][j] = None
 
     def __str__(self):
         board = []
