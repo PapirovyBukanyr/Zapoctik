@@ -1,31 +1,34 @@
-from .pieces.Piece import *
-from .pieces.Pawn import *
-from .pieces.Rook import *
-from .pieces.Knight import *
-from .pieces.Bishop import *
-from .pieces.Queen import *
-from .pieces.King import *
+from .pieces import *
+
 class Board:
   def __init__(self):
     self.board = [[None for _ in range(8)] for _ in range(8)]
+    
   
   def __getitem__(self, index):
     """Pro možnost přstupovat k poli board jako board[row,col] místo board.board[row][col]
+    
     Args:
         index: Tuple dvou integerů, (row, col), oba 0-7
+        
     Returns:
         Figuru na určeném místě na šachovnici, případně None, pokud je prázdné
     """
     row, col = index
     return self.board[row][col]
+  
+  
   def __setitem__(self, index, value):
     """Nastaví políčko na šachovnici jako board[row,col] namísto board.board[row][col] 
+    
     Args:
         index: Tuple dvou integerů, (row, col), oba 0-7
         value: Instance třídy Piece, nebo None, pokud má být políčko prázdné
     """
     row, col = index
     self.board[row][col] = value
+    
+    
   def __str__(self):
     """Vrací string reprezentaci šachovnice. Každé políčko je reprezentováno jako string, který je tvořen z informací o barvě a symbolu figury, nebo jako string "__", pokud je políčko prázdné. Políčka jsou oddělena mezerou a jednotlivé řádky jsou odděleny znakem nového řádku (\n)."""
     result = ""
@@ -37,6 +40,8 @@ class Board:
           result +=  "__ "
       result += "\n"
     return result
+  
+  
   def setupNormalBoard(self):
     """Nastaví šachovnici do normálního stavu. Všichni pěšáci jsou v druhém a sedmém řádku, všechny ostatní figury jsou v prvním a osmém řádku. Barva figurek je v souladu s konvencí, že bílý je dole a černý nahoře."""
     for i in range(8):
@@ -58,6 +63,8 @@ class Board:
     self.board[0][4] = King(Colors.BLACK, [0,4])
     self.board[7][3] = Queen(Colors.WHITE, [7,3])
     self.board[7][4] = King(Colors.WHITE, [7,4])
+    
+    
   def pieceList(self, color):
     """Vrací list všech figurek dané barvy na šachovnici.
     
@@ -70,6 +77,8 @@ class Board:
         if self.board[i][j] is not None and self.board[i][j].color == color:
           pieceList.append(self.board[i][j])
     return pieceList
+  
+  
   def copy(self):
     """Vrátí kopii šachovnice. Každá figura z originální šachovnice je nahrazena její kopií."""
     newBoard = Board()
@@ -78,6 +87,8 @@ class Board:
         if self[i,j] is not None:
           newBoard[i,j] = self[i,j].copy()
     return newBoard
+  
+  
   def compare(self, board):
     """Porovná dvě šachovnice.
     

@@ -2,7 +2,6 @@ from .Board import Board
 from .pieces import *
 
 class Chess:
-  
   def __init__(self):
     self.__movesSinceLastImportantMove = 0
     self.__board = Board()
@@ -10,6 +9,7 @@ class Chess:
     self.__board.setupNormalBoard()
     self.__positionsList = [self.__board.copy()]  
     self.__isMoving = Colors.WHITE
+    
   
   def getBoard(self):
     return self.__board
@@ -43,9 +43,8 @@ class Chess:
 
     Returns:
         bool: tah se zdařil nebo ne
-        string: "Promote" pokud je potreba provest vylepseni pesaka, jinak konec hry
-        board: novy stav sachovnice po tahu
-        tuple: (board, string) pokud hra skoncila
+        string: "Promote" pokud je potreba provest vylepseni pesaka
+        String: string pokud hra skoncila
     """
     
     if self.__playedPiece is None:
@@ -124,6 +123,7 @@ class Chess:
         string: "Draw by fifty-move rule" pokud bylo 50 tahu bez pohybu pesaku nebo braneni
         string: "Draw by threefold repetition" pokud se stejna pozice opakovala 3x
         string: "Checkmate {color} won" pokud byl vyhozen kral
+        None: pokud hra neskoncila
     """
     if self.__movesSinceLastImportantMove >= 100:
       return "Draw by fifty-move rule"
@@ -148,6 +148,7 @@ class Chess:
         else: 
           color = Colors.WHITE
         return f"Checkmate {color} won"
+    return None
       
   def __printToTerminal(self):  
     """Vytiskne hrací desku do konzole
