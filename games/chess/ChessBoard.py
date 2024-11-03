@@ -1,32 +1,37 @@
 from .pieces import *
+from ..Board import *
 
-class Board:
+class ChessBoard (Board):
   def __init__(self):
+    super().__init__()
     self.board = [[None for _ in range(8)] for _ in range(8)]
+    self.__populateBoard()
     
-  
   def __getitem__(self, index):
-    """Pro možnost přstupovat k poli board jako board[row,col] místo board.board[row][col]
+    """Vrací figuru na určeném místě na šachovnici, nebo None, pokud je políčko prázdné. 
     
     Args:
-        index: Tuple dvou integerů, (row, col), oba 0-7
-        
-    Returns:
-        Figuru na určeném místě na šachovnici, případně None, pokud je prázdné
+        index [int, int]: Tuple dvou integerů, (row, col), oba 0-7
     """
-    row, col = index
-    return self.board[row][col]
+    if index[0] < 0 or index[0] > 7 or index[1] < 0 or index[1] > 7:
+      return None
+    return super().__getitem__(index)
   
   
   def __setitem__(self, index, value):
     """Nastaví políčko na šachovnici jako board[row,col] namísto board.board[row][col] 
     
     Args:
-        index: Tuple dvou integerů, (row, col), oba 0-7
-        value: Instance třídy Piece, nebo None, pokud má být políčko prázdné
+        index ([int, int]): Tuple dvou integerů, (row, col), oba 0-7
+        value (Piece): Instance třídy Piece, nebo None, pokud má být políčko prázdné
+        
+    Returns:
+        bool: True, pokud se podařilo nastavit políčko, jinak False
     """
-    row, col = index
-    self.board[row][col] = value
+    if index[0] < 0 or index[0] > 7 or index[1] < 0 or index[1] > 7:
+      return False
+    super().__setitem__(index, value)
+    return True
     
     
   def __str__(self):
@@ -42,7 +47,7 @@ class Board:
     return result
   
   
-  def setupNormalBoard(self):
+  def __populateBoard(self):
     """Nastaví šachovnici do normálního stavu. Všichni pěšáci jsou v druhém a sedmém řádku, všechny ostatní figury jsou v prvním a osmém řádku. Barva figurek je v souladu s konvencí, že bílý je dole a černý nahoře."""
     for i in range(8):
       self.board[1][i] = Pawn(Colors.BLACK, [1,i])
@@ -68,8 +73,11 @@ class Board:
   def pieceList(self, color):
     """Vrací list všech figurek dané barvy na šachovnici.
     
-    color: Barva figurek, které chceme najít (Colors.WHITE nebo Colors.BLACK)
-    _return_: List.figurek dané barvy
+    Args:
+        color (Enum Colors): Barva figurek, které chceme najít (Colors.WHITE nebo Colors.BLACK)
+        
+    Returns: 
+        List of Pieces: List figurek dané barvy
     """
     pieceList = []
     for i in range(8):
@@ -80,8 +88,12 @@ class Board:
   
   
   def copy(self):
-    """Vrátí kopii šachovnice. Každá figura z originální šachovnice je nahrazena její kopií."""
-    newBoard = Board()
+    """Vrátí kopii šachovnice. Každá figura z originální šachovnice je nahrazena její kopií.
+    
+    Returns:
+        ChessBoard: Kopie šachovnice
+    """
+    newBoard = ChessBoard()
     for i in range(8):
       for j in range(8):
         if self[i,j] is not None:
@@ -91,10 +103,13 @@ class Board:
   
   def compare(self, board):
     """Porovná dvě šachovnice.
-    
     Tato metoda porovná dvě šachovnice a vrátí True, pokud jsou stejné. Jinak vrátí False.
-    _param_ board: Šachovnice, která se má porovnat s aktuální šachovnicí
-    _return_: True, pokud jsou šachovnice stejné, jinak False
+    
+    Args: 
+        board: Šachovnice, která se má porovnat s aktuální šachovnicí
+    
+    Returns: 
+        Boolean:True, pokud jsou šachovnice stejné, jinak False
     """
     for i in range(8):
       for j in range(8):
@@ -105,3 +120,28 @@ class Board:
         if self[i,j].__dict__ != board[i,j].__dict__:
           return False
     return True
+  
+  def getListOfBoard(self):
+    """Vrátí šachovnici jako list of Field.
+
+    Returns:
+        List of Struct Field: šachovnice jako list of Field
+    """
+    board = [[None for _ in range(8)] for _ in range(8)]
+    for i in range(8):
+      for j in range(8):
+        if self.board[i][j] is None:
+          board[i][j] = None
+        elif isinstance(self.board[i][j], Pawn):
+          board[i][j] = Field(self.board[i][j].color, Figures.PAWN)
+        elif isinstance(self.board[i][j], Rook):
+          board[i][j] = Field(self.board[i][j].color, Figures.ROOK)
+        elif isinstance(self.board[i][j], Bishop):
+          board[i][j] = Field(self.board[i][j].color, Figures.BISHOP)
+        elif isinstance(self.board[i][j], Knight):
+          board[i][j] = Field(self.board[i][j].color, Figures.KNIGHT)
+        elif isinstance(self.board[i][j], Queen):
+          board[i][j] = Field(self.board[i][j].color, Figures.QUEEN)
+        elif isinstance(self.board[i][j], King):
+          board[i][j] = Field(self.board[i][j].color, Figures.KING)
+    return board

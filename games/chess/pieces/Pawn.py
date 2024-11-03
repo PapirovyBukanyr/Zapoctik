@@ -6,11 +6,15 @@ class Pawn(Piece):
     super().__init__(color, position)
     self.symbol = "P"
     self.value = 1
+    
+    
   def copy(self):
     copy = Pawn(self.color, self.position)
     copy.hasMoved = self.hasMoved
     copy.lastMoveWasDouble = self.lastMoveWasDouble
     return copy
+  
+  
   def move(self, board, end):
     originalPosition = self.position
     if not (end[1] == self.col or board[end] is not None):
@@ -25,6 +29,8 @@ class Pawn(Piece):
       super().move(board, end)
     if abs(originalPosition[0] - self.position[0]) == 2:
       self.lastMoveWasDouble = True
+      
+      
   def possibleMoves(self, board):
     possibleMoves = []
     if self.color == Colors.WHITE:

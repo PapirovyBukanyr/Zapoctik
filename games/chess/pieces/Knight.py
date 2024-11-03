@@ -1,12 +1,17 @@
 from .Piece import *
 
 class Knight(Piece):
+  
   def __init__(self, color, position):
     super().__init__(color, position)
     self.symbol = "N"
     self.value = 3
+    
+    
   def copy(self):
     return Knight(self.color, self.position)
+  
+  
   def possibleMoves(self, board):
     possibleMoves = []
     possibleMoves.append([self.row-1, self.col-2])

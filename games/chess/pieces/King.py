@@ -4,16 +4,22 @@ class King(Piece):
   def __init__(self, color, position):
     super().__init__(color, position)
     self.symbol = "K"
+    
+    
   def copy(self):
     copy = King(self.color, self.position)
     copy.hasMoved = self.hasMoved
     return copy
+  
+  
   def move(self, board, end):
     if end[1] - self.col == 2:
       board[self.row, 7].move(board, [self.row, 5])
     if end[1] - self.col == -2:
       board[self.row, 0].move(board, [self.row, 3])
     super().move(board, end)
+    
+    
   def possibleMoves(self, board):
     possibleMoves = []
     # normalni tahy

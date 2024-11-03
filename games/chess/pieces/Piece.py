@@ -6,6 +6,8 @@ class Piece:
     self.hasMoved = False
     self.lastMoveWasDouble = False
     self.value = 0
+    
+    
   def move(self, board, end):
     """
     Metoda pro pohnutí figurky po šachovnici
@@ -24,12 +26,18 @@ class Piece:
     for pawn in pawns:
       if pawn.lastMoveWasDouble:
         pawn.lastMoveWasDouble = False
+        
+        
   @property
   def row (self):
     return self.position[0]
+  
+  
   @property
   def col (self):
     return self.position[1]
+  
+  
   def possibleMoves(self, board):
     """
     Funkce pro vypsání všech možných tahů danou figurkou
@@ -41,6 +49,8 @@ class Piece:
         (list of [row, col]): Seznam všech možných tahů ve formátu
     """
     pass
+  
+  
   def copy(self):
     """
     Vraci kopii objektu. Pouziva se, kdybychom chteli mit kopii objektu, bez toho, aby se menil puvodni objekt.

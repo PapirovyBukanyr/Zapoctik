@@ -1,18 +1,17 @@
-from .Board import Board
+from .ChessBoard import ChessBoard
 from .pieces import *
 
 class Chess:
   def __init__(self):
     self.__movesSinceLastImportantMove = 0
-    self.__board = Board()
+    self.__board = ChessBoard()
     self.__playedPiece = None
-    self.__board.setupNormalBoard()
     self.__positionsList = [self.__board.copy()]  
     self.__isMoving = Colors.WHITE
     
   
   def getBoard(self):
-    return self.__board
+    return self.__board.getListOfBoard()
   
   def choosePiece (self, positionToPlay, color = None):
     """Funkce pro vyber figurky, kterou chce hrac hrat
@@ -44,7 +43,6 @@ class Chess:
     Returns:
         bool: tah se zdařil nebo ne
         string: "Promote" pokud je potreba provest vylepseni pesaka
-        String: string pokud hra skoncila
     """
     
     if self.__playedPiece is None:
@@ -104,10 +102,6 @@ class Chess:
         string: string pokud hra skoncila
     """
     self.__playedPiece = None
-    
-    result = self.__checkGameOver()
-    if result is not None:
-      return result
 
     self.__isMoving = Colors.BLACK if self.__isMoving == Colors.WHITE else Colors.WHITE
     
@@ -116,13 +110,13 @@ class Chess:
     return True
 
 
-  def __checkGameOver(self):
+  def checkEnd(self):
     """Kontrola konce hry
     
     Returns:
         string: "Draw by fifty-move rule" pokud bylo 50 tahu bez pohybu pesaku nebo braneni
         string: "Draw by threefold repetition" pokud se stejna pozice opakovala 3x
-        string: "Checkmate {color} won" pokud byl vyhozen kral
+        string: "{color} won" pokud byl vyhozen kral
         None: pokud hra neskoncila
     """
     if self.__movesSinceLastImportantMove >= 100:
@@ -147,7 +141,7 @@ class Chess:
           color = Colors.BLACK
         else: 
           color = Colors.WHITE
-        return f"Checkmate {color} won"
+        return f"{color} won"
     return None
       
   def __printToTerminal(self):  

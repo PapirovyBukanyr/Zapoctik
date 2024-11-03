@@ -1,3 +1,3 @@
-from .Pawn import Pawn
-from .Queen import Queen
-from .Piece import Piece
+from .Pawn import *
+from .Queen import *
+from .Piece import *
