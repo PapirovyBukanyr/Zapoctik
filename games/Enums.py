@@ -8,6 +8,22 @@ class Field:
   Color: Enum
   Piece: Enum
   
+  
+class Figures(Enum):
+  """Enum pro typy figurek
+  """
+  # Šachové a dámové figurky
+  PAWN = 1 
+  ROOK = 2
+  BISHOP = 3
+  KNIGHT = 4
+  QUEEN = 5
+  KING = 6
+  # Křížky a kolečka pro hru piškvorky
+  X = 7
+  O = 8
+  
+  
 class Colors(Enum):
   """Enum pro barvy
   """
@@ -32,15 +48,4 @@ class Colors(Enum):
     """
     return Colors.WHITE if self == Colors.BLACK else Colors.BLACK
   
-class Figures(Enum):
-  """Enum pro typy figurek
-  """
-  PAWN = 1
-  ROOK = 2
-  BISHOP = 3
-  KNIGHT = 4
-  QUEEN = 5
-  KING = 6
-  X = 7
-  O = 8
   
