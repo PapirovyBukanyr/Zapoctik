@@ -11,33 +11,27 @@ Snažil jsem se o maximální sjednocení funkcí, snad to pro tebe bude snadné
 Marek
 """
 
-ticTacToe = TicTacToe()
-while True:
-    print(ticTacToe.getBoard())
-    print(ticTacToe.makeMove([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))]))
-    print(ticTacToe.checkEnd())
+#game = TicTacToe()
+#game = Checkers()
+game = Chess()  
+
+while game.checkEnd() == None:
+    print(game.getBoard())
     
-    if ticTacToe.checkEnd() != None:
-        break
+    if isinstance(game, Chess) or isinstance(game, Checkers):
+        moves = game.choosePiece([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))])
+        print(moves)
         
+    while moves != True and moves != "Promote":
+        moves = game.makeMove([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))])
+        print(moves)
+    
+    if moves == "Promote":
+        print(game.promote("Q"))
         
-checkers = Checkers()
-while True:
-    print(checkers.getBoard())  
-    print(checkers.choosePiece([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))]))
-    print(checkers.makeMove([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))]))
-    if checkers.checkEnd() != None:
-        break
+    print(game.checkEnd())
         
-        
-chess = Chess()
-while True:
-    print(chess.getBoard())
-    print(chess.choosePiece([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))]))
-    print(chess.makeMove([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))]))
-    print(chess.promote("Q"))
-    if chess.checkEnd() != None:
-        break
+print (game.checkEnd())
 
 
 qg = GenerateQuestion()
