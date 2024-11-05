@@ -1,4 +1,6 @@
-class Question:
+from abc import ABC, abstractmethod
+
+class Question (ABC):
     """Třída předpisu otázky
     """
     def __init__(self):
@@ -39,10 +41,11 @@ class Question:
         """
         return self.answer.__str__()
     
+    @abstractmethod
     def generateQuestion(self):
         """Funkce na generování otázky
 
         Returns:
             string, string: Vrací otázku
         """
-        raise NotImplementedError
+        pass

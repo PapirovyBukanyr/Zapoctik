@@ -1,12 +1,6 @@
 import random as rand
-from questions.Question import Question
-from questions.generators.MatrixQuestionGenerator import MatrixQuestionGenerator
-from questions.generators.FractionQuestionGenerator import FractionQuestionGenerator
-from questions.generators.DerivativeQuestionGenerator import DerivativeQuestionGenerator
-from questions.generators.LinearEquationSystemQuestionGenerator import LinearEquationSystemQuestionGenerator
-from questions.generators.InfinitiveSeriesQuestionGenerator import InfinitiveSeriesQuestionGenerator
-from questions.generators.IntegralQuestionGenerator import IntegralQuestionGenerator
-from questions.generators.AnalyticGeometryQuestionGenerator import AnalyticGeometryQuestionGenerator
+from .Question import Question
+from .generators import *
 
 
 class GenerateQuestion (Question):
