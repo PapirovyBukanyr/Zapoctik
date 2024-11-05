@@ -18,7 +18,7 @@ class Checkers:
         """Funkce pro vyber figurky, kterou chce hrac hrat
 
         Args:
-            index ([int,int]]): pozice figurky, kterou chce hrac hrat
+            index ([int,int]): pozice figurky, kterou chce hrac hrat
             color (Enum Colors, optional): barva hráče na tahu. Výchozí nastavení je na pravidelném střídání.
 
         Returns:

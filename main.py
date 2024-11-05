@@ -18,6 +18,8 @@ game = Chess()
 while game.checkEnd() == None:
     print(game.getBoard())
     
+    moves = []
+    
     if isinstance(game, Chess) or isinstance(game, Checkers):
         moves = game.choosePiece([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))])
         print(moves)
