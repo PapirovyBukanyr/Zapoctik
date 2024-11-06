@@ -67,7 +67,7 @@ class MathGameBoard (Board):
               else:
                 self.board[i][j] = None
 
-      for i in range(100):
+      for i in range(10):
           x = randint(0,9)
           y = randint(0,9)
           i = 0

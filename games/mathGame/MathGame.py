@@ -12,21 +12,20 @@ class MathGame:
     def choosePiece(self, position, color = None):
         if color is None:
             color = self.__onTurn
-        if self.__board.getPosition(color) == position:
-            return self.__board.getPosibleMoves(position)
-        return []
-        
-    def makeMove(self, move, color = None):
-        print("move")
-        if move is None:
-            return False
-        if color is None:
-            color = self.__onTurn
         else:
             if color == Colors.WHITE:
                 self.__score += 1
             else:
                 self.__score -= 1
+        if self.__board.getPosition(color) == position:
+            return self.__board.getPosibleMoves(position)
+        return []
+        
+    def makeMove(self, move):
+        print("move")
+        if move is None:
+            return False
+        color = self.__onTurn
         if self.__board.getPosibleMoves(self.__board.getPosition(color)).__contains__(move):
             if self.__board.board[move[0]][move[1]] == "TASK":
                 self.__board.movePiece(move, color)

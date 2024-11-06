@@ -75,6 +75,7 @@ class Checkers:
                 self.__pieceToPlay.position = [end_row, end_col]
                 
                 if self.__pieceToPlay.possibleJumps(self.__board) != []:
+                    self.__printToTerminal()
                     return self.__pieceToPlay.possibleJumps(self.__board) 
                 
             if isinstance(self.__pieceToPlay, Pawn) and end_row == 0 and self.__pieceToPlay.color == Colors.WHITE:
@@ -119,5 +120,11 @@ class Checkers:
         
         self.__firstMove = True
         
+        self.__printToTerminal()
+        
         return True
     
+    def __printToTerminal(self):
+        """Funkce pro výpis stavu hry na terminál
+        """
+        print(self.__board.__str__())
