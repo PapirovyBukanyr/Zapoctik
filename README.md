@@ -52,6 +52,10 @@ Většina logiky se nachází v modulu `games/checkers`. Hlavní třída, která
 
 Většina backendu piškvorek se nachází v souboru `games/ticTacToe`, hlavní třída je `games/ticTacToe/TicTacToe.py`, ve které je většina logiky, dále tam je třída `games/ticTacToe/TicTacToeBoard.py`, která dědí z `games/Board.py`.
 
+#### Backend matematické hry
+
+Jde o hru, ve které se dva hráči pohybují podle zadání. mohou se pohybovat pouze nahoru a dolů, pohybují se dokud nenarazí na políčko s úkoly. Potom protější hráč začne hádat otázky. Pokud uhodne, získává bod a může hrát. Pokud ne, získává možnost odpovědět soupeř. Střídají se, dokud někdo neuhodne. Hra končí nalezením a zodpovězením desáté otázky. Vše se nacjází v modulu `games/mathGame`. Hlavní logika se nachází v souboru `games/mathGame/MathGame.py`. Dále je tam třída šachovnice `games/mathGame/MathGameBoard.py`, která dědí z `games/Board.py`.
+
 ### Backend generování otázek
 
 Otázky se generují v modulech `questions`, kde je třída `questions/Question.py`, ze které všechny otázky dědí a která poskytuje základní představu o struktuře generátorů. Další důležitá třída je `questions/GenerateQuestion.py`, která slouží k obecnému vygenerování otázky. Otázky na konkrétní témata se pak generují v souborech:
