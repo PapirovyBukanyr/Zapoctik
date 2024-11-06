@@ -30,7 +30,7 @@ _______________________________________________________________________________
 #game = TicTacToe()
 #game = Checkers()
 game = Chess()  
-
+"""
 while game.checkEnd() == None:
     print(game.getBoard())
     
@@ -51,7 +51,7 @@ while game.checkEnd() == None:
         
 print (game.checkEnd())
 
-
+"""
 qg = GenerateQuestion()
 while True:
     qg.generateQuestion() # automaticky vypíše otázku i s odpovědí do terminálu, nechal bych to kvůli debugování, klidně to odstraním. Marek

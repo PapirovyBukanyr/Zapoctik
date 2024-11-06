@@ -1,5 +1,5 @@
 import numpy as np
-from questions.Question import Question
+from ..Question import Question
 
 class AnalyticGeometryQuestionGenerator(Question):
     def generateQuestion(self):
