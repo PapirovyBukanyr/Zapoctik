@@ -17,11 +17,18 @@ Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky 
 1. **Ujistěte se, že máte verzi Pythonu alespoň 3.6 nebo novější**
 
 2. **Instalace závislostí**:
+    
+    Pro hraní:
     ```sh
     pip install sympy numpy
     ```
 
-3. **Spuštění generátoru otázek**:
+    Pro debugování a testování:
+     ```sh
+    pip install sympy numpy parameterized unittest
+    ```
+
+3. **Spuštění aplikace**:
     ```sh
     python main.py
     ```
