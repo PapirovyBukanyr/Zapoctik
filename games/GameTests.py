@@ -1,9 +1,9 @@
 import unittest
 from parameterized import parameterized
 from games import Chess, Checkers, TicTacToe, MathGame
-from games.Enums import Colors
+from .Enums import Colors
 
-class TestGames(unittest.TestCase):
+class GameTests(unittest.TestCase):
     @parameterized.expand([
         ("Chess", Chess),
         ("Checkers", Checkers),
