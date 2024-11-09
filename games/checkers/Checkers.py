@@ -27,6 +27,8 @@ class Checkers:
         try:
             if color == None:
                 color = self.__currentPlayer
+            else :
+                self.__currentPlayer = color
             start_row = index[0]
             start_col = index[1]
             piece = self.__board[start_row, start_col]
@@ -60,9 +62,16 @@ class Checkers:
                 return False
             
             if [end_row, end_col] not in self.__pieceToPlay.possibleJumps(self.__board) and self.__firstMove == True:
-                self.__board[end_row,end_col] = self.__pieceToPlay
-                self.__board[self.__pieceToPlay.position[0], self.__pieceToPlay.position[1]] = None
-                self.__pieceToPlay.position = [end_row, end_col]
+                index = [-1, -1]
+                for figure in self.__board.pieceList(self.__currentPlayer):
+                    if figure.possibleJumps(self.__board) != []:
+                        self.__board[figure.row, figure.col] = None
+                        index = figure.position
+                        break
+                if index != [end_row, end_col]:
+                    self.__board[end_row,end_col] = self.__pieceToPlay
+                    self.__board[self.__pieceToPlay.position[0], self.__pieceToPlay.position[1]] = None
+                    self.__pieceToPlay.position = [end_row, end_col]
                 
             else:
                 

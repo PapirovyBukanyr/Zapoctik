@@ -33,6 +33,12 @@ Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky 
     python main.py
     ```
 
+    Spuštění kontroly vracených hodnot hrami a otázkami
+    ```sh
+    python tests.py
+    ```
+
+
 ## Složky a Soubory
 
 ### Backend her
