@@ -28,8 +28,8 @@ _______________________________________________________________________________
 """)
 
 #game = TicTacToe()
-#game = Checkers()
-game = Chess()  
+game = Checkers()
+#game = Chess()  
 
 while game.checkEnd() == None:
     print(game.getBoard())
