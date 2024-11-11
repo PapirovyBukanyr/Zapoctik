@@ -4,12 +4,14 @@ from games import Chess, Checkers, TicTacToe, MathGame
 from .Enums import Colors
 
 class GameTests(unittest.TestCase):
-    @parameterized.expand([
+    allClasses = [
         ("Chess", Chess),
         ("Checkers", Checkers),
         ("TicTacToe", TicTacToe),
         ("MathGame", MathGame)
-    ])
+    ]
+    
+    @parameterized.expand(allClasses)
     def testInitialBoard(self, name, game_class):
         game = game_class()
         self.assertIsNotNone(game.getBoard())
@@ -77,12 +79,7 @@ class GameTests(unittest.TestCase):
         self.assertFalse(game.makeMove(move_position))
         
 
-    @parameterized.expand([
-        ("Chess", Chess),
-        ("Checkers", Checkers),
-        ("TicTacToe", TicTacToe),
-        ("MathGame", MathGame)
-    ])
+    @parameterized.expand(allClasses)
     def testCheckEnd(self, name, game_class):
         game = game_class()
         self.assertIsNone(game.checkEnd())

@@ -15,7 +15,7 @@ import unittest
 from parameterized import parameterized
 
 class QuestionTests(unittest.TestCase):
-    @parameterized.expand([
+    allClasses = [
         ("General use", GenerateQuestion),
         ("Analytic geometry", AnalyticGeometryQuestionGenerator),
         ("Derivative", DerivativeQuestionGenerator),
@@ -27,8 +27,11 @@ class QuestionTests(unittest.TestCase):
         ("Matrix", MatrixQuestionGenerator),
         ("Ordinal numbers", OrdinalNumberQuestionGenerator),
         ("Set", SetQuestionGenerator)
-    ])
-    def testenerateQuestion(self, name, generator_class):
+    ]
+        
+    
+    @parameterized.expand(allClasses)
+    def testGenerateQuestion(self, name, generator_class):
         generator = generator_class()
         question = generator.generateQuestion()
         self.assertIsNotNone(question)
@@ -36,58 +39,22 @@ class QuestionTests(unittest.TestCase):
         self.assertIsNotNone(generator.questionLatex)
         
         
-    @parameterized.expand([
-        ("General use", GenerateQuestion),
-        ("Analytic geometry", AnalyticGeometryQuestionGenerator),
-        ("Derivative", DerivativeQuestionGenerator),
-        ("Fraction", FractionQuestionGenerator),
-        ("Infinitive series", InfinitiveSeriesQuestionGenerator),
-        ("Integral", IntegralQuestionGenerator),
-        ("Kardinal numbers", KardinalNumberQuestionGenerator),
-        ("Linear equation system", LinearEquationSystemQuestionGenerator),
-        ("Matrix", MatrixQuestionGenerator),
-        ("Ordinal numbers", OrdinalNumberQuestionGenerator),
-        ("Set", SetQuestionGenerator)
-    ])
+    @parameterized.expand(allClasses)
     def testDoupovcuvOperator(self, name, generator_class):
         generator = generator_class()
-        question = generator.generateQuestion()
+        generator.generateQuestion()
         self.assertIsNotNone(generator.doupovcuvOperator())
 
 
-    @parameterized.expand([
-        ("General use", GenerateQuestion),
-        ("Analytic geometry", AnalyticGeometryQuestionGenerator),
-        ("Derivative", DerivativeQuestionGenerator),
-        ("Fraction", FractionQuestionGenerator),
-        ("Infinitive series", InfinitiveSeriesQuestionGenerator),
-        ("Integral", IntegralQuestionGenerator),
-        ("Kardinal numbers", KardinalNumberQuestionGenerator),
-        ("Linear equation system", LinearEquationSystemQuestionGenerator),
-        ("Matrix", MatrixQuestionGenerator),
-        ("Ordinal numbers", OrdinalNumberQuestionGenerator),
-        ("Set", SetQuestionGenerator)
-    ])
+    @parameterized.expand(allClasses)
     def testCheckAnswer(self, name, generator_class):
         generator = generator_class()
-        question = generator.generateQuestion()
+        generator.generateQuestion()
         self.assertTrue(generator.checkAnswer(generator.doupovcuvOperator()))
         
 
-    @parameterized.expand([
-        ("General use", GenerateQuestion),
-        ("Analytic geometry", AnalyticGeometryQuestionGenerator),
-        ("Derivative", DerivativeQuestionGenerator),
-        ("Fraction", FractionQuestionGenerator),
-        ("Infinitive series", InfinitiveSeriesQuestionGenerator),
-        ("Integral", IntegralQuestionGenerator),
-        ("Kardinal numbers", KardinalNumberQuestionGenerator),
-        ("Linear equation system", LinearEquationSystemQuestionGenerator),
-        ("Matrix", MatrixQuestionGenerator),
-        ("Ordinal numbers", OrdinalNumberQuestionGenerator),
-        ("Set", SetQuestionGenerator)
-    ])
+    @parameterized.expand(allClasses)
     def testWrongAnswer(self, name, generator_class):
         generator = generator_class()
-        question = generator.generateQuestion()
+        generator.generateQuestion()
         self.assertFalse(generator.checkAnswer("Wrong answer"))

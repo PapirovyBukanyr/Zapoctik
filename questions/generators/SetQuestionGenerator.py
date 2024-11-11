@@ -10,14 +10,12 @@ class SetQuestionGenerator(Question):
         Returns:
             SetQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovědí
         """
-        
         a = 0
         b = 0
         c = 0
         d = 0
         e = 0
         f = 0
-        
         
         while a == b or b == c or a == c:
             a = np.random.randint(1, 10)
