@@ -67,7 +67,7 @@ class Checkers:
             else:
                 
                 self.__firstMove = False
-                row, col = self.__pieceToPlay.trackJumps(end_row, end_col)
+                row, col = self.__pieceToPlay.trackJumps([end_row, end_col])
                 self.__board[row, col] = None
                     
                 self.__board[end_row, end_col] = self.__pieceToPlay

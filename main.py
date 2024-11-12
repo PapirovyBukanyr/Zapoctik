@@ -36,7 +36,8 @@ while game.checkEnd() == None:
     
     moves = []
     
-    if isinstance(game, Chess) or isinstance(game, Checkers):
+    while (isinstance(game, Chess) or isinstance(game, Checkers)) and moves == []:
+    
         moves = game.choosePiece([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))])
         print(moves)
         

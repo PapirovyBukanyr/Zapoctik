@@ -85,5 +85,6 @@ class Queen(Piece):
             List of [int, int]: seznam pozic figurek, které dáma přeskočí, než se dostane na koncovou pozici
         """
         jumps=([endPosition[0]-(endPosition[0]-self.position[0])//abs(endPosition[0]-self.position[0]), endPosition[1]-(endPosition[1]-self.position[1])//abs(endPosition[1]-self.position[1])])
+        print(jumps)
         return jumps
     
