@@ -7,7 +7,6 @@ class Queen(Piece):
     super().__init__(color, position)
     self.symbol = "Q"
     self.value = 9
-    self.img_file = "resources//queenW.png" if self.color == Colors.WHITE else "resources//queenB.png"
 
   def copy(self):
     return Queen(self.color, self.position)

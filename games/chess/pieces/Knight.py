@@ -6,7 +6,6 @@ class Knight(Piece):
     super().__init__(color, position)
     self.symbol = "N"
     self.value = 3
-    self.img_file = "resources//horseW.png" if self.color == Colors.WHITE else "resources//horseB.png"
     
   def copy(self):
     return Knight(self.color, self.position)

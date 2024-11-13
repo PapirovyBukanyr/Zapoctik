@@ -4,7 +4,6 @@ class King(Piece):
   def __init__(self, color, position):
     super().__init__(color, position)
     self.symbol = "K"
-    self.img_file = "resources//kingW.png" if self.color == Colors.WHITE else "resources//kingB.png"
     
   def copy(self):
     copy = King(self.color, self.position)
