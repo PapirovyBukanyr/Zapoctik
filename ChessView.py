@@ -24,6 +24,7 @@ class ChessView(QWidget):
         self.layout = QVBoxLayout()
         self.board_layout = None
         self.game = Chess()
+        self.white_turn = True
 
         self.setLayout(self.layout)
         self.update_board(True)
@@ -67,7 +68,10 @@ class ChessView(QWidget):
 
     def get_moves(self, row, col):
         self.selectedPiece = self.dataBoard[row][col]
-        return self.selectedPiece.possibleMoves(self.game.getBoard())
+        isWhite = self.selectedPiece.color.value == 1
+        if isWhite == self.white_turn:
+            return self.selectedPiece.possibleMoves(self.game.getBoard())
+        else: return []
     
     def highlight_square(self, row, col):
         label = self.uiBoard[row][col]
@@ -76,6 +80,7 @@ class ChessView(QWidget):
 
     def move_piece(self, row, col):
         if self.uiBoard[row][col].isHighlighted:
+            self.white_turn = not self.white_turn
             self.selectedPiece.move(self.game.getBoard(), [row, col])
             message = self.game.checkEnd()
             if message != None:
