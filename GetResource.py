@@ -43,7 +43,7 @@ class GetResource:
                     case Colors.BLACK:
                         return "resources//kingB.png"
             case Figures.X:
-                return "resources//kingW.png"
+                return "resources//x.png"
             case Figures.O:
-                return "resources//HoderovaJumpscare.png"
+                return "resources//o.png"
         
