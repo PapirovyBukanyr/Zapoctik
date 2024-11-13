@@ -1,5 +1,5 @@
 import numpy as np
-from questions.Question import Question
+from ..Question import Question
 
 class IntegralQuestionGenerator(Question):
     def __init__(self):
