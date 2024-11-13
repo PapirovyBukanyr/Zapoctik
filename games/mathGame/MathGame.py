@@ -6,6 +6,14 @@ class MathGame:
         self.__board = MathGameBoard()
         self.__onTurn = Colors.WHITE
         
+    def __str__(self):
+        """Vrátí název hry
+
+        Returns:
+            String: název hry
+        """
+        return "Matematická hra"
+        
     def getBoard(self):
         return self.__board.getListOfBoard()
     
@@ -21,7 +29,7 @@ class MathGame:
             return self.__board.getPosibleMoves(position)
         return []
         
-    def makeMove(self, move):
+    def makeMove(self, move, color = None):
         print("move")
         if move is None:
             return False

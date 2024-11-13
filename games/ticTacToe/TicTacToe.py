@@ -1,12 +1,20 @@
 from ..Enums import Colors 
 from .TicTacToeBoard import TicTacToeBoard
 
-class TicTacToe:
+class TicTacToe:    
     def __init__(self):
         """Inicializace hry
         """
         self.__board = TicTacToeBoard()
         self.__current_player = Colors.BLACK
+        
+    def __str__(self):
+        """Vrátí název hry
+
+        Returns:
+            String: název hry
+        """
+        return "Piškvorky"
         
     def getBoard(self):
         """Vrátí hrací desku

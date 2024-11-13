@@ -17,17 +17,17 @@ class ClickableLabel(QLabel):
         if event.button() == Qt.LeftButton:
             self.clicked.emit(self.row, self.col)
 
-class ChessView(QWidget):
-    def __init__(self):
+class GameView(QWidget):
+    def __init__(self, game):
         super().__init__()
-        self.setWindowTitle("Chess")
+        self.setWindowTitle(game.__str__())
         self.setGeometry(100, 100, 400, 400)  
         self.layout = QVBoxLayout()
         self.board_layout = None
-        self.game = Chess()
+        self.game = game
         self.player = Colors.WHITE
         self.selectedPiece = False
-
+        
         self.setLayout(self.layout)
         self.update_board(True)
                     
@@ -61,14 +61,14 @@ class ChessView(QWidget):
                 self.uiBoard[row][col] = label
  
     def handle_square_click(self, row, col):
-        if self.selectedPiece == False:
+        if self.selectedPiece == False and (isinstance(self.game, Checkers) or isinstance(self.game, Chess) or isinstance(self.game, MathGame)):
             self.update_board()
-            self.possible_moves = self.game.choosePiece([row, col])
+            self.possible_moves = self.game.choosePiece([row, col], self.player)
             for move in self.possible_moves:
                 self.highlight_square(move[0], move[1])
             self.selectedPiece = True
         else:
-            result = self.game.makeMove([row, col])
+            result = self.game.makeMove([row, col], self.player)
             if result == "Promote":
                 self.promote_pawn()
             elif result == False:
@@ -95,7 +95,7 @@ class ChessView(QWidget):
     def update_board(self, isFirst = False):
         if not isFirst: 
             self.remove_board()
-        self.uiBoard = [[None for _ in range(8)] for _ in range(8)]
+        self.uiBoard = [[None for _ in range(len(self.game.getBoard()))] for _ in range( len(self.game.getBoard()[0]))]
         self.create_board()
         for i in range(0, len(self.game.getBoard())):
             for j in range(0, len(self.game.getBoard()[i])):
@@ -103,8 +103,8 @@ class ChessView(QWidget):
                     self.set_piece_image(i, j, GetResource.getResource(self.game.getBoard()[i][j]))
 
     def remove_board(self):
-        for row in range(8):
-            for col in range(8):
+        for row in range(len(self.game.getBoard())):
+            for col in range( len(self.game.getBoard()[0])):
                 widget = self.uiBoard[row][col]
                 if widget:
                     self.layout.removeWidget(widget)

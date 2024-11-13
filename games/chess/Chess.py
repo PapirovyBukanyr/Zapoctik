@@ -9,6 +9,14 @@ class Chess:
     self.__positionsList = [self.__board.copy()]  
     self.__isMoving = Colors.WHITE
     
+  def __str__(self):
+        """Vrátí název hry
+
+        Returns:
+            String: název hry
+        """
+        return "Šachy"
+        
   
   def getBoard(self):
     return self.__board.getListOfBoard()
@@ -34,7 +42,7 @@ class Chess:
       return []
 
 
-  def makeMove(self, playedMove):
+  def makeMove(self, playedMove, color = None):
     """Provedení tahu hrace
 
     Args:

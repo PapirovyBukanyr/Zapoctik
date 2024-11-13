@@ -11,8 +11,16 @@ class Checkers:
         self.__pieceToPlay = None
         self.__firstMove = True
     
+    def __str__(self):
+        """Vrátí název hry
+
+        Returns:
+            String: název hry
+        """
+        return "Piškvorky"
+        
     def getBoard(self):
-        return self.__board.__str__()
+        return self.__board.getListOfBoard()
     
     def choosePiece(self, index, color = None):
         """Funkce pro vyber figurky, kterou chce hrac hrat
@@ -42,7 +50,7 @@ class Checkers:
         except:
             return []
     
-    def makeMove(self, index):
+    def makeMove(self, index, color = None):
         """Funkce pro provedení tahu figurkou
         
         Args:

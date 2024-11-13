@@ -46,6 +46,4 @@ class GetResource:
                 return "resources//kingW.png"
             case Figures.O:
                 return "resources//HoderovaJumpscare.png"
-            case _:
-                return None
         

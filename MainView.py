@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel
-from ChessView import *
+from GameView import *
+from games import *
 
 class MainView(QWidget):
     def __init__(self):
@@ -11,7 +12,7 @@ class MainView(QWidget):
         title = QLabel("Select a Game to Play")
         layout.addWidget(title)
 
-        games = ["Šachy", "Dáma"]
+        games = ["Šachy", "Dáma", "Piškvorky", "Matematická hra"]
 
         for game in games:
             button = QPushButton(game)
@@ -23,5 +24,14 @@ class MainView(QWidget):
     def start_game(self, game_name):
         match(game_name):
             case "Šachy":
-                self.chessWindow = ChessView()
-                self.chessWindow.show()
+                self.gameWindow = GameView(Chess())
+                self.gameWindow.show()
+            case "Dáma":
+                self.gameWindow = GameView(Checkers())
+                self.gameWindow.show()
+            case "Piškvorky":
+                self.gameWindow = GameView(TicTacToe())
+                self.gameWindow.show()
+            case "Matematická hra":
+                self.gameWindow = GameView(MathGame())
+                self.gameWindow.show()
