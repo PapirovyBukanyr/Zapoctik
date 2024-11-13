@@ -39,7 +39,11 @@ class Question (ABC):
         Returns:
             string: odpověď
         """
-        return self.answer.__str__()
+        try:
+            answer = round(self.answer).__str__()
+        except:
+            answer = self.answer.__str__()
+        return answer
     
     @abstractmethod
     def generateQuestion(self):

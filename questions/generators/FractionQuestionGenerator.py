@@ -1,5 +1,5 @@
 import random
-from questions.Question import Question
+from ..Question import Question
 
 class FractionQuestionGenerator(Question):
     def generateFraction(self):
@@ -90,6 +90,7 @@ class FractionQuestionGenerator(Question):
         
         elif randomQuestion == 2:
             self.questionText = f"Jaký je největší společný dělitel {numerator} and {denominator}?"
+            self.questionLatex = "\scalebox{10}{\textbf{?}}"
             self.answer = self.greatestCommonDivisor(numerator, denominator)
         
         elif randomQuestion == 3:
@@ -99,10 +100,12 @@ class FractionQuestionGenerator(Question):
         
         elif randomQuestion == 4:
             self.questionText = f"Jaký je zbytek po dělení {numerator} číslem {denominator}?"
+            self.questionLatex = "\scalebox{10}{\textbf{?}}"
             self.answer = numerator % denominator
             
         else:
             self.questionText = f"Jaký je nejmenší společný násobek {numerator} and {denominator}?"
+            self.questionLatex = "\scalebox{10}{\textbf{?}}"
             self.answer = self.lowestCommonMultiple(numerator, denominator)
         
         return self

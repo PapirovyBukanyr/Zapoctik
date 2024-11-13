@@ -1,5 +1,5 @@
 import numpy as np
-from questions.Question import Question
+from ..Question import Question
 
 class InfinitiveSeriesQuestionGenerator(Question):
     def generateQuestion(self):

@@ -1,1 +1,1 @@
-from .GenerateQuestion import *
+from .GenerateQuestion import GenerateQuestion
