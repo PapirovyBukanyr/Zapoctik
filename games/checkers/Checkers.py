@@ -27,6 +27,8 @@ class Checkers:
         try:
             if color == None:
                 color = self.__currentPlayer
+            else :
+                self.__currentPlayer = color
             start_row = index[0]
             start_col = index[1]
             piece = self.__board[start_row, start_col]
@@ -60,14 +62,21 @@ class Checkers:
                 return False
             
             if [end_row, end_col] not in self.__pieceToPlay.possibleJumps(self.__board) and self.__firstMove == True:
-                self.__board[end_row,end_col] = self.__pieceToPlay
-                self.__board[self.__pieceToPlay.position[0], self.__pieceToPlay.position[1]] = None
-                self.__pieceToPlay.position = [end_row, end_col]
+                index = [-1, -1]
+                for figure in self.__board.pieceList(self.__currentPlayer):
+                    if figure.possibleJumps(self.__board) != []:
+                        self.__board[figure.row, figure.col] = None
+                        index = figure.position
+                        break
+                if index != [end_row, end_col]:
+                    self.__board[end_row,end_col] = self.__pieceToPlay
+                    self.__board[self.__pieceToPlay.position[0], self.__pieceToPlay.position[1]] = None
+                    self.__pieceToPlay.position = [end_row, end_col]
                 
             else:
                 
                 self.__firstMove = False
-                row, col = self.__pieceToPlay.trackJumps(end_row, end_col)
+                row, col = self.__pieceToPlay.trackJumps([end_row, end_col])
                 self.__board[row, col] = None
                     
                 self.__board[end_row, end_col] = self.__pieceToPlay
@@ -75,6 +84,7 @@ class Checkers:
                 self.__pieceToPlay.position = [end_row, end_col]
                 
                 if self.__pieceToPlay.possibleJumps(self.__board) != []:
+                    self.__printToTerminal()
                     return self.__pieceToPlay.possibleJumps(self.__board) 
                 
             if isinstance(self.__pieceToPlay, Pawn) and end_row == 0 and self.__pieceToPlay.color == Colors.WHITE:
@@ -119,5 +129,11 @@ class Checkers:
         
         self.__firstMove = True
         
+        self.__printToTerminal()
+        
         return True
     
+    def __printToTerminal(self):
+        """Funkce pro výpis stavu hry na terminál
+        """
+        print(self.__board.__str__())

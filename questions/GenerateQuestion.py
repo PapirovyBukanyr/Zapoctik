@@ -21,7 +21,7 @@ class GenerateQuestion (Question):
         Returns:
             string, string (questionText, questionLatex): otázka
         """
-        randomQuestion = rand.randint(1, 7)
+        randomQuestion = rand.randint(1, 10)
         
         if randomQuestion == 1: # Generování otázky na matice
             question = MatrixQuestionGenerator() 
@@ -40,6 +40,15 @@ class GenerateQuestion (Question):
         
         elif randomQuestion == 6: # Generování otázky na určení hodnoty integrálu
             question = IntegralQuestionGenerator()
+            
+        elif randomQuestion == 7: # Generování otázky na množiny
+            question = SetQuestionGenerator()    
+            
+        elif randomQuestion == 8: # Generování otázky na ordinální čísla
+            question = OrdinalNumberQuestionGenerator()
+            
+        elif randomQuestion == 9: # Generování otázky na kardinální čísla
+            question = KardinalNumberQuestionGenerator()
             
         else: # Generování otázky na analytickou geometrii
             question = AnalyticGeometryQuestionGenerator()

@@ -36,7 +36,7 @@ class Rook(Piece):
         if board[self.row, self.col-i].color != self.color: 
           possibleMoves.append([self.row, self.col-i])
         break
-      possibleMoves.append([self.row, self.col-1])
+      possibleMoves.append([self.row, self.col-i])
       i += 1
     i = 1
     while self.col + i <= 7:  
