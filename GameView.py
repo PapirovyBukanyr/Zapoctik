@@ -80,8 +80,8 @@ class GameView(QWidget):
                 self.update_board()
             else:
                 self.update_board()
-                for result in self.possible_moves:
-                    self.highlight_square(result[0], result[1])
+                for move in result:
+                    self.highlight_square(move[0], move[1])
                 return
             if self.game.checkEnd() != None:
                 self.game_ended(self.game.checkEnd())
@@ -92,7 +92,7 @@ class GameView(QWidget):
         label.setStyleSheet("background-color: yellow;")
         label.isHighlighted = True
 
-    def update_board(self, isFirst = False):
+    def update_board(self, isFirst = True):
         if not isFirst: 
             self.remove_board()
         self.uiBoard = [[None for _ in range(len(self.game.getBoard()))] for _ in range( len(self.game.getBoard()[0]))]
@@ -113,7 +113,7 @@ class GameView(QWidget):
 
     def game_ended(self, message):
         print(message)
-        #TODO dodelat vyskakovaci okno na konec hry
+        raise NotImplementedError("Game ended")
         
     def promote_pawn(self):
         raise NotImplementedError("Promote pawn")
