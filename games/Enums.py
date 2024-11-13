@@ -22,7 +22,19 @@ class Figures(Enum):
   # Křížky a kolečka pro hru piškvorky
   X = 7
   O = 8
-  
+  # Symboly pro hru miny
+  FLAG = 9
+  EXPLOSION = 10
+  ZERO = 11
+  ONE = 12
+  TWO = 13
+  THREE = 14
+  FOUR = 15
+  FIVE = 16
+  SIX = 17
+  SEVEN = 18
+  EIGHT = 19
+  MINE = 20
   
 class Colors(Enum):
   """Enum pro barvy

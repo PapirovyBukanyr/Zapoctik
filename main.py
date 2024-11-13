@@ -29,8 +29,9 @@ _______________________________________________________________________________
 
 #game = TicTacToe()
 #game = Checkers()
-game = Chess()  
-
+#game = Chess()  
+game = Mines()
+print(game.__str__())
 while game.checkEnd() == None:
     print(game.getBoard())
     
