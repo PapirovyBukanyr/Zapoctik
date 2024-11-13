@@ -5,10 +5,13 @@ class Rook(Piece):
     super().__init__(color, position)
     self.symbol = "R"
     self.value = 5
+    self.img_file = "resources//rookW.png" if self.color == Colors.WHITE else "resources//rookB.png"
+
   def copy(self):
     copy = Rook(self.color, self.position)
     copy.hasMoved = self.hasMoved
     return copy
+  
   def possibleMoves(self, board):
     possibleMoves = []
     i = 1

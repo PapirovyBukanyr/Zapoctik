@@ -5,7 +5,7 @@ class Bishop(Piece):
     super().__init__(color, position)
     self.symbol = "B"
     self.value = 3
-    
+    self.img_file = "resources//bishopW.png" if self.color == Colors.WHITE else "resources//bishopB.png"
     
   def copy(self):
     return Bishop(self.color, self.position)

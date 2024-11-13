@@ -1,12 +1,11 @@
 from .Piece import *
 
-
 class Pawn(Piece):
   def __init__(self, color, position):
     super().__init__(color, position)
     self.symbol = "P"
     self.value = 1
-    
+    self.img_file = "resources//pawnW.png" if self.color == Colors.WHITE else "resources//pawnB.png"
     
   def copy(self):
     copy = Pawn(self.color, self.position)
