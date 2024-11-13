@@ -11,7 +11,7 @@ class Chess:
     
   
   def getBoard(self):
-    return self.__board
+    return self.__board.getListOfBoard()
   
   def choosePiece (self, positionToPlay, color = None):
     """Funkce pro vyber figurky, kterou chce hrac hrat

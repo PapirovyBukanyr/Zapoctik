@@ -18,7 +18,7 @@ Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky 
 
 2. **Instalace závislostí**:
     ```sh
-    pip install sympy numpy
+    pip install sympy numpy PyQt5
     ```
 
 3. **Spuštění generátoru otázek**:
