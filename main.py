@@ -5,19 +5,6 @@ from MainView import MainView
 import sys
 from PyQt5.QtWidgets import QApplication
 
-"""
-Zde by měl být přehled všech funkcí, co budeš potřebovat pro frontend. 
-Pokud něco chybí, nebo něco nepotřebuješ, dej mi vědět. 
-Všechny vrací dvojrozměrný list objektů Field, které mají atributy color a piece.
-Pokud je políčko prázdné, je to None.
-Snažil jsem se o maximální sjednocení funkcí, snad to pro tebe bude snadné naprogramovat.
-Marek
-"""
-
-app = QApplication(sys.argv)
-window = MainView()
-window.show()
-sys.exit(app.exec_())
 
 print("""
 _______________________________________________________________________________
@@ -34,6 +21,11 @@ _______________________________________________________________________________
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 _______________________________________________________________________________
 """)
+
+app = QApplication(sys.argv)
+window = MainView()
+window.show()
+sys.exit(app.exec_())
 
 #game = TicTacToe()
 #game = Checkers()

@@ -25,7 +25,7 @@ class GameTests(unittest.TestCase):
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE),
         ("Checkers", Checkers, [5, 5], Colors.WHITE),
-        ("MathGame", MathGame, [9, 9], Colors.WHITE)
+        ("MathGame", MathGame, [7, 7], Colors.WHITE)
     ])
     def testChoosePiece(self, name, game_class, position, color):
         """Testuje, zda se figurka dá vybrat
@@ -77,7 +77,7 @@ class GameTests(unittest.TestCase):
         ("Chess", Chess, [6, 0], Colors.WHITE, [4, 0]),
         ("Checkers", Checkers, [5, 5], Colors.WHITE, [4, 4]),
         ("TicTacToe", TicTacToe, [0, 0], None, [0, 0]),
-        ("MathGame", MathGame, [9, 9], Colors.WHITE, [9, 8])
+        ("MathGame", MathGame, [7, 7], Colors.WHITE, [7, 6])
     ])
     def testMakeMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb provede
@@ -98,7 +98,7 @@ class GameTests(unittest.TestCase):
         ("Chess", Chess, [6, 0], Colors.WHITE, [-1, -1]),
         ("Checkers", Checkers, [5, 5], Colors.WHITE, [-1, -1]),
         ("TicTacToe", TicTacToe, [-1, -1], None, [-1, -1]),
-        ("MathGame", MathGame, [9, 9], Colors.WHITE, [10, 10])
+        ("MathGame", MathGame, [7, 7], Colors.WHITE, [8, 8])
     ])
     def testMakeWrongMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb nelze provést
@@ -118,7 +118,7 @@ class GameTests(unittest.TestCase):
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [1, 1]),
         ("Checkers", Checkers, [5, 5], Colors.WHITE, [1, 1]),
-        ("MathGame", MathGame, [9, 9], Colors.WHITE, [1, 1])
+        ("MathGame", MathGame, [7, 7], Colors.WHITE, [1, 1])
     ])
     def testMakeUnableMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb nelze provést
