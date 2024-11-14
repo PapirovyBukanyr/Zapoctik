@@ -1,8 +1,10 @@
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QVBoxLayout, QPushButton, QMessageBox, QInputDialog
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QColor, QPalette, QPixmap
 from GetResource import GetResource
 from games import *
+from games.Enums import Figures
+import gc
 
 class ClickableLabel(QLabel):
     clicked = pyqtSignal(int, int)  
@@ -110,11 +112,45 @@ class GameView(QWidget):
                     self.layout.removeWidget(widget)
                     widget.deleteLater()
                     self.uiBoard[row][col] = None
+        gc.collect()
 
     def game_ended(self, message):
-        print(message)
-        raise NotImplementedError("Game ended")
+        if isinstance(self.game, TicTacToe):
+            if message == "B won":
+                message = "Vyhrál hráč O"
+            elif message == "W won":
+                message = "Vyhrál hráč X"
+            else:
+                message = "Remíza"
+        else:
+            if message == "W won":
+                message = "Vyhrál hráč bílý"
+            elif message == "B won":
+                message = "Vyhrál hráč černý"
+            else:
+                message = "Remíza"
+        msg_box = QMessageBox()
+        msg_box.setText(message)
+        msg_box.exec_()
+        self.close()
         
     def promote_pawn(self):
-        raise NotImplementedError("Promote pawn")
+        items = ["Dáma", "Věž", "Střelec", "Kůň", "Král"]
+        item, ok = QInputDialog.getItem(self, "Promote Pawn", "Select piece to promote to:", items, 0, False)
         
+        if ok and item:
+            match(item):
+                case "Dáma":
+                    item = Figures.QUEEN
+                case "Věž":
+                    item = Figures.ROOK
+                case "Střelec":
+                    item = Figures.BISHOP
+                case "Kůň":
+                    item = Figures.KNIGHT
+                case "Král":
+                    item = Figures.KING
+                case _:
+                    raise ValueError("Invalid piece")
+            self.game.promote(item)
+            self.update_board()

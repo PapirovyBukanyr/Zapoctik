@@ -88,14 +88,16 @@ class Chess:
       return False
     
     match(newFigure):
-      case "Q":
+      case Figures.QUEEN:
         self.__board[self.__playedPiece.position] = Queen(self.__playedPiece.color, self.__playedPiece.position)
-      case "R":
+      case Figures.ROOK:
         self.__board[self.__playedPiece.position] = Rook(self.__playedPiece.color, self.__playedPiece.position)
-      case "B":
+      case Figures.BISHOP:
         self.__board[self.__playedPiece.position] = Bishop(self.__playedPiece.color, self.__playedPiece.position)
-      case "N":
+      case Figures.KNIGHT:
         self.__board[self.__playedPiece.position] = Knight(self.__playedPiece.color, self.__playedPiece.position)
+      case Figures.KING:
+        self.__board[self.__playedPiece.position] = King(self.__playedPiece.color, self.__playedPiece.position)
       case _:
         return False
       
