@@ -73,7 +73,6 @@ class Queen(Piece):
                                 break
                     else:
                         break
-        print(jumps)
         return jumps
     
     
