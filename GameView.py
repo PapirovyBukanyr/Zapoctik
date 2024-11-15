@@ -96,8 +96,7 @@ class GameView(QWidget):
             col (int): sloupec
         """
         self.update_board()
-        self.possible_moves = self.game.choosePiece([row, col], self.player)
-        for move in self.possible_moves:
+        for move in self.game.choosePiece([row, col], self.player):
             self.highlight_square(move[0], move[1])
         self.selectedPiece = True
         
@@ -136,7 +135,6 @@ class GameView(QWidget):
         """
         label = self.uiBoard[row][col]
         label.setStyleSheet("background-color: yellow;")
-        label.isHighlighted = True
 
     def update_board(self, isFirst = False):
         """Funkce pro aktualizaci herní desky
@@ -209,7 +207,8 @@ class GameView(QWidget):
                     item = Figures.KNIGHT
                 case "Král":
                     item = Figures.KING
-                case _:
-                    raise ValueError("Invalid piece")
-            self.game.promote(item)
+            if self.game.promote(item) == False:
+                self.promote_pawn()
             self.update_board()
+        else:
+            self.promote_pawn()

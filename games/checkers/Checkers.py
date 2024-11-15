@@ -59,52 +59,52 @@ class Checkers:
         Returns:
             bool: True, pokud se tah podařil, jinak False
         """
-        try:
-            if self.__pieceToPlay == None:
-                return False 
-            
-            end_row = index[0]
-            end_col = index[1]
-            
-            if [end_row, end_col] not in self.__pieceToPlay.possibleMoves(self.__board):
-                return False
-            
-            if [end_row, end_col] not in self.__pieceToPlay.possibleJumps(self.__board) and self.__firstMove == True:
-                index = [-1, -1]
-                for figure in self.__board.pieceList(self.__currentPlayer):
-                    if figure.possibleJumps(self.__board) != []:
-                        self.__board[figure.row, figure.col] = None
-                        index = figure.position
-                        break
-                if index != [end_row, end_col]:
-                    self.__board[end_row,end_col] = self.__pieceToPlay
-                    self.__board[self.__pieceToPlay.position[0], self.__pieceToPlay.position[1]] = None
-                    self.__pieceToPlay.position = [end_row, end_col]
-                
-            else:
-                
-                self.__firstMove = False
-                row, col = self.__pieceToPlay.trackJumps([end_row, end_col])
-                self.__board[row, col] = None
-                    
-                self.__board[end_row, end_col] = self.__pieceToPlay
+        
+        if self.__pieceToPlay == None:
+            return False 
+        
+        end_row = index[0]
+        end_col = index[1]
+        
+        if [end_row, end_col] not in self.__pieceToPlay.possibleMoves(self.__board):
+            return False
+        
+        if [end_row, end_col] not in self.__pieceToPlay.possibleJumps(self.__board) and self.__firstMove == True:
+            index = [-1, -1]
+            for figure in self.__board.pieceList(self.__currentPlayer):
+                if figure.possibleJumps(self.__board) != []:
+                    self.__board[figure.row, figure.col] = None
+                    index = figure.position
+                    break
+            if index != [end_row, end_col]:
+                self.__board[end_row,end_col] = self.__pieceToPlay
                 self.__board[self.__pieceToPlay.position[0], self.__pieceToPlay.position[1]] = None
                 self.__pieceToPlay.position = [end_row, end_col]
-                
-                if self.__pieceToPlay.possibleJumps(self.__board) != []:
-                    self.__printToTerminal()
-                    return self.__pieceToPlay.possibleJumps(self.__board) 
-                
-            if isinstance(self.__pieceToPlay, Pawn) and end_row == 0 and self.__pieceToPlay.color == Colors.WHITE:
-                self.__board[end_row, end_col] = Queen(self.__pieceToPlay)
-            elif isinstance(self.__pieceToPlay, Pawn) and end_row == 7 and self.__pieceToPlay.color == Colors.BLACK:
-                self.__board[end_row, end_col] = Queen(self.__pieceToPlay)
-
-            return self.__endOfTurn()
-        
-        except:
             
-            return False
+        else:
+            
+            self.__firstMove = False
+            row, col = self.__pieceToPlay.trackJumps([end_row, end_col])
+            self.__board[row, col] = None
+                
+            self.__board[end_row, end_col] = self.__pieceToPlay
+            self.__board[self.__pieceToPlay.position[0], self.__pieceToPlay.position[1]] = None
+            self.__pieceToPlay.position = [end_row, end_col]
+            
+            if self.__pieceToPlay.possibleJumps(self.__board) != []:
+                self.__printToTerminal()
+                return self.__pieceToPlay.possibleJumps(self.__board) 
+            
+        if isinstance(self.__pieceToPlay, Pawn) and end_row == 0 and self.__pieceToPlay.color == Colors.WHITE:
+            self.__board[end_row, end_col] = Queen(self.__pieceToPlay)
+        elif isinstance(self.__pieceToPlay, Pawn) and end_row == 7 and self.__pieceToPlay.color == Colors.BLACK:
+            self.__board[end_row, end_col] = Queen(self.__pieceToPlay)
+
+        return self.__endOfTurn()
+    
+    
+        
+        return False
     
     def reset(self):
         """Funkce pro resetování hry
@@ -118,20 +118,27 @@ class Checkers:
         Returns:
             string: Vrací vítěze "{barva} won", pokud hra skončila, jinak None
         """
-        for piece in self.__board.pieceList(self.__currentPlayer.changeColor()):
-            if isinstance(piece, Piece):
-                if piece.possibleMoves(self.__board) != [] or piece.possibleJumps(self.__board) != []:
-                    return None
-                
-        return f"{self.__currentPlayer} won"
+        hasMoves = [False, False]
+        for color in [Colors.WHITE, Colors.BLACK]:
+            if self.__board.pieceList(color) == []:
+                return f"{color.changeColor()} won"
+            
+            for piece in self.__board.pieceList(color):
+                if isinstance(piece, Piece):
+                    if piece.possibleMoves(self.__board) != [] or piece.possibleJumps(self.__board) != []:
+                        hasMoves[0 if color == Colors.WHITE else 1] = True
+                        break
+        if hasMoves[0] == False:
+            return f"{Colors.WHITE} won"
+        elif hasMoves[1] == False:
+            return f"{Colors.BLACK} won"
+        else:
+            return None
         
     def __endOfTurn(self):
         """Funkce pro ukončení tahu
         """
         self.__currentPlayer = self.__currentPlayer.changeColor()
-        
-        if self.checkEnd() != None:
-            return self.checkEnd()
         
         self.__pieceToPlay = None
         
