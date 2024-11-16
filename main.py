@@ -30,6 +30,7 @@ sys.exit(app.exec_())
 #game = TicTacToe()
 #game = Checkers()
 #game = Chess()  
+#game = Mines()
 #game = MathGame()
 
 # while game.checkEnd() == None:

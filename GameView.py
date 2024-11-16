@@ -8,7 +8,7 @@ from games import *
 import gc
 
 class ClickableLabel(QLabel):
-    clicked = pyqtSignal(int, int)  
+    clicked = pyqtSignal(int, int, str)  
 
     def __init__(self, row, col, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -18,7 +18,9 @@ class ClickableLabel(QLabel):
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
-            self.clicked.emit(self.row, self.col)
+            self.clicked.emit(self.row, self.col, "left")
+        elif event.button() == Qt.RightButton:
+            self.clicked.emit(self.row, self.col, "right")
 
 class GameView(QWidget):
     def __init__(self, game):
@@ -65,8 +67,8 @@ class GameView(QWidget):
 
         colors = [QColor(235, 235, 208), QColor(119, 148, 85)]  
 
-        for row in range(len(self.game.getBoard()[0])):
-            for col in range(len(self.game.getBoard())):
+        for row in range(len(self.game.getBoard())):
+            for col in range(len(self.game.getBoard()[0])):
                 label = ClickableLabel(row, col)  
                 label.clicked.connect(self.handle_square_click)
                 color = colors[(row + col) % 2]  
@@ -102,18 +104,30 @@ class GameView(QWidget):
         self.player = self.player.changeColor()
         self.show_question()
     
-    def handle_square_click(self, row, col):
+    def handle_square_click(self, row, col, button):
         """Funkce pro obsluhu kliknutí na políčko
 
         Args:
             row (int): řádek
             col (int): sloupec
+            button (string): tlačítko, které bylo stisknuto
         """
         if self.answered:
-            if self.selectedPiece == False and (isinstance(self.game, Checkers) or isinstance(self.game, Chess) or isinstance(self.game, MathGame)):
-                self.choose_piece(row, col)
-            else:
-                self.make_move(row, col)
+            if button == "right":
+                if isinstance(self.game, Mines):
+                    self.game.placeFlag([row, col], self.player)
+                    self.update_board()
+                    if self.game.checkEnd() != None:
+                        self.game_ended(self.game.checkEnd())
+                    self.player = self.player.changeColor()
+                    self.answered = True
+                    self.show_question()
+                    
+            if button == "left":
+                if self.selectedPiece == False and (isinstance(self.game, Checkers) or isinstance(self.game, Chess) or isinstance(self.game, MathGame)):
+                    self.choose_piece(row, col)
+                else:
+                    self.make_move(row, col)
         else:
             self.show_question()
     
@@ -175,7 +189,7 @@ class GameView(QWidget):
         """
         if not isFirst: 
             self.remove_board()
-        self.uiBoard = [[None for _ in range(len(self.game.getBoard()))] for _ in range( len(self.game.getBoard()[0]))]
+        self.uiBoard = [[None for _ in range(len(self.game.getBoard()[0]))] for _ in range( len(self.game.getBoard()))]
         self.create_board()
         for i in range(0, len(self.game.getBoard())):
             for j in range(0, len(self.game.getBoard()[i])):
