@@ -2,8 +2,9 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QVBoxLayout, QPushButt
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QColor, QPalette, QPixmap
 from GetResource import GetResource
+from QuestionView import MathQuestion
+from questions import GenerateQuestion
 from games import *
-from games.Enums import Figures
 import gc
 
 class ClickableLabel(QLabel):
@@ -34,9 +35,12 @@ class GameView(QWidget):
         self.game = game
         self.player = Colors.WHITE
         self.selectedPiece = False
+        self.answered = False
+        
         
         self.setLayout(self.layout)
         self.update_board(True)
+        self.show_question()
                     
     def set_piece_image(self, row, col, filePath):
         """Funkce pro nastavení obrázku figurky na dané pozici
@@ -75,7 +79,29 @@ class GameView(QWidget):
 
                 self.board_layout.addWidget(label, row, col) 
                 self.uiBoard[row][col] = label
- 
+                
+    def show_question(self):
+        """Funkce pro zobrazení otázky
+        """
+        question = GenerateQuestion()
+        question.generateQuestion()
+        self.questionView = MathQuestion(question, self.player, lambda correct: self.handle_answer(correct))
+        self.questionView.show()
+        
+    def handle_answer(self, correct):
+        """Funkce pro zpracování odpovědi na otázku
+
+        Args:
+            correct (bool): Byla odpověď správná?
+        """
+        self.answered = correct
+        if correct:
+            self.questionView.close()
+            return
+        self.questionView.close()
+        self.player = self.player.changeColor()
+        self.show_question()
+    
     def handle_square_click(self, row, col):
         """Funkce pro obsluhu kliknutí na políčko
 
@@ -83,10 +109,13 @@ class GameView(QWidget):
             row (int): řádek
             col (int): sloupec
         """
-        if self.selectedPiece == False and (isinstance(self.game, Checkers) or isinstance(self.game, Chess) or isinstance(self.game, MathGame)):
-            self.choose_piece(row, col)
+        if self.answered:
+            if self.selectedPiece == False and (isinstance(self.game, Checkers) or isinstance(self.game, Chess) or isinstance(self.game, MathGame)):
+                self.choose_piece(row, col)
+            else:
+                self.make_move(row, col)
         else:
-            self.make_move(row, col)
+            self.show_question()
     
     def choose_piece(self, row, col):
         """Funkce pro výběr figurky
@@ -125,6 +154,8 @@ class GameView(QWidget):
         if self.game.checkEnd() != None:
             self.game_ended(self.game.checkEnd())
         self.player = self.player.changeColor()
+        self.answered = False
+        self.show_question()
     
     def highlight_square(self, row, col):
         """Funkce pro zvýraznění políčka
