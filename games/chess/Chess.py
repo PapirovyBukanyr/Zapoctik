@@ -90,6 +90,7 @@ class Chess:
         self.__board[self.__playedPiece.position] = Knight(self.__playedPiece.color, self.__playedPiece.position)
       case _:
         return False
+    self.__board[self.__playedPiece.position].hasMoved = True
       
     return self.__endOfMove()
     

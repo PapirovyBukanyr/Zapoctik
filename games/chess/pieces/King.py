@@ -35,12 +35,15 @@ class King(Piece):
     possibleMoves = [x for x in possibleMoves if board[x] is None or board[x].color != self.color]
     # rosady
     if not self.hasMoved:
-      if board[self.row, self.col+1] is None and \
-          board[self.row, self.col+2] is None and \
-          not board[self.row, 7].hasMoved:
-        possibleMoves.append([self.row, self.col+2])
-      if board[self.row, self.col-1] is None and \
-          board[self.row, self.col-2] is None and \
-          not board[self.row, 0].hasMoved:
-        possibleMoves.append([self.row, self.col-2])
+      if board[self.row, 7] is not None:
+        if board[self.row, self.col+1] is None and \
+            board[self.row, self.col+2] is None and \
+            not board[self.row, 7].hasMoved:
+          possibleMoves.append([self.row, self.col+2])
+      if board[self.row, 0] is not None:
+        if board[self.row, self.col-1] is None and \
+            board[self.row, self.col-2] is None and \
+            board[self.row, self.col-3] is None and \
+            not board[self.row, 0].hasMoved:
+          possibleMoves.append([self.row, self.col-2])
     return possibleMoves
