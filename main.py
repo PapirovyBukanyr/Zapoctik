@@ -29,11 +29,11 @@ _______________________________________________________________________________
 
 #game = TicTacToe()
 #game = Checkers()
-#game = Chess()  
-game = MathGame()
+game = Chess()  
+# game = MathGame()
 
 while game.checkEnd() == None:
-    print(game.getBoard())
+    # print(game.getBoard())
     
     moves = []
     
