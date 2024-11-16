@@ -5,4 +5,7 @@ from .FractionQuestionGenerator import FractionQuestionGenerator
 from .LinearEquationSystemQuestionGenerator import LinearEquationSystemQuestionGenerator
 from .MatrixQuestionGenerator import MatrixQuestionGenerator
 from .InfinitiveSeriesQuestionGenerator import InfinitiveSeriesQuestionGenerator
+from .SetQuestionGenerator import SetQuestionGenerator
+from .OrdinalNumberQuestionGenerator import OrdinalNumberQuestionGenerator
+from .KardinalNumberQuestionGenerator import KardinalNumberQuestionGenerator
 

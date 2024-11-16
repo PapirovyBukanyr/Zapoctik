@@ -5,8 +5,8 @@ from dataclasses import dataclass
 class Field:
   """Třída reprezentující políčko na šachovnici
   """
-  Color: Enum
-  Piece: Enum
+  color: Enum
+  piece: Enum
   
   
 class Figures(Enum):

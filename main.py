@@ -1,15 +1,10 @@
 # Zde se to pak celé spustí
 from games import *
 from questions import *
+from MainView import MainView
+import sys
+from PyQt5.QtWidgets import QApplication
 
-"""
-Zde by měl být přehled všech funkcí, co budeš potřebovat pro frontend. 
-Pokud něco chybí, nebo něco nepotřebuješ, dej mi vědět. 
-Všechny vrací dvojrozměrný list objektů Field, které mají atributy color a piece.
-Pokud je políčko prázdné, je to None.
-Snažil jsem se o maximální sjednocení funkcí, snad to pro tebe bude snadné naprogramovat.
-Marek
-"""
 
 print("""
 _______________________________________________________________________________
@@ -27,31 +22,40 @@ _______________________________________________________________________________
 _______________________________________________________________________________
 """)
 
+app = QApplication(sys.argv)
+window = MainView()
+window.show()
+sys.exit(app.exec_())
+
 #game = TicTacToe()
 #game = Checkers()
 #game = Chess()  
-game = Mines()
-print(game.__str__())
-while game.checkEnd() == None:
-    print(game.getBoard())
-    
-    moves = []
-    
-    if isinstance(game, Chess) or isinstance(game, Checkers):
-        moves = game.choosePiece([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))])
-        print(moves)
-        
-    while moves != True and moves != "Promote":
-        moves = game.makeMove([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))])
-        print(moves)
-    
-    if moves == "Promote":
-        print(game.promote("Q"))
-        
-    print(game.checkEnd())
-        
-print (game.checkEnd())
+#game = Mines()
+#game = MathGame()
 
+# while game.checkEnd() == None:
+#     print(game.getBoard())
+    
+#     moves = []
+    
+#     if isinstance(game, Chess) or isinstance(game, Checkers):
+#         moves = game.choosePiece([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))])
+#         print(moves)
+#    if isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame):
+#        while moves == []:
+#            moves = game.choosePiece([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))])
+#            print(moves)
+        
+#     while moves != True and moves != "Promote":
+#         moves = game.makeMove([int(input("zadejte radek: ")), int(input("zadejte sloupec: "))])
+#         print(moves)
+    
+#     if moves == "Promote":
+#         print(game.promote("Q"))
+        
+#     print(game.checkEnd())
+        
+# print (game.checkEnd())
 
 qg = GenerateQuestion()
 while True:

@@ -7,7 +7,6 @@ class Knight(Piece):
     self.symbol = "N"
     self.value = 3
     
-    
   def copy(self):
     return Knight(self.color, self.position)
   

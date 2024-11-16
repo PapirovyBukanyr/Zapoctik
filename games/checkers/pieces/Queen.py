@@ -19,7 +19,7 @@ class Queen(Piece):
         return 'Q' + self.color.__str__()
         
         
-    def posibleMoves(self, board):
+    def possibleMoves(self, board):
         """Vrací seznam možných tahů dámy
 
         Args:
@@ -29,15 +29,17 @@ class Queen(Piece):
             List of [int, int] : seznam možných tahů dámy
         """
         moves = []
-        for i in range(1, 8):
-            if self.position[0] + i < 8 and self.position[1] + i < 8:
-                if board[self.position[0] + i][self.position[1] + i] == None:
-                    moves.append([self.position[0] + i, self.position[1] + i])
-                else:
-                    break
-            else:
-                break
-            
+        for j in [-1,1]:
+            for k in [-1,1]:
+                for i in range(1, 8):
+                    if self.position[0] + i*j < 8 and self.position[0] + i*j >= 0 and self.position[1] + i*k < 8 and self.position[1] + i*k >= 0:
+                        if board[self.position[0] + i*j,self.position[1] + i*k] is None:
+                            moves.append([self.position[0] + i*j, self.position[1] + i*k])
+                        else:
+                            break
+                    else:
+                        break
+                    
         moves += self.possibleJumps(board)    
             
         return moves
@@ -57,59 +59,20 @@ class Queen(Piece):
             position = self.position
         jumps = []
         
-        for i in range(1, 8):
-            if position[0] + i + 1 < 8 and position[1] + i + 1 < 8:
-                if board[position[0] + i][position[1] + i] != None:
-                    if board[position[0] + i][position[1] + i].color == self.color:
-                        break
-                    
-                    if board[position[0] + i][position[1] + i].color == self.color.changeColor() and board[position[0] + i + 1][position[1] + i + 1] == None:
-                        jumps.append([position[0] + i + 1, position[1] + i + 1])
-                        jumps += self.posibleJumps(board, [position[0] + i + 1, position[1] + i + 1])
+        for j in [-1,1]:
+            for k in [-1,1]:
+                for i in range(1, 8):
+                    if position[0] + i*j + j< 8 and position[0] + i*j + j>= 0 and position[1] + i*k + k < 8 and position[1] + i*k + k>= 0:
+                        if board[position[0] + i*j,position[1] + i*k] != None:
+                            if board[position[0] + i*j,position[1] + i*k].color == self.color:
+                                break
+                            
+                            if board[position[0] + i*j,position[1] + i*k].color == self.color.changeColor() and board[position[0] + i*j + j,position[1] + i*k + k] == None:
+                                jumps.append([position[0] + i*j + j, position[1] + i*k + k])
+                            else:
+                                break
                     else:
                         break
-            else:
-                break
-        
-        for i in range(1, 8):
-            if position[0] + i + 1 < 8 and position[1] - i - 1 >= 0:
-                if board[position[0] + i][position[1] - i] != None:
-                    if board[position[0] + i][position[1] - i].color == self.color:
-                        break
-                    
-                    if board[position[0] + i][position[1] - i].color == self.color.changeColor() and board[position[0] + i + 1][position[1] - i - 1] == None:
-                        jumps.append([position[0] + i + 1, position[1] - i - 1])
-                    else:
-                        break
-            else:
-                break
-            
-        for i in range(1, 8):
-            if position[0] - i - 1 >= 0 and position[1] + i + 1 < 8:
-                if board[position[0] - i][position[1] + i] != None:
-                    if board[position[0] - i][position[1] + i].color == self.color:
-                        break
-                    
-                    if board[position[0] - i][position[1] + i].color == self.color.changeColor() and board[position[0] - i - 1][position[1] + i + 1] == None:
-                        jumps.append([position[0] - i - 1, position[1] + i + 1])
-                    else:
-                        break
-            else:
-                break
-            
-        for i in range(1, 8):
-            if position[0] - i - 1 >= 0 and position[1] - i - 1 >= 0:
-                if board[position[0] - i][position[1] - i] != None:
-                    if board[position[0] - i][position[1] - i].color == self.color:
-                        break
-                    
-                    if board[position[0] - i][position[1] - i].color == self.color.changeColor() and board[position[0] - i - 1][position[1] - i - 1] == None:
-                        jumps.append([position[0] - i - 1, position[1] - i - 1])
-                    else:
-                        break
-            else:
-                break
-            
         return jumps
     
     

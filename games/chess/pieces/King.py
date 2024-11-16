@@ -5,7 +5,6 @@ class King(Piece):
     super().__init__(color, position)
     self.symbol = "K"
     
-    
   def copy(self):
     copy = King(self.color, self.position)
     copy.hasMoved = self.hasMoved
