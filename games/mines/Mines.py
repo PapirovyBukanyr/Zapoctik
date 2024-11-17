@@ -2,6 +2,8 @@ from .MinesBoard import *
 
 class Mines:
     def __init__(self):
+        """Inicializace hry Miny
+        """
         self.__numberOfMines = 15
         self.__board = MinesBoard(self.__numberOfMines)
         self.__firstMove = True
@@ -9,20 +11,37 @@ class Mines:
         
         
     def makeMove(self, position, color = Colors.WHITE):
+        """Provede tah 
+        
+        Args:
+            position ([int, int]): pozice, kam se má hráč pohnout
+            color (Enum Colors): barva na tahu
+            
+        Returns:
+            bool: úspěšnost tahu
+        """
         self.__color = color
         if self.__firstMove:
             row, col = position
             while self.__board[row, col] != None or self.__board.countMinesAroundSymbol(row, col) != 0:
                 self.__board = MinesBoard(self.__numberOfMines)
             self.__firstMove = False
-        self.__board.makeMove(position[0], position[1])
+        result = self.__board.makeMove(position[0], position[1])
         self.__printToTerminal()
-        return True
+        return result
         
     def __str__(self):
+        """Vrátí jméno hry
+        """
         return "Miny"
     
     def checkEnd(self):
+        """Zkontroluje, zda hra skončila
+        
+        Returns:
+            None: pokud hra neskončila
+            string: výsledek hry
+        """
         if self.__board.kaboom:
             return f"{self.__color.changeColor()} won"
         if self.__board.minesRemaining() == 0 and self.__board.flagsPlanted() == self.__numberOfMines:
@@ -36,14 +55,29 @@ class Mines:
             return None
         
     def placeFlag(self, position, color = Colors.WHITE):
+        """Umístí vlajku na danou pozici
+        
+        Args:
+            position ([int, int]): pozice, kam se má vlajka umístit
+            color (Enum Colors): barva na tahu
+            
+        Returns:
+            bool: úspěšnost umístění vlajky
+        """
         success = self.__board.placeFlag(position[0], position[1])
         if color == Colors.WHITE:
             self.score += success
         else:   
             self.score -= success
         self.__printToTerminal()
+        return False if success == False else True
         
     def getBoard(self):
+        """Vrátí herní desku
+        
+        Returns:
+            list: herní deska
+        """
         board = [[None for x in range(16)] for y in range(8)]
         if self.checkEnd() == None or self.__board.kaboom == False:
             for i in range(8):
@@ -113,6 +147,8 @@ class Mines:
         return board
     
     def __printToTerminal(self):
+        """Vypíše herní desku do konzole
+        """
         for i in range(8):
             for j in range(16):
                 if self.__board[i, j] == None:

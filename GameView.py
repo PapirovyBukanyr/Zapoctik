@@ -167,9 +167,10 @@ class GameView(QWidget):
             return
         if self.game.checkEnd() != None:
             self.game_ended(self.game.checkEnd())
-        self.player = self.player.changeColor()
-        self.answered = False
-        self.show_question()
+        else:
+            self.player = self.player.changeColor()
+            self.answered = False
+            self.show_question()
     
     def highlight_square(self, row, col):
         """Funkce pro zvýraznění políčka
@@ -232,6 +233,7 @@ class GameView(QWidget):
         msg_box.setText(message)
         msg_box.setWindowTitle("Konec hry")
         msg_box.exec_()
+        self.questionView.kill_yourself()
         self.close()
         
     def promote_pawn(self):

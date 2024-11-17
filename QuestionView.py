@@ -47,6 +47,9 @@ class MathQuestion(QWidget):
         msg_box.setWindowTitle("Vyhodnocení odpovědi")
         msg_box.exec_()    
         self.close()
+    
+    def kill_yourself(self):
+        self.close()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

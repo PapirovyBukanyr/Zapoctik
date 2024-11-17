@@ -1,6 +1,6 @@
 import unittest
 from parameterized import parameterized
-from games import Chess, Checkers, TicTacToe, MathGame
+from games import Chess, Checkers, TicTacToe, MathGame, Mines
 from .Enums import Colors
 
 class GameTests(unittest.TestCase):
@@ -8,7 +8,8 @@ class GameTests(unittest.TestCase):
         ("Chess", Chess),
         ("Checkers", Checkers),
         ("TicTacToe", TicTacToe),
-        ("MathGame", MathGame)
+        ("MathGame", MathGame),
+        ("Mines", Mines)
     ]
     
     @parameterized.expand(__allClasses)
@@ -77,7 +78,8 @@ class GameTests(unittest.TestCase):
         ("Chess", Chess, [6, 0], Colors.WHITE, [4, 0]),
         ("Checkers", Checkers, [5, 5], Colors.WHITE, [4, 4]),
         ("TicTacToe", TicTacToe, [0, 0], None, [0, 0]),
-        ("MathGame", MathGame, [7, 7], Colors.WHITE, [7, 6])
+        ("MathGame", MathGame, [7, 7], Colors.WHITE, [7, 6]),
+        ("Mines", Mines, [0, 0], None, [1, 1])
     ])
     def testMakeMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb provede
@@ -98,7 +100,8 @@ class GameTests(unittest.TestCase):
         ("Chess", Chess, [6, 0], Colors.WHITE, [-1, -1]),
         ("Checkers", Checkers, [5, 5], Colors.WHITE, [-1, -1]),
         ("TicTacToe", TicTacToe, [-1, -1], None, [-1, -1]),
-        ("MathGame", MathGame, [7, 7], Colors.WHITE, [8, 8])
+        ("MathGame", MathGame, [7, 7], Colors.WHITE, [8, 8]),
+        ("Mines", Mines, [0, 0], None, [-1, -1])
     ])
     def testMakeWrongMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb nelze provést
