@@ -5,7 +5,6 @@ from MainView import MainView
 import sys
 from PyQt5.QtWidgets import QApplication
 
-
 print("""
 _______________________________________________________________________________
 

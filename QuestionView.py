@@ -1,5 +1,9 @@
 import sys
 from games import Colors
+from PyQt5.QtGui import QPixmap
+import matplotlib.pyplot as plt
+from matplotlib import rc
+from io import BytesIO
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QVBoxLayout, QPushButton, QMessageBox
 
 class MathQuestion(QWidget):
@@ -18,9 +22,11 @@ class MathQuestion(QWidget):
 
         self.question_label = QLabel(self.question.questionText)
         layout.addWidget(self.question_label)
-        
-        self.question_latex = QLabel(self.question.questionLatex)
-        layout.addWidget(self.question_latex)
+
+        pixmap = self.render_latex_to_pixmap(self.question.questionLatex)
+        self.question_latex_label = QLabel()
+        self.question_latex_label.setPixmap(pixmap)
+        layout.addWidget(self.question_latex_label)
         
         self.answer_input = QLineEdit(self)
         self.answer_input.setPlaceholderText("Vaše odpověď")
@@ -50,6 +56,23 @@ class MathQuestion(QWidget):
     
     def kill_yourself(self):
         self.close()
+
+    def render_latex_to_pixmap(self, latexEq):
+        plt.figure(figsize=(2, 1))  
+        print("Rovnice: ", latexEq)
+        plt.text(0.5, 0.5, f"${latexEq}$", fontsize=20, ha='center', va='center')
+        plt.axis('off') 
+
+        buf = BytesIO()
+        plt.savefig(buf, format='png', bbox_inches='tight')
+        buf.seek(0)
+        plt.close()
+
+        pixmap = QPixmap()
+        pixmap.loadFromData(buf.getvalue(), "PNG")
+        buf.close()
+        return pixmap
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

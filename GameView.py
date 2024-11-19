@@ -38,7 +38,13 @@ class GameView(QWidget):
         self.player = Colors.WHITE
         self.selectedPiece = False
         self.answered = False
-        
+
+        self.setStyleSheet("""
+        QMainWindow {
+            background-color: #2e2e2e;
+            color: #ffffff;
+        }
+        """)
         
         self.setLayout(self.layout)
         self.update_board(True)

@@ -1,11 +1,59 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel
 from GameView import *
 from games import *
+from PyQt5.QtGui import QFontDatabase
 
 class MainView(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Game Menu")
+        self.setStyleSheet("""
+        QMainWindow {
+            background-color: #2e2e2e;
+            color: #ffffff;
+        }
+
+        QWidget {
+            background-color: #2e2e2e;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        QPushButton {
+            background-color: #444444;
+            color: #ffffff;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        QPushButton:hover {
+            background-color: #0066ff;
+        }
+
+        QPushButton:pressed {
+            background-color: #3399ff;
+        }
+
+        QLabel {
+            color: #ffffff;
+        }
+
+        QLineEdit {
+            background-color: #444444;
+            color: #ffffff;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            padding: 2px;
+        }
+        """)
+
+        # font_database = QFontDatabase()
+        # available_fonts = font_database.families()
+
+        # # Print the list of fonts
+        # for font in available_fonts:
+        #     print(font)
 
         layout = QVBoxLayout()
 
