@@ -20,7 +20,7 @@ class KardinalNumberQuestionGenerator(Question):
         if a == 3 or a == 4:
             a = a%2
             a = f"\\aleph_{a}"
-        if a == 3 or b == 4:
+        if b == 3 or b == 4:
             b = b%2
             b = f"\\aleph_{b}"
         
