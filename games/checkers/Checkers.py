@@ -158,6 +158,8 @@ class Checkers:
         for piece in self.__board.pieceList(color):
             for move in piece.possibleMoves(self.__board):
                 listOfMoves.append(move)
+            for jump in piece.possibleJumps(self.__board):
+                listOfMoves.append(piece.trackJumps(jump))
         return listOfMoves
     
     def __printToTerminal(self):
