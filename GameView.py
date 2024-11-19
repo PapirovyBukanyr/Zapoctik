@@ -52,7 +52,7 @@ class GameView(QWidget):
             col (int): sloupec
             filePath (string): cesta k obrázku
         """
-        if 0 <= row < len(self.game.getBoard()) and 0 <= col < len(self.game.getBoard()[0]):  
+        if 0 <= row < len(self.game.getBoard(self.player)) and 0 <= col < len(self.game.getBoard(self.player)[0]):  
             label = self.uiBoard[row][col]
             pixmap = QPixmap(filePath)
             label.setPixmap(pixmap.scaled(100, 100, Qt.KeepAspectRatio))
@@ -67,8 +67,8 @@ class GameView(QWidget):
 
         colors = [QColor(235, 235, 208), QColor(119, 148, 85)]  
 
-        for row in range(len(self.game.getBoard())):
-            for col in range(len(self.game.getBoard()[0])):
+        for row in range(len(self.game.getBoard(self.player))):
+            for col in range(len(self.game.getBoard(self.player)[0])):
                 label = ClickableLabel(row, col)  
                 label.clicked.connect(self.handle_square_click)
                 color = colors[(row + col) % 2]  
@@ -85,9 +85,11 @@ class GameView(QWidget):
     def show_question(self):
         """Funkce pro zobrazení otázky
         """
+        self.update_board()
         question = GenerateQuestion()
         question.generateQuestion()
-        self.questionView = MathQuestion(question, self.player, lambda correct: self.handle_answer(correct))
+        fullscreen = True if isinstance(self.game, ChessWithFogOfWar) or isinstance(self.game, CheckersWithFogOfWar) else False
+        self.questionView = MathQuestion(question, self.player, fullscreen, lambda correct: self.handle_answer(correct))
         self.questionView.show()
         
     def handle_answer(self, correct):
@@ -190,18 +192,18 @@ class GameView(QWidget):
         """
         if not isFirst: 
             self.remove_board()
-        self.uiBoard = [[None for _ in range(len(self.game.getBoard()[0]))] for _ in range( len(self.game.getBoard()))]
+        self.uiBoard = [[None for _ in range(len(self.game.getBoard(self.player)[0]))] for _ in range( len(self.game.getBoard(self.player)))]
         self.create_board()
-        for i in range(0, len(self.game.getBoard())):
-            for j in range(0, len(self.game.getBoard()[i])):
-                if (self.game.getBoard()[i][j] != None):
-                    self.set_piece_image(i, j, GetResource.getResource(self.game.getBoard()[i][j]))
+        for i in range(0, len(self.game.getBoard(self.player))):
+            for j in range(0, len(self.game.getBoard(self.player)[i])):
+                if (self.game.getBoard(self.player)[i][j] != None):
+                    self.set_piece_image(i, j, GetResource.getResource(self.game.getBoard(self.player)[i][j]))
 
     def remove_board(self):
         """Funkce pro odstranění herní desky
         """
-        for row in range(len(self.game.getBoard())):
-            for col in range( len(self.game.getBoard()[0])):
+        for row in range(len(self.game.getBoard(self.player))):
+            for col in range( len(self.game.getBoard(self.player)[0])):
                 widget = self.uiBoard[row][col]
                 if widget:
                     self.layout.removeWidget(widget)

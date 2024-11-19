@@ -19,7 +19,7 @@ class Checkers:
         """
         return "Piškvorky"
         
-    def getBoard(self):
+    def getBoard(self, color=None):
         return self.__board.getListOfBoard()
     
     def choosePiece(self, index, color = None):
@@ -103,9 +103,6 @@ class Checkers:
         return self.__endOfTurn()
     
     
-        
-        return False
-    
     def reset(self):
         """Funkce pro resetování hry
         """
@@ -147,6 +144,21 @@ class Checkers:
         self.__printToTerminal()
         
         return True
+    
+    def possibleMoves(self, color):
+        """Funkce pro získání možných tahů pro hráče, primárně pro rozšíření Fog Of War
+        
+        Args:
+            color (Enum Colors): barva hráče, pro kterého se mají tahy získat
+            
+        Returns:
+            List of [int, int]: seznam možných tahů
+        """
+        listOfMoves = []
+        for piece in self.__board.pieceList(color):
+            for move in piece.possibleMoves(self.__board):
+                listOfMoves.append(move)
+        return listOfMoves
     
     def __printToTerminal(self):
         """Funkce pro výpis stavu hry na terminál

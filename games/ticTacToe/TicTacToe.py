@@ -16,7 +16,7 @@ class TicTacToe:
         """
         return "Piškvorky"
         
-    def getBoard(self):
+    def getBoard(self, color=None):
         """Vrátí hrací desku
 
         Returns:

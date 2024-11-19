@@ -18,7 +18,7 @@ class Chess:
         return "Šachy"
         
   
-  def getBoard(self):
+  def getBoard(self, color=None):
     return self.__board.getListOfBoard()
   
   def choosePiece (self, positionToPlay, color = None):
@@ -118,7 +118,21 @@ class Chess:
     self.__printToTerminal()
     
     return True
+  
+  def possibleMoves(self, color):
+    """Vrati mozne tahy pro hrace, primárně pro rozšíření Fog Of War
 
+    Args:
+        color (Enum Colors): barva hrace, pro ktereho se maji tahy vypsat
+        
+    Returns:
+        list of [int, int]: seznam moznych tahu
+    """
+    listOfMoves = []
+    for piece in self.__board.pieceList(color):
+      for move in piece.possibleMoves(self.__board):
+        listOfMoves.append(move)
+    return listOfMoves
 
   def checkEnd(self):
     """Kontrola konce hry

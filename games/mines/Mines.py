@@ -72,7 +72,7 @@ class Mines:
         self.__printToTerminal()
         return False if success == False else True
         
-    def getBoard(self):
+    def getBoard(self, color=None):
         """Vrátí herní desku
         
         Returns:
