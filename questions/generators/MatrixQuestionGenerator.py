@@ -85,7 +85,7 @@ class MatrixQuestionGenerator(Question):
                 vypis+= matrix[i][j].__str__() 
                 if j != matrix.shape[1]-1:
                     vypis+="&"
-            vypis+="\\\\\n"
+            vypis+="\\\\\n" 
         vypis+="\\end{pmatrix}"
         return vypis
     
