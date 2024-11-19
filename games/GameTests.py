@@ -1,6 +1,6 @@
 import unittest
 from parameterized import parameterized
-from games import Chess, Checkers, TicTacToe, MathGame, Mines
+from games import Chess, Checkers, TicTacToe, MathGame, Mines, ChessWithFogOfWar, CheckersWithFogOfWar
 from .Enums import Colors
 
 class GameTests(unittest.TestCase):
@@ -9,7 +9,9 @@ class GameTests(unittest.TestCase):
         ("Checkers", Checkers),
         ("TicTacToe", TicTacToe),
         ("MathGame", MathGame),
-        ("Mines", Mines)
+        ("Mines", Mines),
+        ("ChessWithFogOfWar", ChessWithFogOfWar),
+        ("CheckersWithFogOfWar", CheckersWithFogOfWar)        
     ]
     
     @parameterized.expand(__allClasses)
@@ -21,11 +23,14 @@ class GameTests(unittest.TestCase):
             game_class (game): třída hry
         """
         game = game_class()
-        self.assertIsNotNone(game.getBoard())
+        self.assertIsNotNone(game.getBoard(Colors.WHITE))
+        self.assertIsNotNone(game.getBoard(Colors.BLACK))
 
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE),
+        ("Chess with fog of war", ChessWithFogOfWar, [6, 0], Colors.WHITE),
         ("Checkers", Checkers, [5, 5], Colors.WHITE),
+        ("Checkers with fog of war", CheckersWithFogOfWar, [5, 5], Colors.WHITE),
         ("MathGame", MathGame, [7, 7], Colors.WHITE)
     ])
     def testChoosePiece(self, name, game_class, position, color):
@@ -42,7 +47,9 @@ class GameTests(unittest.TestCase):
 
     @parameterized.expand([
         ("Chess", Chess, [-1, -1], Colors.WHITE),
+        ("Chess with fog of war", ChessWithFogOfWar, [-1, -1], Colors.WHITE),
         ("Checkers", Checkers, [-1, -1], Colors.WHITE),
+        ("Checkers with fog of war", CheckersWithFogOfWar, [-1, -1], Colors.WHITE),
         ("MathGame", MathGame, [-1, -1], Colors.WHITE)
     ])
     def testChooseWrongPiece(self, name, game_class, position, color):
@@ -59,7 +66,9 @@ class GameTests(unittest.TestCase):
 
     @parameterized.expand([
         ("Chess", Chess, [1, 1], Colors.WHITE),
+        ("Chess with fog of war", ChessWithFogOfWar, [1, 1], Colors.WHITE),
         ("Checkers", Checkers, [2, 2], Colors.WHITE),
+        ("Checkers with fog of war", CheckersWithFogOfWar, [2, 2], Colors.WHITE),
         ("MathGame", MathGame, [0, 0], Colors.WHITE)
     ])
     def testChooseUnablePiece(self, name, game_class, position, color):
@@ -76,7 +85,9 @@ class GameTests(unittest.TestCase):
     
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [4, 0]),
+        ("Chess with fog of war", ChessWithFogOfWar, [6, 0], Colors.WHITE, [4, 0]),
         ("Checkers", Checkers, [5, 5], Colors.WHITE, [4, 4]),
+        ("Checkers with fog of war", CheckersWithFogOfWar, [5, 5], Colors.WHITE, [4, 4]),
         ("TicTacToe", TicTacToe, [0, 0], None, [0, 0]),
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [7, 6]),
         ("Mines", Mines, [0, 0], None, [1, 1])
@@ -98,7 +109,9 @@ class GameTests(unittest.TestCase):
         
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [-1, -1]),
+        ("Chess with fog of war", ChessWithFogOfWar, [6, 0], Colors.WHITE, [-1, -1]),
         ("Checkers", Checkers, [5, 5], Colors.WHITE, [-1, -1]),
+        ("Checkers with fog of war", CheckersWithFogOfWar, [5, 5], Colors.WHITE, [-1, -1]),
         ("TicTacToe", TicTacToe, [-1, -1], None, [-1, -1]),
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [8, 8]),
         ("Mines", Mines, [0, 0], None, [-1, -1])
@@ -120,7 +133,9 @@ class GameTests(unittest.TestCase):
         
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [1, 1]),
+        ("Chess with fog of war", ChessWithFogOfWar, [6, 0], Colors.WHITE, [1, 1]),
         ("Checkers", Checkers, [5, 5], Colors.WHITE, [1, 1]),
+        ("Checkers with fog of war", CheckersWithFogOfWar, [5, 5], Colors.WHITE, [1, 1]),
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [1, 1])
     ])
     def testMakeUnableMove(self, name, game_class, choose_position, color, move_position):

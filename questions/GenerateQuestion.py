@@ -21,7 +21,7 @@ class GenerateQuestion (Question):
         Returns:
             string, string (questionText, questionLatex): otázka
         """
-        randomQuestion = rand.randint(1, 10)
+        randomQuestion = rand.randint(2, 10)
         
         if randomQuestion == 1: # Generování otázky na matice
             question = MatrixQuestionGenerator() 

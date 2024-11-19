@@ -32,12 +32,12 @@ class LinearEquationSystemQuestionGenerator(Question):
         Returns:
             string: latexový zápis rovnic ve formátu string
         """
-        result = "\\begin{align*}"
+        result = ""
         for eq in equations:
             lhs = eq.lhs
             rhs = eq.rhs
-            result += f"{sp.latex(lhs)} &= {sp.latex(rhs)}\\\\ "
-        return result + "\\end{align*}"
+            result += f"{sp.latex(lhs)} = {sp.latex(rhs)}\n "
+        return result + ""
     
     def generateQuestion(self):
         """Metoda na generování otázky

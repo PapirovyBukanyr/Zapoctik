@@ -7,7 +7,7 @@ from io import BytesIO
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QVBoxLayout, QPushButton, QMessageBox
 
 class MathQuestion(QWidget):
-    def __init__(self, question, color, callback):
+    def __init__(self, question, color, fullscreen, callback):
         super().__init__()
         self.question = question
         self.callback = callback
@@ -37,6 +37,8 @@ class MathQuestion(QWidget):
         layout.addWidget(submit_button)
 
         self.setLayout(layout)
+        if fullscreen:
+            self.showFullScreen()
 
     def check_answer(self):
         answer = self.answer_input.text()

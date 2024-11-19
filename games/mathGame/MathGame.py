@@ -15,7 +15,7 @@ class MathGame:
         """
         return "Matematická hra"
         
-    def getBoard(self):
+    def getBoard(self, color=None):
         return self.__board.getListOfBoard()
     
     def choosePiece(self, position, color = None):
