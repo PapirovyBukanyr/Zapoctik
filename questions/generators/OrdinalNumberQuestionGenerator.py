@@ -40,9 +40,12 @@ class OrdinalNumberQuestionGenerator(Question):
             if a == "\\omega" and b == "\\omega":
                 self.answer = "w^2"
             elif a == "\\omega":
-                self.answer = f"w2"
+                if b == 2:
+                    self.answer = "w2"
+                else:
+                    self.answer = "w"
             elif b == "\\omega":
-                self.answer = f"w"
+                self.answer = "w"
             else:
                 self.answer = a * b
         
