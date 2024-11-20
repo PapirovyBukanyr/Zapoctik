@@ -45,8 +45,6 @@ class MainView(QWidget):
                 self.gameWindow = GameView(CheckersWithFogOfWar())
                 self.gameWindow.show()
             case "Hledání krtka":
-                game = ChallengeAccepted()
-                game.create()
-                self.gameWindow = GameView(game)
+                self.gameWindow = GameView(ChallengeAccepted())
                 self.gameWindow.show()
             
