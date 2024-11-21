@@ -1,4 +1,3 @@
-import sys
 from games import Colors
 from resources.KatexHtmlTemplate import *
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QVBoxLayout, QPushButton, QMessageBox
@@ -10,6 +9,36 @@ class MathQuestion(QWidget):
         self.question = question
         self.callback = callback
         self.color = color  
+
+        self.setStyleSheet("""
+        QMainWindow {
+            background-color: #FFFFFF;
+            color: #FFFFFF;
+        }
+
+        QWidget {
+            background-color: #FFFFFF;
+            color: #000000;
+            font-family: Segoe UI;
+        }
+
+        QPushButton {
+            background-color: #DDDDDD;
+            color: #000000;
+            border: 2px solid #555555;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        QPushButton:hover {
+            background-color: #0066ff;
+        }
+
+        QPushButton:pressed {
+            background-color: #3399ff;
+        }
+        """)
+
         if color == Colors.WHITE:
             self.setWindowTitle("Otázka pro bílého hráče")
         else:
