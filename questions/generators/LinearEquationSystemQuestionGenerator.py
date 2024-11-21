@@ -36,7 +36,7 @@ class LinearEquationSystemQuestionGenerator(Question):
         for eq in equations:
             lhs = eq.lhs
             rhs = eq.rhs
-            result += f"{sp.latex(lhs)} = {sp.latex(rhs)}\n "
+            result += f"{sp.latex(lhs)} = {sp.latex(rhs)}\\\\newline "
         return result + ""
     
     def generateQuestion(self):

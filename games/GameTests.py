@@ -1,6 +1,6 @@
 import unittest
 from parameterized import parameterized
-from games import Chess, Checkers, TicTacToe, MathGame, Mines, ChessWithFogOfWar, CheckersWithFogOfWar
+from games import Chess, Checkers, TicTacToe, MathGame, Mines, ChessWithFogOfWar, CheckersWithFogOfWar, ChallengeAccepted
 from .Enums import Colors
 
 class GameTests(unittest.TestCase):
@@ -11,7 +11,8 @@ class GameTests(unittest.TestCase):
         ("MathGame", MathGame),
         ("Mines", Mines),
         ("ChessWithFogOfWar", ChessWithFogOfWar),
-        ("CheckersWithFogOfWar", CheckersWithFogOfWar)        
+        ("CheckersWithFogOfWar", CheckersWithFogOfWar),
+        ("Filipova výzva", ChallengeAccepted)     
     ]
     
     @parameterized.expand(__allClasses)
@@ -90,7 +91,8 @@ class GameTests(unittest.TestCase):
         ("Checkers with fog of war", CheckersWithFogOfWar, [5, 5], Colors.WHITE, [4, 4]),
         ("TicTacToe", TicTacToe, [0, 0], None, [0, 0]),
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [7, 6]),
-        ("Mines", Mines, [0, 0], None, [1, 1])
+        ("Mines", Mines, [0, 0], None, [1, 1]),
+        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [0, 0])
     ])
     def testMakeMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb provede
@@ -105,7 +107,9 @@ class GameTests(unittest.TestCase):
         game = game_class()
         if choose_position and color:
             game.choosePiece(choose_position, color)
-        self.assertTrue(game.makeMove(move_position))
+            self.assertTrue(game.makeMove(move_position))
+        else:
+            self.assertTrue(game.makeMove(move_position, color))
         
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [-1, -1]),
@@ -114,7 +118,8 @@ class GameTests(unittest.TestCase):
         ("Checkers with fog of war", CheckersWithFogOfWar, [5, 5], Colors.WHITE, [-1, -1]),
         ("TicTacToe", TicTacToe, [-1, -1], None, [-1, -1]),
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [8, 8]),
-        ("Mines", Mines, [0, 0], None, [-1, -1])
+        ("Mines", Mines, [0, 0], None, [-1, -1]),
+        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [-1, -1])
     ])
     def testMakeWrongMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb nelze provést
@@ -129,7 +134,9 @@ class GameTests(unittest.TestCase):
         game = game_class()
         if choose_position and color:
             game.choosePiece(choose_position, color)
-        self.assertFalse(game.makeMove(move_position))
+            self.assertFalse(game.makeMove(move_position))
+        else:
+            self.assertFalse(game.makeMove(move_position, color))
         
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [1, 1]),
@@ -151,7 +158,9 @@ class GameTests(unittest.TestCase):
         game = game_class()
         if choose_position and color:
             game.choosePiece(choose_position, color)
-        self.assertFalse(game.makeMove(move_position))
+            self.assertFalse(game.makeMove(move_position))
+        else:
+            self.assertFalse(game.makeMove(move_position, color))
         
 
     @parameterized.expand(__allClasses)
