@@ -9,20 +9,20 @@ class MainView(QWidget):
         self.setWindowTitle("Game Menu")
         self.setStyleSheet("""
         QMainWindow {
-            background-color: #2e2e2e;
-            color: #ffffff;
+            background-color: #FFFFFF;
+            color: #FFFFFF;
         }
 
         QWidget {
-            background-color: #2e2e2e;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
+            background-color: #FFFFFF;
+            color: #000000;
+            font-family: Yu Gothic UI;
         }
 
         QPushButton {
-            background-color: #444444;
-            color: #ffffff;
-            border: 1px solid #555555;
+            background-color: #DDDDDD;
+            color: #000000;
+            border: 2px solid #555555;
             border-radius: 5px;
             padding: 5px;
         }
@@ -33,18 +33,6 @@ class MainView(QWidget):
 
         QPushButton:pressed {
             background-color: #3399ff;
-        }
-
-        QLabel {
-            color: #ffffff;
-        }
-
-        QLineEdit {
-            background-color: #444444;
-            color: #ffffff;
-            border: 1px solid #555555;
-            border-radius: 5px;
-            padding: 2px;
         }
         """)
 

@@ -1,10 +1,8 @@
-import sys
 from games import Colors
 from PyQt5.QtGui import QPixmap
 import matplotlib.pyplot as plt
-from matplotlib import rc
 from io import BytesIO
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QVBoxLayout, QPushButton, QMessageBox
+from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QVBoxLayout, QPushButton, QMessageBox
 
 class MathQuestion(QWidget):
     def __init__(self, question, color, fullscreen, callback):
@@ -12,6 +10,36 @@ class MathQuestion(QWidget):
         self.question = question
         self.callback = callback
         self.color = color  
+
+        self.setStyleSheet("""
+        QMainWindow {
+            background-color: #FFFFFF;
+            color: #FFFFFF;
+        }
+
+        QWidget {
+            background-color: #FFFFFF;
+            color: #000000;
+            font-family: Segoe UI;
+        }
+
+        QPushButton {
+            background-color: #DDDDDD;
+            color: #000000;
+            border: 2px solid #555555;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        QPushButton:hover {
+            background-color: #0066ff;
+        }
+
+        QPushButton:pressed {
+            background-color: #3399ff;
+        }
+        """)
+
         if color == Colors.WHITE:
             self.setWindowTitle("Otázka pro bílého hráče")
         else:
@@ -74,10 +102,3 @@ class MathQuestion(QWidget):
         pixmap.loadFromData(buf.getvalue(), "PNG")
         buf.close()
         return pixmap
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MathQuestion("Kolik je 2+2", "4", lambda x: print("Correct" if x else "Incorrect"))
-    window.show()
-    sys.exit(app.exec_())
