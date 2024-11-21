@@ -6,3 +6,4 @@ from .mines import Mines
 from .mathGame import MathGame
 from .ChessWithFogOfWar import ChessWithFogOfWar
 from .CheckersWithFogOfWar import CheckersWithFogOfWar
+from .ChallengeAccepted import ChallengeAccepted

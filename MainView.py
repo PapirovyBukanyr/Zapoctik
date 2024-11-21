@@ -60,7 +60,7 @@ class MainView(QWidget):
         title = QLabel("Select a Game to Play")
         layout.addWidget(title)
 
-        games = ["Šachy", "Dáma", "Piškvorky", "Matematická hra", "Miny", "Šachy s mlhou války", "Dáma s mlhou války"]
+        games = ["Šachy", "Dáma", "Piškvorky", "Matematická hra", "Miny", "Šachy s mlhou války", "Dáma s mlhou války", "Hledání krtka"]
 
         for game in games:
             button = QPushButton(game)
@@ -92,3 +92,7 @@ class MainView(QWidget):
             case "Dáma s mlhou války":
                 self.gameWindow = GameView(CheckersWithFogOfWar())
                 self.gameWindow.show()
+            case "Hledání krtka":
+                self.gameWindow = GameView(ChallengeAccepted())
+                self.gameWindow.show()
+            
