@@ -1,10 +1,8 @@
 import sys
 from games import Colors
-from PyQt5.QtGui import QPixmap
-import matplotlib.pyplot as plt
-from matplotlib import rc
-from io import BytesIO
+from resources.KatexHtmlTemplate import *
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QVBoxLayout, QPushButton, QMessageBox
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 class MathQuestion(QWidget):
     def __init__(self, question, color, fullscreen, callback):
@@ -23,9 +21,9 @@ class MathQuestion(QWidget):
         self.question_label = QLabel(self.question.questionText)
         layout.addWidget(self.question_label)
 
-        pixmap = self.render_latex_to_pixmap(self.question.questionLatex)
-        self.question_latex_label = QLabel()
-        self.question_latex_label.setPixmap(pixmap)
+        self.question_latex_label = QWebEngineView()
+        self.question_latex_label.setFixedHeight(300)
+        self.render_latex_to_katex(self.question.questionLatex)
         layout.addWidget(self.question_latex_label)
         
         self.answer_input = QLineEdit(self)
@@ -59,25 +57,6 @@ class MathQuestion(QWidget):
     def kill_yourself(self):
         self.close()
 
-    def render_latex_to_pixmap(self, latexEq):
-        plt.figure(figsize=(2, 1))  
-        print("Rovnice: ", latexEq)
-        plt.text(0.5, 0.5, f"${latexEq}$", fontsize=20, ha='center', va='center')
-        plt.axis('off') 
-
-        buf = BytesIO()
-        plt.savefig(buf, format='png', bbox_inches='tight')
-        buf.seek(0)
-        plt.close()
-
-        pixmap = QPixmap()
-        pixmap.loadFromData(buf.getvalue(), "PNG")
-        buf.close()
-        return pixmap
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MathQuestion("Kolik je 2+2", "4", lambda x: print("Correct" if x else "Incorrect"))
-    window.show()
-    sys.exit(app.exec_())
+    def render_latex_to_katex(self, latexEq):
+        html = KATEX_HTML_TEMPLATE.format(equation=latexEq)
+        self.question_latex_label.setHtml(html)

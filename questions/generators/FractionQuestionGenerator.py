@@ -59,7 +59,7 @@ class FractionQuestionGenerator(Question):
         Returns:
             String: reprezentace zlomku v latexu
         """
-        return f"\\frac{ {numerator} }{ {denominator} }"
+        return f"\\\\frac{ {numerator} }{ {denominator} }"
     
     def fractionToAnswer(self, a, b):
         """Převedení zlomku na string
@@ -90,7 +90,7 @@ class FractionQuestionGenerator(Question):
         
         elif randomQuestion == 2:
             self.questionText = f"Jaký je největší společný dělitel {numerator} and {denominator}?"
-            self.questionLatex = "\\textbf{?}"
+            self.questionLatex = "?"
             self.answer = self.greatestCommonDivisor(numerator, denominator)
         
         elif randomQuestion == 3:
@@ -100,12 +100,12 @@ class FractionQuestionGenerator(Question):
         
         elif randomQuestion == 4:
             self.questionText = f"Jaký je zbytek po dělení {numerator} číslem {denominator}?"
-            self.questionLatex = "\\textbf{?}"
+            self.questionLatex = "?"
             self.answer = numerator % denominator
             
         else:
             self.questionText = f"Jaký je nejmenší společný násobek {numerator} and {denominator}?"
-            self.questionLatex = "\\textbf{?}"
+            self.questionLatex = "?"
             self.answer = self.lowestCommonMultiple(numerator, denominator)
         
         return self

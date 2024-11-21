@@ -74,20 +74,21 @@ class MatrixQuestionGenerator(Question):
         """Metoda pro vygenerování matice ve formátu LaTeX
 
         Args:
-            matrix (numpy array int): matice
+            matrix (numpy.ndarray): matice
 
         Returns:
             string: matice ve formátu LaTeX
         """
-        vypis = "\\begin{pmatrix}\n"
+        vypis = "\\\\begin{pmatrix}"
         for i in range(matrix.shape[0]):
             for j in range(matrix.shape[1]):
                 vypis+= matrix[i][j].__str__() 
                 if j != matrix.shape[1]-1:
                     vypis+="&"
-            vypis+="\\\\\n" 
-        vypis+="\\end{pmatrix}"
+            vypis+="\\\\\\\\" 
+        vypis+="\\\\end{pmatrix}"
         return vypis
+    
     
     def generateQuestion(self):
         """Metoda na generování otázek na matice
@@ -125,4 +126,3 @@ class MatrixQuestionGenerator(Question):
 if __name__ == "__main__":
     mqg = MatrixQuestionGenerator()
     print (mqg.generateQuestion().__str__())
-    

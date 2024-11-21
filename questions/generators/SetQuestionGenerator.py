@@ -31,31 +31,31 @@ class SetQuestionGenerator(Question):
         
         if i == 0:
             self.questionText = "Urči součet prvků sjednocení množin:"
-            self.questionLatex = f"\\{{ {a}, {b}, {c}\\}} \\cup \\{{ {d}, {e}, {f}\\}}"
+            self.questionLatex = f"\\\\{{ {a}, {b}, {c}\\\\}} \\\\cup \\\\{{ {d}, {e}, {f}\\\\}}"
             self.answer = sum(set([a, b, c]) | set([d, e, f]))
         elif i == 1:
             self.questionText = "Urči součet prvků průnik množin:"
-            self.questionLatex = f"\\{{ {a}, {b}, {c}\\}} \\cap \\{{ {d}, {e}, {f}\\}}"
+            self.questionLatex = f"\\\\{{ {a}, {b}, {c}\\\\}} \\\\cap \\\\{{ {d}, {e}, {f}\\\\}}"
             self.answer = sum(set([a, b, c]) & set([d, e, f]))
         elif i == 2:
             self.questionText = "Urči součet prvků rozdílu množin:"
-            self.questionLatex = f"\\{{ {a}, {b}, {c}\\}} \\setminus \\{{ {d}, {e}, {f}\\}}"
+            self.questionLatex = f"\\\\{{ {a}, {b}, {c}\\\\}} \\\\setminus \\\\{{ {d}, {e}, {f}\\\\}}"
             self.answer = sum(set([a, b, c]) - set([d, e, f]))
         elif i == 3:
             self.questionText = "Urči součet prvků symetrické diference množin:"
-            self.questionLatex = f"\\{{ {a}, {b}, {c}\\}} \\triangle \\{{ {d}, {e}, {f}\\}}"
+            self.questionLatex = f"\\\\{{ {a}, {b}, {c}\\\\}} \\\\triangle \\\\{{ {d}, {e}, {f}\\\\}}"
             self.answer = sum(set([a, b, c]) ^ set([d, e, f]))
         elif i == 4:
             self.questionText = "Urči nejmenší prvek kartézského součinu podle obou parametrů (odpověď zadej ve formátu a,b):"
-            self.questionLatex = f"\\{{ {a}, {b}, {c}\\}} \\times \\{{ {d}, {e}, {f}\\}}"
+            self.questionLatex = f"\\\\{{ {a}, {b}, {c}\\\\}} \\\\times \\\\{{ {d}, {e}, {f}\\\\}}"
             self.answer = min([a, b, c]).__str__()+","+min([d, e, f]).__str__()
         elif i == 5:
             self.questionText = "Urči největší prvek kartézského součinu podle obou parametrů (odpověď zadej ve formátu a,b):"
-            self.questionLatex = f"\\{{ {a}, {b}, {c}\\}} \\times \\{{ {d}, {e}, {f}\\}}"
+            self.questionLatex = f"\\\\{{ {a}, {b}, {c}\\\\}} \\\\times \\\\{{ {d}, {e}, {f}\\\\}}"
             self.answer = max([a, b, c]).__str__()+","+max([d, e, f]).__str__()
         else:
             self.questionText = "Urči počet prvků kartézského součinu:"
-            self.questionLatex = f"\\{{ {a}, {b}, {c}\\}} \\times \\{{ {d}, {e}, {f}\\}}"
+            self.questionLatex = f"\\\\{{ {a}, {b}, {c}\\\\}} \\\\times \\\\{{ {d}, {e}, {f}\\\\}}"
             self.answer = len(set([a, b, c])) * len(set([d, e, f]))
             
         return self
