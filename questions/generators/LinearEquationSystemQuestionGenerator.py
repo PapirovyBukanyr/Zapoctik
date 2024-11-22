@@ -3,6 +3,14 @@ import sympy as sp
 from ..Question import Question
 
 class LinearEquationSystemQuestionGenerator(Question):
+    """Generátor otázek na lineární soustavy rovnic
+    """
+    
+    
+    numberOfQuestions = 1
+    """int: Počet otázek, které generátor vygeneruje
+    """
+    
     
     def generateLinearEquationSystem(self, num_equations, num_variables):
         """Vygenerování lineární soustavy rovnic
@@ -16,12 +24,15 @@ class LinearEquationSystemQuestionGenerator(Question):
         """
         variables = sp.symbols(f'x1:{num_variables+1}')
         equations = []
+    
         for _ in range(num_equations):
             lhs = sum(random.randint(-10, 10) * var for var in variables)
             rhs = random.randint(-10, 10)
             equation = sp.Eq(lhs, rhs)
             equations.append(equation)
+    
         return equations, variables
+    
     
     def convert_to_latex(self, equations):
         """Metoda na konverzi rovnic do latexu
@@ -33,14 +44,20 @@ class LinearEquationSystemQuestionGenerator(Question):
             string: latexový zápis rovnic ve formátu string
         """
         result = "\\begin{align*}"
+    
         for eq in equations:
             lhs = eq.lhs
             rhs = eq.rhs
             result += f"{sp.latex(lhs)} &= {sp.latex(rhs)}\\\\ "
+    
         return result + "\\end{align*}"
     
-    def generateQuestion(self):
+    
+    def generateQuestion(self, n = None):
         """Metoda na generování otázky
+        
+        Args:
+            n (int): Číslo otázky, defaultně náhodné
 
         Returns:
             LinearEquationSystemQuestionGenerator: Funkce vrací sebe sama s vygenerovanou otázkou
@@ -55,10 +72,12 @@ class LinearEquationSystemQuestionGenerator(Question):
             self.answer = sum(next(iter(solution))).__str__()
             self.questionText = "Vyřeš soustavu rovnic, jako výsledek zapiš součet, pro zlomky ve tvaru a/b: "
             self.questionLatex = self.convert_to_latex(equations)
+    
         except:
             self.generateQuestion()
             
         return self
+
 
 if __name__ == "__main__":
     lesqg = LinearEquationSystemQuestionGenerator()

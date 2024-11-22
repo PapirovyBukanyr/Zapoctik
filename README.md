@@ -20,12 +20,12 @@ Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky 
     
     Pro hraní:
     ```sh
-    pip install sympy numpy
+    pip install sympy numpy PyQt5 PyQtWebEngine
     ```
 
     Pro debugování a testování:
      ```sh
-    pip install sympy numpy parameterized unittest
+    pip install sympy numpy PyQt5 PyQtWebEngine parameterized unittest
     ```
 
 3. **Spuštění aplikace**:
@@ -55,11 +55,19 @@ Celá logika se nachází ve složce `games/chess`. Řízení chodu celé hry m�
 - `games/chess/pieces/Bishop.py`: Střelec
 - `games/chess/pieces/Pawn.py`: Pěšec
 
+#### Backend šachů s mlhou války
+
+Jedná se prakticky o totožnou hru, jako je ta předchozí jenom třída `games/ChessWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovali pouze dostupná políčka.
+
 #### Backend dámy
 
 Většina logiky se nachází v modulu `games/checkers`. Hlavní třída, která vše řídí je `games/checkers/Checkers.py`, která zajišťuje výběr figurky, provedení tahu, střídání tahů a případné zjištění konce hry a její ukončení. Funkčnost desky zajišťuje třída `games/checkers/CheckersBoard.py`, která představuje šachovnici, primárně tedy slouží k ukládání pozic figur při hře. Dědí z `games/Board.py`. Dále je tam složka `games/checkers/pieces`, ve které se nachází všechny možné figurky. Všechny figury dědí z jedné mateřské třídy `games/checkers/pieces/Piece.py`, která předepisuje základní vlastnosti všech figur (např. pohyb po šachovnici). Konkrétní implementace jednotlivých figur jsou v souborech:
 - `games/checkers/pieces/Queen.py`: Dáma
 - `games/checkers/pieces/Pawn.py`: Pěšec
+
+#### Backend dámy s mlhou války
+
+Jedná se prakticky o totožnou hru, jako je ta předchozí jenom třída `games/CheckersWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovali pouze dostupná políčka.
 
 #### Backend piškvorek 3x3
 
@@ -68,6 +76,14 @@ Většina backendu piškvorek se nachází v souboru `games/ticTacToe`, hlavní 
 #### Backend matematické hry
 
 Jde o hru, ve které se dva hráči pohybují podle zadání. mohou se pohybovat pouze nahoru a dolů, pohybují se dokud nenarazí na políčko s úkoly. Potom protější hráč začne hádat otázky. Pokud uhodne, získává bod a může hrát. Pokud ne, získává možnost odpovědět soupeř. Střídají se, dokud někdo neuhodne. Hra končí nalezením a zodpovězením desáté otázky. Vše se nacjází v modulu `games/mathGame`. Hlavní logika se nachází v souboru `games/mathGame/MathGame.py`. Dále je tam třída šachovnice `games/mathGame/MathGameBoard.py`, která dědí z `games/Board.py`.
+
+#### Backend hry hledání krtka
+
+Cílem hry je najít krtka, což je černý pěšák na zakryté šachovnici. Ten za sebou zanechává stopu, tedy po odkrytí políčka se objeví číslo, před kolika tahy tam krtek byl. Maximum je historie osmi tahů. Zvláštností hry je, že se celý její kód nachází na jediném řádku ve třídě `games/ChallengeAccepted`. Tato hra vznikla jako protest proti nutné podmínce, že žádná funkce nesmí být delší než čtyřicet řádků. Snažíme se tím poukázat na to, že počet řádků není primární kritérium přehlednosti kódu.
+
+#### Backend hry miny 
+
+Veškerá logika hry je v `games/mines`. Hlavní třída je `games/mines/Mines`, kde je definována veškerá logika hry. Herní deska je definována ve třídě `games/mines/MinesBoard`, která stejně jako ostatní herní desky dědí z `games/Board`. Princip hry je lehce upraven pro dva hráče. To v praxi znamená, že za správně umístěnou vlaječku hráč získá bod, za odebrání správné vlaječky bod ztratí, kdo má nakonec nejvíc bodů vítězí. 
 
 ### Backend generování otázek
 
@@ -82,4 +98,8 @@ Otázky se generují v modulech `questions`, kde je třída `questions/Question.
 - `questions/generators/OrdinalNumberQuestionGenerator.py`: Generátor otázek na ordinální čísla.
 - `questions/generators/KardinalNumberQuestionGenerator.py`: Generátor otázek na kardinální čísla.
 - `questions/generators/SetQuestionGenerator.py`: Generátor otázek na množiny.
+
+### Testy
+
+Abychom si usnadnili práci při debugování, byly stvořeny testy. Ty kontrolují pouze to, zda-li se vrací správný datový typ. Primární logika je v `Tests.py`. Odtama se zavolají třídy pro kontrolu funkčnosti her `games/GameTests` a funkčnost generování otázek `questions/QuestionTests`. Jak již bylo řečeno, kontrolují ale pouze a jenom správnost vráceného návratového typu a ne jestli třeba odpověď na otázku dává smysl nebo jestli je otázka v češtině.
 
