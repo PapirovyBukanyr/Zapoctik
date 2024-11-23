@@ -128,7 +128,7 @@ class GameView(QWidget):
                     if self.game.checkEnd() != None:
                         self.game_ended(self.game.checkEnd())
                     self.player = self.player.changeColor()
-                    self.answered = True
+                    self.answered = False
                     self.show_question()
                     
             if button == "left":
