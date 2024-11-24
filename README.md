@@ -57,7 +57,7 @@ Celá logika se nachází ve složce `games/chess`. Řízení chodu celé hry m�
 
 #### Backend šachů s mlhou války
 
-Jedná se prakticky o totožnou hru, jako je ta předchozí jenom třída `games/ChessWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovali pouze dostupná políčka.
+Jedná se prakticky o totožnou hru, jako je ta předchozí, jenom třída `games/ChessWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovala pouze dostupná políčka.
 
 #### Backend dámy
 
