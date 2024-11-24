@@ -67,7 +67,7 @@ Většina logiky se nachází v modulu `games/checkers`. Hlavní třída, která
 
 #### Backend dámy s mlhou války
 
-Jedná se prakticky o totožnou hru, jako je ta předchozí jenom třída `games/CheckersWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovali pouze dostupná políčka.
+Jedná se prakticky o totožnou hru, jako je ta předchozí, jenom třída `games/CheckersWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovala pouze dostupná políčka.
 
 #### Backend piškvorek 3x3
 
