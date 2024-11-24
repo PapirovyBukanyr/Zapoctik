@@ -79,7 +79,7 @@ Jde o hru, ve které se dva hráči pohybují podle zadání. mohou se pohybovat
 
 #### Backend hry hledání krtka
 
-Cílem hry je najít krtka, což je černý pěšák na zakryté šachovnici. Ten za sebou zanechává stopu, tedy po odkrytí políčka se objeví číslo, před kolika tahy tam krtek byl. Maximum je historie osmi tahů. Zvláštností hry je, že se celý její kód nachází na jediném řádku ve třídě `games/ChallengeAccepted`. Tato hra vznikla jako protest proti nutné podmínce, že žádná funkce nesmí být delší než čtyřicet řádků. Snažíme se tím poukázat na to, že počet řádků není primární kritérium přehlednosti kódu.
+Cílem hry je najít krtka, což je černý pěšák, na zakryté šachovnici. Ten za sebou zanechává stopu, tedy po odkrytí políčka se objeví číslo, před kolika tahy tam krtek byl. Maximum je historie osmi tahů. Zvláštností hry je, že se celý její kód nachází na jediném řádku ve třídě `games/ChallengeAccepted`. Tato hra vznikla jako protest proti nutné podmínce, že žádná funkce nesmí být delší než čtyřicet řádků. Snažíme se tím poukázat na to, že počet řádků není primární kritérium přehlednosti kódu.
 
 #### Backend hry miny 
 
