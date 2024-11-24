@@ -101,5 +101,5 @@ Otázky se generují v modulech `questions`, kde je třída `questions/Question.
 
 ### Testy
 
-Abychom si usnadnili práci při debugování, byly stvořeny testy. Ty kontrolují pouze to, zda-li se vrací správný datový typ. Primární logika je v `Tests.py`. Odtama se zavolají třídy pro kontrolu funkčnosti her `games/GameTests` a funkčnost generování otázek `questions/QuestionTests`. Jak již bylo řečeno, kontrolují ale pouze a jenom správnost vráceného návratového typu a ne jestli třeba odpověď na otázku dává smysl nebo jestli je otázka v češtině.
+Abychom si usnadnili práci při debugování, byly stvořeny testy. Ty kontrolují pouze, zda se vrací správný datový typ. Primární logika je v `Tests.py`. Odtud se zavolají třídy pro kontrolu funkčnosti her `games/GameTests` a funkčnost generování otázek `questions/QuestionTests`. Jak již bylo řečeno, kontrolují ale pouze a jenom správnost vráceného návratového typu, ne jestli například odpověď na otázku dává smysl nebo jestli je otázka v češtině.
 
