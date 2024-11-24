@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QSpacerItem, QSizePolicy
 from GameView import *
 from games import *
 from PyQt5.QtGui import QFontDatabase
@@ -6,7 +6,8 @@ from PyQt5.QtGui import QFontDatabase
 class MainView(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Game Menu")
+        self.setWindowTitle("Zápočtík Games")
+        self.setFixedSize(400, 300)
         self.setStyleSheet("""
         QMainWindow {
             background-color: #FFFFFF;
@@ -34,6 +35,12 @@ class MainView(QWidget):
         QPushButton:pressed {
             background-color: #3399ff;
         }
+                           
+        QLabel#AppName {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
         """)
 
         # font_database = QFontDatabase()
@@ -43,19 +50,30 @@ class MainView(QWidget):
         # for font in available_fonts:
         #     print(font)
 
-        layout = QVBoxLayout()
+        main_layout = QVBoxLayout()
 
-        title = QLabel("Select a Game to Play")
-        layout.addWidget(title)
+        title = QLabel("Zápočtík Games")
+        title.setObjectName("AppName")  
+        title.setAlignment(Qt.AlignCenter)  
+        main_layout.addWidget(title)
 
+        spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        main_layout.addSpacerItem(spacer)
+
+        grid_layout = QGridLayout()
         games = ["Šachy♛", "Dáma𖣯", "Piškvorky❌⭕", "Matematická hra🔢", "Miny💣", "Šachy s mlhou války☁️", "Dáma s mlhou války☁️", "Hledání krtka🐀"]
 
-        for game in games:
+        for i, game in enumerate(games):
             button = QPushButton(game)
             button.clicked.connect(lambda checked, g=game: self.start_game(g))
-            layout.addWidget(button)
+            grid_layout.addWidget(button, i // 2, i % 2) 
 
-        self.setLayout(layout)
+        main_layout.addLayout(grid_layout)
+
+        spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        main_layout.addSpacerItem(spacer)
+
+        self.setLayout(main_layout)
 
     def start_game(self, game_name):
         match(game_name):
