@@ -48,7 +48,7 @@ class MainView(QWidget):
         title = QLabel("Select a Game to Play")
         layout.addWidget(title)
 
-        games = ["Šachy", "Dáma", "Piškvorky", "Matematická hra", "Miny", "Šachy s mlhou války", "Dáma s mlhou války", "Hledání krtka"]
+        games = ["Šachy♛", "Dáma𖣯", "Piškvorky❌⭕", "Matematická hra🔢", "Miny💣", "Šachy s mlhou války☁️", "Dáma s mlhou války☁️", "Hledání krtka🐀"]
 
         for game in games:
             button = QPushButton(game)
@@ -59,28 +59,36 @@ class MainView(QWidget):
 
     def start_game(self, game_name):
         match(game_name):
-            case "Šachy":
+            case "Šachy♛":
                 self.gameWindow = GameView(Chess())
                 self.gameWindow.show()
-            case "Dáma":
+                self.showMinimized()
+            case "Dáma𖣯":
                 self.gameWindow = GameView(Checkers())
                 self.gameWindow.show()
-            case "Piškvorky":
+                self.showMinimized()
+            case "Piškvorky❌⭕":
                 self.gameWindow = GameView(TicTacToe())
                 self.gameWindow.show()
-            case "Matematická hra":
+                self.showMinimized()
+            case "Matematická hra🔢":
                 self.gameWindow = GameView(MathGame())
                 self.gameWindow.show()
-            case "Miny":
+                self.showMinimized()
+            case "Miny💣":
                 self.gameWindow = GameView(Mines())
                 self.gameWindow.show()
-            case "Šachy s mlhou války":
+                self.showMinimized()
+            case "Šachy s mlhou války☁️":
                 self.gameWindow = GameView(ChessWithFogOfWar())
                 self.gameWindow.show()
-            case "Dáma s mlhou války":
+                self.showMinimized()
+            case "Dáma s mlhou války☁️":
                 self.gameWindow = GameView(CheckersWithFogOfWar())
                 self.gameWindow.show()
-            case "Hledání krtka":
+                self.showMinimized()
+            case "Hledání krtka🐀":
                 self.gameWindow = GameView(ChallengeAccepted())
                 self.gameWindow.show()
+                self.showMinimized()
             
