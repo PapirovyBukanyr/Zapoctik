@@ -13,6 +13,13 @@ class KardinalNumberQuestionGenerator(Question):
     """
     
     
+    def __init__(self):
+        """Konstruktor třídy otázek na kardinální čísla
+        """
+        super().__init__()
+        self.time = 10
+    
+    
     def generateQuestion(self, n = None):	
         """Generování náhodné otázky na kardinální čísla
 

@@ -11,6 +11,13 @@ class FractionQuestionGenerator(Question):
     """
     
     
+    def __init__(self):
+        """Konstruktor třídy FractionQuestionGenerator
+        """
+        super().__init__()
+        self.time = 10
+    
+    
     def generateFraction(self):
         """Vygenerování náhodné dvojice čísel
         

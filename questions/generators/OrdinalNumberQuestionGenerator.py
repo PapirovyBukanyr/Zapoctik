@@ -13,6 +13,13 @@ class OrdinalNumberQuestionGenerator(Question):
     """
     
     
+    def __init__(self): 
+        """Konstruktor třídy otázek na ordinální čísla
+        """
+        super().__init__()
+        self.time = 20
+    
+    
     def generateQuestion(self, n = None):
         """Generování náhodné otázky na uspořádaná čísla
 
