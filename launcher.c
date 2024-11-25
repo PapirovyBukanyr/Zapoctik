@@ -43,14 +43,12 @@ int main() {
     fgets(buffer, sizeof(buffer), pipe);
     pclose(pipe);
 
-    // Parse the version string
     int major, minor;
     if (sscanf(buffer, "Python %d.%d", &major, &minor) != 2) {
         printf("Chyba pri cteni verze Pythonu!\n");
         return 4;
     }
 
-    // Check if the version is at least 3.10
     if (major < 3 || (major == 3 && minor < 10)) {
         printf("Python verze 3.10 nebo vyssi je vyzadovana!\n");
         return 4;
