@@ -1,9 +1,21 @@
 import numpy as np
 from ..Question import Question
 
-class AnalyticGeometryQuestionGenerator(Question):
-    def generateQuestion(self):
+class AnalyticGeometryQuestionGenerator(Question):    
+    """Generátor otázek na analytickou geometrii
+    """
+    
+    
+    numberOfQuestions = 1
+    """int: Počet otázek, které generátor vygeneruje
+    """
+    
+    
+    def generateQuestion(self, n = None):
         """Generování náhodné otázky na analytickou geometrii
+
+        Args:
+            n (int): Číslo otázky, defaultně náhodné
 
         Returns:
             AnalyticGeometryQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovědí

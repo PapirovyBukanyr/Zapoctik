@@ -1,9 +1,14 @@
 import unittest
 from parameterized import parameterized
 from games import Chess, Checkers, TicTacToe, MathGame, Mines, ChessWithFogOfWar, CheckersWithFogOfWar, ChallengeAccepted
+import random
 from .Enums import Colors
 
 class GameTests(unittest.TestCase):
+    """Testy na hry
+    """
+    
+    
     __allClasses = [
         ("Chess", Chess),
         ("Checkers", Checkers),
@@ -14,6 +19,9 @@ class GameTests(unittest.TestCase):
         ("CheckersWithFogOfWar", CheckersWithFogOfWar),
         ("Filipova výzva", ChallengeAccepted)     
     ]
+    """list: Seznam všech tříd her
+    """
+    
     
     @parameterized.expand(__allClasses)
     def testInitialBoard(self, name, game_class):
@@ -45,6 +53,7 @@ class GameTests(unittest.TestCase):
         """
         game = game_class()
         self.assertIsNotNone(game.choosePiece(position, color))
+        
 
     @parameterized.expand([
         ("Chess", Chess, [-1, -1], Colors.WHITE),
@@ -64,6 +73,7 @@ class GameTests(unittest.TestCase):
         """
         game = game_class()
         self.assertIsNotNone(game.choosePiece(position, color))
+        
 
     @parameterized.expand([
         ("Chess", Chess, [1, 1], Colors.WHITE),
@@ -83,6 +93,7 @@ class GameTests(unittest.TestCase):
         """
         game = game_class()
         self.assertIsNotNone(game.choosePiece(position, color))
+        
     
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [4, 0]),
@@ -105,11 +116,10 @@ class GameTests(unittest.TestCase):
             move_position ([int, int]): pozice, kam se má figurka pohnout
         """
         game = game_class()
+        
         if choose_position and color:
             game.choosePiece(choose_position, color)
-            self.assertTrue(game.makeMove(move_position))
-        else:
-            self.assertTrue(game.makeMove(move_position, color))
+        self.assertTrue(game.makeMove(move_position, color))
         
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [-1, -1]),
@@ -137,6 +147,7 @@ class GameTests(unittest.TestCase):
             self.assertFalse(game.makeMove(move_position))
         else:
             self.assertFalse(game.makeMove(move_position, color))
+        
         
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [1, 1]),
@@ -173,3 +184,44 @@ class GameTests(unittest.TestCase):
         """
         game = game_class()
         self.assertIsNone(game.checkEnd())
+        
+    
+    @parameterized.expand(__allClasses)
+    def testSimulateFullGame(self, name, game_class):
+        """Testuje, zda se hra zahraje do konce
+
+        Args:
+            name (string): jméno hry
+            game_class (game): třída hry
+        """
+        game = game_class()
+        colorOnMove = Colors.WHITE
+        counter = 0
+        limit = 1000
+
+        while game.checkEnd() is None and counter < limit:
+            move = []
+
+            if isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame):
+                while move == []:
+                    move = game.choosePiece([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
+                
+                move = random.choice(move)
+                
+            newMove = False
+            while newMove != True:
+                if isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame):
+                    newMove = game.makeMove(move)
+                    if not isinstance(newMove,bool) and not isinstance(newMove, str) and isinstance(newMove[0], list) and isinstance(newMove[0][0], int):
+                        move = random.choice(newMove)
+                    elif newMove == "Promote":
+                        move = game.promote("Q")
+                        newMove = True
+                else:
+                    move = game.makeMove([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
+
+            colorOnMove = colorOnMove.changeColor()
+            counter += 1
+        print(game.checkEnd())
+        self.assertFalse(counter >= limit)
+

@@ -4,12 +4,36 @@ import random
 from ..Question import Question
 
 class OrdinalNumberQuestionGenerator(Question):
-    def generateQuestion(self):
+    """Generátor otázek na ordinální čísla
+    """
+    
+    
+    numberOfQuestions = 3
+    """int: Počet otázek, které generátor vygeneruje
+    """
+    
+    
+    def __init__(self): 
+        """Konstruktor třídy otázek na ordinální čísla
+        """
+        super().__init__()
+        self.time = 20
+    
+    
+    def generateQuestion(self, n = None):
         """Generování náhodné otázky na uspořádaná čísla
+
+        Args:
+            n (int): Číslo otázky, defaultně náhodné
 
         Returns:
             OrdinalNumberQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovědí
         """
+        if n is not None and n in range(0, 4):
+            randomQuestion = n
+        else:
+            randomQuestion = random.randint(0, 3)
+            
         a = 0
         b = 0
         while a != 3 and b != 3:
@@ -20,9 +44,7 @@ class OrdinalNumberQuestionGenerator(Question):
         if b == 3:
             b = "\\\\omega"
         
-        i = random.randint(0, 2)
-        
-        if i == 0:
+        if randomQuestion == 0:
             self.questionText = "Urči hodnotu výrazu ordinálních čísel, odpověď zadej ve formátu \"wa+b\", \"wa\", \"w+b\" nebo \"b\":"
             self.questionLatex = f"{a} + {b}"
             if a == "\\\\omega" and b == "\\\\omega":
@@ -34,7 +56,7 @@ class OrdinalNumberQuestionGenerator(Question):
             else:
                 self.answer = a + b
                 
-        elif i == 1:
+        elif randomQuestion == 1:
             self.questionText = "Urči hodnotu výrazu ordinálních čísel, odpověď zadej ve formátu \"w^2\",\"wa+b\", \"wa\", \"w+b\" nebo \"b\":"
             self.questionLatex = f"{a} \\\\cdot {b}"
             if a == "\\\\omega" and b == "\\\\omega":
@@ -49,7 +71,7 @@ class OrdinalNumberQuestionGenerator(Question):
             else:
                 self.answer = a * b
         
-        elif i == 2:
+        elif randomQuestion == 2:
             self.questionText = "Urči hodnotu výrazu ordinálních čísel, odpověď zadej ve formátu \"w^a\",\"wa+b\", \"wa\", \"w+b\" nebo \"b\":"
             self.questionLatex = f"{a} ^ {b}"
             if a == "\\\\omega" and b == "\\\\omega":

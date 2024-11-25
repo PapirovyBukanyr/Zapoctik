@@ -9,45 +9,59 @@ class GenerateQuestion (Question):
     Pro kontrolu odpovědí použij metodu checkAnswer s parametrem answer
     Výsledky se zaokrouhlují na celá čísla!!!
     """
+    
+    
+    numberOfQuestions = 10
+    """int: Počet otázek, které generátor vygeneruje    
+    """
+    
+    
     def __init__(self):
         """Konstruktor třídy GenerateQuestion
         """
         super().__init__()
         print("Otázky jsou připraveny ke generování")
         
-    def generateQuestion(self):
+        
+    def generateQuestion(self, n = None):	
         """Metoda na generování otázek
+        
+        Args: 
+            n (int): Číslo otázky, defaultně náhodné
         
         Returns:
             string, string (questionText, questionLatex): otázka
         """
-        randomQuestion = rand.randint(1, 10)
+        if n is not None and n in range(0, self.numberOfQuestions):
+            randomQuestion = n
+        else:
+            randomQuestion = rand.randint(0, 9)
         
-        if randomQuestion == 1: # Generování otázky na matice
+        if randomQuestion == 0: # Generování otázky na matice
             question = MatrixQuestionGenerator() 
             
-        elif randomQuestion == 2: # Generování otázky na zlomky
+        elif randomQuestion == 1: # Generování otázky na zlomky
             question = FractionQuestionGenerator()
             
-        elif randomQuestion == 3: # Generování otázky na derivace
+        elif randomQuestion == 2: # Generování otázky na derivace
             question = DerivativeQuestionGenerator()
             
-        elif randomQuestion == 4: # Generování otázky na soustavu lineárních rovnic
+        elif randomQuestion == 3: # Generování otázky na soustavu lineárních rovnic
             question = LinearEquationSystemQuestionGenerator()
             
-        elif randomQuestion == 5: # Generování otázky na konvergenci nekonečných řad
+        elif randomQuestion == 4: # Generování otázky na konvergenci nekonečných řad
             question = InfinitiveSeriesQuestionGenerator()
         
-        elif randomQuestion == 6: # Generování otázky na určení hodnoty integrálu
+        elif randomQuestion == 5: # Generování otázky na určení hodnoty integrálu
             question = IntegralQuestionGenerator()
             
-        elif randomQuestion == 7: # Generování otázky na množiny
+        elif randomQuestion == 6: # Generování otázky na množiny
             question = SetQuestionGenerator()    
             
-        elif randomQuestion == 8: # Generování otázky na ordinální čísla
+        elif randomQuestion == 7: # Generování otázky na ordinální čísla
             question = OrdinalNumberQuestionGenerator()
             
-        elif randomQuestion == 9: # Generování otázky na kardinální čísla
+        elif randomQuestion == 8: # Generování otázky na kardinální čísla
             question = KardinalNumberQuestionGenerator()
             
         else: # Generování otázky na analytickou geometrii
@@ -61,6 +75,7 @@ class GenerateQuestion (Question):
         print(self)
         
         return self.questionText, self.questionLatex
+    
     
 if __name__ == "__main__":
     gq = GenerateQuestion()
