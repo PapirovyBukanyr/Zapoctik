@@ -7,6 +7,13 @@ class LinearEquationSystemQuestionGenerator(Question):
     """
     
     
+    def __init__(self):
+        """Konstruktor třídy soustav lineárních rovnic
+        """
+        super().__init__()
+        self.time = 120
+    
+    
     numberOfQuestions = 1
     """int: Počet otázek, které generátor vygeneruje
     """
