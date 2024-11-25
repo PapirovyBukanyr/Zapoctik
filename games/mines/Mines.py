@@ -1,10 +1,11 @@
 from .MinesBoard import *
+import random
 
 class Mines:
     def __init__(self):
         """Inicializace hry Miny
         """
-        self.__numberOfMines = 15
+        self.__numberOfMines = random.randint(15,20)
         self.__board = MinesBoard(self.__numberOfMines)
         self.__firstMove = True
         self.score = 0
@@ -20,6 +21,8 @@ class Mines:
         Returns:
             bool: úspěšnost tahu
         """
+        if position[0] < 0 or position[0] > 7 or position[1] < 0 or position[1] > 15:
+            return False
         self.__color = color
         if self.__firstMove:
             row, col = position

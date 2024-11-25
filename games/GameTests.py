@@ -197,31 +197,52 @@ class GameTests(unittest.TestCase):
         game = game_class()
         colorOnMove = Colors.WHITE
         counter = 0
-        limit = 1000
+        limit = 10000
 
         while game.checkEnd() is None and counter < limit:
             move = []
 
-            if isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame):
+            if self.isGameWithChoosingPiece(game):
                 while move == []:
                     move = game.choosePiece([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
                 
-                move = random.choice(move)
-                
+                if isinstance(move, list) and isinstance(move[0], list):
+                    move = random.choice(move)
+            else:
+                move = [random.randint(0, 10), random.randint(0, 15)]
+                                                        
             newMove = False
+            
             while newMove != True:
-                if isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame):
-                    newMove = game.makeMove(move)
+                if self.isGameWithChoosingPiece(game):
+                    newMove = game.makeMove(move, colorOnMove)
                     if not isinstance(newMove,bool) and not isinstance(newMove, str) and isinstance(newMove[0], list) and isinstance(newMove[0][0], int):
                         move = random.choice(newMove)
+                        
                     elif newMove == "Promote":
                         move = game.promote("Q")
                         newMove = True
+                    
+                    elif not isinstance(newMove,bool) and isinstance(newMove, list) and isinstance(newMove[0], int):
+                        move = newMove
+                
                 else:
-                    move = game.makeMove([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
+                    newMove = game.makeMove([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
 
             colorOnMove = colorOnMove.changeColor()
             counter += 1
         print(game.checkEnd())
         self.assertFalse(counter >= limit)
+    
+    
+    def isGameWithChoosingPiece(self, game):
+        """Zjistí, zda hra vyžaduje výběr figurky
+
+        Args:
+            game (game): hra
+
+        Returns:
+            bool: True, pokud hra vyžaduje výběr figurky
+        """
+        return isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame) or isinstance(game, ChessWithFogOfWar) or isinstance(game, CheckersWithFogOfWar)
 
