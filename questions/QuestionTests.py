@@ -1,15 +1,4 @@
-from .generators import (
-    MatrixQuestionGenerator,
-    FractionQuestionGenerator,
-    DerivativeQuestionGenerator,
-    LinearEquationSystemQuestionGenerator,
-    AnalyticGeometryQuestionGenerator,
-    InfinitiveSeriesQuestionGenerator,
-    IntegralQuestionGenerator,
-    OrdinalNumberQuestionGenerator,
-    KardinalNumberQuestionGenerator,
-    SetQuestionGenerator
-)
+from .generators import *
 from .GenerateQuestion import GenerateQuestion
 import unittest
 from parameterized import parameterized

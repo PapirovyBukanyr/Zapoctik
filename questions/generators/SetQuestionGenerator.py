@@ -12,6 +12,7 @@ class SetQuestionGenerator(Question):
     """int: Počet otázek, které generátor vygeneruje
     """
     
+    
     def __init__(self):
         """Konstruktor třídy otázek na množiny
         """
@@ -30,6 +31,7 @@ class SetQuestionGenerator(Question):
         """
         if n is not None and n in range(0, 7):
             randomQuestion = n
+            
         else:
             randomQuestion = random.randint(0, 6)
         

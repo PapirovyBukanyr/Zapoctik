@@ -1,4 +1,3 @@
-# Zde se to pak celé spustí
 from MainView import MainView
 import sys
 from PyQt5.QtWidgets import QApplication

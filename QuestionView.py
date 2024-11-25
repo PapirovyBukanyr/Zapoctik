@@ -5,7 +5,19 @@ from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtCore import QTimer, QTime
 
 class MathQuestion(QWidget):
+    """Třída MathQuestion slouží k zobrazení matematické otázky.
+    """
+    
+    
     def __init__(self, question, color, fullscreen, callback):
+        """Konstruktor třídy
+        
+        Args:
+            question (Question): Otázka, která se má zobrazit
+            color (Colors): Barva hráče, který má odpovídat
+            fullscreen (bool): Zda se má zobrazit na celou obrazovku
+            callback (function): Funkce, která se má zavolat po zodpovězení otázky
+        """
         super().__init__()
         self.question = question
         self.callback = callback
@@ -45,6 +57,7 @@ class MathQuestion(QWidget):
             self.setWindowTitle("Otázka pro prvního hráče")
         else:
             self.setWindowTitle("Otázka pro druhého hráče")
+            
         self.setGeometry(100, 100, 300, 150)
 
         layout = QVBoxLayout()
@@ -76,14 +89,20 @@ class MathQuestion(QWidget):
         self.timer.timeout.connect(self.update_timer)
         self.timer.start(1000)
 
+
     def update_timer(self):
+        """Metoda na aktualizaci časovače
+        """
         self.remaining_time -= 1
         self.timer_label.setText(f"Zbývající čas: {self.remaining_time} s")
         if self.remaining_time <= 0:
             self.timer.stop()
             self.time_out()
 
+
     def time_out(self):
+        """Metoda na oznámení, že čas vypršel
+        """
         msg_box = QMessageBox()
         self.callback(False)
         msg_box.setText("Vypršel čas! Správná odpověď je: " + self.question.doupovcuvOperator())
@@ -91,26 +110,44 @@ class MathQuestion(QWidget):
         msg_box.exec_()
         self.close()
 
+
     def check_answer(self):
+        """Metoda na kontrolu odpovědi
+        """
         self.timer.stop()
         answer = self.answer_input.text()
         msg_box = QMessageBox()
+        
         if self.question.checkAnswer(answer):
             self.callback(True)
+            
             if self.color == Colors.WHITE:
                 msg_box.setText("Odpověď je správná, první hráč může táhnout")
+                
             else:
                 msg_box.setText("Odpověď je správná, druhý hráč může táhnout")
+                
         else:
             self.callback(False)
             msg_box.setText("Odpověď je blbě!! Správná odpověď je: " + self.question.doupovcuvOperator())
+            
         msg_box.setWindowTitle("Vyhodnocení odpovědi")
         msg_box.exec_()    
         self.close()
     
+    
     def kill_yourself(self):
+        """ Metoda pro ukončení okna galantní cestou
+        """
+        self.timer.stop()
         self.close()
 
+
     def render_latex_to_katex(self, latexEq):
+        """Metoda na vytvoření rovnic ve formátu LaTeX
+
+        Args:
+            latexEq (string): rovnice, které se mají vykreslit v LaTeXu
+        """
         html = KATEX_HTML_TEMPLATE.format(equation=latexEq)
         self.question_latex_label.setHtml(html)

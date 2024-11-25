@@ -36,8 +36,10 @@ class Question (ABC):
         """
         try:
             self.answer = round(self.answer).__str__()
+            
         except:
             self.answer = self.answer.__str__()
+            
         return answer.strip().lower() == self.answer.strip().lower()
     
     
@@ -49,8 +51,10 @@ class Question (ABC):
         """
         try:
             answer = round(self.answer).__str__()
+            
         except:
             answer = self.answer.__str__()
+            
         return answer
     
     

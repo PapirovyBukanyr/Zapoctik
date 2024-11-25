@@ -4,7 +4,13 @@ from games import *
 from PyQt5.QtGui import QFontDatabase
 
 class MainView(QWidget):
+    """Třída MainView slouží k zobrazení hlavního menu aplikace.
+    """
+    
+    
     def __init__(self):
+        """Konstruktor třídy
+        """
         super().__init__()
         self.setWindowTitle("Game Menu")
         self.setStyleSheet("""
@@ -57,36 +63,49 @@ class MainView(QWidget):
 
         self.setLayout(layout)
 
+
     def start_game(self, game_name):
+        """Spustí hru podle jména
+        
+        Args:
+            game_name (string): název hry
+        """
         match(game_name):
             case "Šachy♛":
                 self.gameWindow = GameView(Chess())
                 self.gameWindow.show()
                 self.showMinimized()
+                
             case "Dáma𖣯":
                 self.gameWindow = GameView(Checkers())
                 self.gameWindow.show()
                 self.showMinimized()
+                
             case "Piškvorky❌⭕":
                 self.gameWindow = GameView(TicTacToe())
                 self.gameWindow.show()
                 self.showMinimized()
+                
             case "Matematická hra🔢":
                 self.gameWindow = GameView(MathGame())
                 self.gameWindow.show()
                 self.showMinimized()
+                
             case "Miny💣":
                 self.gameWindow = GameView(Mines())
                 self.gameWindow.show()
                 self.showMinimized()
+                
             case "Šachy s mlhou války☁️":
                 self.gameWindow = GameView(ChessWithFogOfWar())
                 self.gameWindow.show()
                 self.showMinimized()
+                
             case "Dáma s mlhou války☁️":
                 self.gameWindow = GameView(CheckersWithFogOfWar())
                 self.gameWindow.show()
                 self.showMinimized()
+                
             case "Hledání krtka🐀":
                 self.gameWindow = GameView(ChallengeAccepted())
                 self.gameWindow.show()
