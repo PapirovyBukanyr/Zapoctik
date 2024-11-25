@@ -2,8 +2,26 @@ import numpy as np
 from ..Question import Question
 
 class InfinitiveSeriesQuestionGenerator(Question):
-    def generateQuestion(self):
+    """Generátor otázek na konvergenci nekonečných řad
+    """
+    
+    
+    numberOfQuestions = 1
+    """int: Počet otázek, které generátor vygeneruje
+    """
+    
+    def __init__(self):
+        """Konstruktor třídy nekonečných řad
+        """
+        super().__init__()
+        self.time = 10
+    
+    
+    def generateQuestion(self, n = None):	
         """Generování náhodné otázky na konvergenci nekonečných řad
+        
+        Args:
+            n (int): Číslo otázky, defaultně náhodné
 
         Returns:
             InfinitiveSeriesQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovědí

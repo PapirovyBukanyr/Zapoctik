@@ -1,11 +1,16 @@
 from .MathGameBoard import *
 
 class MathGame:
+    """Třída reprezentující hru MathGame
+    """
+    
+    
     def __init__(self):
         self.__score = 0
         self.__board = MathGameBoard()
         self.__onTurn = Colors.WHITE
         self.__firstTime = False
+        
         
     def __str__(self):
         """Vrátí název hry
@@ -15,8 +20,10 @@ class MathGame:
         """
         return "Matematická hra"
         
+        
     def getBoard(self, color=None):
         return self.__board.getListOfBoard()
+    
     
     def choosePiece(self, position, color = None):
         if color is None:
@@ -24,6 +31,7 @@ class MathGame:
         if self.__board.getPosition(color) == position:
             return self.__board.getPosibleMoves(position)
         return []
+    
         
     def makeMove(self, move, color = None):
         if move is None:
