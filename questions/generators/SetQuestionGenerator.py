@@ -13,7 +13,7 @@ class SetQuestionGenerator(Question):
     """
     
     def __init__(self):
-        """Konstruktor třídy množin
+        """Konstruktor třídy otázek na množiny
         """
         super().__init__()
         self.time = 10

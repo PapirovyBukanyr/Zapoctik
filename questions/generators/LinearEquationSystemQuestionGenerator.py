@@ -8,7 +8,7 @@ class LinearEquationSystemQuestionGenerator(Question):
     
     
     def __init__(self):
-        """Konstruktor třídy lineárních soustav rovnic
+        """Konstruktor třídy soustav lineárních rovnic
         """
         super().__init__()
         self.time = 120
