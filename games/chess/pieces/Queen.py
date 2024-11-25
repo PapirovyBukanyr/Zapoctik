@@ -7,8 +7,10 @@ class Queen(Piece):
     super().__init__(color, position)
     self.symbol = "Q"
     self.value = 9
+
   def copy(self):
     return Queen(self.color, self.position)
+  
   def possibleMoves(self, board):
     possibleMoves = []
     possibleMoves += Rook(self.color, self.position).possibleMoves(board)

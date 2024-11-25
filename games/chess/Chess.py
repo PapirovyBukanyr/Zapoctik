@@ -9,8 +9,16 @@ class Chess:
     self.__positionsList = [self.__board.copy()]  
     self.__isMoving = Colors.WHITE
     
+  def __str__(self):
+        """Vrátí název hry
+
+        Returns:
+            String: název hry
+        """
+        return "Šachy"
+        
   
-  def getBoard(self):
+  def getBoard(self, color=None):
     return self.__board.getListOfBoard()
   
   def choosePiece (self, positionToPlay, color = None):
@@ -34,7 +42,7 @@ class Chess:
       return []
 
 
-  def makeMove(self, playedMove):
+  def makeMove(self, playedMove, color = None):
     """Provedení tahu hrace
 
     Args:
@@ -80,14 +88,16 @@ class Chess:
       return False
     
     match(newFigure):
-      case "Q":
+      case Figures.QUEEN:
         self.__board[self.__playedPiece.position] = Queen(self.__playedPiece.color, self.__playedPiece.position)
-      case "R":
+      case Figures.ROOK:
         self.__board[self.__playedPiece.position] = Rook(self.__playedPiece.color, self.__playedPiece.position)
-      case "B":
+      case Figures.BISHOP:
         self.__board[self.__playedPiece.position] = Bishop(self.__playedPiece.color, self.__playedPiece.position)
-      case "N":
+      case Figures.KNIGHT:
         self.__board[self.__playedPiece.position] = Knight(self.__playedPiece.color, self.__playedPiece.position)
+      case Figures.KING:
+        self.__board[self.__playedPiece.position] = King(self.__playedPiece.color, self.__playedPiece.position)
       case _:
         return False
     self.__board[self.__playedPiece.position].hasMoved = True
@@ -109,7 +119,21 @@ class Chess:
     self.__printToTerminal()
     
     return True
+  
+  def possibleMoves(self, color):
+    """Vrati mozne tahy pro hrace, primárně pro rozšíření Fog Of War
 
+    Args:
+        color (Enum Colors): barva hrace, pro ktereho se maji tahy vypsat
+        
+    Returns:
+        list of [int, int]: seznam moznych tahu
+    """
+    listOfMoves = []
+    for piece in self.__board.pieceList(color):
+      for move in piece.possibleMoves(self.__board):
+        listOfMoves.append(move)
+    return listOfMoves
 
   def checkEnd(self):
     """Kontrola konce hry

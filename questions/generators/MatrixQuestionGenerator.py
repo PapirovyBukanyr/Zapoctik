@@ -3,9 +3,16 @@ import sympy as sp
 import random
 from ..Question import Question
 
-class MatrixQuestionGenerator(Question):  
+class MatrixQuestionGenerator(Question): 
     """Generátor otázek na matice
     """  
+    
+    
+    numberOfQuestions = 4
+    """int: Počet otázek, které generátor vygeneruje
+    """
+     
+    
     def generateRegularMatrix(self, n = random.randint(2, 4)):
         """Generování regulární matice
         
@@ -20,6 +27,7 @@ class MatrixQuestionGenerator(Question):
             matrix = np.random.randint(1, 10, (n, n))
         return matrix
     
+    
     def calculateDeterminant(self, matrix):
         """Výpočet determinantu matice
         
@@ -33,6 +41,7 @@ class MatrixQuestionGenerator(Question):
             return 0
         return np.linalg.det(matrix)
     
+    
     def calculateInverseMatrix(self, matrix):
         """Výpočet inverzní matice
 
@@ -44,7 +53,9 @@ class MatrixQuestionGenerator(Question):
         """
         if matrix.shape[0] != matrix.shape[1]:
             return 0
+    
         return np.linalg.inv(matrix)
+    
     
     def calculateRank(self, matrix):
         """Výpočet řádu matice
@@ -56,6 +67,7 @@ class MatrixQuestionGenerator(Question):
             int: řád matice
         """
         return np.linalg.matrix_rank(matrix)
+    
     
     def calculateEigenvalues(self, matrix):
         """Výpočet vlastních čísel matice
@@ -70,46 +82,52 @@ class MatrixQuestionGenerator(Question):
             return 0
         return sum(np.linalg.eigvals(matrix))
     
+    
     def getLatexMatrix(self, matrix):
         """Metoda pro vygenerování matice ve formátu LaTeX
 
         Args:
-            matrix (numpy array int): matice
+            matrix (numpy.ndarray): matice
 
         Returns:
             string: matice ve formátu LaTeX
         """
-        vypis = "\\begin{pmatrix}\n"
+        vypis = "\\\\begin{pmatrix}"
         for i in range(matrix.shape[0]):
             for j in range(matrix.shape[1]):
                 vypis+= matrix[i][j].__str__() 
                 if j != matrix.shape[1]-1:
                     vypis+="&"
-            vypis+="\\\\\n"
-        vypis+="\\end{pmatrix}"
+            vypis+="\\\\\\\\" 
+        vypis+="\\\\end{pmatrix}"
         return vypis
     
-    def generateQuestion(self):
+
+    
+    def generateQuestion(self, n = None):
         """Metoda na generování otázek na matice
 
         Returns:
             MatrixQuestionGenerator: Vrací sebe sama s vygenerovanými otázkami
         """
-        randomQuestion = random.randint(1, 4)
+        if n is not None and n in range(0, 4):
+            randomQuestion = n
+        else:
+            randomQuestion = random.randint(0, 3)
         matice = self.generateRegularMatrix()
         
-        if randomQuestion == 1:
+        if randomQuestion == 0:
             matice = self.generateRegularMatrix(2)
             self.questionText ="Vypočti determinant matice: " 
             self.questionLatex = self.getLatexMatrix(matice)
             self.answer =self.calculateDeterminant(matice)
             
-        elif randomQuestion == 2:
+        elif randomQuestion == 1:
             self.questionText ="Vypočti determinant inverzní matice: " 
             self.questionLatex = self.getLatexMatrix(matice)
             self.answer =self.calculateDeterminant(self.calculateInverseMatrix(matice))
             
-        elif randomQuestion == 3:
+        elif randomQuestion == 2:
             self.questionText ="Vypočti hodnost matice: " 
             self.questionLatex = self.getLatexMatrix(matice)
             self.answer =self.calculateRank(matice)
@@ -125,4 +143,3 @@ class MatrixQuestionGenerator(Question):
 if __name__ == "__main__":
     mqg = MatrixQuestionGenerator()
     print (mqg.generateQuestion().__str__())
-    

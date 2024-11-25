@@ -39,9 +39,9 @@ class TicTacToeBoard (Board):
             for j in range(3):
                 if self.board[i][j] != None:
                     if self.board[i][j] == Colors.WHITE:
-                        board[i][j] = Field(Colors.WHITE, "X")
+                        board[i][j] = Field(Colors.WHITE, Figures.X)
                     else:
-                        board[i][j] = Field(Colors.BLACK, "O")
+                        board[i][j] = Field(Colors.BLACK, Figures.O)
                 else:
                     board[i][j] = None
         return board

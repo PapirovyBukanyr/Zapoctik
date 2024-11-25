@@ -15,6 +15,10 @@ import unittest
 from parameterized import parameterized
 
 class QuestionTests(unittest.TestCase):
+    """Testy na generátory otázek
+    """
+    
+    
     allClasses = [
         ("General use", GenerateQuestion),
         ("Analytic geometry", AnalyticGeometryQuestionGenerator),
@@ -28,6 +32,8 @@ class QuestionTests(unittest.TestCase):
         ("Ordinal numbers", OrdinalNumberQuestionGenerator),
         ("Set", SetQuestionGenerator)
     ]
+    """list: Seznam všech tříd generátorů otázek
+    """
         
     
     @parameterized.expand(allClasses)
@@ -39,10 +45,12 @@ class QuestionTests(unittest.TestCase):
             generator_class (Question): třída generátoru
         """
         generator = generator_class()
-        question = generator.generateQuestion()
-        self.assertIsNotNone(question)
-        self.assertIsNotNone(generator.questionText)
-        self.assertIsNotNone(generator.questionLatex)
+        
+        for i in range(0, generator.numberOfQuestions):
+            question = generator.generateQuestion(i)
+            self.assertIsNotNone(question)
+            self.assertIsNotNone(generator.questionText)
+            self.assertIsNotNone(generator.questionLatex)
         
         
     @parameterized.expand(allClasses)
@@ -54,9 +62,11 @@ class QuestionTests(unittest.TestCase):
             generator_class (Question): třída generátoru
         """
         generator = generator_class()
-        generator.generateQuestion()
-        self.assertIsNotNone(generator.doupovcuvOperator())
-
+        
+        for i in range(0,generator.numberOfQuestions):
+            generator.generateQuestion(i)
+            self.assertIsNotNone(generator.doupovcuvOperator())
+            
 
     @parameterized.expand(allClasses)
     def testCheckAnswer(self, name, generator_class):
@@ -67,8 +77,12 @@ class QuestionTests(unittest.TestCase):
             generator_class (Question): třída generátoru
         """
         generator = generator_class()
-        generator.generateQuestion()
-        self.assertTrue(generator.checkAnswer(generator.doupovcuvOperator()))
+        
+        for i in range(0, generator.numberOfQuestions):
+            generator.generateQuestion(i)
+            self.assertTrue(generator.checkAnswer(generator.doupovcuvOperator()))
+            self.assertTrue(generator.checkAnswer(generator.doupovcuvOperator().upper()))
+            self.assertTrue(generator.checkAnswer(generator.doupovcuvOperator().lower()))
         
 
     @parameterized.expand(allClasses)
@@ -80,5 +94,7 @@ class QuestionTests(unittest.TestCase):
             generator_class (Question): třída generátoru
         """
         generator = generator_class()
-        generator.generateQuestion()
-        self.assertFalse(generator.checkAnswer("Wrong answer"))
+        
+        for i in range(0, generator.numberOfQuestions):
+            generator.generateQuestion(i)
+            self.assertFalse(generator.checkAnswer("Wrong answer"))

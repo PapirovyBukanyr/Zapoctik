@@ -14,7 +14,7 @@ class MathGameBoard (Board):
           index [int, int]: Tuple dvou integerů, (row, col), oba 0-7
       """
       try:
-        if index[0] < 0 or index[0] > 9 or index[1] < 0 or index[1] > 9:
+        if index[0] < 0 or index[0] > 7 or index[1] < 0 or index[1] > 7:
           return None
         return super().__getitem__(index)
       except:
@@ -31,7 +31,7 @@ class MathGameBoard (Board):
       Returns:
           bool: True, pokud se podařilo nastavit políčko, jinak False
       """
-      if index[0] < 0 or index[0] > 9 or index[1] < 0 or index[1] > 9:
+      if index[0] < 0 or index[0] > 7 or index[1] < 0 or index[1] > 7:
         return False
       super().__setitem__(index, value)
       return True
@@ -40,8 +40,8 @@ class MathGameBoard (Board):
     def __str__(self):
       """Vrací string reprezentaci šachovnice. Každé políčko je reprezentováno jako string, který je tvořen z informací o barvě a symbolu figury, nebo jako string "__", pokud je políčko prázdné. Políčka jsou oddělena mezerou a jednotlivé řádky jsou odděleny znakem nového řádku (\n)."""
       result = ""
-      for i in range(10):
-        for j in range(10):
+      for i in range(8):
+        for j in range(8):
           try:
               if self.board[i][j]!=None:
                   result += str(self.board[i][j]) + " "
@@ -56,24 +56,24 @@ class MathGameBoard (Board):
     def __populateBoard(self):
       """Nastaví šachovnici do počátečního stavu. Bílý je vpravo dole a černý vlevo nahoře."""
 
-      self.board = [[None for i in range(10)] for j in range(10)]
+      self.board = [[None for i in range(8)] for j in range(8)]
 
-      for i in range(10):
-          for j in range(10):
+      for i in range(8):
+          for j in range(8):
               if i == 0 and i == j:
                   self.board[i][j] = Colors.BLACK
-              elif i == 9 and i == j:
+              elif i == 7 and i == j:
                   self.board[i][j] = Colors.WHITE
               else:
                 self.board[i][j] = None
 
-      for i in range(10):
-          x = randint(0,9)
-          y = randint(0,9)
+      for i in range(8):
+          x = randint(0,7)
+          y = randint(0,7)
           i = 0
           while self.board[x][y] is not None:
-            x = randint(0,9)
-            y = randint(0,9)
+            x = randint(0,7)
+            y = randint(0,7)
             i += 1
             if i > 100:
               break
@@ -86,8 +86,8 @@ class MathGameBoard (Board):
           int: Počet zbývajících úkolů
       """
       count = 0
-      for i in range(10):
-        for j in range(10):
+      for i in range(8):
+        for j in range(8):
           if self.board[i][j] == "TASK":
             count += 1
       return count
@@ -101,8 +101,8 @@ class MathGameBoard (Board):
       Returns: 
           [int, int]: Pozice figury na šachovnici
       """
-      for i in range(10):
-        for j in range(10):
+      for i in range(8):
+        for j in range(8):
           if self.board[i][j] is not None and self.board[i][j] == color:
             return [i,j]
       return None
@@ -118,10 +118,10 @@ class MathGameBoard (Board):
       """
       moves = []
       for i in range(-1,2,2):
-        if position[0]+i >= 0 and position[0]+i <= 9 and position[1] >= 0 and position[1] <= 9:
+        if position[0]+i >= 0 and position[0]+i <= 7 and position[1] >= 0 and position[1] <= 7:
             if self.board[position[0]+i][position[1]] is None or self.board[position[0]+i][position[1]] == "TASK":
               moves.append([position[0]+i,position[1]])
-        if position[0] >= 0 and position[0] <= 9 and position[1]+i >= 0 and position[1]+i <= 9:
+        if position[0] >= 0 and position[0] <= 7 and position[1]+i >= 0 and position[1]+i <= 7:
             if self.board[position[0]][position[1]+i] is None or self.board[position[0]][position[1]+i] == "TASK":
               moves.append([position[0],position[1]+i])
       return moves
@@ -142,9 +142,9 @@ class MathGameBoard (Board):
       Returns: 
           List of Fields: List figurek na šachovnici
       """
-      pieceList = [[None for i in range(10)] for j in range(10)]
-      for i in range(10):
-        for j in range(10):
+      pieceList = [[None for i in range(8)] for j in range(8)]
+      for i in range(8):
+        for j in range(8):
           if isinstance(self.board[i][j], Colors):
             pieceList[i][j] = Field(self.board[i][j], Figures.PAWN)
           else: 
