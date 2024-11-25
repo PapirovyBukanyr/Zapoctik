@@ -6,7 +6,7 @@ class Piece:
     self.hasMoved = False
     self.lastMoveWasDouble = False
     self.value = 0
-    
+    self.image = None
     
   def move(self, board, end):
     """

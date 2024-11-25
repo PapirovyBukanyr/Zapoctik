@@ -14,7 +14,7 @@ Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky 
 
 ## Použití
 
-1. **Ujistěte se, že máte verzi Pythonu alespoň 3.6 nebo novější**
+1. **Ujistěte se, že máte verzi Pythonu alespoň 3.10 nebo novější**
 
 2. **Instalace závislostí**:
     

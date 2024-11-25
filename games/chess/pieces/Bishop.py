@@ -6,7 +6,6 @@ class Bishop(Piece):
     self.symbol = "B"
     self.value = 3
     
-    
   def copy(self):
     return Bishop(self.color, self.position)
   

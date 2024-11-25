@@ -5,10 +5,12 @@ class Rook(Piece):
     super().__init__(color, position)
     self.symbol = "R"
     self.value = 5
+
   def copy(self):
     copy = Rook(self.color, self.position)
     copy.hasMoved = self.hasMoved
     return copy
+  
   def possibleMoves(self, board):
     possibleMoves = []
     i = 1

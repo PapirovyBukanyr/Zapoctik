@@ -26,8 +26,7 @@ class IntegralQuestionGenerator(Question):
         d = np.random.randint(1, 4)
         
         self.questionText = "Urči hodnotu výrazu:"
-        self.questionLatex = f"\\int_{{{a}}}^{{{b}}} {c}x^{d} dx"
-        
+        self.questionLatex = f"\\\\int_{{{a}}}^{{{b}}} {c}x^{d} dx"
         upperIntegralLimit = (c/(d+1))*b**(d+1)
         lowerIntegralLimit = (c/(d+1))*a**(d+1)
         
