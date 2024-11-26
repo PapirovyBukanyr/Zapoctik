@@ -14,7 +14,6 @@ class Question (ABC):
         self.numberOfQuestions = 0
         self.time = 60
         self.hoderovaDanger = False
-        
 
     def __str__(self):
         """Metoda na výpis otázky s odpovědí

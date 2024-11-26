@@ -7,16 +7,12 @@ class DerivativeQuestionGenerator(Question):
     """
     
     
-    numberOfQuestions = 3
-    """int: Počet otázek, které generátor vygeneruje
-    """
-    
-    
     def __init__(self):
         """Konstruktor třídy DerivativeQuestionGenerator
         """
         super().__init__()
         self.hoderovaDanger = True
+        self.numberOfQuestions = 3
     
     
     def generatePolynomial(self, degree):

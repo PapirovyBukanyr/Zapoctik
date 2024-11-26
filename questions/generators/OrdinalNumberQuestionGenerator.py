@@ -8,16 +8,12 @@ class OrdinalNumberQuestionGenerator(Question):
     """
     
     
-    numberOfQuestions = 3
-    """int: Počet otázek, které generátor vygeneruje
-    """
-    
-    
     def __init__(self): 
         """Konstruktor třídy otázek na ordinální čísla
         """
         super().__init__()
         self.time = 20
+        self.numberOfQuestions = 3
     
     
     def generateQuestion(self, n = None):
@@ -29,11 +25,11 @@ class OrdinalNumberQuestionGenerator(Question):
         Returns:
             OrdinalNumberQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovědí
         """
-        if n is not None and n in range(0, 4):
+        if n is not None and n in range(0, 3):
             randomQuestion = n
             
         else:
-            randomQuestion = random.randint(0, 3)
+            randomQuestion = random.randint(0, 2)
             
         a = 0
         b = 0
