@@ -7,10 +7,11 @@ class MatrixQuestionGenerator(Question):
     """Generátor otázek na matice
     """  
     
-    
-    numberOfQuestions = 4
-    """int: Počet otázek, které generátor vygeneruje
-    """
+    def __init__(self):
+        """Konstruktor třídy matice
+        """
+        super().__init__()
+        self.numberOfQuestions = 4
      
     
     def generateRegularMatrix(self, n = random.randint(2, 4)):

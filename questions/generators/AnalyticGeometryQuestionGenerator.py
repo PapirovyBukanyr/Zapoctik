@@ -6,9 +6,11 @@ class AnalyticGeometryQuestionGenerator(Question):
     """
     
     
-    numberOfQuestions = 1
-    """int: Počet otázek, které generátor vygeneruje
-    """
+    def __init__(self):
+        """Konstruktor třídy AnalyticGeometryQuestionGenerator
+        """
+        super().__init__()
+        self.numberOfQuestions = 1
     
     
     def generateQuestion(self, n = None):

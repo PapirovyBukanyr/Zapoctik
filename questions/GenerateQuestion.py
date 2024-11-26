@@ -12,16 +12,11 @@ class GenerateQuestion (Question):
     """
     
     
-    numberOfQuestions = 10
-    """int: Počet otázek, které generátor vygeneruje    
-    """
-    
-    
     def __init__(self):
         """Konstruktor třídy GenerateQuestion
         """
         super().__init__()
-        print("Otázky jsou připraveny ke generování")
+        self.numberOfQuestions = 10
         
         
     def generateQuestion(self, n = None):	
@@ -72,7 +67,6 @@ class GenerateQuestion (Question):
         self.answer = question.answer
         self.questionText = question.questionText
         self.questionLatex = question.questionLatex
-        print(self)
         
         return self.questionText, self.questionLatex
     

@@ -12,11 +12,7 @@ class LinearEquationSystemQuestionGenerator(Question):
         """
         super().__init__()
         self.time = 120
-    
-    
-    numberOfQuestions = 1
-    """int: Počet otázek, které generátor vygeneruje
-    """
+        self.numberOfQuestions = 1
     
     
     def generateLinearEquationSystem(self, num_equations, num_variables):

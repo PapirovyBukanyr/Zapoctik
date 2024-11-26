@@ -8,16 +8,12 @@ class KardinalNumberQuestionGenerator(Question):
     """
     
     
-    numberOfQuestions = 2
-    """int: Počet otázek, které generátor vygeneruje
-    """
-    
-    
     def __init__(self):
         """Konstruktor třídy otázek na kardinální čísla
         """
         super().__init__()
         self.time = 10
+        self.numberOfQuestions = 2
     
     
     def generateQuestion(self, n = None):	

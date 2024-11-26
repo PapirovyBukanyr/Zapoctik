@@ -6,16 +6,12 @@ class FractionQuestionGenerator(Question):
     """
     
     
-    numberOfQuestions = 5
-    """int: Počet otázek, které generátor vygeneruje
-    """
-    
-    
     def __init__(self):
         """Konstruktor třídy FractionQuestionGenerator
         """
         super().__init__()
         self.time = 10
+        self.numberOfQuestions = 5
     
     
     def generateFraction(self):

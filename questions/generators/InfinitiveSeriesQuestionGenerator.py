@@ -6,16 +6,12 @@ class InfinitiveSeriesQuestionGenerator(Question):
     """
     
     
-    numberOfQuestions = 1
-    """int: Počet otázek, které generátor vygeneruje
-    """
-    
-    
     def __init__(self):
         """Konstruktor třídy nekonečných řad
         """
         super().__init__()
         self.time = 10
+        self.numberOfQuestions = 1
     
     
     def generateQuestion(self, n = None):	
