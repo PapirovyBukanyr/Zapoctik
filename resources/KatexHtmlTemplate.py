@@ -19,3 +19,6 @@ KATEX_HTML_TEMPLATE = """
 </body>
 </html>
 """
+"""
+HTML šablona pro zobrazení matematického výrazu pomocí KaTeXu.
+"""

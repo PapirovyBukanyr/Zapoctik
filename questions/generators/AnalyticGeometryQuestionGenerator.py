@@ -27,8 +27,10 @@ class AnalyticGeometryQuestionGenerator(Question):
         
         self.questionText = "Urči průsečík přímek, odpověď zadej ve formátu (x,y):"
         self.questionLatex = f"y = {a}x + {b}\\\\newline y = {c}x + {d}"
+        
         if a == c:
             return self.generateQuestion()
+        
         x = round( (d - b) / (a - c))
         y = round (a*x + b)
         self.answer = f"({x},{y})"

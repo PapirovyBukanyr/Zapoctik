@@ -110,6 +110,7 @@ class FractionQuestionGenerator(Question):
         """
         if n is not None and n in range(0, 5):
             randomQuestion = n
+            
         else:
             randomQuestion = random.randint(0, 4)
     

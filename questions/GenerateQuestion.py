@@ -7,6 +7,7 @@ class GenerateQuestion (Question):
     """Třída na generování otázek
     Pro generování otázek použij metodu generateQuestion
     Pro kontrolu odpovědí použij metodu checkAnswer s parametrem answer
+    Pro získání správné odpovědi použij funkci doupovcuvOperator
     Výsledky se zaokrouhlují na celá čísla!!!
     """
     
@@ -71,7 +72,6 @@ class GenerateQuestion (Question):
         self.answer = question.answer
         self.questionText = question.questionText
         self.questionLatex = question.questionLatex
-            
         print(self)
         
         return self.questionText, self.questionLatex

@@ -1,6 +1,13 @@
 from ...Enums import *
+
 class Piece:
+  """Třída reprezentující jednu figurku na šachovnici.
+  """
+  
+  
   def __init__(self, color, position):
+    """Konstruktor třídy Piece. Nastaví barvu a pozici figurky.
+    """
     self.color = color
     self.position = position
     self.hasMoved = False
@@ -18,11 +25,13 @@ class Piece:
     """
     if not self.hasMoved:
       self.hasMoved = True
+      
     board[end] = board[self.position]
     board[self.position] = None
     self.position = end
     pawns = board.pieceList(Colors.BLACK) + board.pieceList(Colors.WHITE)
     pawns = [ pawn for pawn in pawns if pawn.symbol == "P" ]
+    
     for pawn in pawns:
       if pawn.lastMoveWasDouble:
         pawn.lastMoveWasDouble = False
@@ -30,11 +39,21 @@ class Piece:
         
   @property
   def row (self):
+    """Vrací řádek, na kterém se figurka nachází
+
+    Returns:
+        int: Řádek figurky
+    """
     return self.position[0]
   
   
   @property
   def col (self):
+    """Vrací sloupec, na kterém se figurka nachází
+    
+    Returns:
+        int: Sloupec figurky
+    """
     return self.position[1]
   
   

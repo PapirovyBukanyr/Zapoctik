@@ -82,11 +82,13 @@ class MathGame:
                 self.__board.movePiece(move, color)
                 self.__firstTime = True
                 self.__printToTerminal()
+    
                 return True
             
             else:
                 self.__board.movePiece(move, color)
                 self.__printToTerminal()
+    
                 return self.choosePiece(move, color)
             
         else:
@@ -115,5 +117,7 @@ class MathGame:
     
     
     def __printToTerminal(self):
+        """Vytiskne aktuální stav hry na terminál
+        """
         print(self.__board.__str__())
         print(self.__score)

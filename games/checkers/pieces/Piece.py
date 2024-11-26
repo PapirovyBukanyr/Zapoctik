@@ -44,9 +44,19 @@ class Piece (ABC.ABC):
     
     @property
     def row (self):
-      return self.position[0]
+        """Vlastnost pro získání řádku, na kterém se figurka nachází
+
+        Returns:
+            int: řádek, na kterém se figurka nachází
+        """
+        return self.position[0]
     
     
     @property
     def col (self):
-      return self.position[1]
+        """Vlastnost pro získání sloupce, na kterém se figurka nachází
+        
+        Returns:
+            int: sloupec, na kterém se figurka nachází
+        """
+        return self.position[1]

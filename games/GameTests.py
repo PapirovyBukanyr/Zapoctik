@@ -231,6 +231,7 @@ class GameTests(unittest.TestCase):
 
             colorOnMove = colorOnMove.changeColor()
             counter += 1
+            
         print(game.checkEnd())
         self.assertFalse(counter >= limit)
     
