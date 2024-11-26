@@ -92,10 +92,18 @@ class OrdinalNumberQuestionGenerator(Question):
                 self.answer = "w^w"
                 
             elif a == "\\\\omega":
-                self.answer = f"w^{b}"
+                if b == 1:
+                    self.answer = "w"
+                    
+                else:
+                    self.answer = f"w^{b}"
                 
             elif b == "\\\\omega":
-                self.answer = f"w"
+                if a == 1:
+                    self.answer = "1"
+                    
+                else:
+                    self.answer = f"w^{a}"
                 
             else:
                 self.answer = a ** b
