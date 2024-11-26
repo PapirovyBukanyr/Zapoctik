@@ -32,6 +32,7 @@ int call_pyc_killer_3000() {
  * @return 2 pokud nastala chyba pri spousteni skriptu main.py
  * @return 3 pokud nastala chyba pri spousteni skriptu pyc_killer
  * @return 4 pokud nastala chyba pri kontrole verze Pythonu
+ * @return 5 pokud nastala chyba pri stahovani nejnovejsi aktualizace z GitHubu
  */
 int main() {
     char buffer[128];
@@ -57,6 +58,13 @@ int main() {
         printf("Program vyzaduje Python verze 3.10 nebo vyssi.\n");
         printf("Je nainstalovana verze Pythonu %d.%d.\n", major, minor);
     }
+
+    printf("Kontrola nejnovejsi verze z GitHubu...\n");
+    if (system("git pull") != 0) {
+        printf("Chyba pri stahovani nejnovejsi verze z GitHubu!\n");
+        return 5;
+    }
+
 
     printf("Instalace pozadovanych Python knihoven...\n");
     

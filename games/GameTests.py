@@ -1,8 +1,7 @@
 import unittest
 from parameterized import parameterized
-from games import Chess, Checkers, TicTacToe, MathGame, Mines, ChessWithFogOfWar, CheckersWithFogOfWar, ChallengeAccepted
+from games import *
 import random
-from .Enums import Colors
 
 class GameTests(unittest.TestCase):
     """Testy na hry
@@ -34,6 +33,8 @@ class GameTests(unittest.TestCase):
         game = game_class()
         self.assertIsNotNone(game.getBoard(Colors.WHITE))
         self.assertIsNotNone(game.getBoard(Colors.BLACK))
+        self.assertNotEqual(game.getBoard(Colors.WHITE), [])
+        self.assertNotEqual(game.getBoard(Colors.BLACK), [])
 
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE),
@@ -53,6 +54,7 @@ class GameTests(unittest.TestCase):
         """
         game = game_class()
         self.assertIsNotNone(game.choosePiece(position, color))
+        self.assertNotEqual(game.choosePiece(position, color), [])
         
 
     @parameterized.expand([
@@ -73,6 +75,7 @@ class GameTests(unittest.TestCase):
         """
         game = game_class()
         self.assertIsNotNone(game.choosePiece(position, color))
+        self.assertEqual(game.choosePiece(position, color), [])
         
 
     @parameterized.expand([
@@ -93,6 +96,7 @@ class GameTests(unittest.TestCase):
         """
         game = game_class()
         self.assertIsNotNone(game.choosePiece(position, color))
+        self.assertEqual(game.choosePiece(position, color), [])
         
     
     @parameterized.expand([
@@ -119,6 +123,7 @@ class GameTests(unittest.TestCase):
         
         if choose_position and color:
             game.choosePiece(choose_position, color)
+            
         self.assertTrue(game.makeMove(move_position, color))
         
     @parameterized.expand([
@@ -142,11 +147,11 @@ class GameTests(unittest.TestCase):
             move_position ([int, int]): pozice, kam se má figurka pohnout
         """
         game = game_class()
+        
         if choose_position and color:
             game.choosePiece(choose_position, color)
-            self.assertFalse(game.makeMove(move_position))
-        else:
-            self.assertFalse(game.makeMove(move_position, color))
+        
+        self.assertFalse(game.makeMove(move_position, color))
         
         
     @parameterized.expand([
@@ -167,11 +172,11 @@ class GameTests(unittest.TestCase):
             move_position ([int, int]): pozice, kam se má figurka pohnout
         """
         game = game_class()
+        
         if choose_position and color:
             game.choosePiece(choose_position, color)
-            self.assertFalse(game.makeMove(move_position))
-        else:
-            self.assertFalse(game.makeMove(move_position, color))
+            
+        self.assertFalse(game.makeMove(move_position, color))
         
 
     @parameterized.expand(__allClasses)
@@ -233,7 +238,7 @@ class GameTests(unittest.TestCase):
             counter += 1
             
         print(game.checkEnd())
-        self.assertFalse(counter >= limit)
+        self.assertGreater(limit, counter)
     
     
     def isGameWithChoosingPiece(self, game):
