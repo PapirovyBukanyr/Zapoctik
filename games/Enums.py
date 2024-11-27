@@ -43,6 +43,8 @@ class Colors(Enum):
   
   WHITE = 1
   BLACK = 2
+  RED = 3
+  GREEN = 4
   
   
   def __str__(self):
@@ -54,8 +56,14 @@ class Colors(Enum):
     if self == Colors.WHITE:
       return "W"
     
-    else:
+    elif self == Colors.BLACK:
       return "B"
+    
+    elif self == Colors.RED:
+      return "R"
+    
+    elif self == Colors.GREEN:
+      return "G"
     
     
   def changeColor(self):
@@ -65,5 +73,24 @@ class Colors(Enum):
         Enum Colors: inverzní barva
     """
     return Colors.WHITE if self == Colors.BLACK else Colors.BLACK
+  
+  
+  def changeColorFour(self):
+    """Vrátí další barvu
+    
+    Returns:
+        Enum Colors: další barva
+    """
+    if self == Colors.WHITE:
+      return Colors.BLACK
+    
+    elif self == Colors.BLACK:
+      return Colors.RED
+    
+    elif self == Colors.RED:
+      return Colors.GREEN
+    
+    else:
+      return Colors.WHITE
   
   

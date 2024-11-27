@@ -37,6 +37,7 @@ class GameTests(unittest.TestCase):
         self.assertNotEqual(game.getBoard(Colors.WHITE), [])
         self.assertNotEqual(game.getBoard(Colors.BLACK), [])
 
+
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE),
         ("Chess with fog of war", ChessWithFogOfWar, [6, 0], Colors.WHITE),

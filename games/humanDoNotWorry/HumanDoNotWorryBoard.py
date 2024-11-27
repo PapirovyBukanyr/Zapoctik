@@ -1,23 +1,78 @@
 from ..Enums import *
 from ..Board import Board
+from .pieces import *
 import random as rand
+
 
 class HumanDoNotWorryBoard (Board):
     """ Třída HumanDoNotWorryBoard slouží k reprezentaci hrací desky hry člověče, nezlob se.
     """
     
+    
     def __init__(self):
         """ Konstruktor třídy HumanDoNotWorryBoard.
         """
-        self.board = [[None for i in range(8)] for j in range(8)]
+        self.board = [[None for i in range(9)] for j in range(9)]
         self.__populateBoard()
+        
         
     def __populateBoard(self):
         """ Metoda, která naplní hrací desku figurkami.
         """
-        for i in range(11):
-            for j in range(11):
-                if i == 0 or i == 10 or j == 0 or j == 10:
-                    self.board[i][j] = None
-                else:
-                    self.board[i][j] = rand.choice([Colors.WHITE, Colors.BLACK, None])
+        for i in range(0,2):
+            for j in range(0,2):
+                self.board[i][j] = WhitePiece([i,j])
+                
+        for i in range(0,2):
+            for j in range(7,9):
+                self.board[i][j] = GreenPiece([i,j])
+                
+        for i in range(7,9):
+            for j in range(0,2):
+                self.board[i][j] = BlackPiece([i,j])
+                
+        for i in range(7,9):
+            for j in range(7,9):
+                self.board[i][j] = RedPiece([i,j])
+                
+        for i in range(0,9):
+            self.board[i][4] = Figures.FLAG
+            self.board[4][i] = Figures.FLAG
+
+        self.board[4][4] = Figures.SHADOW
+        
+        for i in range(0,3):
+            self.board[2][i] = Figures.SHADOW
+            self.board[i][2] = Figures.SHADOW
+            self.board[6][i] = Figures.SHADOW
+            self.board[i][6] = Figures.SHADOW
+            self.board[2][8-i] = Figures.SHADOW
+            self.board[8-i][2] = Figures.SHADOW
+            self.board[6][8-i] = Figures.SHADOW
+            self.board[8-i][6] = Figures.SHADOW
+                
+
+    def getListOfBoard(self):
+        """ Metoda, která vrátí seznam seznamů reprezentující hrací desku.
+        
+        Returns:
+            List of List of Field: Seznam seznamů reprezentující hrací desku
+        """
+        board = [[None for _ in range(10)] for _ in range(10)]
+        for i in range(0,9):
+            for j in range(0,9):
+                if self.board[i][j] is None:
+                    board[i][j] = None
+                elif self.board[i][j] == Figures.SHADOW:
+                    board[i][j] = Field(Colors.WHITE, Figures.SHADOW)
+                elif self.board[i][j] == Figures.FLAG:
+                    board[i][j] = Field(Colors.WHITE, Figures.FLAG)
+                elif self.board[i][j].color == Colors.BLACK:
+                    board[i][j] = Field(Colors.BLACK, Figures.PAWN)
+                elif self.board[i][j].color == Colors.RED:
+                    board[i][j] = Field(Colors.RED, Figures.PAWN)
+                elif self.board[i][j].color == Colors.WHITE:
+                    board[i][j] = Field(Colors.WHITE, Figures.PAWN)
+                elif self.board[i][j].color == Colors.GREEN:
+                    board[i][j] = Field(Colors.GREEN, Figures.PAWN)
+        
