@@ -13,6 +13,8 @@ class BlackPiece(Piece):
         """
         super().__init__(position)
         self.color = Colors.BLACK
+        self.startPosition = [8,3]
+        self.finalPosition = [8,4]
 
 
     def __str__(self):

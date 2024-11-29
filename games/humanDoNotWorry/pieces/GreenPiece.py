@@ -13,6 +13,8 @@ class GreenPiece(Piece):
         """
         super().__init__(position)
         self.color = Colors.GREEN
+        self.startPosition = [0,5]
+        self.finalPosition = [0,4]
 
 
     def __str__(self):

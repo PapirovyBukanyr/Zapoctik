@@ -13,6 +13,8 @@ class WhitePiece(Piece):
         """
         super().__init__(position)
         self.color = Colors.WHITE
+        self.startPosition = [3,0]
+        self.finalPosition = [4,0]
 
 
     def __str__(self):

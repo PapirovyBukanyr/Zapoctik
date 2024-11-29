@@ -16,14 +16,61 @@ class HumanDoNotWorryBoard (Board):
         self.__populateBoard()
         
         
+    def __str__(self):
+        """ Vrátí textovou reprezentaci instance třídy HumanDoNotWorryBoard.
+        """
+        board = ""
+        for i in range(0,9):
+            for j in range(0,9):
+                if self.board[i][j] is None:
+                    board += "-"
+                    
+                elif self.board[i][j] == Figures.SHADOW:
+                    board += "X"
+                
+                elif self.board[i][j] == Figures.FLAG:
+                    board += "F"
+                
+                elif isinstance( self.board[i][j], Figures):
+                    board += "-"
+                
+                elif self.board[i][j].color == Colors.BLACK:
+                    board += "B"
+                
+                elif self.board[i][j].color == Colors.RED:
+                    board += "R"
+                    
+                elif self.board[i][j].color == Colors.WHITE:
+                    board += "W"
+                    
+                elif self.board[i][j].color == Colors.GREEN:
+                    board += "G"
+                    
+            board += "\n"
+            
+        return board
+        
+        
+    def isDeployed(self, color):
+        """Metoda, která zjistí, zda je alespoň jedna figurka zadané barvy nasazena.
+
+        Args:
+            color (Colors): Barva figurky
+        """
+        for i in range(0,9):
+            for j in range(0,9):
+                if isinstance(self.board[i][j], Piece) and self.board[i][j].color == color and self.board[i][j].isDeployed:
+                    return True
+                
+        return False
+        
+        
     def __populateBoard(self):
         """ Metoda, která naplní hrací desku figurkami.
         """
         for i in range(0,2):
             for j in range(0,2):
                 self.board[i][j] = WhitePiece([i,j])
-                
-        self.board[0][4] = WhitePiece([0,4])
                 
         for i in range(0,2):
             for j in range(7,9):

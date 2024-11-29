@@ -52,7 +52,8 @@ class GameView(QWidget):
         self.game = game
         self.player = Colors.WHITE
         self.selectedPiece = False
-        self.answered = False
+        self.answered = True 
+        """!!!!!!!"""
 
         self.setStyleSheet("""
         QMainWindow {
@@ -130,7 +131,10 @@ class GameView(QWidget):
             return
         
         self.questionView.close()
-        self.player = self.player.changeColor()
+        if isinstance(self.game, HumanDoNotWorry):
+            self.player = self.player.changeColorFour()
+        else:
+            self.player = self.player.changeColor()
         self.show_question()
         
     
@@ -152,7 +156,8 @@ class GameView(QWidget):
                         self.game_ended(self.game.checkEnd())
                         
                     self.player = self.player.changeColor()
-                    self.answered = False
+                    self.answered = True
+                    """!!!!!!!"""
                     self.show_question()
                     
             if button == "left":
@@ -174,9 +179,17 @@ class GameView(QWidget):
             col (int): sloupec
         """
         self.update_board()
+        moves = self.game.choosePiece([row, col], self.player)
         
-        for move in self.game.choosePiece([row, col], self.player):
-            self.highlight_square(move[0], move[1])
+        if moves == []:
+            return
+        
+        if isinstance(moves[0], int):
+            self.highlight_square(moves[0], moves[1])
+            
+        else:
+            for move in moves:
+                self.highlight_square(move[0], move[1])
         
         self.selectedPiece = True
         
@@ -214,8 +227,12 @@ class GameView(QWidget):
             self.game_ended(self.game.checkEnd())
         
         else:
-            self.player = self.player.changeColor()
-            self.answered = False
+            if isinstance(self.game, HumanDoNotWorry):
+                self.player = self.player.changeColorFour()
+            else:
+                self.player = self.player.changeColor()
+            self.answered = True
+            """!!!!!!!"""
             self.show_question()
     
     

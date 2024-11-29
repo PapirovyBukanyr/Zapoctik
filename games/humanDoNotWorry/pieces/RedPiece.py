@@ -13,7 +13,9 @@ class RedPiece(Piece):
         """
         super().__init__(position)
         self.color = Colors.RED
-
+        self.startPosition = [5,8]
+        self.finalPosition = [4,8]
+        
 
     def __str__(self):
         """ Vrací textovou reprezentaci instance třídy RedPiece.

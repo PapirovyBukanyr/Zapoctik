@@ -16,6 +16,7 @@ class HumanDoNotWorry:
         self.currentPlayer = Colors.WHITE
         self.selectedPiece = None
         self.rolled = False
+        self.passTurn = False
       
         
     def __str__(self):
@@ -45,8 +46,9 @@ class HumanDoNotWorry:
         Returns:
             bool: True, pokud se podařilo zvolit figurku, jinak False
         """
-        if color is None:
+        if color is not None:
             self.currentPlayer = color
+            
         else:
             color = self.currentPlayer
         
@@ -54,17 +56,37 @@ class HumanDoNotWorry:
             return []
         
         if not self.rolled:
+            self.passTurn = False
             self.rollDice()
+            
         else:
+            if not self.board.isDeployed(color) and self.number != 6:
+                self.passTurn = True
+                self.rolled = False
+                self.board[4,4] = Figures.SHADOW
+                return [4,4]
+                
             row, col = position
             
             if isinstance(self.board[row, col], Piece):
                 if self.board[row, col].color == color:
                     self.selectedPiece = self.board[row, col]
 
-                    return self.selectedPiece.possibleMoves(self.number, self.board)
+                    move = self.selectedPiece.possibleMoves(self.number, self.board)
+                    
+                    if move == []:
+                        return []
+                    
+                    if move[0]>8 or move[1]>8 or move[0]<0 or move[1]<0:
+                        move = []
+                    
+                    if isinstance(self.board[move[0], move[1]], Piece) and self.board[move[0], move[1]].color == color:
+                        move = []
+                        
+                    return move
         
         return []
+    
     
     def makeMove(self, position, color = None):
         """Metoda provede tah figurkou.
@@ -77,19 +99,82 @@ class HumanDoNotWorry:
         """
         if color is not None:
             self.currentPlayer = color
+            
         else:
             color = self.currentPlayer
         
         row, col = position
-        if self.selectedPiece is not None and self.selectedPiece.possibleMoves(self.number, self.board).__contains__(position):
-            if self.board[row, col] is None:
-                self.board[row, col] = self.selectedPiece
-                self.board[self.selectedPiece.position[0], self.selectedPiece.position[1]] = None
-                self.selectedPiece.position = position
+        
+        if self.passTurn:
+            self.passTurn = False
+            self.rolled = False
+            self.board[4,4] = Figures.SHADOW
+            return True
+        
+        if self.selectedPiece is not None and self.selectedPiece.possibleMoves(self.number, self.board) == position:
+            if self.board[row, col] is None or self.board[row, col] == Figures.FLAG:
+                pass
+            
+            elif self.board[row, col].color != color:
+                self.board[row, col].returnHome(self.board)
                 
+            elif self.board[row, col].color == color:
+                return False
+                
+            if self.selectedPiece.isDeployed == False and self.number == 6:
+                self.selectedPiece.isDeployed = True
+                
+            if self.selectedPiece.finalPosition == position:
+                self.selectedPiece.isInFinal = True
+                self.__placeToFinal()
+                return True
+                
+            self.__makeStandartMove(row, col)
+            
             return True
         
         return False
+    
+    
+    def __makeStandartMove(self, row, col):
+        """Metoda provede standardní tah figurkou.
+
+        Args:
+            row (int): řádek
+            col (int): sloupec
+        """
+        self.board[row, col] = self.selectedPiece
+        self.board[self.selectedPiece.position[0], self.selectedPiece.position[1]] = None
+        self.selectedPiece.position = [row, col]
+        self.selectedPiece = None
+        self.rolled = False
+        self.board[4,4] = Figures.SHADOW
+        
+        self.__printToTerminal()
+        
+        
+    def __placeToFinal(self):
+        """Metoda umístí figurku do cíle.
+        
+        Args:
+            board (Board): Hrací deska
+            piece (Piece): Figurka
+        """
+        finalPosition = [4,4]
+        
+        while self.board[finalPosition[0], finalPosition[1]] is not None and self.board[finalPosition[0], finalPosition[1]] != Figures.FLAG:
+            finalPosition[0]+=int((self.selectedPiece.finalPosition[0]-4)/4)
+            finalPosition[1]+=int((self.selectedPiece.finalPosition[1]-4)/4)
+            
+        self.board[finalPosition[0], finalPosition[1]] = self.selectedPiece
+        self.board[self.selectedPiece.position[0], self.selectedPiece.position[1]] = None
+        self.selectedPiece.position = finalPosition
+        self.selectedPiece.isDeployed = False
+        self.selectedPiece = None
+        self.rolled = False
+        self.board[4,4] = Figures.SHADOW
+        
+        self.__printToTerminal()
         
     
     def checkEnd(self):
@@ -104,7 +189,7 @@ class HumanDoNotWorry:
             for i in range(0,9):
                 for j in range(0,9):
                     try:
-                        if self.board[i, j].color == color and self.board[i, j].inIsHome == True:
+                        if self.board[i, j].color == color and self.board[i, j].isInFinal == True:
                             finished += 1
                             
                     except:
@@ -114,6 +199,7 @@ class HumanDoNotWorry:
                 return f"{color} won"
             
         return None
+    
     
     def rollDice(self):
         """Metoda hodí kostkou.
@@ -142,4 +228,10 @@ class HumanDoNotWorry:
                     
                 case 6:
                     self.board[4,4] = Figures.SIX
+                    
+                    
+    def __printToTerminal(self):
+        """Metoda vytiskne hrací desku na obrazovku.
+        """
+        print(self.board)
         

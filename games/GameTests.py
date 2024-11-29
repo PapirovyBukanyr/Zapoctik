@@ -212,7 +212,6 @@ class GameTests(unittest.TestCase):
             
             if self.isGameWithChoosingPiece(game):
                 while move == []:
-                    print("Choose piece")
                     move = game.choosePiece([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
                 
                 if isinstance(move, list) and isinstance(move[0], list):
@@ -241,9 +240,9 @@ class GameTests(unittest.TestCase):
             counter += 1
             
             if isinstance(game, HumanDoNotWorry):
-                continue
-            
-            colorOnMove = colorOnMove.changeColor()
+                colorOnMove = colorOnMove.changeColorFour()
+            else:
+                colorOnMove = colorOnMove.changeColor()
             
             
         print(game.checkEnd())
