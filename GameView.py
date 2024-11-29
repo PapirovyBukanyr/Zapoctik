@@ -156,7 +156,7 @@ class GameView(QWidget):
                     self.show_question()
                     
             if button == "left":
-                if self.selectedPiece == False and (isinstance(self.game, Checkers) or isinstance(self.game, Chess) or isinstance(self.game, MathGame)):
+                if self.selectedPiece == False and (isinstance(self.game, Checkers) or isinstance(self.game, Chess) or isinstance(self.game, MathGame) or isinstance(self.game, HumanDoNotWorry)):
                     self.choose_piece(row, col)
                 
                 else:

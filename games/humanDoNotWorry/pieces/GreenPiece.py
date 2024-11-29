@@ -12,7 +12,7 @@ class GreenPiece(Piece):
             position ([int,int]): Pozice figurky
         """
         super().__init__(position)
-        self.color = Colors.WHITE
+        self.color = Colors.GREEN
 
 
     def __str__(self):

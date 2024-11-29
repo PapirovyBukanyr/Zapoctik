@@ -23,6 +23,8 @@ class HumanDoNotWorryBoard (Board):
             for j in range(0,2):
                 self.board[i][j] = WhitePiece([i,j])
                 
+        self.board[0][4] = WhitePiece([0,4])
+                
         for i in range(0,2):
             for j in range(7,9):
                 self.board[i][j] = GreenPiece([i,j])
@@ -35,7 +37,7 @@ class HumanDoNotWorryBoard (Board):
             for j in range(7,9):
                 self.board[i][j] = RedPiece([i,j])
                 
-        for i in range(0,9):
+        for i in range(1,8):
             self.board[i][4] = Figures.FLAG
             self.board[4][i] = Figures.FLAG
 
@@ -58,21 +60,32 @@ class HumanDoNotWorryBoard (Board):
         Returns:
             List of List of Field: Seznam seznamů reprezentující hrací desku
         """
-        board = [[None for _ in range(10)] for _ in range(10)]
+        board = [[None for _ in range(9)] for _ in range(9)]
         for i in range(0,9):
             for j in range(0,9):
                 if self.board[i][j] is None:
                     board[i][j] = None
+                    
                 elif self.board[i][j] == Figures.SHADOW:
                     board[i][j] = Field(Colors.WHITE, Figures.SHADOW)
+                
                 elif self.board[i][j] == Figures.FLAG:
                     board[i][j] = Field(Colors.WHITE, Figures.FLAG)
+                
+                elif isinstance( self.board[i][j], Figures):
+                    board[i][j] = Field(Colors.WHITE, self.board[i][j])
+                
                 elif self.board[i][j].color == Colors.BLACK:
                     board[i][j] = Field(Colors.BLACK, Figures.PAWN)
+                
                 elif self.board[i][j].color == Colors.RED:
                     board[i][j] = Field(Colors.RED, Figures.PAWN)
+                    
                 elif self.board[i][j].color == Colors.WHITE:
                     board[i][j] = Field(Colors.WHITE, Figures.PAWN)
+                    
                 elif self.board[i][j].color == Colors.GREEN:
                     board[i][j] = Field(Colors.GREEN, Figures.PAWN)
+                    
+        return board
         
