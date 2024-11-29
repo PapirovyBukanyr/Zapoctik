@@ -35,6 +35,7 @@ class Figures(Enum):
   EIGHT = 19 # 8 do hledání min, hledání krtka, ...
   SHADOW = 20 # Stín do šachů s mlhou války, dám s mlhou války, min, hledání krtka, ...
   MOLE = 21 # Krteček!!!
+  LOGO = 22 # Logo hry
   
 class Colors(Enum):
   """Enum pro barvy
