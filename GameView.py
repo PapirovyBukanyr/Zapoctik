@@ -52,8 +52,7 @@ class GameView(QWidget):
         self.game = game
         self.player = Colors.WHITE
         self.selectedPiece = False
-        self.answered = True 
-        """!!!!!!!"""
+        self.answered = False
 
         self.setStyleSheet("""
         QMainWindow {
@@ -156,8 +155,7 @@ class GameView(QWidget):
                         self.game_ended(self.game.checkEnd())
                         
                     self.player = self.player.changeColor()
-                    self.answered = True
-                    """!!!!!!!"""
+                    self.answered = False
                     self.show_question()
                     
             if button == "left":
@@ -231,8 +229,7 @@ class GameView(QWidget):
                 self.player = self.player.changeColorFour()
             else:
                 self.player = self.player.changeColor()
-            self.answered = True
-            """!!!!!!!"""
+            self.answered = False
             self.show_question()
     
     
