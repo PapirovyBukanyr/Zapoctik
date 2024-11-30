@@ -144,7 +144,7 @@ class MatrixQuestionGenerator(Question):
         else:
             self.questionText ="Vypočti součet vlastních čísel matice: " 
             self.questionLatex = self.getLatexMatrix(matice)
-            self.answer = self.calculateEigenvalues(matice)
+            self.answer = self.calculateEigenvalues(matice).real
             
         return self
             

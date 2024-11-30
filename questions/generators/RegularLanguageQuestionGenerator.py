@@ -29,24 +29,27 @@ class RegularLanguageQuestionGenerator(Question):
             
         self.questionText = "Je následující jazyk regulární odpověď zadej ve formátu ano/ne?"
         
+        limit = random.randint(0, 86000)
+        
         if randomQuestion == 0:
-            self.questionLatex = "L = \\\\{a^n | n \\\\geq 0\\\\}"
+            self.questionLatex = f"L = \\\\{{a^n | n \\\\geq {limit}\\\\}}"
             self.answer = "ano"
             
         elif randomQuestion == 1:
-            self.questionLatex = "L = \\\\{a^nb^n | n \\\\geq 0\\\\}"
+            self.questionLatex = f"L = \\\\{{a^nb^n | n \\\\geq {limit}\\\\}}"
             self.answer = "ne"
             
         elif randomQuestion == 2:
-            self.questionLatex = "L = \\\\{a^nb^n | n \\\\leq 5\\\\}"
+            self.questionLatex = f"L = \\\\{{a^nb^n | n \\\\leq {limit}\\\\}}"
             self.answer = "ano"
             
         elif randomQuestion == 3:
-            self.questionLatex = "L = \\\\{a^n | n \\\\leq 86 000\\\\}"
+            self.questionLatex = f"L = \\\\{{a^nb | n \\\\geq {limit}\\\\}}"
             self.answer = "ano"
             
         else:
-            self.questionLatex = "L = \\\\{\\\\{a,b\\\\}^* | #_a \\\\mod7 = #_b \\\\mod12 \\\\}"
+            self.questionText = "Je následující jazyk regulární odpověď zadej ve formátu ano/ne? # je počet znaků"
+            self.questionLatex = f"L = \\\\{{\\\\omega =\\\\{{a,b\\\\}}^* | \\\\#_a (\\\\omega)\\\\mod 7 = \\\\#_b(\\\\omega) \\\\mod {limit}\\\\}}"
             self.answer = "ano"
         
         return self
