@@ -23,13 +23,13 @@ class InfinitiveSeriesQuestionGenerator(Question):
         Returns:
             InfinitiveSeriesQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovědí
         """
-        a = np.random.randint(1, 10)
-        b = np.random.randint(1, 10)
+        a = np.random.randint(-100, 100)
+        b = np.random.randint(1, 100)
         
         self.questionText = "Urči konvergenci nekonečné řady, odpověď zadej ve formátu konverguje/diverguje:"
         self.questionLatex = f"\\\\sum_{{n=1}}^\\\\infty \\\\left(\\\\frac{{{a}}}{{{b}}}\\\\right)^n"
         
-        if a/b < 1:
+        if abs(a)/abs(b) < 1:
             self.answer = "konverguje"
             
         else:

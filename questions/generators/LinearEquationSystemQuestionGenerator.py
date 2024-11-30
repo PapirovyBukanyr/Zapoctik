@@ -29,8 +29,8 @@ class LinearEquationSystemQuestionGenerator(Question):
         equations = []
     
         for _ in range(num_equations):
-            lhs = sum(random.randint(-10, 10) * var for var in variables)
-            rhs = random.randint(-10, 10)
+            lhs = sum(random.randint(-5, 5) * var for var in variables)
+            rhs = random.randint(-5, 5)
             equation = sp.Eq(lhs, rhs)
             equations.append(equation)
     
@@ -65,7 +65,7 @@ class LinearEquationSystemQuestionGenerator(Question):
         Returns:
             LinearEquationSystemQuestionGenerator: Funkce vrací sebe sama s vygenerovanou otázkou
         """
-        num_equations = random.randint(2, 4)
+        num_equations = random.randint(2, 3)
         num_variables = num_equations 
         equations, variables = self.generateLinearEquationSystem(num_equations, num_variables)
         
