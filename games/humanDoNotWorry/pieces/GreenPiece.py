@@ -23,4 +23,4 @@ class GreenPiece(Piece):
         Returns:
             str: Textová reprezentace instance třídy GreenPiece
         """
-        return "GP"
+        return "G"

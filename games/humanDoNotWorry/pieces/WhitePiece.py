@@ -23,4 +23,4 @@ class WhitePiece(Piece):
         Returns:
             str: Textová reprezentace instance třídy WhitePiece
         """
-        return "WP"
+        return "W"

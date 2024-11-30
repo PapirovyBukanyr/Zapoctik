@@ -23,4 +23,4 @@ class RedPiece(Piece):
         Returns:
             str: Textová reprezentace instance třídy RedPiece
         """
-        return "RP"
+        return "R"

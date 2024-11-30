@@ -34,17 +34,8 @@ class HumanDoNotWorryBoard (Board):
                 elif isinstance( self.board[i][j], Figures):
                     board += "-"
                 
-                elif self.board[i][j].color == Colors.BLACK:
-                    board += "B"
-                
-                elif self.board[i][j].color == Colors.RED:
-                    board += "R"
-                    
-                elif self.board[i][j].color == Colors.WHITE:
-                    board += "W"
-                    
-                elif self.board[i][j].color == Colors.GREEN:
-                    board += "G"
+                else:
+                    board +=  self.board[i][j].__str__()
                     
             board += "\n"
             

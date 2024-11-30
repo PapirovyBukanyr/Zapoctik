@@ -23,4 +23,4 @@ class BlackPiece(Piece):
         Returns:
             str: Textová reprezentace instance třídy BlackPiece
         """
-        return "BP"
+        return "B"
