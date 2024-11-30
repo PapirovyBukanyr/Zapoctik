@@ -1,6 +1,6 @@
 #include <stdlib.h> 
 #include <stdio.h>  
-#include "C_files/pyc_killer.h"
+#include "pyc_killer.h"
 
 /** 
  * Spusti skript pyc_killer.exe, ktery odstrani vsechny soubory s priponou .pyc v adresari a jeho podadresarich.

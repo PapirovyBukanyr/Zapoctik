@@ -116,5 +116,8 @@ class GetResource:
             
             case Figures.MOLE:
                 return "resources//mole.jpg"
+            
+            case Figures.LOGO:
+                return "resources//logo.png"
                 
         
