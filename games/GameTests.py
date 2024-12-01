@@ -1,8 +1,7 @@
 import unittest
 from parameterized import parameterized
-from games import Chess, Checkers, TicTacToe, MathGame, Mines, ChessWithFogOfWar, CheckersWithFogOfWar, ChallengeAccepted
+from games import *
 import random
-from .Enums import Colors
 
 class GameTests(unittest.TestCase):
     """Testy na hry
@@ -17,7 +16,8 @@ class GameTests(unittest.TestCase):
         ("Mines", Mines),
         ("ChessWithFogOfWar", ChessWithFogOfWar),
         ("CheckersWithFogOfWar", CheckersWithFogOfWar),
-        ("Filipova výzva", ChallengeAccepted)     
+        ("Filipova výzva", ChallengeAccepted),
+        ("Connect four", ConnectFour)
     ]
     """list: Seznam všech tříd her
     """
@@ -36,6 +36,7 @@ class GameTests(unittest.TestCase):
         self.assertIsNotNone(game.getBoard(Colors.BLACK))
         self.assertNotEqual(game.getBoard(Colors.WHITE), [])
         self.assertNotEqual(game.getBoard(Colors.BLACK), [])
+        
 
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE),
@@ -108,7 +109,8 @@ class GameTests(unittest.TestCase):
         ("TicTacToe", TicTacToe, [0, 0], None, [0, 0]),
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [7, 6]),
         ("Mines", Mines, [0, 0], None, [1, 1]),
-        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [0, 0])
+        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [0, 0]),
+        ("Connect four", ConnectFour, [0, 0], None, [0, 0])
     ])
     def testMakeMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb provede
@@ -127,6 +129,7 @@ class GameTests(unittest.TestCase):
             
         self.assertTrue(game.makeMove(move_position, color))
         
+        
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [-1, -1]),
         ("Chess with fog of war", ChessWithFogOfWar, [6, 0], Colors.WHITE, [-1, -1]),
@@ -135,7 +138,8 @@ class GameTests(unittest.TestCase):
         ("TicTacToe", TicTacToe, [-1, -1], None, [-1, -1]),
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [8, 8]),
         ("Mines", Mines, [0, 0], None, [-1, -1]),
-        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [-1, -1])
+        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [-1, -1]),
+        ("Connect four", ConnectFour, [0, 0], None, [-1, -1])
     ])
     def testMakeWrongMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb nelze provést
