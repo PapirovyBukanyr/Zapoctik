@@ -110,7 +110,7 @@ class GameTests(unittest.TestCase):
         if choose_position and color:
             game.choosePiece(choose_position, color)
             
-        self.assertTrue(game.makeMove(move_position, color))
+        self.assertTrue(game.makeMove(move_position, color, False))
         
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [-1, -1]),

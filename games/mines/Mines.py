@@ -14,8 +14,25 @@ class Mines:
         self.__firstMove = True
         self.score = 0
         
+    
+    def makeMove(self, position, color = Colors.WHITE, rightClick = False):
+        """Provede tah hráče
         
-    def makeMove(self, position, color = Colors.WHITE):
+        Args:
+            position ([int, int]): pozice, kam se má hráč pohnout
+            color (Enum Colors): barva na tahu
+            rightClick (bool): True, pokud hráč klikl pravým tlačítkem myši, jinak False
+            
+        Returns:
+            bool: úspěšnost tahu
+        """
+        if rightClick:
+            return self.placeFlag(position, color)
+        
+        return self.makeUncoverMove(position, color)
+        
+    
+    def makeUncoverMove(self, position, color = Colors.WHITE):
         """Provede tah 
         
         Args:
@@ -84,16 +101,18 @@ class Mines:
             bool: úspěšnost umístění vlajky
         """
         success = self.__board.placeFlag(position[0], position[1])
+        if success == 2:
+            return False
         
         if color == Colors.WHITE:
             self.score += success
         
         else:   
             self.score -= success
-        
+                
         self.__printToTerminal()
         
-        return False if success == False else True
+        return True
         
     def getBoard(self, color=None):
         """Vrátí herní desku
@@ -211,6 +230,7 @@ class Mines:
                     print(self.__board[i, j], end = " ")
         
             print()
+        print()
                      
                 
         

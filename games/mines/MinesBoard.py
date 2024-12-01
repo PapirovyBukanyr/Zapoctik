@@ -160,11 +160,11 @@ class MinesBoard(Board):
             bool: False, pokud se vlajka neumístí
             int: -1, pokud se správná vlajka odstraní, 1, pokud se vlajka umístí správně a 0, pokud se vlajka odstraní nebo přidá na špatné místo
         """
-        if self.board[row][col] == "F" and self.__numberOfMines > self.flagsPlanted():
+        if self.board[row][col] == "F":
             self.board[row][col] = None
             return 0
         
-        elif self.board[row][col] == None:
+        elif self.board[row][col] == None and self.__numberOfMines > self.flagsPlanted():
             self.board[row][col] = "F"
             return 0
         
@@ -177,7 +177,7 @@ class MinesBoard(Board):
             return -1
         
         else:
-            return False
+            return 2
         
                 
     def __str__(self):
