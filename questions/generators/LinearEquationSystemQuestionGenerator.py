@@ -12,11 +12,7 @@ class LinearEquationSystemQuestionGenerator(Question):
         """
         super().__init__()
         self.time = 120
-    
-    
-    numberOfQuestions = 1
-    """int: Počet otázek, které generátor vygeneruje
-    """
+        self.numberOfQuestions = 1
     
     
     def generateLinearEquationSystem(self, num_equations, num_variables):
@@ -51,10 +47,12 @@ class LinearEquationSystemQuestionGenerator(Question):
             string: latexový zápis rovnic ve formátu string
         """
         result = ""
+        
         for eq in equations:
             lhs = eq.lhs
             rhs = eq.rhs
             result += f"{sp.latex(lhs)} = {sp.latex(rhs)}\\\\newline "
+            
         return result + ""
     
     

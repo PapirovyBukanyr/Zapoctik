@@ -8,21 +8,36 @@ from games import *
 import gc
 
 class ClickableLabel(QLabel):
+    """Třída ClickableLabel slouží k vytvoření klikatelného labelu, který může vyslat signál o kliknutí na dané políčko
+    """
+    
+    
     clicked = pyqtSignal(int, int, str)  
+    """Signál, který se vysílá při kliknutí na dané políčko
+    """
 
     def __init__(self, row, col, *args, **kwargs):
+        """Konstruktor třídy ClickableLabel 
+        """
         super().__init__(*args, **kwargs)
         self.row = row
         self.col = col
         self.isHighlighted = False
 
     def mousePressEvent(self, event):
+        """Metoda, která se zavolá při kliknutí na dané políčko
+        """
         if event.button() == Qt.LeftButton:
             self.clicked.emit(self.row, self.col, "left")
+            
         elif event.button() == Qt.RightButton:
             self.clicked.emit(self.row, self.col, "right")
 
 class GameView(QWidget):
+    """Třída GameView slouží k zobrazení hry na grafickém rozhraní pomocí PyQt5
+    """
+    
+    
     def __init__(self, game):
         """Konstruktor
 
@@ -50,6 +65,7 @@ class GameView(QWidget):
         self.update_board(True)
         self.show_question()
                     
+                    
     def set_piece_image(self, row, col, filePath):
         """Funkce pro nastavení obrázku figurky na dané pozici
 
@@ -63,6 +79,7 @@ class GameView(QWidget):
             pixmap = QPixmap(filePath)
             label.setPixmap(pixmap.scaled(100, 100, Qt.KeepAspectRatio))
             label.setAlignment(Qt.AlignCenter)
+
 
     def create_board(self):
         """Funkce pro vytvoření herní desky
@@ -88,6 +105,7 @@ class GameView(QWidget):
                 self.board_layout.addWidget(label, row, col) 
                 self.uiBoard[row][col] = label
                 
+                
     def show_question(self):
         """Funkce pro zobrazení otázky
         """
@@ -98,6 +116,7 @@ class GameView(QWidget):
         self.questionView = MathQuestion(question, self.player, fullscreen, lambda correct: self.handle_answer(correct))
         self.questionView.show()
         
+        
     def handle_answer(self, correct):
         """Funkce pro zpracování odpovědi na otázku
 
@@ -105,12 +124,15 @@ class GameView(QWidget):
             correct (bool): Byla odpověď správná?
         """
         self.answered = correct
+        
         if correct:
             self.questionView.close()
             return
+        
         self.questionView.close()
         self.player = self.player.changeColor()
         self.show_question()
+        
     
     def handle_square_click(self, row, col, button):
         """Funkce pro obsluhu kliknutí na políčko
@@ -125,8 +147,10 @@ class GameView(QWidget):
                 if isinstance(self.game, Mines):
                     self.game.placeFlag([row, col], self.player)
                     self.update_board()
+                    
                     if self.game.checkEnd() != None:
                         self.game_ended(self.game.checkEnd())
+                        
                     self.player = self.player.changeColor()
                     self.answered = False
                     self.show_question()
@@ -134,10 +158,13 @@ class GameView(QWidget):
             if button == "left":
                 if self.selectedPiece == False and (isinstance(self.game, Checkers) or isinstance(self.game, Chess) or isinstance(self.game, MathGame)):
                     self.choose_piece(row, col)
+                
                 else:
                     self.make_move(row, col)
+        
         else:
             self.show_question()
+            
     
     def choose_piece(self, row, col):
         """Funkce pro výběr figurky
@@ -147,9 +174,12 @@ class GameView(QWidget):
             col (int): sloupec
         """
         self.update_board()
+        
         for move in self.game.choosePiece([row, col], self.player):
             self.highlight_square(move[0], move[1])
+        
         self.selectedPiece = True
+        
         
     def make_move(self, row, col):
         """Funkce pro provedení tahu
@@ -159,26 +189,35 @@ class GameView(QWidget):
             col (int): sloupec
         """
         result = self.game.makeMove([row, col], self.player)
+        
         if result == "Promote":
             self.promote_pawn()
+        
         elif result == False:
             self.selectedPiece = False
             self.update_board()   
             return
+        
         elif result == True:
             self.selectedPiece = False
             self.update_board()
+        
         else:
             self.update_board()
+            
             for move in result:
                 self.highlight_square(move[0], move[1])
+            
             return
+       
         if self.game.checkEnd() != None:
             self.game_ended(self.game.checkEnd())
+        
         else:
             self.player = self.player.changeColor()
             self.answered = False
             self.show_question()
+    
     
     def highlight_square(self, row, col):
         """Funkce pro zvýraznění políčka
@@ -190,6 +229,7 @@ class GameView(QWidget):
         label = self.uiBoard[row][col]
         label.setStyleSheet("background-color: yellow;")
 
+
     def update_board(self, isFirst = False):
         """Funkce pro aktualizaci herní desky
         
@@ -198,12 +238,15 @@ class GameView(QWidget):
         """
         if not isFirst: 
             self.remove_board()
+        
         self.uiBoard = [[None for _ in range(len(self.game.getBoard(self.player)[0]))] for _ in range( len(self.game.getBoard(self.player)))]
         self.create_board()
+        
         for i in range(0, len(self.game.getBoard(self.player))):
             for j in range(0, len(self.game.getBoard(self.player)[i])):
                 if (self.game.getBoard(self.player)[i][j] != None):
                     self.set_piece_image(i, j, GetResource.getResource(self.game.getBoard(self.player)[i][j]))
+
 
     def remove_board(self):
         """Funkce pro odstranění herní desky
@@ -211,11 +254,14 @@ class GameView(QWidget):
         for row in range(len(self.game.getBoard(self.player))):
             for col in range( len(self.game.getBoard(self.player)[0])):
                 widget = self.uiBoard[row][col]
+                
                 if widget:
                     self.layout.removeWidget(widget)
                     widget.deleteLater()
                     self.uiBoard[row][col] = None
+                    
         gc.collect()
+
 
     def game_ended(self, message):
         """Funkce pro zobrazení dialogového okna s výsledkem hry
@@ -226,17 +272,23 @@ class GameView(QWidget):
         if isinstance(self.game, TicTacToe):
             if message == "B won":
                 message = "Vyhrál hráč O"
+                
             elif message == "W won":
                 message = "Vyhrál hráč X"
+                
             else:
                 message = "Remíza"
+                
         else:
             if message == "W won":
                 message = "Vyhrál hráč bílý"
+                
             elif message == "B won":
                 message = "Vyhrál hráč černý"
+                
             else:
                 message = "Remíza"
+                
         msg_box = QMessageBox()
         msg_box.setText(message)
         msg_box.setWindowTitle("Konec hry")
@@ -254,16 +306,23 @@ class GameView(QWidget):
             match(item):
                 case "Dáma":
                     item = Figures.QUEEN
+                    
                 case "Věž":
                     item = Figures.ROOK
+                    
                 case "Střelec":
                     item = Figures.BISHOP
+                    
                 case "Kůň":
                     item = Figures.KNIGHT
+                    
                 case "Král":
                     item = Figures.KING
+                    
             if self.game.promote(item) == False:
                 self.promote_pawn()
+                
             self.update_board()
+            
         else:
             self.promote_pawn()

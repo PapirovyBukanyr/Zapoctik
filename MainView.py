@@ -4,7 +4,13 @@ from games import *
 from PyQt5.QtGui import QFontDatabase
 
 class MainView(QWidget):
+    """Třída MainView slouží k zobrazení hlavního menu aplikace.
+    """
+    
+    
     def __init__(self):
+        """Konstruktor třídy
+        """
         super().__init__()
         self.setWindowTitle("Zápočtík Games")
         self.setFixedSize(400, 300)
@@ -73,6 +79,7 @@ class MainView(QWidget):
 
         main_layout.addLayout(grid_layout)
 
+<<<<<<< HEAD
         spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
         main_layout.addSpacerItem(spacer)
 
@@ -88,4 +95,53 @@ class MainView(QWidget):
         self.gameWindow = GameView(game.game)
         self.gameWindow.show()
         self.showMinimized()
+=======
+
+    def start_game(self, game_name):
+        """Spustí hru podle jména
+        
+        Args:
+            game_name (string): název hry
+        """
+        match(game_name):
+            case "Šachy♛":
+                self.gameWindow = GameView(Chess())
+                self.gameWindow.show()
+                self.showMinimized()
+                
+            case "Dáma𖣯":
+                self.gameWindow = GameView(Checkers())
+                self.gameWindow.show()
+                self.showMinimized()
+                
+            case "Piškvorky❌⭕":
+                self.gameWindow = GameView(TicTacToe())
+                self.gameWindow.show()
+                self.showMinimized()
+                
+            case "Matematická hra🔢":
+                self.gameWindow = GameView(MathGame())
+                self.gameWindow.show()
+                self.showMinimized()
+                
+            case "Miny💣":
+                self.gameWindow = GameView(Mines())
+                self.gameWindow.show()
+                self.showMinimized()
+                
+            case "Šachy s mlhou války☁️":
+                self.gameWindow = GameView(ChessWithFogOfWar())
+                self.gameWindow.show()
+                self.showMinimized()
+                
+            case "Dáma s mlhou války☁️":
+                self.gameWindow = GameView(CheckersWithFogOfWar())
+                self.gameWindow.show()
+                self.showMinimized()
+                
+            case "Hledání krtka🐀":
+                self.gameWindow = GameView(ChallengeAccepted())
+                self.gameWindow.show()
+                self.showMinimized()
+>>>>>>> dev
             

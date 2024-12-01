@@ -30,13 +30,19 @@ class Queen(Piece):
         """
         moves = []
         for j in [-1,1]:
+            
             for k in [-1,1]:
+                
                 for i in range(1, 8):
+                    
                     if self.position[0] + i*j < 8 and self.position[0] + i*j >= 0 and self.position[1] + i*k < 8 and self.position[1] + i*k >= 0:
+                        
                         if board[self.position[0] + i*j,self.position[1] + i*k] is None:
                             moves.append([self.position[0] + i*j, self.position[1] + i*k])
+                        
                         else:
                             break
+                    
                     else:
                         break
                     
@@ -60,19 +66,27 @@ class Queen(Piece):
         jumps = []
         
         for j in [-1,1]:
+            
             for k in [-1,1]:
+                
                 for i in range(1, 8):
+                    
                     if position[0] + i*j + j< 8 and position[0] + i*j + j>= 0 and position[1] + i*k + k < 8 and position[1] + i*k + k>= 0:
+                        
                         if board[position[0] + i*j,position[1] + i*k] != None:
+                            
                             if board[position[0] + i*j,position[1] + i*k].color == self.color:
                                 break
                             
                             if board[position[0] + i*j,position[1] + i*k].color == self.color.changeColor() and board[position[0] + i*j + j,position[1] + i*k + k] == None:
                                 jumps.append([position[0] + i*j + j, position[1] + i*k + k])
+                            
                             else:
                                 break
+                    
                     else:
                         break
+                    
         return jumps
     
     
@@ -86,5 +100,6 @@ class Queen(Piece):
             List of [int, int]: seznam pozic figurek, které dáma přeskočí, než se dostane na koncovou pozici
         """
         jumps=([endPosition[0]-(endPosition[0]-self.position[0])//abs(endPosition[0]-self.position[0]), endPosition[1]-(endPosition[1]-self.position[1])//abs(endPosition[1]-self.position[1])])
+        
         return jumps
     

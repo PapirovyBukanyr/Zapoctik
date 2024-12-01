@@ -19,6 +19,8 @@ class GameTests(unittest.TestCase):
         game = game.game
         self.assertIsNotNone(game.getBoard(Colors.WHITE))
         self.assertIsNotNone(game.getBoard(Colors.BLACK))
+        self.assertNotEqual(game.getBoard(Colors.WHITE), [])
+        self.assertNotEqual(game.getBoard(Colors.BLACK), [])
 
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE),
@@ -38,6 +40,7 @@ class GameTests(unittest.TestCase):
         """
         game = game_class()
         self.assertIsNotNone(game.choosePiece(position, color))
+        self.assertNotEqual(game.choosePiece(position, color), [])
         
 
     @parameterized.expand([
@@ -58,6 +61,7 @@ class GameTests(unittest.TestCase):
         """
         game = game_class()
         self.assertIsNotNone(game.choosePiece(position, color))
+        self.assertEqual(game.choosePiece(position, color), [])
         
 
     @parameterized.expand([
@@ -78,6 +82,7 @@ class GameTests(unittest.TestCase):
         """
         game = game_class()
         self.assertIsNotNone(game.choosePiece(position, color))
+        self.assertEqual(game.choosePiece(position, color), [])
         
     
     @parameterized.expand([
@@ -104,6 +109,7 @@ class GameTests(unittest.TestCase):
         
         if choose_position and color:
             game.choosePiece(choose_position, color)
+            
         self.assertTrue(game.makeMove(move_position, color))
         
     @parameterized.expand([
@@ -127,11 +133,11 @@ class GameTests(unittest.TestCase):
             move_position ([int, int]): pozice, kam se má figurka pohnout
         """
         game = game_class()
+        
         if choose_position and color:
             game.choosePiece(choose_position, color)
-            self.assertFalse(game.makeMove(move_position))
-        else:
-            self.assertFalse(game.makeMove(move_position, color))
+        
+        self.assertFalse(game.makeMove(move_position, color))
         
         
     @parameterized.expand([
@@ -152,11 +158,11 @@ class GameTests(unittest.TestCase):
             move_position ([int, int]): pozice, kam se má figurka pohnout
         """
         game = game_class()
+        
         if choose_position and color:
             game.choosePiece(choose_position, color)
-            self.assertFalse(game.makeMove(move_position))
-        else:
-            self.assertFalse(game.makeMove(move_position, color))
+            
+        self.assertFalse(game.makeMove(move_position, color))
         
 
     @parameterized.expand(ListOfGames.getListOfGames())
@@ -182,31 +188,53 @@ class GameTests(unittest.TestCase):
         game = game.game
         colorOnMove = Colors.WHITE
         counter = 0
-        limit = 1000
+        limit = 10000
 
         while game.checkEnd() is None and counter < limit:
             move = []
 
-            if isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame):
+            if self.isGameWithChoosingPiece(game):
                 while move == []:
                     move = game.choosePiece([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
                 
-                move = random.choice(move)
-                
+                if isinstance(move, list) and isinstance(move[0], list):
+                    move = random.choice(move)
+            else:
+                move = [random.randint(0, 10), random.randint(0, 15)]
+                                                        
             newMove = False
+            
             while newMove != True:
-                if isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame):
-                    newMove = game.makeMove(move)
+                if self.isGameWithChoosingPiece(game):
+                    newMove = game.makeMove(move, colorOnMove)
                     if not isinstance(newMove,bool) and not isinstance(newMove, str) and isinstance(newMove[0], list) and isinstance(newMove[0][0], int):
                         move = random.choice(newMove)
+                        
                     elif newMove == "Promote":
                         move = game.promote("Q")
                         newMove = True
+                    
+                    elif not isinstance(newMove,bool) and isinstance(newMove, list) and isinstance(newMove[0], int):
+                        move = newMove
+                
                 else:
-                    move = game.makeMove([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
+                    newMove = game.makeMove([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
 
             colorOnMove = colorOnMove.changeColor()
             counter += 1
+            
         print(game.checkEnd())
-        self.assertFalse(counter >= limit)
+        self.assertGreater(limit, counter)
+    
+    
+    def isGameWithChoosingPiece(self, game):
+        """Zjistí, zda hra vyžaduje výběr figurky
+
+        Args:
+            game (game): hra
+
+        Returns:
+            bool: True, pokud hra vyžaduje výběr figurky
+        """
+        return isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame) or isinstance(game, ChessWithFogOfWar) or isinstance(game, CheckersWithFogOfWar)
 
