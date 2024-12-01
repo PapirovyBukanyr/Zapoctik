@@ -2,15 +2,26 @@ from abc import ABC
 from .Enums import *
 
 class Board(ABC):
+    """Třída reprezentující hrací desku hry
+    """
+    
+    
     def __init__(self):
+        """Konstruktor třídy Board
+        """
         self.board = []
         self.__populateBoard()
         
+        
     def __populateBoard(self):
+        """Inicializace herní desky
+        """
         pass
     
     
     def __str__(self):
+        """Vytvoří string hrací desky na výpis do konzole
+        """
         pass
     
     

@@ -7,12 +7,8 @@ class GenerateQuestion (Question):
     """Třída na generování otázek
     Pro generování otázek použij metodu generateQuestion
     Pro kontrolu odpovědí použij metodu checkAnswer s parametrem answer
+    Pro získání správné odpovědi použij funkci doupovcuvOperator
     Výsledky se zaokrouhlují na celá čísla!!!
-    """
-    
-    
-    numberOfQuestions = 10
-    """int: Počet otázek, které generátor vygeneruje    
     """
     
     
@@ -20,7 +16,7 @@ class GenerateQuestion (Question):
         """Konstruktor třídy GenerateQuestion
         """
         super().__init__()
-        print("Otázky jsou připraveny ke generování")
+        self.numberOfQuestions = 10
         
         
     def generateQuestion(self, n = None):	
@@ -71,8 +67,6 @@ class GenerateQuestion (Question):
         self.answer = question.answer
         self.questionText = question.questionText
         self.questionLatex = question.questionLatex
-            
-        print(self)
         
         return self.questionText, self.questionLatex
     

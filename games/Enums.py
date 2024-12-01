@@ -5,42 +5,47 @@ from dataclasses import dataclass
 class Field:
   """Třída reprezentující políčko na šachovnici
   """
-  color: Enum
-  piece: Enum
+  color: Enum # Barva políčka (Colors)
+  piece: Enum # Figurka na políčku (Figures)
   
   
 class Figures(Enum):
   """Enum pro typy figurek
   """
-  # Šachové a dámové figurky
-  PAWN = 1 
-  ROOK = 2
-  BISHOP = 3
-  KNIGHT = 4
-  QUEEN = 5
-  KING = 6
-  # Křížky a kolečka pro hru piškvorky
-  X = 7
-  O = 8
-  # Symboly pro hru miny
-  FLAG = 9
-  EXPLOSION = 10
-  MINE = 11
-  ONE = 12
-  TWO = 13
-  THREE = 14
-  FOUR = 15
-  FIVE = 16
-  SIX = 17
-  SEVEN = 18
-  EIGHT = 19
-  SHADOW = 20
+  
+  
+  PAWN = 1 # Pěšec do šachů, dámy, ...
+  ROOK = 2 # Věž do šachů
+  BISHOP = 3 # Střelec do šachů
+  KNIGHT = 4 # Jezdec do šachů
+  QUEEN = 5 # Dáma do šachů, dámy, ...
+  KING = 6 # Král do šachů
+  X = 7 # X do piškvorek
+  O = 8 # O do piškvorek
+  FLAG = 9 # Vlajka do hledání min
+  EXPLOSION = 10 # Výbuch do hledání min
+  MINE = 11 # Mina do hledání min
+  ONE = 12 # 1 do hledání min, hledání krtka, ...
+  TWO = 13 # 2 do hledání min, hledání krtka, ...
+  THREE = 14 # 3 do hledání min, hledání krtka, ...
+  FOUR = 15 # 4 do hledání min, hledání krtka, ...
+  FIVE = 16 # 5 do hledání min, hledání krtka, ...
+  SIX = 17 # 6 do hledání min, hledání krtka, ...
+  SEVEN = 18 # 7 do hledání min, hledání krtka, ...
+  EIGHT = 19 # 8 do hledání min, hledání krtka, ...
+  SHADOW = 20 # Stín do šachů s mlhou války, dám s mlhou války, min, hledání krtka, ...
+  MOLE = 21 # Krteček!!!
+  LOGO = 22 # Logo hry
   
 class Colors(Enum):
   """Enum pro barvy
   """
+  
+  
   WHITE = 1
   BLACK = 2
+  
+  
   def __str__(self):
     """Vrací string reprezentaci barvy
 
@@ -49,8 +54,10 @@ class Colors(Enum):
     """
     if self == Colors.WHITE:
       return "W"
+    
     else:
       return "B"
+    
     
   def changeColor(self):
     """Vrátí inverzní barvu

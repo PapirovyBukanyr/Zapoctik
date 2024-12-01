@@ -2,7 +2,12 @@ from .ChessBoard import ChessBoard
 from .pieces import *
 
 class Chess:
+  """Třída reprezentující hru šachy
+  """
+  
   def __init__(self):
+    """ Konstruktor třídy šachů
+    """
     self.__movesSinceLastImportantMove = 0
     self.__board = ChessBoard()
     self.__playedPiece = None
@@ -19,6 +24,8 @@ class Chess:
         
   
   def getBoard(self, color=None):
+    """Vrátí šachovnici v aktuálním stavu jako dvourozměrné pole Field
+    """
     return self.__board.getListOfBoard()
   
   def choosePiece (self, positionToPlay, color = None):
@@ -33,11 +40,14 @@ class Chess:
     """
     if color is not None:
       self.__isMoving = color
+      
     try:
       if self.__isMoving != self.__board[positionToPlay].color:
         return []
+      
       self.__playedPiece = self.__board[positionToPlay]
       return  self.__playedPiece.possibleMoves(self.__board)
+    
     except:
       return []
 
@@ -55,13 +65,16 @@ class Chess:
     
     if self.__playedPiece is None:
       return False
+    
     if playedMove is None:
       return False
+    
     if playedMove not in self.__playedPiece.possibleMoves(self.__board):
       return False
 
     if isinstance(self.__playedPiece,Pawn) or self.__board[playedMove] is not None:
       self.__movesSinceLastImportantMove = -1
+    
     self.__playedPiece.move(self.__board, playedMove)
     self.__movesSinceLastImportantMove += 1
     self.__positionsList.append(self.__board.copy())
@@ -90,16 +103,22 @@ class Chess:
     match(newFigure):
       case Figures.QUEEN:
         self.__board[self.__playedPiece.position] = Queen(self.__playedPiece.color, self.__playedPiece.position)
+      
       case Figures.ROOK:
         self.__board[self.__playedPiece.position] = Rook(self.__playedPiece.color, self.__playedPiece.position)
+      
       case Figures.BISHOP:
         self.__board[self.__playedPiece.position] = Bishop(self.__playedPiece.color, self.__playedPiece.position)
+      
       case Figures.KNIGHT:
         self.__board[self.__playedPiece.position] = Knight(self.__playedPiece.color, self.__playedPiece.position)
+      
       case Figures.KING:
         self.__board[self.__playedPiece.position] = King(self.__playedPiece.color, self.__playedPiece.position)
+      
       case _:
         return False
+   
     self.__board[self.__playedPiece.position].hasMoved = True
       
     return self.__endOfMove()
@@ -113,9 +132,7 @@ class Chess:
         string: string pokud hra skoncila
     """
     self.__playedPiece = None
-
     self.__isMoving = Colors.BLACK if self.__isMoving == Colors.WHITE else Colors.WHITE
-    
     self.__printToTerminal()
     
     return True
@@ -130,9 +147,11 @@ class Chess:
         list of [int, int]: seznam moznych tahu
     """
     listOfMoves = []
+    
     for piece in self.__board.pieceList(color):
       for move in piece.possibleMoves(self.__board):
         listOfMoves.append(move)
+    
     return listOfMoves
 
   def checkEnd(self):
@@ -152,21 +171,27 @@ class Chess:
       for j in range(i+1, len(self.__positionsList)):
         if self.__positionsList[i].compare(self.__positionsList[j]):
           count += 1
+          
       if count >= 3:
         return "Draw by threefold repetition"
       
     for color in [Colors.WHITE, Colors.BLACK]:
       isKing = False
+      
       for piece in self.__board.pieceList(color):
         if piece.symbol == "K":
           isKing = True
           break
+      
       if not isKing:
         if color == Colors.WHITE:
           color = Colors.BLACK
+          
         else: 
           color = Colors.WHITE
+        
         return f"{color} won"
+      
     return None
       
   def __printToTerminal(self):  

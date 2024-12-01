@@ -1,15 +1,4 @@
-from .generators import (
-    MatrixQuestionGenerator,
-    FractionQuestionGenerator,
-    DerivativeQuestionGenerator,
-    LinearEquationSystemQuestionGenerator,
-    AnalyticGeometryQuestionGenerator,
-    InfinitiveSeriesQuestionGenerator,
-    IntegralQuestionGenerator,
-    OrdinalNumberQuestionGenerator,
-    KardinalNumberQuestionGenerator,
-    SetQuestionGenerator
-)
+from .generators import *
 from .GenerateQuestion import GenerateQuestion
 import unittest
 from parameterized import parameterized
@@ -34,6 +23,18 @@ class QuestionTests(unittest.TestCase):
     ]
     """list: Seznam všech tříd generátorů otázek
     """
+    
+    
+    @parameterized.expand(allClasses)
+    def testNumberOfQuestions(self, name, generator_class):
+        """Testuje, zda se generuje nenulový počet otázek
+
+        Args:
+            name (string): jméno generátoru
+            generator_class (Question): třída generátoru
+        """
+        generator = generator_class()
+        self.assertGreater(generator.numberOfQuestions, 0)
         
     
     @parameterized.expand(allClasses)
@@ -51,6 +52,8 @@ class QuestionTests(unittest.TestCase):
             self.assertIsNotNone(question)
             self.assertIsNotNone(generator.questionText)
             self.assertIsNotNone(generator.questionLatex)
+            self.assertNotEqual(generator.questionText, "")
+            self.assertNotEqual(generator.questionLatex, "")
         
         
     @parameterized.expand(allClasses)
@@ -66,6 +69,7 @@ class QuestionTests(unittest.TestCase):
         for i in range(0,generator.numberOfQuestions):
             generator.generateQuestion(i)
             self.assertIsNotNone(generator.doupovcuvOperator())
+            self.assertNotEqual(generator.doupovcuvOperator(), "")
             
 
     @parameterized.expand(allClasses)
@@ -98,3 +102,20 @@ class QuestionTests(unittest.TestCase):
         for i in range(0, generator.numberOfQuestions):
             generator.generateQuestion(i)
             self.assertFalse(generator.checkAnswer("Wrong answer"))
+            
+    @parameterized.expand(allClasses)
+    def testTimeSet(self, name, generator_class):
+        generator = generator_class()
+        
+        for i in range(0, generator.numberOfQuestions):
+            generator.generateQuestion(i)
+            self.assertIsNotNone(generator.time)
+            self.assertGreater(generator.time, 0)
+            
+    @parameterized.expand(allClasses)
+    def testHoderova(self, name, generator_class):
+        generator = generator_class()
+        
+        for i in range(0, generator.numberOfQuestions):
+            generator.generateQuestion(i)
+            self.assertIsNotNone(generator.hoderovaDanger)

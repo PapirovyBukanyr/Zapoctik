@@ -8,15 +8,12 @@ class SetQuestionGenerator(Question):
     """
     
     
-    numberOfQuestions = 7
-    """int: Počet otázek, které generátor vygeneruje
-    """
-    
     def __init__(self):
         """Konstruktor třídy otázek na množiny
         """
         super().__init__()
         self.time = 10
+        self.numberOfQuestions = 7
     
     
     def generateQuestion(self, n = None):
@@ -30,6 +27,7 @@ class SetQuestionGenerator(Question):
         """
         if n is not None and n in range(0, 7):
             randomQuestion = n
+            
         else:
             randomQuestion = random.randint(0, 6)
         
