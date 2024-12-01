@@ -1,37 +1,22 @@
 import unittest
 from parameterized import parameterized
-from games import Chess, Checkers, TicTacToe, MathGame, Mines, ChessWithFogOfWar, CheckersWithFogOfWar, ChallengeAccepted
+from games import *
 import random
-from .Enums import Colors
 
 class GameTests(unittest.TestCase):
     """Testy na hry
     """
     
     
-    __allClasses = [
-        ("Chess", Chess),
-        ("Checkers", Checkers),
-        ("TicTacToe", TicTacToe),
-        ("MathGame", MathGame),
-        ("Mines", Mines),
-        ("ChessWithFogOfWar", ChessWithFogOfWar),
-        ("CheckersWithFogOfWar", CheckersWithFogOfWar),
-        ("Filipova výzva", ChallengeAccepted)     
-    ]
-    """list: Seznam všech tříd her
-    """
-    
-    
-    @parameterized.expand(__allClasses)
-    def testInitialBoard(self, name, game_class):
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testInitialBoard(self, game):
         """Testuje, zda se vytvoří hrací pole
         
         Args:
             name (string): jméno hry
             game_class (game): třída hry
         """
-        game = game_class()
+        game = game.game
         self.assertIsNotNone(game.getBoard(Colors.WHITE))
         self.assertIsNotNone(game.getBoard(Colors.BLACK))
 
@@ -174,27 +159,27 @@ class GameTests(unittest.TestCase):
             self.assertFalse(game.makeMove(move_position, color))
         
 
-    @parameterized.expand(__allClasses)
-    def testCheckEnd(self, name, game_class):
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testCheckEnd(self, game):
         """Testuje, zda hra skončila
 
         Args:
             name (string): jméno hry
             game_class (game): třída hry
         """
-        game = game_class()
+        game = game.game
         self.assertIsNone(game.checkEnd())
         
     
-    @parameterized.expand(__allClasses)
-    def testSimulateFullGame(self, name, game_class):
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testSimulateFullGame(self, game):
         """Testuje, zda se hra zahraje do konce
 
         Args:
             name (string): jméno hry
             game_class (game): třída hry
         """
-        game = game_class()
+        game = game.game
         colorOnMove = Colors.WHITE
         counter = 0
         limit = 1000
