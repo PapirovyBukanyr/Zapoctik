@@ -2,7 +2,6 @@ import unittest
 from parameterized import parameterized
 from games import *
 import random
-from .Enums import Colors
 
 class GameTests(unittest.TestCase):
     """Testy na hry
@@ -17,8 +16,10 @@ class GameTests(unittest.TestCase):
         ("Mines", Mines),
         ("ChessWithFogOfWar", ChessWithFogOfWar),
         ("CheckersWithFogOfWar", CheckersWithFogOfWar),
-        ("Filipova výzva", ChallengeAccepted) ,
-        ("Člověče nezlob se", HumanDoNotWorry)    
+        ("Filipova výzva", ChallengeAccepted),
+        ("Chess track game", ChessTrackGame),
+        ("Člověče nezlob se", HumanDoNotWorry),
+        ("Pexeso", Pexeso)    
     ]
     """list: Seznam všech tříd her
     """
@@ -110,7 +111,8 @@ class GameTests(unittest.TestCase):
         ("TicTacToe", TicTacToe, [0, 0], None, [0, 0]),
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [7, 6]),
         ("Mines", Mines, [0, 0], None, [1, 1]),
-        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [0, 0])
+        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [0, 0]),
+        ("Chess track game", ChessTrackGame, [0, 0], None, [1, 1])
     ])
     def testMakeMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb provede
@@ -205,7 +207,7 @@ class GameTests(unittest.TestCase):
         game = game_class()
         colorOnMove = Colors.WHITE
         counter = 0
-        limit = 1000
+        limit = 10000
 
         while game.checkEnd() is None and counter < limit:
             move = []
