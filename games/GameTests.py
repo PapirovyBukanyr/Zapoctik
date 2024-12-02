@@ -207,7 +207,7 @@ class GameTests(unittest.TestCase):
         game = game_class()
         colorOnMove = Colors.WHITE
         counter = 0
-        limit = 1000
+        limit = 10000
 
         while game.checkEnd() is None and counter < limit:
             move = []

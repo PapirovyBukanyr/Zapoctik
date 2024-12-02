@@ -26,7 +26,21 @@ class PexesoCard:
         if self.isRevealed:
             return self.symbol
         else:
-            return Field(Figures.SHADOW, Colors.WHITE)
+            return Field(Colors.WHITE, Figures.SHADOW)
+        
+        
+    def equals(self, other):
+        """Porovná symboly dvou kartiček
+        
+        Args:
+            other (PexesoCard): druhá kartička
+        
+        Returns:
+            bool: zda jsou symboly stejné
+        """
+        if isinstance(other, PexesoCard):
+            return self.getSymbol().color == other.getSymbol().color and self.getSymbol().piece == other.getSymbol().piece
+        return False
         
     
     def turn(self):
@@ -50,4 +64,5 @@ class PexesoCard:
     def match(self):
         """Označ kartičku jako vyřešenou
         """
+        self.isRevealed = True
         self.isCompleted = True
