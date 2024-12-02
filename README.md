@@ -4,7 +4,7 @@ Snad ten zápočet dostaneme
 
 ## Celkový popis
 
-Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky her (Šachy) a zahrát si je. Aby to nebylo tak snadné, tak před každým kolem se mu zobrazí matematická otázka, na kterou bude muset vymyslet odpověď.
+Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky her a zahrát si je. Aby to nebylo tak snadné, tak před každým kolem se mu zobrazí matematická otázka, na kterou bude muset vymyslet odpověď.
 
 ## Autoři
  
@@ -43,7 +43,7 @@ Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky 
 
 ### Backend her
 
-Všechny hry se nachází v modulu `games`. Každá hra používá jednotnou brací desku `games/Board.py`. Společný je také soubor `games/Enums.py`, který obsahuje třídy typu enum "Figure" (co za figurku má frontend vykreslit), Colors (Barvy jsou "WHITE" a "BLACK") a "Field" (datová struktura kombinující předchozí dvě, určená ke komunikaci s Frontendem)
+Všechny hry se nachází v modulu `games`. Každá hra používá jednotnou brací desku `games/Board.py`. Společný je také soubor `games/Enums.py`, který obsahuje třídy typu enum "Figure" (co za figurku má frontend vykreslit), Colors (Barvy jsou "WHITE", "BLACK", "RED" a "GREEN") a "Field" (datová struktura kombinující předchozí dvě, určená ke komunikaci s Frontendem)
 
 #### Backend šachů
 
@@ -84,6 +84,14 @@ Cílem hry je najít krtka, což je černý pěšák, na zakryté šachovnici. T
 #### Backend hry miny 
 
 Veškerá logika hry je v `games/mines`. Hlavní třída je `games/mines/Mines`, kde je definována veškerá logika hry. Herní deska je definována ve třídě `games/mines/MinesBoard`, která stejně jako ostatní herní desky dědí z `games/Board`. Princip hry je lehce upraven pro dva hráče. To v praxi znamená, že za správně umístěnou vlaječku hráč získá bod, za odebrání správné vlaječky bod ztratí. Kdo má nakonec nejvíc bodů vítězí. 
+
+#### Backend hry Člověče, nezlob se
+
+Naše skupina došla k závěru, že je ve světě málo občanských válek a že by se s tím mělo něco udělat. Proto jsme vytvořili tuto hru, kde se na nasazování hází pouze jednou, před každým hodem se musí zodpovědět otázka, ale kde se stačí dostat na cílovou čáru (nemusí se řešit prostor v domečku). Na šestku se znovu nehází. Veškerá logika hry se nachází v modulu `games/humanDoNotWorry`. Hlavní třída je `games/humanDoNotWorry/HumanDoNotWorry`. Herní deska `games/humanDoNotWorry/HumanDoNotWorryBoard` dědí z `games/Board`.  Jednotlivé figurky dědí ze třídy `games/humanDoNotWorry/pieces/Piece`. Konkrétně to jsou:
+- `games/humanDoNotWorry/pieces/RedPiece`: červená figurka
+- `games/humanDoNotWorry/pieces/BlackPiece`: černá figurka
+- `games/humanDoNotWorry/pieces/GreenPiece`: zelená figurka
+- `games/humanDoNotWorry/pieces/WhitePiece`: bílá figurka
 
 ### Backend generování otázek
 

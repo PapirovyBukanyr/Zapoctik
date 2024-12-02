@@ -17,7 +17,9 @@ class GameTests(unittest.TestCase):
         ("ChessWithFogOfWar", ChessWithFogOfWar),
         ("CheckersWithFogOfWar", CheckersWithFogOfWar),
         ("Filipova výzva", ChallengeAccepted),
-        ("Chess track game", ChessTrackGame)  
+        ("Chess track game", ChessTrackGame),
+        ("Člověče nezlob se", HumanDoNotWorry),
+        ("Pexeso", Pexeso)    
     ]
     """list: Seznam všech tříd her
     """
@@ -36,6 +38,7 @@ class GameTests(unittest.TestCase):
         self.assertIsNotNone(game.getBoard(Colors.BLACK))
         self.assertNotEqual(game.getBoard(Colors.WHITE), [])
         self.assertNotEqual(game.getBoard(Colors.BLACK), [])
+
 
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE),
@@ -204,11 +207,11 @@ class GameTests(unittest.TestCase):
         game = game_class()
         colorOnMove = Colors.WHITE
         counter = 0
-        limit = 10000
+        limit = 1000
 
         while game.checkEnd() is None and counter < limit:
             move = []
-
+            
             if self.isGameWithChoosingPiece(game):
                 while move == []:
                     move = game.choosePiece([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
@@ -235,9 +238,14 @@ class GameTests(unittest.TestCase):
                 
                 else:
                     newMove = game.makeMove([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
-
-            colorOnMove = colorOnMove.changeColor()
+           
             counter += 1
+            
+            if isinstance(game, HumanDoNotWorry):
+                colorOnMove = colorOnMove.changeColorFour()
+            else:
+                colorOnMove = colorOnMove.changeColor()
+            
             
         print(game.checkEnd())
         self.assertGreater(limit, counter)
@@ -252,5 +260,5 @@ class GameTests(unittest.TestCase):
         Returns:
             bool: True, pokud hra vyžaduje výběr figurky
         """
-        return isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame) or isinstance(game, ChessWithFogOfWar) or isinstance(game, CheckersWithFogOfWar)
+        return isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame) or isinstance(game, ChessWithFogOfWar) or isinstance(game, CheckersWithFogOfWar) or isinstance(game, HumanDoNotWorry)
 
