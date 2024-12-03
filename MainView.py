@@ -94,4 +94,3 @@ class MainView(QWidget):
         self.gameWindow = GameView(game.game)
         self.gameWindow.show()
         self.showMinimized()
-            

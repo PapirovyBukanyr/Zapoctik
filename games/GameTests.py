@@ -93,7 +93,8 @@ class GameTests(unittest.TestCase):
         ("TicTacToe", TicTacToe, [0, 0], None, [0, 0]),
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [7, 6]),
         ("Mines", Mines, [0, 0], None, [1, 1]),
-        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [0, 0])
+        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [0, 0]),
+        ("Chess track game", ChessTrackGame, [0, 0], None, [1, 1])
     ])
     def testMakeMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb provede

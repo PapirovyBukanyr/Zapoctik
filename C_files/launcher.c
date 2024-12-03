@@ -80,5 +80,10 @@ int main() {
         return 3; 
     }
 
+    printf("\nPro dnesek jsem s tvym vykonem spokojen, takze zadne soubory nesmazu...\n");
+    printf("...ale zitra to bude jina!\n\n");
+    printf("Stiskni libovolnou klavesu pro ukonceni.\n");
+    getchar();
+
     return 0; 
 }
