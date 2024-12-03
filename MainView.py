@@ -120,4 +120,9 @@ class MainView(QWidget):
                 self.gameWindow = GameView(ChallengeAccepted())
                 self.gameWindow.show()
                 self.showMinimized()
+                
+            case "Člověče, nezlob se🎲":
+                self.gameWindow = GameView(HumanDoNotWorry())
+                self.gameWindow.show()
+                self.showMinimized()
             
