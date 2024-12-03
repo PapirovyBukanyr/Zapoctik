@@ -8,4 +8,5 @@ from .ChessWithFogOfWar import ChessWithFogOfWar
 from .CheckersWithFogOfWar import CheckersWithFogOfWar
 from .ChallengeAccepted import ChallengeAccepted
 from .humanDoNotWorry import HumanDoNotWorry
+from .connectFour import ConnectFour
 from .chessTrackGame import ChessTrackGame

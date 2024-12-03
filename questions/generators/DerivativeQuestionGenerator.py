@@ -12,7 +12,7 @@ class DerivativeQuestionGenerator(Question):
         """
         super().__init__()
         self.hoderovaDanger = True
-        self.numberOfQuestions = 3
+        self.numberOfQuestions = 4
     
     
     def generatePolynomial(self, degree):
@@ -25,7 +25,7 @@ class DerivativeQuestionGenerator(Question):
             sympy symbol: polynom 
         """
         x = sp.symbols('x')
-        polynomial = sum(random.randint(-10, 10) * x**i for i in range(0,degree + 1))
+        polynomial = sum(random.randint(-5, 5) * x**i for i in range(0,degree))
     
         return polynomial
     
@@ -39,16 +39,16 @@ class DerivativeQuestionGenerator(Question):
         Returns:
             DerivativeQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovědí
         """
-        if n is not None and n in range(0, 3):
+        if n is not None and n in range(0, 4):
             randomQuestion = n
             
         else:
-            randomQuestion = random.randint(0, 2)
+            randomQuestion = random.randint(0, 3)
     
-        degree = random.randint(1, 2)
+        degree = random.randint(1, 3)
         polynomial = self.generatePolynomial(degree)
         x = sp.symbols('x')
-        i = random.randint(-3, 3)
+        i = random.randint(-2, 2)
         
         if randomQuestion == 0:
             self.questionText = f"Urči hodnotu první derivace v bodě x = {i}"
@@ -60,11 +60,16 @@ class DerivativeQuestionGenerator(Question):
             self.questionLatex = sp.latex(polynomial)
             self.answer = sp.diff(polynomial, x, 2).subs(x, i)
         
-        else:
+        elif randomQuestion == 2:
             self.questionText = f"Urči hodnotu třetí derivace v bodě x = {i}"
             self.questionLatex = sp.latex(polynomial)
             self.answer = sp.diff(polynomial, x, 3).subs(x, i)
         
+        else:
+            self.questionText = f"Urči hodnotu čtvrté derivace v bodě x = {i}"
+            self.questionLatex = sp.latex(polynomial)
+            self.answer = sp.diff(polynomial, x, 4).subs(x, i)
+            
         return self
 
 

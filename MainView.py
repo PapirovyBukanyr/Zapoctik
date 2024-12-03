@@ -54,7 +54,7 @@ class MainView(QWidget):
         title = QLabel("Select a Game to Play")
         layout.addWidget(title)
 
-        games = ["Šachy♛", "Dáma𖣯", "Piškvorky❌⭕", "Chess track game 🔄❌⭕", "Matematická hra🔢", "Miny💣", "Šachy s mlhou války☁️", "Dáma s mlhou války☁️", "Hledání krtka🐀"]
+        games = ["Šachy♛", "Dáma𖣯", "Piškvorky 3x3 ❌⭕", "Connect four ❌⭕", "Matematická hra🔢", "Miny💣", "Šachy s mlhou války☁️", "Dáma s mlhou války☁️", "Hledání krtka🐀"]
 
         for game in games:
             button = QPushButton(game)
@@ -81,11 +81,16 @@ class MainView(QWidget):
                 self.gameWindow.show()
                 self.showMinimized()
                 
-            case "Piškvorky❌⭕":
+            case "Piškvorky 3x3 ❌⭕":
                 self.gameWindow = GameView(TicTacToe())
                 self.gameWindow.show()
                 self.showMinimized()
                 
+            case "Connect four ❌⭕":
+                self.gameWindow = GameView(ConnectFour())
+                self.gameWindow.show()
+                self.showMinimized()
+
             case "Chess track game 🔄❌⭕":
                 self.gameWindow = GameView(ChessTrackGame())
                 self.gameWindow.show()

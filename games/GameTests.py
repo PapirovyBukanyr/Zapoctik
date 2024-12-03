@@ -18,6 +18,7 @@ class GameTests(unittest.TestCase):
         ("CheckersWithFogOfWar", CheckersWithFogOfWar),
         ("Člověče nezlob se", HumanDoNotWorry) ,   
         ("Filipova výzva", ChallengeAccepted),
+        ("Connect four", ConnectFour),
         ("Chess track game", ChessTrackGame)  
     ]
     """list: Seznam všech tříd her
@@ -37,6 +38,7 @@ class GameTests(unittest.TestCase):
         self.assertIsNotNone(game.getBoard(Colors.BLACK))
         self.assertNotEqual(game.getBoard(Colors.WHITE), [])
         self.assertNotEqual(game.getBoard(Colors.BLACK), [])
+        
 
 
     @parameterized.expand([
@@ -111,6 +113,7 @@ class GameTests(unittest.TestCase):
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [7, 6]),
         ("Mines", Mines, [0, 0], None, [1, 1]),
         ("Filipova výzva", ChallengeAccepted, [0, 0], None, [0, 0]),
+        ("Connect four", ConnectFour, [0, 0], None, [0, 0]),
         ("Chess track game", ChessTrackGame, [0, 0], None, [1, 1])
     ])
     def testMakeMove(self, name, game_class, choose_position, color, move_position):
@@ -130,6 +133,7 @@ class GameTests(unittest.TestCase):
             
         self.assertTrue(game.makeMove(move_position, color))
         
+        
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [-1, -1]),
         ("Chess with fog of war", ChessWithFogOfWar, [6, 0], Colors.WHITE, [-1, -1]),
@@ -138,7 +142,8 @@ class GameTests(unittest.TestCase):
         ("TicTacToe", TicTacToe, [-1, -1], None, [-1, -1]),
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [8, 8]),
         ("Mines", Mines, [0, 0], None, [-1, -1]),
-        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [-1, -1])
+        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [-1, -1]),
+        ("Connect four", ConnectFour, [0, 0], None, [-1, -1])
     ])
     def testMakeWrongMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb nelze provést

@@ -14,7 +14,7 @@ class MatrixQuestionGenerator(Question):
         self.numberOfQuestions = 4
      
     
-    def generateRegularMatrix(self, n = random.randint(2, 4)):
+    def generateRegularMatrix(self, n = random.randint(1, 3)):
         """Generování regulární matice
         
         Args:
@@ -26,7 +26,7 @@ class MatrixQuestionGenerator(Question):
         matrix = np.zeros((n,n))
         
         while self.calculateDeterminant(matrix) == 0:
-            matrix = np.random.randint(1, 10, (n, n))
+            matrix = np.random.randint(-3, 3, (n, n))
             
         return matrix
     
@@ -127,7 +127,6 @@ class MatrixQuestionGenerator(Question):
         matice = self.generateRegularMatrix()
         
         if randomQuestion == 0:
-            matice = self.generateRegularMatrix(2)
             self.questionText ="Vypočti determinant matice: " 
             self.questionLatex = self.getLatexMatrix(matice)
             self.answer =self.calculateDeterminant(matice)
@@ -143,10 +142,9 @@ class MatrixQuestionGenerator(Question):
             self.answer =self.calculateRank(matice)
             
         else:
-            matice = self.generateRegularMatrix(2)
             self.questionText ="Vypočti součet vlastních čísel matice: " 
             self.questionLatex = self.getLatexMatrix(matice)
-            self.answer = self.calculateEigenvalues(matice)
+            self.answer = self.calculateEigenvalues(matice).real
             
         return self
             
