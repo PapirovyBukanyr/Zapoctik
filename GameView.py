@@ -22,7 +22,6 @@ class ClickableLabel(QLabel):
         super().__init__(*args, **kwargs)
         self.row = row
         self.col = col
-        self.isHighlighted = False
 
     def mousePressEvent(self, event):
         """Metoda, která se zavolá při kliknutí na dané políčko
@@ -145,25 +144,12 @@ class GameView(QWidget):
             col (int): sloupec
             button (string): tlačítko, které bylo stisknuto
         """
-        if self.answered:
-            if button == "right":
-                if isinstance(self.game, Mines):
-                    self.game.placeFlag([row, col], self.player)
-                    self.update_board()
-                    
-                    if self.game.checkEnd() != None:
-                        self.game_ended(self.game.checkEnd())
-                        
-                    self.player = self.player.changeColor()
-                    self.answered = False
-                    self.show_question()
-                    
-            if button == "left":
-                if self.selectedPiece == False and (isinstance(self.game, Checkers) or isinstance(self.game, Chess) or isinstance(self.game, MathGame) or isinstance(self.game, HumanDoNotWorry)):
+        if self.answered:                
+                if self.selectedPiece == False and (isinstance(self.game, Checkers) or isinstance(self.game, Chess) or isinstance(self.game, MathGame)):
                     self.choose_piece(row, col)
                 
                 else:
-                    self.make_move(row, col)
+                    self.make_move(row, col, False if button == "left" else True)
         
         else:
             self.show_question()
@@ -192,14 +178,14 @@ class GameView(QWidget):
         self.selectedPiece = True
         
         
-    def make_move(self, row, col):
+    def make_move(self, row, col, rightClick = False):
         """Funkce pro provedení tahu
         
         Args:
             row (int): řádek
             col (int): sloupec
         """
-        result = self.game.makeMove([row, col], self.player)
+        result = self.game.makeMove([row, col], self.player, rightClick)
         
         if result == "Promote":
             self.promote_pawn()

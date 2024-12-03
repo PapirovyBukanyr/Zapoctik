@@ -8,33 +8,15 @@ class GameTests(unittest.TestCase):
     """
     
     
-    __allClasses = [
-        ("Chess", Chess),
-        ("Checkers", Checkers),
-        ("TicTacToe", TicTacToe),
-        ("MathGame", MathGame),
-        ("Mines", Mines),
-        ("ChessWithFogOfWar", ChessWithFogOfWar),
-        ("CheckersWithFogOfWar", CheckersWithFogOfWar),
-        ("Filipova výzva", ChallengeAccepted),
-        ("Chess track game", ChessTrackGame),
-        ("Člověče nezlob se", HumanDoNotWorry),
-        ("Pexeso", Pexeso),    
-        ("Connect four", ConnectFour) 
-    ]
-    """list: Seznam všech tříd her
-    """
-    
-    
-    @parameterized.expand(__allClasses)
-    def testInitialBoard(self, name, game_class):
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testInitialBoard(self, game):
         """Testuje, zda se vytvoří hrací pole
         
         Args:
             name (string): jméno hry
             game_class (game): třída hry
         """
-        game = game_class()
+        game = game.game
         self.assertIsNotNone(game.getBoard(Colors.WHITE))
         self.assertIsNotNone(game.getBoard(Colors.BLACK))
         self.assertNotEqual(game.getBoard(Colors.WHITE), [])
@@ -132,7 +114,7 @@ class GameTests(unittest.TestCase):
         if choose_position and color:
             game.choosePiece(choose_position, color)
             
-        self.assertTrue(game.makeMove(move_position, color))
+        self.assertTrue(game.makeMove(move_position, color, False))
         
         
     @parameterized.expand([
@@ -189,27 +171,27 @@ class GameTests(unittest.TestCase):
         self.assertFalse(game.makeMove(move_position, color))
         
 
-    @parameterized.expand(__allClasses)
-    def testCheckEnd(self, name, game_class):
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testCheckEnd(self, game):
         """Testuje, zda hra skončila
 
         Args:
             name (string): jméno hry
             game_class (game): třída hry
         """
-        game = game_class()
+        game = game.game
         self.assertIsNone(game.checkEnd())
         
     
-    @parameterized.expand(__allClasses)
-    def testSimulateFullGame(self, name, game_class):
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testSimulateFullGame(self, game):
         """Testuje, zda se hra zahraje do konce
 
         Args:
             name (string): jméno hry
             game_class (game): třída hry
         """
-        game = game_class()
+        game = game.game
         colorOnMove = Colors.WHITE
         counter = 0
         limit = 10000

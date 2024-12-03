@@ -52,7 +52,7 @@ class Chess:
       return []
 
 
-  def makeMove(self, playedMove, color = None):
+  def makeMove(self, playedMove, color = None, rightClick = False):
     """Provedení tahu hrace
 
     Args:
@@ -62,6 +62,8 @@ class Chess:
         bool: tah se zdařil nebo ne
         string: "Promote" pokud je potreba provest vylepseni pesaka
     """
+    if rightClick:
+      return False
     
     if self.__playedPiece is None:
       return False

@@ -51,7 +51,7 @@ class MathGame:
         return []
     
         
-    def makeMove(self, move, color = None):
+    def makeMove(self, move, color = None, rightClick = False):
         """Přesune figuru na jinou pozici
         
         Args:
@@ -62,6 +62,9 @@ class MathGame:
             bool: True, pokud se tah podařil, jinak False
             List of List of int: List možných tahů figury, pokud se dá pokračovat v pohybu
         """
+        if rightClick:
+            return False
+        
         if move is None:
             return False
         

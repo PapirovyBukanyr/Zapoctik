@@ -71,7 +71,7 @@ class Checkers:
             return []
         
     
-    def makeMove(self, index, color = None):
+    def makeMove(self, index, color = None, rightClick = False):
         """Funkce pro provedení tahu figurkou
         
         Args:
@@ -80,6 +80,8 @@ class Checkers:
         Returns:
             bool: True, pokud se tah podařil, jinak False
         """
+        if rightClick:
+            return False
         
         if self.__pieceToPlay == None:
             return False 

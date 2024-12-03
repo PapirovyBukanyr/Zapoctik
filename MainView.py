@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QSpacerItem, QSizePolicy
 from GameView import *
 from games import *
 from PyQt5.QtGui import QFontDatabase
@@ -12,7 +12,8 @@ class MainView(QWidget):
         """Konstruktor třídy
         """
         super().__init__()
-        self.setWindowTitle("Game Menu")
+        self.setWindowTitle("Zápočtík Games")
+        self.setFixedSize(400, 300)
         self.setStyleSheet("""
         QMainWindow {
             background-color: #FFFFFF;
@@ -40,6 +41,12 @@ class MainView(QWidget):
         QPushButton:pressed {
             background-color: #3399ff;
         }
+                           
+        QLabel#AppName {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
         """)
 
         # font_database = QFontDatabase()
@@ -49,86 +56,41 @@ class MainView(QWidget):
         # for font in available_fonts:
         #     print(font)
 
-        layout = QVBoxLayout()
+        main_layout = QVBoxLayout()
 
-        title = QLabel("Select a Game to Play")
-        layout.addWidget(title)
+        title = QLabel("Zápočtík Games")
+        title.setObjectName("AppName")  
+        title.setAlignment(Qt.AlignCenter)  
+        main_layout.addWidget(title)
 
-        games = ["Pexeso", "Šachy♛", "Dáma𖣯", "Piškvorky❌⭕", "Matematická hra🔢", "Miny💣", "Šachy s mlhou války☁️", "Dáma s mlhou války☁️", "Hledání krtka🐀", "Člověče, nezlob se🎲"]
-        games = ["Šachy♛", "Dáma𖣯", "Piškvorky 3x3 ❌⭕", "Connect four ❌⭕", "Matematická hra🔢", "Miny💣", "Šachy s mlhou války☁️", "Dáma s mlhou války☁️", "Hledání krtka🐀"]
+        spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        main_layout.addSpacerItem(spacer)
 
-        for game in games:
-            button = QPushButton(game)
-            button.clicked.connect(lambda checked, g=game: self.start_game(g))
-            layout.addWidget(button)
-
-        self.setLayout(layout)
-
-
-    def start_game(self, game_name):
-        """Spustí hru podle jména
+        grid_layout = QGridLayout()
         
-        Args:
-            game_name (string): název hry
-        """
-        match(game_name):
-            case "Šachy♛":
-                self.gameWindow = GameView(Chess())
-                self.gameWindow.show()
-                self.showMinimized()
-                
-            case "Dáma𖣯":
-                self.gameWindow = GameView(Checkers())
-                self.gameWindow.show()
-                self.showMinimized()
-                
-            case "Piškvorky 3x3 ❌⭕":
-                self.gameWindow = GameView(TicTacToe())
-                self.gameWindow.show()
-                self.showMinimized()
-                
-            case "Connect four ❌⭕":
-                self.gameWindow = GameView(ConnectFour())
-                self.gameWindow.show()
-                self.showMinimized()
+        games = ListOfGames.getListOfGames()
+        
+        for i, game in enumerate(games):
+            button = QPushButton(game.name)
+            button.clicked.connect(lambda checked, g=game: self.start_game(g))
+            tooltip = f"<H1>{game.name}</H1><H3 style='width: 200px;'>{game.description}</H3>"
+            button.setToolTip(tooltip)
+            grid_layout.addWidget(button, i // 2, i % 2) 
 
-            case "Chess track game 🔄❌⭕":
-                self.gameWindow = GameView(ChessTrackGame())
-                self.gameWindow.show()
-                self.showMinimized()
-                
-            case "Matematická hra🔢":
-                self.gameWindow = GameView(MathGame())
-                self.gameWindow.show()
-                self.showMinimized()
-                
-            case "Miny💣":
-                self.gameWindow = GameView(Mines())
-                self.gameWindow.show()
-                self.showMinimized()
-                
-            case "Šachy s mlhou války☁️":
-                self.gameWindow = GameView(ChessWithFogOfWar())
-                self.gameWindow.show()
-                self.showMinimized()
-                
-            case "Dáma s mlhou války☁️":
-                self.gameWindow = GameView(CheckersWithFogOfWar())
-                self.gameWindow.show()
-                self.showMinimized()
-                
-            case "Hledání krtka🐀":
-                self.gameWindow = GameView(ChallengeAccepted())
-                self.gameWindow.show()
-                self.showMinimized()
-                
-            case "Pexeso":
-                self.gameWindow = GameView(Pexeso())
-                self.gameWindow.show()
-                self.showMinimized()
-                
-            case "Člověče, nezlob se🎲":
-                self.gameWindow = GameView(HumanDoNotWorry())
-                self.gameWindow.show()
-                self.showMinimized()
-            
+        main_layout.addLayout(grid_layout)
+
+        spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        main_layout.addSpacerItem(spacer)
+
+        self.setLayout(main_layout)
+
+
+    def start_game(self, game):
+        """Spustí hru dle jména hry
+
+        Args:
+            game (Game): objekt Game, který obsahuje název hry a objekt hry
+        """
+        self.gameWindow = GameView(game.game)
+        self.gameWindow.show()
+        self.showMinimized()

@@ -31,7 +31,7 @@ class TicTacToe:
         return self.__board.getListOfBoard()
     
     
-    def makeMove(self, index, player = None):
+    def makeMove(self, index, player = None, rightClick = False):
         """Metoda na zahrání tahu
 
         Args:
@@ -41,6 +41,9 @@ class TicTacToe:
         Returns:
             Boolean: true pokud se tah podařil, jinak false
         """
+        if rightClick:
+            return False
+        
         row, col = index
         
         if row < 0 or row > 2 or col < 0 or col > 2:
