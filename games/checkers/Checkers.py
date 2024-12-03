@@ -14,15 +14,6 @@ class Checkers:
         self.__currentPlayer = Colors.WHITE
         self.__pieceToPlay = None
         self.__firstMove = True
-    
-    
-    def __str__(self):
-        """Vrátí název hry
-
-        Returns:
-            String: název hry
-        """
-        return "Dáma"
         
         
     def getBoard(self, color=None):
@@ -76,6 +67,8 @@ class Checkers:
         
         Args:
             index ([int,int]): pozice, kam chce hráč hrát
+            color (Enum Colors, optional): barva hráče na tahu. Výchozí nastavení je na pravidelném střídání.
+            rightClick (bool, optional): True, pokud se jedná o pravé tlačítko myši. Výchozí nastavení je False.
             
         Returns:
             bool: True, pokud se tah podařil, jinak False
@@ -133,6 +126,7 @@ class Checkers:
         self.__board = CheckersBoard()
         self.__currentPlayer = Colors.WHITE
         
+        
     def checkEnd(self):
         """Funkce pro kontrolu konce hry
         
@@ -173,6 +167,7 @@ class Checkers:
         
         return True
     
+    
     def possibleMoves(self, color):
         """Funkce pro získání možných tahů pro hráče, primárně pro rozšíření Fog Of War
         
@@ -193,6 +188,7 @@ class Checkers:
                 listOfMoves.append(piece.trackJumps(jump))
                 
         return listOfMoves
+    
     
     def __printToTerminal(self):
         """Funkce pro výpis stavu hry na terminál

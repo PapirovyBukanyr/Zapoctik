@@ -14,17 +14,11 @@ class MathGame:
         self.__firstTime = False
         
         
-    def __str__(self):
-        """Vrátí název hry
-
-        Returns:
-            String: název hry
-        """
-        return "Matematická hra"
-        
-        
     def getBoard(self, color=None):
         """Vrátí šachovnici ve formě dvourozměrného pole objektů Field
+        
+        Args:
+            color (Enum Colors, optional): Barva hráče. Defaults to None.
         
         Returns:
             list: dvourozměrné pole objektů Field
@@ -57,6 +51,7 @@ class MathGame:
         Args:
             move ([int,int]): nová pozice figury
             color (Enum Colors, optional): Barva figury. Defaults to None.
+            rightClick (bool, optional): True, pokud hráč klikl pravým tlačítkem myši, jina False. Defaults to False.
             
         Returns:
             bool: True, pokud se tah podařil, jinak False

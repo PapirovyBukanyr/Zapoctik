@@ -59,13 +59,6 @@ class Mines:
         
         return result
         
-    def __str__(self):
-        """Vrátí jméno hry
-        
-        Returns:
-            string: jméno hry
-        """
-        return "Miny"
     
     def checkEnd(self):
         """Zkontroluje, zda hra skončila
@@ -90,6 +83,7 @@ class Mines:
         else:
             return None
         
+        
     def placeFlag(self, position, color = Colors.WHITE):
         """Umístí vlajku na danou pozici
         
@@ -113,9 +107,13 @@ class Mines:
         self.__printToTerminal()
         
         return True
+    
         
     def getBoard(self, color=None):
         """Vrátí herní desku
+        
+        Args:
+            color (Enum Colors, optional): Barva, která je na tahu. Výchozí je None.
         
         Returns:
             list: herní deska

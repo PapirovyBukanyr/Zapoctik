@@ -11,15 +11,12 @@ class ConnectFour:
         self.board = ConnectFourBoard()
         self.player = Colors.WHITE
     
-    
-    def __str__(self):
-        """Vrátí název hry
-        """
-        return "ConnectFour"
-    
         
     def getBoard(self, color = None):
         """Vrací hrací desku
+        
+        Args:
+            color (Enum, optional): Barva hráče. Defaults to None.
         
         Returns:
             List of Struct: Hrací deska
@@ -33,6 +30,7 @@ class ConnectFour:
         Args:
             position ([int,int]): Pozice tahu
             color (Enum, optional): Barva hráče. Defaults to None.
+            rightClick (bool, optional): True, pokud se jedná o pravé tlačítko myši. Defaults to False.
         
         Returns:
             bool: True, pokud se tah podařil, jinak False

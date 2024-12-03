@@ -6,14 +6,11 @@ class ChessWithFogOfWar(Chess):
     """
     
     
-    def __str__(self):
-        """Vrací název hry
-        """
-        return "Šachy s mlhou války"
-    
-    
     def getBoard(self, color):
         """Vrací zakrytou šachovnici
+        
+        Args:   
+            color (Enum Colors): Barva hráče na tahu
 
         Returns:
             Array of Field: zakrytá šachovnice

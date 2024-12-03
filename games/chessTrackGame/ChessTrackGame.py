@@ -16,6 +16,9 @@ class ChessTrackGame():
     def getBoard(self, color = None):
         """Vrácení hrací desky.
         
+        Args:
+            color (Enum Colors): Barva hráče.
+        
         Returns:
             ChessTrackGameBoard: Hrací deska.
         """
@@ -28,6 +31,7 @@ class ChessTrackGame():
         Args:
             position ([int,int]]): Pozice, na kterou se má kámen umístit.
             color (Enum Colors): Barva kamene.
+            rightClick (bool): True, pokud se jedná o pravé tlačítko myši.
             
         Returns:
             bool: True, pokud je tah platný, jinak False.
@@ -48,6 +52,7 @@ class ChessTrackGame():
         
         return False
     
+    
     def checkEnd(self):
         """Kontrola konce hry.
         
@@ -55,6 +60,7 @@ class ChessTrackGame():
             Enum EndGame: Výsledek hry.
         """
         return self.board.checkEnd()
+    
     
     def __printToTerminal(self):
         """Vypsání hrací desky do terminálu.

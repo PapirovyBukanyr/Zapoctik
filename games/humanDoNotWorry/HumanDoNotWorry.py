@@ -17,19 +17,13 @@ class HumanDoNotWorry:
         self.selectedPiece = None
         self.rolled = False
         self.passTurn = False
-      
-        
-    def __str__(self):
-        """Vrátí textovou reprezentaci instance třídy HumanDoNotWorry.
-        
-        Returns:
-            str: Textová reprezentace instance třídy HumanDoNotWorry
-        """
-        return "Člověče, nezlob se"
           
         
     def getBoard(self, color = None):
         """Metoda vrátí hrací desku.
+        
+        Args:
+            color (Enum Colors, optional): Barva hráče na tahu. Defaults to None.
         
         Returns:
             List of list of field: Hrací deska
@@ -37,18 +31,16 @@ class HumanDoNotWorry:
         return self.board.getListOfBoard()
     
     
-    def choosePiece(self, position, color = None, rightClick = False):
+    def choosePiece(self, position, color = None):
         """Metoda zvolí figurku, kterou se bude hrát.
         
         Args:
             position (int): Pozice figurky
+            color (Enum Colors, optional): Barva hráče. Defaults to None.
         
         Returns:
             bool: True, pokud se podařilo zvolit figurku, jinak False
-        """
-        if rightClick:
-            return False
-        
+        """        
         if color is not None:
             self.currentPlayer = color
             
@@ -91,15 +83,21 @@ class HumanDoNotWorry:
         return []
     
     
-    def makeMove(self, position, color = None):
+    def makeMove(self, position, color = None, rightClick = False):
         """Metoda provede tah figurkou.
         
         Args:
             position ([int,int]): Pozice figurky
+            color (Enum Colors, optional): Barva hráče. Defaults to None.
+            rightClick (bool, optional): True, pokud se jedná o pravé tlačítko myši. Defaults to False.
         
         Returns:
             bool: True, pokud se podařilo provést tah, jinak False
         """
+        if rightClick:
+            return False
+        
+        
         if color is not None:
             self.currentPlayer = color
             

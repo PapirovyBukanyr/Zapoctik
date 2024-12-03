@@ -6,14 +6,11 @@ class CheckersWithFogOfWar(Checkers):
     """
     
     
-    def __str__(self):
-        """Vrací název hry
-        """
-        return "Dáma s mlhou války"
-    
-    
     def getBoard(self, color):
         """Vrací zakrytou šachovnici
+        
+        Args:
+            color (Enum Colors): Barva hráče na tahu
 
         Returns:
             Array of Field: zakrytá šachovnice

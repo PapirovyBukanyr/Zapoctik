@@ -15,15 +15,6 @@ class Pexeso:
         self.__found = False
         
         
-    def __str__(self):
-        """Vrátí název hry
-        
-        Returns:
-            string: název hry
-        """
-        return "Pexeso"
-        
-        
     def getBoard(self, color):
         """ Vrátí hrací plochu
         
@@ -42,6 +33,7 @@ class Pexeso:
         Args:
             position ([int, int]): pozice, kterou chce hráč otočit
             color (Enum Colors): barva na tahu
+            rightClick (bool): True, pokud hráč klikl pravým tlačítkem myši, jinak False
             
         Returns:
             bool: úspěšnost tahu
