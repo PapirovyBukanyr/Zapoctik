@@ -2,7 +2,7 @@ import unittest
 from parameterized import parameterized
 from games import *
 import random
-
+ 
 class GameTests(unittest.TestCase):
     """Testy na hry
     """
