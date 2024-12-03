@@ -54,9 +54,13 @@ class MathQuestion(QWidget):
         """)
 
         if color == Colors.WHITE:
-            self.setWindowTitle("Otázka pro prvního hráče")
-        else:
-            self.setWindowTitle("Otázka pro druhého hráče")
+            self.setWindowTitle("Otázka pro bílého hráče")
+        elif color == Colors.BLACK:
+            self.setWindowTitle("Otázka pro černého hráče")
+        elif color == Colors.RED:
+            self.setWindowTitle("Otázka pro červeného hráče")
+        elif color == Colors.GREEN:
+            self.setWindowTitle("Otázka pro zeleného hráče")
             
         self.setGeometry(100, 100, 300, 150)
 
@@ -122,10 +126,16 @@ class MathQuestion(QWidget):
             self.callback(True)
             
             if self.color == Colors.WHITE:
-                msg_box.setText("Odpověď je správná, první hráč může táhnout")
+                msg_box.setText("Odpověď je správná, bílý hráč může táhnout")
                 
-            else:
-                msg_box.setText("Odpověď je správná, druhý hráč může táhnout")
+            elif self.color == Colors.BLACK:
+                msg_box.setText("Odpověď je správná, černý hráč může táhnout")
+                
+            elif self.color == Colors.RED:
+                msg_box.setText("Odpověď je správná, červený hráč může táhnout")
+                
+            elif self.color == Colors.GREEN:
+                msg_box.setText("Odpověď je správná, zelený hráč může táhnout")
                 
         else:
             self.callback(False)

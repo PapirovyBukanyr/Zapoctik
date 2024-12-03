@@ -22,10 +22,10 @@ class AnalyticGeometryQuestionGenerator(Question):
         Returns:
             AnalyticGeometryQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovědí
         """
-        a = np.random.randint(1, 10)
-        b = np.random.randint(1, 10)
-        c = np.random.randint(1, 10)
-        d = np.random.randint(1, 10)
+        a = np.random.randint(1, 5)
+        b = np.random.randint(1, 5)
+        c = np.random.randint(1, 5)
+        d = np.random.randint(1, 5)
         
         self.questionText = "Urči průsečík přímek, odpověď zadej ve formátu (x,y):"
         self.questionLatex = f"y = {a}x + {b}\\\\newline y = {c}x + {d}"

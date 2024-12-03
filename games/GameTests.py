@@ -2,7 +2,7 @@ import unittest
 from parameterized import parameterized
 from games import *
 import random
-
+ 
 class GameTests(unittest.TestCase):
     """Testy na hry
     """
@@ -21,6 +21,8 @@ class GameTests(unittest.TestCase):
         self.assertIsNotNone(game.getBoard(Colors.BLACK))
         self.assertNotEqual(game.getBoard(Colors.WHITE), [])
         self.assertNotEqual(game.getBoard(Colors.BLACK), [])
+        
+
 
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE),
@@ -94,6 +96,7 @@ class GameTests(unittest.TestCase):
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [7, 6]),
         ("Mines", Mines, [0, 0], None, [1, 1]),
         ("Filipova výzva", ChallengeAccepted, [0, 0], None, [0, 0]),
+        ("Connect four", ConnectFour, [0, 0], None, [0, 0]),
         ("Chess track game", ChessTrackGame, [0, 0], None, [1, 1])
     ])
     def testMakeMove(self, name, game_class, choose_position, color, move_position):
@@ -113,6 +116,7 @@ class GameTests(unittest.TestCase):
             
         self.assertTrue(game.makeMove(move_position, color, False))
         
+        
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [-1, -1]),
         ("Chess with fog of war", ChessWithFogOfWar, [6, 0], Colors.WHITE, [-1, -1]),
@@ -121,7 +125,8 @@ class GameTests(unittest.TestCase):
         ("TicTacToe", TicTacToe, [-1, -1], None, [-1, -1]),
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [8, 8]),
         ("Mines", Mines, [0, 0], None, [-1, -1]),
-        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [-1, -1])
+        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [-1, -1]),
+        ("Connect four", ConnectFour, [0, 0], None, [-1, -1])
     ])
     def testMakeWrongMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb nelze provést
@@ -193,7 +198,7 @@ class GameTests(unittest.TestCase):
 
         while game.checkEnd() is None and counter < limit:
             move = []
-
+            
             if self.isGameWithChoosingPiece(game):
                 while move == []:
                     move = game.choosePiece([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
@@ -220,9 +225,14 @@ class GameTests(unittest.TestCase):
                 
                 else:
                     newMove = game.makeMove([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
-
-            colorOnMove = colorOnMove.changeColor()
+           
             counter += 1
+            
+            if isinstance(game, HumanDoNotWorry):
+                colorOnMove = colorOnMove.changeColorFour()
+            else:
+                colorOnMove = colorOnMove.changeColor()
+            
             
         print(game.checkEnd())
         self.assertGreater(limit, counter)
@@ -237,5 +247,5 @@ class GameTests(unittest.TestCase):
         Returns:
             bool: True, pokud hra vyžaduje výběr figurky
         """
-        return isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame) or isinstance(game, ChessWithFogOfWar) or isinstance(game, CheckersWithFogOfWar)
+        return isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame) or isinstance(game, ChessWithFogOfWar) or isinstance(game, CheckersWithFogOfWar) or isinstance(game, HumanDoNotWorry)
 

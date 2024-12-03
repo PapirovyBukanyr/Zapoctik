@@ -19,7 +19,8 @@ class QuestionTests(unittest.TestCase):
         ("Linear equation system", LinearEquationSystemQuestionGenerator),
         ("Matrix", MatrixQuestionGenerator),
         ("Ordinal numbers", OrdinalNumberQuestionGenerator),
-        ("Set", SetQuestionGenerator)
+        ("Set", SetQuestionGenerator),
+        ("Regular language", RegularLanguageQuestionGenerator)
     ]
     """list: Seznam všech tříd generátorů otázek
     """

@@ -9,4 +9,6 @@ from .CheckersWithFogOfWar import CheckersWithFogOfWar
 from .ChallengeAccepted import ChallengeAccepted
 from .ListOfGames import ListOfGames
 from .chessTrackGame import ChessTrackGame
-
+from .connectFour import ConnectFour
+from .pexeso import Pexeso
+from .humanDoNotWorry import HumanDoNotWorry
