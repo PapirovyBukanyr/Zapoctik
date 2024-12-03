@@ -12,6 +12,7 @@ class Pexeso:
         self.__firstMove = True
         self.score = 0
         self.__viewMode = False
+        self.__found = False
         
         
     def __str__(self):
@@ -35,7 +36,7 @@ class Pexeso:
         return self.__board.getListOfBoard(color)
         
         
-    def makeMove(self, position, color = Colors.WHITE):
+    def makeMove(self, position, color = Colors.WHITE, rightClick = False):
         """ Provede tah
         
         Args:
@@ -45,17 +46,19 @@ class Pexeso:
         Returns:
             bool: úspěšnost tahu
         """
-        self.__printToTerminal()
+        if rightClick:
+            return False
         
         if self.__viewMode:
             self.__viewMode = False
             self.__board.hideCards()
-            return True
+            return not self.__found
         
         if position[0] < 0 or position[0] >= len(self.__board.board) or position[1] < 0 or position[1] >= len(self.__board.board[0]):
             return False
         
         if self.__firstMove:
+            self.__found = False
             if self.__board.isCompleted(position):
                 return False
             
@@ -69,6 +72,7 @@ class Pexeso:
         self.__firstMove = True
         
         if self.__board.makeMove(position):
+            self.__found = True
             self.score += 1 if color == Colors.WHITE else -1
             return True
         

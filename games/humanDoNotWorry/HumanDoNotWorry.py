@@ -37,7 +37,7 @@ class HumanDoNotWorry:
         return self.board.getListOfBoard()
     
     
-    def choosePiece(self, position, color = None):
+    def choosePiece(self, position, color = None, rightClick = False):
         """Metoda zvolí figurku, kterou se bude hrát.
         
         Args:
@@ -46,6 +46,9 @@ class HumanDoNotWorry:
         Returns:
             bool: True, pokud se podařilo zvolit figurku, jinak False
         """
+        if rightClick:
+            return False
+        
         if color is not None:
             self.currentPlayer = color
             

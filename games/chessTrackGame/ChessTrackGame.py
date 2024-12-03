@@ -22,7 +22,7 @@ class ChessTrackGame():
         return self.board.getListOfBoard()
         
         
-    def makeMove(self, position, color = None): 
+    def makeMove(self, position, color = None, rightClick = False): 
         """Provedení tahu.
         
         Args:

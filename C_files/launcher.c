@@ -69,7 +69,12 @@ int main() {
 
     printf("Spoustim skript main.py...\n");
     if (system("python main.py") != 0) {
-        printf("Chyba pri spousteni skriptu main.py!\n");
+
+        printf("\nNeco se pokazilo...\n");
+        printf("...muze za to Marek!\n\n");
+        printf("Stiskni libovolnou klavesu (enter) pro spusteni genocidy souboru.\n");
+        getchar();
+
         call_pyc_killer_3000();
         return 2;
     }
@@ -82,7 +87,7 @@ int main() {
 
     printf("\nPro dnesek jsem s tvym vykonem spokojen, takze zadne soubory nesmazu...\n");
     printf("...ale zitra to bude jina!\n\n");
-    printf("Stiskni libovolnou klavesu pro ukonceni.\n");
+    printf("Stiskni libovolnou klavesu (enter) pro ukonceni.\n");
     getchar();
 
     return 0; 

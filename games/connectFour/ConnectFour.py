@@ -27,7 +27,7 @@ class ConnectFour:
         return self.board.getListOfBoard()
     
     
-    def makeMove(self, position, color = None):
+    def makeMove(self, position, color = None, rightClick = False):
         """Provedení tahu
         
         Args:
@@ -37,7 +37,11 @@ class ConnectFour:
         Returns:
             bool: True, pokud se tah podařil, jinak False
         """
+        if rightClick:
+            return False
+        
         position = [position[1], position[0]]
+        
         if position[0] < 0 or position[0] > 6 or position[1] < 0 or position[1] > 5:
             return False
         
