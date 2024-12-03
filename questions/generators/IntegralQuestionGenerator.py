@@ -1,4 +1,5 @@
 import numpy as np
+import sympy as sp
 from ..Question import Question
 
 class IntegralQuestionGenerator(Question):
@@ -10,7 +11,7 @@ class IntegralQuestionGenerator(Question):
         """Konstruktor třídy IntegralQuestionGenerator
         """
         super().__init__()
-        self.numberOfQuestions = 1
+        self.numberOfQuestions = 3
     
     
     def generateQuestion(self, n = None):
@@ -22,16 +23,47 @@ class IntegralQuestionGenerator(Question):
         Returns:
             IntegralQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovědí
         """
-        a = np.random.randint(1, 5)
-        b = np.random.randint(5, 10)
-        c = np.random.randint(1, 10)
-        d = np.random.randint(1, 4)
+        if n is not None and n in range(0, 3):
+            randomQuestion = n
+        else:
+            randomQuestion = np.random.randint(0, 2)
+            
+        a = np.random.randint(1, 3)
+        b = np.random.randint(4, 6)
+        c = np.random.randint(1, 5)
+        d = np.random.randint(-2, 2)
+        x = sp.symbols('x')
         
-        self.questionText = "Urči hodnotu výrazu:"
-        self.questionLatex = f"\\\\int_{{{a}}}^{{{b}}} {c}x^{d} dx"
-        upperIntegralLimit = (c/(d+1))*b**(d+1)
-        lowerIntegralLimit = (c/(d+1))*a**(d+1)
-        
-        self.answer = upperIntegralLimit - lowerIntegralLimit
+        if randomQuestion == 0:
+            function = c * x**d
+            integral = sp.integrate(function, (x, a, b))
+
+            self.questionText = "Urči hodnotu výrazu:"
+            self.questionLatex = sp.latex(sp.Integral(function, (x, a, b)))
+
+            self.questionLatex = self.questionLatex.replace("\\limits", "")
+            self.questionLatex = self.questionLatex.replace("\\", "\\\\")
+            
+        elif randomQuestion == 1:
+            function = c * sp.cos(sp.pi*d*x/2)
+            integral = sp.integrate(function, (x, a, b))
+            
+            self.questionText = "Urči hodnotu výrazu:"
+            self.questionLatex = sp.latex(sp.Integral(function, (x, a, b)))
+            
+            self.questionLatex = self.questionLatex.replace("\\limits", "")
+            self.questionLatex = self.questionLatex.replace("\\", "\\\\")
+            
+        else:
+            function = c * sp.sin(sp.pi*d*x/2)
+            integral = sp.integrate(function, (x, a, b))
+            
+            self.questionText = "Urči hodnotu výrazu:"
+            self.questionLatex = sp.latex(sp.Integral(function, (x, a, b)))
+            
+            self.questionLatex = self.questionLatex.replace("\\limits", "")
+            self.questionLatex = self.questionLatex.replace("\\", "\\\\")
+            
+        self.answer = float(integral.evalf())
         
         return self

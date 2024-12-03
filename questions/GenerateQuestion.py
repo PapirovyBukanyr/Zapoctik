@@ -16,7 +16,7 @@ class GenerateQuestion (Question):
         """Konstruktor třídy GenerateQuestion
         """
         super().__init__()
-        self.numberOfQuestions = 10
+        self.numberOfQuestions = 11
         
         
     def generateQuestion(self, n = None):	
@@ -59,6 +59,9 @@ class GenerateQuestion (Question):
             
         elif randomQuestion == 8: # Generování otázky na kardinální čísla
             question = KardinalNumberQuestionGenerator()
+            
+        elif randomQuestion == 9: # Generování otázky na regulární jazyky
+            question = RegularLanguageQuestionGenerator()
             
         else: # Generování otázky na analytickou geometrii
             question = AnalyticGeometryQuestionGenerator()
