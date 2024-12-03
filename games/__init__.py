@@ -7,8 +7,5 @@ from .mathGame import MathGame
 from .ChessWithFogOfWar import ChessWithFogOfWar
 from .CheckersWithFogOfWar import CheckersWithFogOfWar
 from .ChallengeAccepted import ChallengeAccepted
-<<<<<<< HEAD
 from .humanDoNotWorry import HumanDoNotWorry
-=======
 from .chessTrackGame import ChessTrackGame
->>>>>>> dev
