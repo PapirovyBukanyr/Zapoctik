@@ -2,7 +2,7 @@ import unittest
 from parameterized import parameterized
 from games import *
 import random
-
+ 
 class GameTests(unittest.TestCase):
     """Testy na hry
     """
@@ -16,10 +16,11 @@ class GameTests(unittest.TestCase):
         ("Mines", Mines),
         ("ChessWithFogOfWar", ChessWithFogOfWar),
         ("CheckersWithFogOfWar", CheckersWithFogOfWar),
-        ("Člověče nezlob se", HumanDoNotWorry) ,   
         ("Filipova výzva", ChallengeAccepted),
-        ("Connect four", ConnectFour),
-        ("Chess track game", ChessTrackGame)  
+        ("Chess track game", ChessTrackGame),
+        ("Člověče nezlob se", HumanDoNotWorry),
+        ("Pexeso", Pexeso),    
+        ("Connect four", ConnectFour) 
     ]
     """list: Seznam všech tříd her
     """
@@ -211,7 +212,7 @@ class GameTests(unittest.TestCase):
         game = game_class()
         colorOnMove = Colors.WHITE
         counter = 0
-        limit = 1000
+        limit = 10000
 
         while game.checkEnd() is None and counter < limit:
             move = []
