@@ -17,7 +17,8 @@ class GameTests(unittest.TestCase):
         ("ChessWithFogOfWar", ChessWithFogOfWar),
         ("CheckersWithFogOfWar", CheckersWithFogOfWar),
         ("Filipova výzva", ChallengeAccepted),
-        ("Connect four", ConnectFour)
+        ("Connect four", ConnectFour),
+        ("Chess track game", ChessTrackGame)  
     ]
     """list: Seznam všech tříd her
     """
@@ -110,7 +111,8 @@ class GameTests(unittest.TestCase):
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [7, 6]),
         ("Mines", Mines, [0, 0], None, [1, 1]),
         ("Filipova výzva", ChallengeAccepted, [0, 0], None, [0, 0]),
-        ("Connect four", ConnectFour, [0, 0], None, [0, 0])
+        ("Connect four", ConnectFour, [0, 0], None, [0, 0]),
+        ("Chess track game", ChessTrackGame, [0, 0], None, [1, 1])
     ])
     def testMakeMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb provede

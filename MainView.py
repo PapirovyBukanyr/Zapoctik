@@ -90,6 +90,11 @@ class MainView(QWidget):
                 self.gameWindow = GameView(ConnectFour())
                 self.gameWindow.show()
                 self.showMinimized()
+
+            case "Chess track game 🔄❌⭕":
+                self.gameWindow = GameView(ChessTrackGame())
+                self.gameWindow.show()
+                self.showMinimized()
                 
             case "Matematická hra🔢":
                 self.gameWindow = GameView(MathGame())
