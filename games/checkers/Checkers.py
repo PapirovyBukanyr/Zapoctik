@@ -190,6 +190,15 @@ class Checkers:
         return listOfMoves
     
     
+    def killPiece(self, piecePosition):
+        """Funkce pro odstranění figurky z hrací desky
+        
+        Args:
+            piecePosition ([int, int]): pozice figurky, která má být odstraněna
+        """
+        self.__board[piecePosition[0], piecePosition[1]] = None
+    
+    
     def __printToTerminal(self):
         """Funkce pro výpis stavu hry na terminál
         """

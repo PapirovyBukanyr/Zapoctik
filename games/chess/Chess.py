@@ -199,6 +199,15 @@ class Chess:
       
     return None
   
+  
+  def killPiece(self, piecePosition):
+    """Vyhození figurky z hrací desky
+    
+    Args:
+        piecePosition ([int, int]): pozice figurky, kterou chceme vyhodit
+    """
+    self.__board[piecePosition] = None
+  
       
   def __printToTerminal(self):  
     """Vytiskne hrací desku do konzole
