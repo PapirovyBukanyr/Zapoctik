@@ -1,7 +1,6 @@
 from ..Enums import *
 from ..Board import Board
 from .pieces import *
-import random as rand
 
 
 class HumanDoNotWorryBoard (Board):

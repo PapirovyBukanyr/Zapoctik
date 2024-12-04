@@ -1,5 +1,5 @@
-from .checkers import Checkers
-from .Enums import *
+from .Checkers import Checkers
+from ..Enums import *
 
 class CheckersWithFogOfWar(Checkers):
     """Třída CheckersWithFogOfWar slouží k reprezentaci hry Dáma s mlhou války.

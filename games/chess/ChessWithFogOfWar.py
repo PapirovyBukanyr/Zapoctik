@@ -1,5 +1,5 @@
-from .chess import Chess
-from .Enums import *
+from .Chess import Chess
+from ..Enums import *
 
 class ChessWithFogOfWar(Chess):
     """Třída ChessWithFogOfWar slouží k reprezentaci hry Šachy s mlhou války.
