@@ -6,6 +6,13 @@ class ChessMinesWithFogOfWar(ChessMines):
     """
     
     
+    def __init__(self):
+        """Konstruktor třídy ChessMinesWithFogOfWar
+        """
+        super().__init__()
+        self.fog = True
+    
+    
     def getBoard(self, color=None):
         """Vrátí hrací desku.
         """

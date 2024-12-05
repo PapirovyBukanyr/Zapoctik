@@ -1,7 +1,8 @@
 from ..Enums import Colors 
 from .TicTacToeBoard import TicTacToeBoard
+from ..GameTemplate import GameTemplate
 
-class TicTacToe:    
+class TicTacToe (GameTemplate):    
     """Třída reprezentující hru Piškvorky
     """
     
@@ -9,6 +10,7 @@ class TicTacToe:
     def __init__(self):
         """Inicializace hry
         """
+        super().__init__()
         self.__board = TicTacToeBoard()
         self.__current_player = Colors.BLACK
         

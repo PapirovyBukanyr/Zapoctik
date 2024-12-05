@@ -6,6 +6,13 @@ class ChessWithFogOfWar(Chess):
     """
     
     
+    def __init__(self):
+        """Konstruktor třídy ChessWithFogOfWar
+        """
+        super().__init__()
+        self.fog = True
+    
+    
     def getBoard(self, color):
         """Vrací zakrytou šachovnici
         

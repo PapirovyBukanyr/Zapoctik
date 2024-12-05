@@ -1,6 +1,7 @@
 from .MathGameBoard import *
+from ..GameTemplate import GameTemplate
 
-class MathGame:
+class MathGame (GameTemplate):
     """Třída reprezentující hru MathGame
     """
     
@@ -8,6 +9,7 @@ class MathGame:
     def __init__(self):
         """Konstruktor třídy matematické hry. Vytvoří novou hru a nastaví počáteční hodnoty.
         """
+        super().__init__()
         self.__score = 0
         self.__board = MathGameBoard()
         self.__onTurn = Colors.WHITE
