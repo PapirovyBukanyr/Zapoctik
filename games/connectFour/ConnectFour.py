@@ -1,6 +1,7 @@
 from .ConnectFourBoard import *
+from ..GameTemplate import GameTemplate
 
-class ConnectFour:
+class ConnectFour (GameTemplate):
     """ Hrací deska pro hru ConnectFour 
     """
     
@@ -8,6 +9,7 @@ class ConnectFour:
     def __init__(self):
         """Inicializace hry ConnectFour
         """
+        super().__init__()
         self.board = ConnectFourBoard()
         self.player = Colors.WHITE
     

@@ -1,13 +1,13 @@
-from .chess import Chess
-from .Enums import *
+from .CheckersMines import CheckersMines
+from ..Enums import *
 
-class ChessWithFogOfWar(Chess):
-    """Třída ChessWithFogOfWar slouží k reprezentaci hry Šachy s mlhou války.
+class CheckersMinesWithFogOfWar(CheckersMines):
+    """Třída CheckersWithFogOfWar slouží k reprezentaci hry Dáma s mlhou války.
     """
     
     
     def __init__(self):
-        """Konstruktor třídy ChessWithFogOfWar
+        """Konstruktor třídy CheckersWithFogOfWar
         """
         super().__init__()
         self.fog = True
@@ -16,7 +16,7 @@ class ChessWithFogOfWar(Chess):
     def getBoard(self, color):
         """Vrací zakrytou šachovnici
         
-        Args:   
+        Args:
             color (Enum Colors): Barva hráče na tahu
 
         Returns:
@@ -28,7 +28,8 @@ class ChessWithFogOfWar(Chess):
         for i in range(len(board)):
             for j in range(len(board)):
                 if not possibleMoves.__contains__([i, j]):
-                    if board[i][j] == None or board[i][j].color != color:
+                    if board[i][j] == None or (board[i][j].color != color and board[i][j].piece != Figures.EXPLOSION):
                         board[i][j] = Field(Colors.WHITE, Figures.SHADOW)
+    
         return board
-        
+    

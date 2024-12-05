@@ -1,7 +1,8 @@
 from .MinesBoard import *
 import random
+from ..GameTemplate import GameTemplate
 
-class Mines:
+class Mines (GameTemplate):
     """Třída reprezentující hru Miny
     """
     
@@ -9,6 +10,7 @@ class Mines:
     def __init__(self):
         """Inicializace hry Miny
         """
+        super().__init__()
         self.__numberOfMines = random.randint(15,20)
         self.__board = MinesBoard(self.__numberOfMines)
         self.__firstMove = True

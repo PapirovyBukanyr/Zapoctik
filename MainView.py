@@ -13,7 +13,7 @@ class MainView(QWidget):
         """
         super().__init__()
         self.setWindowTitle("Zápočtík Games")
-        self.setFixedSize(400, 300)
+        self.setFixedSize(500, 400)
         self.setStyleSheet("""
         QMainWindow {
             background-color: #FFFFFF;

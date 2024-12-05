@@ -1,13 +1,16 @@
 from .ChessBoard import ChessBoard
 from .pieces import *
+from ..GameTemplate import GameTemplate
 
-class Chess:
+class Chess (GameTemplate):
   """Třída reprezentující hru šachy
   """
   
   def __init__(self):
     """ Konstruktor třídy šachů
     """
+    super().__init__()
+    self.withChoosePiece = True
     self.__movesSinceLastImportantMove = 0
     self.__board = ChessBoard()
     self.__playedPiece = None
@@ -198,6 +201,15 @@ class Chess:
         return f"{color} won"
       
     return None
+  
+  
+  def killPiece(self, piecePosition):
+    """Vyhození figurky z hrací desky
+    
+    Args:
+        piecePosition ([int, int]): pozice figurky, kterou chceme vyhodit
+    """
+    self.__board[piecePosition] = None
   
       
   def __printToTerminal(self):  
