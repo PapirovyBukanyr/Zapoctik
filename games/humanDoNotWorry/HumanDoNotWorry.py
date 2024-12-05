@@ -12,6 +12,7 @@ class HumanDoNotWorry (GameTemplate):
         """Konstruktor třídy hry člověče, nezlob se.
         """
         super().__init__()
+        self.number = None
         self.numberOfPlayers = 4
         self.withChoosePiece = True
         self.board = HumanDoNotWorryBoard()

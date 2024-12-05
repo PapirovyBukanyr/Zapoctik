@@ -1,8 +1,8 @@
 from .HumanDoNotWorry import HumanDoNotWorry
-from ..Enums import Colors, Figures, Field
+from ..Enums import *
 
 
-class HumanDoNotWorryWithFogOfWar(HumanDoNotWorry):
+class HumanDoNotWorryWithFogOfWar (HumanDoNotWorry):
     """Hra Člověče, nezlob se! s mlhou války
     """
     
@@ -11,9 +11,10 @@ class HumanDoNotWorryWithFogOfWar(HumanDoNotWorry):
         """Konstruktor třídy HumanDoNotWorryWithFogOfWar
         """
         super().__init__()
+        self.fog = True
     
     
-    def getBoard(self, color=None):
+    def getBoard(self, color):
         """Vrací hrací desku
         
         Args:
@@ -22,14 +23,13 @@ class HumanDoNotWorryWithFogOfWar(HumanDoNotWorry):
         Returns:
             List[List[Field]]: hrací deska
         """
-        board = self.board.getListOfBoard()
-        possibleMoves = self.possibleMoves(self.currentPlayer)
+        board = super().getBoard()
+        possibleMoves = self.possibleMoves(color)
         
         for i in range(len(board)):
             for j in range(len(board[i])):
-                if board[i][j].color == color or board[i][j].color in possibleMoves:
-                    pass
-                else:
-                    board[i][j] = Field(color=Colors.WHITE, piece=Figures.SHADOW)
+                if not possibleMoves.__contains__([i, j]):
+                    if (board[i][j] == None or board[i][j].color != color or board[i][j].piece == Figures.FLAG) and not (board[i][j] is not None and (board[i][j].piece == Figures.ONE or board[i][j].piece == Figures.TWO or board[i][j].piece == Figures.THREE or board[i][j].piece == Figures.FOUR or board[i][j].piece == Figures.FIVE or board[i][j].piece == Figures.SIX)):
+                        board[i][j] = Field(Colors.WHITE, Figures.SHADOW)
         
         return board
