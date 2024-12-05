@@ -13,20 +13,19 @@ class Chess:
     self.__playedPiece = None
     self.__positionsList = [self.__board.copy()]  
     self.__isMoving = Colors.WHITE
-    
-  def __str__(self):
-        """Vrátí název hry
-
-        Returns:
-            String: název hry
-        """
-        return "Šachy"
         
   
   def getBoard(self, color=None):
     """Vrátí šachovnici v aktuálním stavu jako dvourozměrné pole Field
+    
+    Args:
+        color (Enum Colors): Barva hráče, pro kterého se má šachovnice vykreslit
+        
+    Returns:
+        list of list of Field: šachovnice
     """
     return self.__board.getListOfBoard()
+  
   
   def choosePiece (self, positionToPlay, color = None):
     """Funkce pro vyber figurky, kterou chce hrac hrat
@@ -57,6 +56,8 @@ class Chess:
 
     Args:
         playedMove ([int, int]): pozice, kam chce hrac hrat
+        color (Enum Colors): Barva hrace, ktery chce hrat
+        rightClick (bool): True, pokud hrac klikl pravym tlacitkem mysi, jinak False
 
     Returns:
         bool: tah se zdařil nebo ne
@@ -139,6 +140,7 @@ class Chess:
     
     return True
   
+  
   def possibleMoves(self, color):
     """Vrati mozne tahy pro hrace, primárně pro rozšíření Fog Of War
 
@@ -155,6 +157,7 @@ class Chess:
         listOfMoves.append(move)
     
     return listOfMoves
+
 
   def checkEnd(self):
     """Kontrola konce hry
@@ -195,6 +198,7 @@ class Chess:
         return f"{color} won"
       
     return None
+  
       
   def __printToTerminal(self):  
     """Vytiskne hrací desku do konzole

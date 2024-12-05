@@ -37,14 +37,14 @@ class GameView(QWidget):
     """
     
     
-    def __init__(self, game):
+    def __init__(self, game, name):
         """Konstruktor
 
         Args:
             game (game): Hra, kterou chceme zobrazit
         """
         super().__init__()
-        self.setWindowTitle(game.__str__())
+        self.setWindowTitle(name)
         self.setGeometry(100, 100, 400, 400)  
         self.layout = QVBoxLayout()
         self.board_layout = None

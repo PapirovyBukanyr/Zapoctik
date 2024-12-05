@@ -43,7 +43,7 @@ Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky 
 
 ### Backend her
 
-Všechny hry se nachází v modulu `games`. Každá hra používá jednotnou brací desku `games/Board.py`. Společný je také soubor `games/Enums.py`, který obsahuje třídy typu enum "Figure" (co za figurku má frontend vykreslit), Colors (Barvy jsou "WHITE", "BLACK", "RED" a "GREEN") a "Field" (datová struktura kombinující předchozí dvě, určená ke komunikaci s Frontendem)
+Všechny hry se nachází v modulu `games`. Každá hra používá jednotnou brací desku `games/Board.py`. Společný je také soubor `games/Enums.py`, který obsahuje třídy typu enum "Figure" (co za figurku má frontend vykreslit), Colors (Barvy jsou "WHITE", "BLACK", "RED" a "GREEN") a "Field" (datová struktura kombinující předchozí dvě, určená ke komunikaci s Frontendem). Všechny hry jsou vypsány ve třídě `games/ListOfGames` a pokud je vytvořena nějaká nová, stačí jí tam snadno připsat, o zbytek se postará sama aplikace. Ta jednotivé hry reprezentuje třídou `games/Game`, která má vlastnost název, popis a objekt hry samotné.
 
 #### Backend šachů
 
@@ -71,7 +71,15 @@ Jedná se prakticky o totožnou hru, jako je ta předchozí, jenom třída `game
 
 #### Backend piškvorek 3x3
 
-Většina backendu piškvorek se nachází v souboru `games/ticTacToe`, hlavní třída je `games/ticTacToe/TicTacToe.py`, ve které je většina logiky, dále tam je třída `games/ticTacToe/TicTacToeBoard.py`, která dědí z `games/Board.py`.
+Většina backendu piškvorek se nachází ve složce `games/ticTacToe`, hlavní třída je `games/ticTacToe/TicTacToe`, ve které je většina logiky, dále tam je třída `games/ticTacToe/TicTacToeBoard`, která dědí z `games/Board`.
+
+#### Backend rotujících piškvorek
+
+Celá logika hry je v modulu `games/chessTrackGame`, kde je hlavní třída `games/chessTrackGame/ChessTrackGame`, ve které je polovina logiky, druhá polovina se nacházi ve třídě `games/chessTrackGame/ChessTrackGameBoard`, která dědí z `games/Board`. Princip hry je, že po každém zahraném tahu se herní deska pootočí se stejnou obvodovou rychlostí (vnitřní i vnější se posunou o jedno pole), cílem je propojit čtyři stejné symboly horizontálně nebo vertikálně (diagonály nejsou v původní hře akceptovány, tak je neakceptujeme ani my).
+
+#### Backend ConnectFour
+
+Celá logika hry je v modulu `games/connectFour`, kde je hlavní třída `games/ConnectFour/connectFour`, ve které je polovina logiky, druhá polovina se nacházi ve třídě `games/ConnectFour/connectFourBoard`, která dědí z `games/Board`. Princip hry jsou klasické piškvorky, akorát se začíná od spodního řádku a symboly nelze umístit do vzduchu.
 
 #### Backend matematické hry
 
@@ -92,6 +100,10 @@ Naše skupina došla k závěru, že je ve světě málo občanských válek a �
 - `games/humanDoNotWorry/pieces/BlackPiece`: černá figurka
 - `games/humanDoNotWorry/pieces/GreenPiece`: zelená figurka
 - `games/humanDoNotWorry/pieces/WhitePiece`: bílá figurka
+
+#### Backend hry pexeso
+
+Celá logika hry je v modulu `games/pexeso`, kde je hlavní třída `games/pexeso/Pexeso`, ve které je polovina logiky, druhá polovina se nacházi ve třídě `games/pexeso/PexesoBoard`, která dědí z `games/Board`. Ke hře se využívají ještě třídy `games/pexeso/PexesoCard`, které reprezentují jednotlivé kartičky a jejich stavy.
 
 ### Backend generování otázek
 
