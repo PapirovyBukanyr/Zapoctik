@@ -1,7 +1,8 @@
 from .ChessTrackGameBoard import ChessTrackGameBoard
 from ..Enums import *
+from ..GameTemplate import GameTemplate
 
-class ChessTrackGame():
+class ChessTrackGame(GameTemplate):
     """Hra ChessTrackGame.
     """
     
@@ -9,6 +10,7 @@ class ChessTrackGame():
     def __init__(self):
         """Inicializace hry.
         """
+        super().__init__()
         self.board = ChessTrackGameBoard()
         self.currentPlayer = Colors.WHITE
         

@@ -1,5 +1,5 @@
-from .chess import Chess
-from .checkers import Checkers
+from .checkers import *
+from .chess import *
 from .ticTacToe import TicTacToe
 from .Enums import *
 from .mines import Mines    

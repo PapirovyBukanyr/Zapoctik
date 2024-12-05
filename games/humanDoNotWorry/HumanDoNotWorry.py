@@ -1,7 +1,9 @@
 from .HumanDoNotWorryBoard import *
 import random
+from .pieces import *
+from ..GameTemplate import GameTemplate
 
-class HumanDoNotWorry:
+class HumanDoNotWorry (GameTemplate):
     """Třída pro hru člověče, nezlob se.
     """
     
@@ -9,6 +11,9 @@ class HumanDoNotWorry:
     def __init__(self):
         """Konstruktor třídy hry člověče, nezlob se.
         """
+        super().__init__()
+        self.numberOfPlayers = 4
+        self.withChoosePiece = True
         self.board = HumanDoNotWorryBoard()
         self.players = []
         self.currentPlayer = Colors.WHITE

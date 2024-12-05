@@ -6,6 +6,13 @@ class CheckersWithFogOfWar(Checkers):
     """
     
     
+    def __init__(self):
+        """Konstruktor třídy CheckersWithFogOfWar
+        """
+        super().__init__()
+        self.fog = True
+    
+    
     def getBoard(self, color):
         """Vrací zakrytou šachovnici
         

@@ -1,8 +1,9 @@
 from ..Enums import Colors
 from .pieces import *
 from .CheckersBoard import CheckersBoard
+from ..GameTemplate import GameTemplate
 
-class Checkers:
+class Checkers (GameTemplate):
     """Třída reprezentující hru dáma
     """
     
@@ -10,6 +11,8 @@ class Checkers:
     def __init__(self):
         """Konstruktor třídy hry dáma
         """
+        super().__init__()
+        self.withChoosePiece = True
         self.__board = CheckersBoard()
         self.__currentPlayer = Colors.WHITE
         self.__pieceToPlay = None
@@ -188,6 +191,15 @@ class Checkers:
                 listOfMoves.append(piece.trackJumps(jump))
                 
         return listOfMoves
+    
+    
+    def killPiece(self, piecePosition):
+        """Funkce pro odstranění figurky z hrací desky
+        
+        Args:
+            piecePosition ([int, int]): pozice figurky, která má být odstraněna
+        """
+        self.__board[piecePosition[0], piecePosition[1]] = None
     
     
     def __printToTerminal(self):

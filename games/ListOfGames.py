@@ -32,6 +32,14 @@ class ListOfGames:
                     "Šachy s mlhou války jsou hra pro dva hráče. Cílem hry je vyhodit soupeřova krále. Hra končí, když je král vyhozen, případně pokud je porušeno pravidlo padesáti tahů nebo opakování pozic. Do toho je hrací deska zahalena mlhou války.",
                     ChessWithFogOfWar()),
                 
+                Game("Zaminované šachy 💣",
+                     "Zaminované šachy jsou hra pro dva hráče. Cílem hry je vyhodit soupeřova krále. Hra končí, když je král vyhozen, případně pokud je porušeno pravidlo padesáti tahů nebo opakování pozic. Do toho jsou na hrací desce náhodně umístěny miny.",
+                    ChessMines()),
+                
+                Game("Zaminované šachy s mlhou války 💣☁️",
+                     "Zaminované šachy s mlhou války jsou hra pro dva hráče. Cílem hry je vyhodit soupeřova krále. Hra končí, když je král vyhozen, případně pokud je porušeno pravidlo padesáti tahů nebo opakování pozic. Do toho jsou na hrací desce náhodně umístěny miny a hrací deska je zahalena mlhou války. Hráč tedy vidí pouze své figurky, odpálené miny a pole, kam se může pohnout.",
+                     ChessMinesWithFogOfWar()),
+                
                 Game("Dáma 𖣯",
                      "Dáma je hra pro dva hráče. Cílem hry je vyhodit soupeřovy figurky. Hra končí, když jsou vyhozeny všechny soupeřovy figurky nebo soupeř již nijak nemůže táhnout.",
                      Checkers()),
@@ -39,6 +47,14 @@ class ListOfGames:
                 Game("Dáma s mlhou války ☁️",
                      "Dáma s mlhou války je hra pro dva hráče. Cílem hry je vyhodit soupeřovy figurky. Hra končí, když jsou vyhozeny všechny soupeřovy figurky nebo soupeř již nijak nemůže táhnout. Do toho je hrací deska zahalena mlhou války.",
                      CheckersWithFogOfWar()),
+                
+                Game("Zaminovaná dáma 💣",
+                     "Zaminovaná dáma je hra pro dva hráče. Cílem hry je vyhodit soupeřovy figurky. Hra končí, když jsou vyhozeny všechny soupeřovy figurky nebo soupeř již nijak nemůže táhnout. Do toho jsou na hrací desce náhodně umístěny miny.",
+                     CheckersMines()),
+                
+                Game("Zaminovaná dáma s mlhou války 💣☁️",
+                        "Zaminovaná dáma s mlhou války je hra pro dva hráče. Cílem hry je vyhodit soupeřovy figurky. Hra končí, když jsou vyhozeny všechny soupeřovy figurky nebo soupeř již nijak nemůže táhnout. Do toho jsou na hrací desce náhodně umístěny miny a hrací deska je zahalena mlhou války. Hráč tedy vidí pouze své figurky, odpálené miny a pole, kam se může pohnout.",
+                        CheckersMinesWithFogOfWar()),
                 
                 Game("Piškvorky 3x3 ❌⭕",
                     "Piškvorky jsou hra pro dva hráče. Cílem hry je spojit tři své symboly v řadě. Hra končí, když je někdo spojí nebo je plné pole.",

@@ -1,6 +1,7 @@
 from .PexesoBoard import *
+from ..GameTemplate import GameTemplate
 
-class Pexeso:
+class Pexeso (GameTemplate):
     """ Třída reprezentující hru Pexeso
     """
     
@@ -8,6 +9,7 @@ class Pexeso:
     def __init__(self):
         """Inicializace hry Pexeso
         """
+        super().__init__()
         self.__board = PexesoBoard()
         self.__firstMove = True
         self.score = 0

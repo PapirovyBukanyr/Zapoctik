@@ -182,6 +182,42 @@ class GameTests(unittest.TestCase):
         game = game.game
         self.assertIsNone(game.checkEnd())
         
+        
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testWithChoosingPiece(self, game):
+        """Testuje, zda je definováno vybírání figurky
+
+        Args:
+            name (string): jméno hry
+            game_class (game): třída hry
+        """
+        game = game.game
+        self.assertIsNotNone(game.withChoosePiece)    
+        
+        
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testFog(self, game):
+        """Testuje, zda je definován mlhový efekt
+        
+        Args:
+            name (string): jméno hry
+            game_class (game): třída hry
+        """
+        game = game.game
+        self.assertIsNotNone(game.fog)
+        
+        
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testNumberOfPlayers(self, game):
+        """Testuje, zda je definován počet hráčů
+
+        Args:
+            name (string): jméno hry
+            game_class (game): třída hry
+        """
+        game = game.game
+        self.assertIsNotNone(game.numberOfPlayers)
+        
     
     @parameterized.expand(ListOfGames.getListOfGames())
     def testSimulateFullGame(self, game):
@@ -199,7 +235,7 @@ class GameTests(unittest.TestCase):
         while game.checkEnd() is None and counter < limit:
             move = []
             
-            if self.isGameWithChoosingPiece(game):
+            if game.withChoosePiece:
                 while move == []:
                     move = game.choosePiece([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
                 
@@ -211,7 +247,7 @@ class GameTests(unittest.TestCase):
             newMove = False
             
             while newMove != True:
-                if self.isGameWithChoosingPiece(game):
+                if game.withChoosePiece:
                     newMove = game.makeMove(move, colorOnMove)
                     if not isinstance(newMove,bool) and not isinstance(newMove, str) and isinstance(newMove[0], list) and isinstance(newMove[0][0], int):
                         move = random.choice(newMove)
@@ -237,15 +273,3 @@ class GameTests(unittest.TestCase):
         print(game.checkEnd())
         self.assertGreater(limit, counter)
     
-    
-    def isGameWithChoosingPiece(self, game):
-        """Zjistí, zda hra vyžaduje výběr figurky
-
-        Args:
-            game (game): hra
-
-        Returns:
-            bool: True, pokud hra vyžaduje výběr figurky
-        """
-        return isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame) or isinstance(game, ChessWithFogOfWar) or isinstance(game, CheckersWithFogOfWar) or isinstance(game, HumanDoNotWorry)
-
