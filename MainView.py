@@ -94,6 +94,6 @@ class MainView(QWidget):
         Args:
             game (Game): objekt Game, který obsahuje název hry a objekt hry
         """
-        self.gameWindow = GameView(game.game, game.name)
+        self.gameWindow = GameView(game.game)
         self.gameWindow.show()
         self.showMinimized()
