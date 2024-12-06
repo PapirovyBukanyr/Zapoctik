@@ -1,5 +1,4 @@
-from .HumanDoNotWorryBoard import HumanDoNotWorryBoard
-from ..Enums import *
+from .HumanDoNotWorryBoard import *
 import random
 from .pieces import *
 from ..GameTemplate import GameTemplate
@@ -13,6 +12,7 @@ class HumanDoNotWorry (GameTemplate):
         """Konstruktor třídy hry člověče, nezlob se.
         """
         super().__init__()
+        self.number = None
         self.numberOfPlayers = 4
         self.withChoosePiece = True
         self.board = HumanDoNotWorryBoard()
@@ -239,4 +239,28 @@ class HumanDoNotWorry (GameTemplate):
         """Metoda vytiskne hrací desku na obrazovku.
         """
         print(self.board)
+        
+        
+    def possibleMoves(self, color):
+        """Metoda vrátí možné tahy.
+        
+        Args:
+            colors (Enum Colors): Barva hráče
+        
+        Returns:
+            List of list of int: Možné tahy
+        """
+        if self.number is None:
+            return []
+        
+        for i in range(len(self.board.board)):
+            for j in range(len(self.board.board[0])):
+                try:
+                    if self.board[i, j].color == color:
+                        return self.board[i, j].possibleMoves(self.number, self.board)
+                    
+                except:
+                    pass
+        
+        return []
         

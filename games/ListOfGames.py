@@ -72,9 +72,9 @@ class ListOfGames:
                     "Člověče, nezlob se! je hra pro čtyři hráče. Cílem hry je dostat všechny své figurky do cíle. Hra končí, když někdo dostane všechny figurky do cíle.",
                     HumanDoNotWorry()),
                 
-#                Game("Člověče, nezlob se! s mlhou války",
-#                    "Člověče, nezlob se! s mlhou války je hra pro čtyři hráče. Cílem hry je dostat všechny své figurky do cíle. Hra končí, když někdo dostane všechny figurky do cíle. Do toho je hrací deska zahalena mlhou války.",
-#                    HumanDoNotWorryWithFogOfWar),
+                Game("Člověče, nezlob se! s mlhou války",
+                    "Člověče, nezlob se! s mlhou války je hra pro čtyři hráče. Cílem hry je dostat všechny své figurky do cíle. Hra končí, když někdo dostane všechny figurky do cíle. Do toho je hrací deska zahalena mlhou války.",
+                    HumanDoNotWorryWithFogOfWar()),
                 
                 Game("Matematická hra 🔢",
                     "Matematická hra je hra pro dva hráče. Cílem hry je zodpovědět správně víc otázek než soupeř. Hra končí, když jsou všechny otázky nalezeny.",
