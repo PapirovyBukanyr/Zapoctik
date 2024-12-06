@@ -1,13 +1,16 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QSpacerItem, QSizePolicy
 from GameView import *
 from games import *
-from PyQt5.QtGui import QFontDatabase
+from PyQt5.QtGui import QIcon
 
 class MainView(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Zápočtík Games")
         self.setFixedSize(400, 300)
+        icon = QIcon("resources/logo.jpg")  
+        self.setWindowIcon(icon)
+
         self.setStyleSheet("""
         QMainWindow {
             background-color: #FFFFFF;

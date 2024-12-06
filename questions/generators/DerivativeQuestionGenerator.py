@@ -44,7 +44,7 @@ class DerivativeQuestionGenerator(Question):
         if n is not None and n in range(0, 3):
             randomQuestion = n
         else:
-            randomQuestion = random.randint(0, 2)
+            randomQuestion = random.randint(0, 3)
     
         degree = random.randint(1, 2)
         polynomial = self.generatePolynomial(degree)

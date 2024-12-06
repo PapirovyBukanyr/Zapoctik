@@ -35,7 +35,7 @@ class GenerateQuestion (Question):
         if n is not None and n in range(0, self.numberOfQuestions):
             randomQuestion = n
         else:
-            randomQuestion = rand.randint(0, 9)
+            randomQuestion = 2
         
         if randomQuestion == 0: # Generování otázky na matice
             question = MatrixQuestionGenerator() 
@@ -45,6 +45,7 @@ class GenerateQuestion (Question):
             
         elif randomQuestion == 2: # Generování otázky na derivace
             question = DerivativeQuestionGenerator()
+            self.hoderovaDanger = True
             
         elif randomQuestion == 3: # Generování otázky na soustavu lineárních rovnic
             question = LinearEquationSystemQuestionGenerator()
@@ -74,7 +75,7 @@ class GenerateQuestion (Question):
             
         print(self)
         
-        return self.questionText, self.questionLatex
+        return self
     
     
 if __name__ == "__main__":
