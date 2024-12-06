@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import numpy as np
 
 class Question (ABC):
     """Třída předpisu otázky
@@ -14,7 +15,6 @@ class Question (ABC):
         self.numberOfQuestions = 0
         self.time = 60
         self.hoderovaDanger = False
-        
 
     def __str__(self):
         """Metoda na výpis otázky s odpovědí
@@ -35,9 +35,11 @@ class Question (ABC):
             bool: true pokud je odpověď správná
         """
         try:
-            self.answer = round(self.answer).__str__()
+            self.answer = int(np.round(self.answer)).__str__()
+            
         except:
             self.answer = self.answer.__str__()
+            
         return answer.strip().lower() == self.answer.strip().lower()
     
     
@@ -48,9 +50,11 @@ class Question (ABC):
             string: odpověď
         """
         try:
-            answer = round(self.answer).__str__()
+            answer = int(np.round(self.answer)).__str__()
+            
         except:
             answer = self.answer.__str__()
+            
         return answer
     
     

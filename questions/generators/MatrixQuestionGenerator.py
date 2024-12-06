@@ -7,13 +7,14 @@ class MatrixQuestionGenerator(Question):
     """Generátor otázek na matice
     """  
     
-    
-    numberOfQuestions = 4
-    """int: Počet otázek, které generátor vygeneruje
-    """
+    def __init__(self):
+        """Konstruktor třídy matice
+        """
+        super().__init__()
+        self.numberOfQuestions = 4
      
     
-    def generateRegularMatrix(self, n = random.randint(2, 4)):
+    def generateRegularMatrix(self, n = random.randint(1, 3)):
         """Generování regulární matice
         
         Args:
@@ -23,8 +24,10 @@ class MatrixQuestionGenerator(Question):
             numpy array int: Náhodná regulární matice
         """
         matrix = np.zeros((n,n))
+        
         while self.calculateDeterminant(matrix) == 0:
-            matrix = np.random.randint(1, 10, (n, n))
+            matrix = np.random.randint(-3, 3, (n, n))
+            
         return matrix
     
     
@@ -39,6 +42,7 @@ class MatrixQuestionGenerator(Question):
         """
         if matrix.shape[0] != matrix.shape[1]:
             return 0
+        
         return np.linalg.det(matrix)
     
     
@@ -80,6 +84,7 @@ class MatrixQuestionGenerator(Question):
         """
         if matrix.shape[0] != matrix.shape[1]:
             return 0
+        
         return sum(np.linalg.eigvals(matrix))
     
     
@@ -93,14 +98,17 @@ class MatrixQuestionGenerator(Question):
             string: matice ve formátu LaTeX
         """
         vypis = "\\\\begin{pmatrix}"
+        
         for i in range(matrix.shape[0]):
             for j in range(matrix.shape[1]):
                 vypis+= matrix[i][j].__str__() 
+                
                 if j != matrix.shape[1]-1:
                     vypis+="&"
+                    
             vypis+="\\\\\\\\" 
-        vypis+="\\\\end{pmatrix}"
-        return vypis
+            
+        return vypis+"\\\\end{pmatrix}"
     
 
     
@@ -112,12 +120,13 @@ class MatrixQuestionGenerator(Question):
         """
         if n is not None and n in range(0, 4):
             randomQuestion = n
+            
         else:
             randomQuestion = random.randint(0, 3)
+            
         matice = self.generateRegularMatrix()
         
         if randomQuestion == 0:
-            matice = self.generateRegularMatrix(2)
             self.questionText ="Vypočti determinant matice: " 
             self.questionLatex = self.getLatexMatrix(matice)
             self.answer =self.calculateDeterminant(matice)
@@ -133,10 +142,10 @@ class MatrixQuestionGenerator(Question):
             self.answer =self.calculateRank(matice)
             
         else:
-            matice = self.generateRegularMatrix(2)
             self.questionText ="Vypočti součet vlastních čísel matice: " 
             self.questionLatex = self.getLatexMatrix(matice)
-            self.answer = self.calculateEigenvalues(matice)
+            self.answer = self.calculateEigenvalues(matice).real
+            
         return self
             
     

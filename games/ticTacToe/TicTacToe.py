@@ -2,11 +2,16 @@ from ..Enums import Colors
 from .TicTacToeBoard import TicTacToeBoard
 
 class TicTacToe:    
+    """Třída reprezentující hru Piškvorky
+    """
+    
+
     def __init__(self):
         """Inicializace hry
         """
         self.__board = TicTacToeBoard()
         self.__current_player = Colors.BLACK
+        
         
     def __str__(self):
         """Vrátí název hry
@@ -16,6 +21,7 @@ class TicTacToe:
         """
         return "Piškvorky"
         
+        
     def getBoard(self, color=None):
         """Vrátí hrací desku
 
@@ -24,7 +30,8 @@ class TicTacToe:
         """
         return self.__board.getListOfBoard()
     
-    def makeMove(self, index, player = None):
+    
+    def makeMove(self, index, player = None, rightClick = False):
         """Metoda na zahrání tahu
 
         Args:
@@ -34,6 +41,9 @@ class TicTacToe:
         Returns:
             Boolean: true pokud se tah podařil, jinak false
         """
+        if rightClick:
+            return False
+        
         row, col = index
         
         if row < 0 or row > 2 or col < 0 or col > 2:
@@ -41,6 +51,7 @@ class TicTacToe:
         
         if player is None:
             player = self.__current_player
+            
         else:
             self.__current_player = player
             
@@ -49,6 +60,7 @@ class TicTacToe:
             self.__current_player = self.__current_player.changeColor()
             self.__printToTerminal()
             return True
+        
         else:
             return False
         
@@ -63,10 +75,13 @@ class TicTacToe:
         """
         if self.__checkDraw():
             return "Draw"
+        
         elif self.__checkWinner() == None:
             return None
+        
         else:
             return f"{self.__checkWinner()} won"
+        
         
     def reset(self):
         """Resetuje hru
@@ -74,10 +89,12 @@ class TicTacToe:
         self.board = TicTacToeBoard()
         self.__current_player = Colors.WHITE
     
+    
     def __printToTerminal(self):  
         """Vytiskne hrací desku do konzole
         """
         print(self.__board.__str__()) 
+    
     
     def __checkWinner(self):
         """Kontroluje jestli někdo vyhrál
@@ -89,14 +106,19 @@ class TicTacToe:
         for i in range(3):
             if self.__board[i,0] == self.__board[i,1] == self.__board[i,2] and self.__board[i,0] != None:
                 return self.__board[i,0]
+    
         for col in range(3):
             if self.__board[0,col] == self.__board[1,col] == self.__board[2,col] != None:
                 return self.__board[0,col]
+    
         if self.__board[0,0] == self.__board[1,1] == self.__board[2,2] != None:
             return self.__board[0,0]
+    
         if self.__board[0,2] == self.__board[1,1] == self.__board[2,0] != None:
             return self.__board[0,2]
+    
         return None
+    
     
     def __checkDraw(self):
         """Kontroluje jestli je remíza
@@ -108,4 +130,5 @@ class TicTacToe:
             for j in range(3):
                 if self.__board[i,j] == None:
                     return False
+    
         return True

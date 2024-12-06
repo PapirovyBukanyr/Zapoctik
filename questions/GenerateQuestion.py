@@ -7,12 +7,8 @@ class GenerateQuestion (Question):
     """Třída na generování otázek
     Pro generování otázek použij metodu generateQuestion
     Pro kontrolu odpovědí použij metodu checkAnswer s parametrem answer
+    Pro získání správné odpovědi použij funkci doupovcuvOperator
     Výsledky se zaokrouhlují na celá čísla!!!
-    """
-    
-    
-    numberOfQuestions = 10
-    """int: Počet otázek, které generátor vygeneruje    
     """
     
     
@@ -20,7 +16,7 @@ class GenerateQuestion (Question):
         """Konstruktor třídy GenerateQuestion
         """
         super().__init__()
-        print("Otázky jsou připraveny ke generování")
+        self.numberOfQuestions = 11
         
         
     def generateQuestion(self, n = None):	
@@ -65,6 +61,9 @@ class GenerateQuestion (Question):
         elif randomQuestion == 8: # Generování otázky na kardinální čísla
             question = KardinalNumberQuestionGenerator()
             
+        elif randomQuestion == 9: # Generování otázky na regulární jazyky
+            question = RegularLanguageQuestionGenerator()
+            
         else: # Generování otázky na analytickou geometrii
             question = AnalyticGeometryQuestionGenerator()
             
@@ -72,8 +71,6 @@ class GenerateQuestion (Question):
         self.answer = question.answer
         self.questionText = question.questionText
         self.questionLatex = question.questionLatex
-            
-        print(self)
         
         return self
     

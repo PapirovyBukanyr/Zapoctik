@@ -4,7 +4,13 @@ from games import *
 from PyQt5.QtGui import QIcon
 
 class MainView(QWidget):
+    """Třída MainView slouží k zobrazení hlavního menu aplikace.
+    """
+    
+    
     def __init__(self):
+        """Konstruktor třídy
+        """
         super().__init__()
         self.setWindowTitle("Zápočtík Games")
         self.setFixedSize(400, 300)
@@ -64,11 +70,14 @@ class MainView(QWidget):
         main_layout.addSpacerItem(spacer)
 
         grid_layout = QGridLayout()
-        games = ["Šachy♛", "Dáma𖣯", "Piškvorky❌⭕", "Matematická hra🔢", "Miny💣", "Šachy s mlhou války☁️", "Dáma s mlhou války☁️", "Hledání krtka🐀"]
-
+        
+        games = ListOfGames.getListOfGames()
+        
         for i, game in enumerate(games):
-            button = QPushButton(game)
+            button = QPushButton(game.name)
             button.clicked.connect(lambda checked, g=game: self.start_game(g))
+            tooltip = f"<H1>{game.name}</H1><H3 style='width: 200px;'>{game.description}</H3>"
+            button.setToolTip(tooltip)
             grid_layout.addWidget(button, i // 2, i % 2) 
 
         main_layout.addLayout(grid_layout)
@@ -78,38 +87,13 @@ class MainView(QWidget):
 
         self.setLayout(main_layout)
 
-    def start_game(self, game_name):
-        match(game_name):
-            case "Šachy♛":
-                self.gameWindow = GameView(Chess())
-                self.gameWindow.show()
-                self.showMinimized()
-            case "Dáma𖣯":
-                self.gameWindow = GameView(Checkers())
-                self.gameWindow.show()
-                self.showMinimized()
-            case "Piškvorky❌⭕":
-                self.gameWindow = GameView(TicTacToe())
-                self.gameWindow.show()
-                self.showMinimized()
-            case "Matematická hra🔢":
-                self.gameWindow = GameView(MathGame())
-                self.gameWindow.show()
-                self.showMinimized()
-            case "Miny💣":
-                self.gameWindow = GameView(Mines())
-                self.gameWindow.show()
-                self.showMinimized()
-            case "Šachy s mlhou války☁️":
-                self.gameWindow = GameView(ChessWithFogOfWar())
-                self.gameWindow.show()
-                self.showMinimized()
-            case "Dáma s mlhou války☁️":
-                self.gameWindow = GameView(CheckersWithFogOfWar())
-                self.gameWindow.show()
-                self.showMinimized()
-            case "Hledání krtka🐀":
-                self.gameWindow = GameView(ChallengeAccepted())
-                self.gameWindow.show()
-                self.showMinimized()
-            
+
+    def start_game(self, game):
+        """Spustí hru dle jména hry
+
+        Args:
+            game (Game): objekt Game, který obsahuje název hry a objekt hry
+        """
+        self.gameWindow = GameView(game.game, game.name)
+        self.gameWindow.show()
+        self.showMinimized()

@@ -1,22 +1,35 @@
 from .Piece import *
 
 class Pawn(Piece):
-    def __init__(self, color, position):
-        super().__init__(color, position)
-      
+    """Třída reprezentující pěšáka
+    """      
+        
         
     def __str__(self):
+        """Funkce na výpis figurky
+
+        Returns:
+            str: P + barva figurky
+        """
         return 'P' + self.color.__str__() 
     
     
     def possibleMoves(self, board):
+        """Funkce najde všechny možné tahy figurky
+        
+        Args:
+            board (two-dimensional array of ints): hrací deska
+            
+        Returns:
+            [int,int]: pole možných tahů
+        """
         moves = []
         direction = -1 if self.color == Colors.WHITE else 1
         row, col = self.position
         
-        # Check for simple moves
         for dc in [-1, 1]:
             new_row, new_col = row + direction, col + dc
+            
             if 0 <= new_col < 8 and board[new_row, new_col] is None:
                 moves.append([new_row, new_col])
         
@@ -26,6 +39,15 @@ class Pawn(Piece):
     
     
     def possibleJumps(self, board, position=None):
+        """Funkce najde všechny jednoduché skoky z pozice
+
+        Args:
+            board (two-dimensional array of ints): hrací deska
+            position ([int,int]], optional): _description_. Defaults to None.
+
+        Returns:
+            [int,int]: pole možných skoků
+        """
         if position is None:
             position = self.position
 
@@ -36,10 +58,12 @@ class Pawn(Piece):
         for dc in [-1, 1]:
             mid_row, mid_col = row + direction, col + dc
             new_row, new_col = row + 2 * direction, col + 2 * dc
+            
             if (0 <= new_row < 8 and 0 <= new_col < 8 and 
                 board[mid_row,mid_col] is not None and 
                 board[mid_row,mid_col].color != self.color and 
                 board[new_row,new_col] is None):
+                
                 jumps.append([new_row, new_col])
 
         return jumps
