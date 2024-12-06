@@ -14,28 +14,71 @@ class Figures(Enum):
   """
   
   
-  PAWN = 1 # Pěšec do šachů, dámy, ...
-  ROOK = 2 # Věž do šachů
-  BISHOP = 3 # Střelec do šachů
-  KNIGHT = 4 # Jezdec do šachů
-  QUEEN = 5 # Dáma do šachů, dámy, ...
-  KING = 6 # Král do šachů
-  X = 7 # X do piškvorek
-  O = 8 # O do piškvorek
-  FLAG = 9 # Vlajka do hledání min
-  EXPLOSION = 10 # Výbuch do hledání min
-  MINE = 11 # Mina do hledání min
-  ONE = 12 # 1 do hledání min, hledání krtka, ...
-  TWO = 13 # 2 do hledání min, hledání krtka, ...
-  THREE = 14 # 3 do hledání min, hledání krtka, ...
-  FOUR = 15 # 4 do hledání min, hledání krtka, ...
-  FIVE = 16 # 5 do hledání min, hledání krtka, ...
-  SIX = 17 # 6 do hledání min, hledání krtka, ...
-  SEVEN = 18 # 7 do hledání min, hledání krtka, ...
-  EIGHT = 19 # 8 do hledání min, hledání krtka, ...
-  SHADOW = 20 # Stín do šachů s mlhou války, dám s mlhou války, min, hledání krtka, ...
-  MOLE = 21 # Krteček!!!
-  LOGO = 22 # Logo hry
+  PAWN = 1  
+  """Pěšec do šachů, dámy, ..."""
+  
+  ROOK = 2 
+  """Věž do šachů"""
+  
+  BISHOP = 3 
+  """Střelec do šachů"""
+  
+  KNIGHT = 4
+  """Kůň do šachů"""
+  
+  QUEEN = 5 
+  """Dáma do šachů, dámy, ..."""
+  
+  KING = 6  
+  """Král do šachů"""
+  
+  X = 7 
+  """X do piškvorek"""
+  
+  O = 8 
+  """O do piškvorek"""
+
+  FLAG = 9 
+  """Vlajka do hledání min"""
+  
+  EXPLOSION = 10
+  """Výbuch do hledání min"""
+  
+  MINE = 11  
+  """Mina do hledání min"""
+  
+  ONE = 12 
+  """1 do hledání min, hledání krtka, ..."""
+  
+  TWO = 13 
+  """2 do hledání min, hledání krtka, ..."""
+  
+  THREE = 14 
+  """3 do hledání min, hledání krtka, ..."""
+  
+  FOUR = 15 
+  """4 do hledání min, hledání krtka, ..."""
+  
+  FIVE = 16 
+  """5 do hledání min, hledání krtka, ..."""
+  
+  SIX = 17 
+  """6 do hledání min, hledání krtka, ..."""
+  
+  SEVEN = 18 
+  """7 do hledání min, hledání krtka, ..."""
+  
+  EIGHT = 19 
+  """8 do hledání min, hledání krtka, ..."""
+  
+  SHADOW = 20 
+  """Zakryté políčko"""
+  
+  MOLE = 21 
+  """Krteček"""
+  
+  LOGO = 22
+  """Logo hry"""
   
 class Colors(Enum):
   """Enum pro barvy
@@ -77,7 +120,7 @@ class Colors(Enum):
   
   
   def changeColorFour(self):
-    """Vrátí další barvu
+    """Vrátí další barvu, počítá se čtyřmi hráči
     
     Returns:
         Enum Colors: další barva

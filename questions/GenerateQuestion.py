@@ -1,6 +1,7 @@
 import random as rand
 from .Question import Question
 from .generators import *
+from .listOfQuestions import listOfQuestions
 
 
 class GenerateQuestion (Question):
@@ -16,7 +17,7 @@ class GenerateQuestion (Question):
         """Konstruktor třídy GenerateQuestion
         """
         super().__init__()
-        self.numberOfQuestions = 11
+        self.numberOfQuestions = listOfQuestions
         
         
     def generateQuestion(self, n = None):	
@@ -28,43 +29,13 @@ class GenerateQuestion (Question):
         Returns:
             string, string (questionText, questionLatex): otázka
         """
-        if n is not None and n in range(0, self.numberOfQuestions):
+        if n is not None and n in range(0, len(listOfQuestions)):
             randomQuestion = n
         else:
-            randomQuestion = rand.randint(0, 9)
+            randomQuestion = rand.randint(0, len(listOfQuestions) - 1)
         
-        if randomQuestion == 0: # Generování otázky na matice
-            question = MatrixQuestionGenerator() 
-            
-        elif randomQuestion == 1: # Generování otázky na zlomky
-            question = FractionQuestionGenerator()
-            
-        elif randomQuestion == 2: # Generování otázky na derivace
-            question = DerivativeQuestionGenerator()
-            
-        elif randomQuestion == 3: # Generování otázky na soustavu lineárních rovnic
-            question = LinearEquationSystemQuestionGenerator()
-            
-        elif randomQuestion == 4: # Generování otázky na konvergenci nekonečných řad
-            question = InfinitiveSeriesQuestionGenerator()
-        
-        elif randomQuestion == 5: # Generování otázky na určení hodnoty integrálu
-            question = IntegralQuestionGenerator()
-            
-        elif randomQuestion == 6: # Generování otázky na množiny
-            question = SetQuestionGenerator()    
-            
-        elif randomQuestion == 7: # Generování otázky na ordinální čísla
-            question = OrdinalNumberQuestionGenerator()
-            
-        elif randomQuestion == 8: # Generování otázky na kardinální čísla
-            question = KardinalNumberQuestionGenerator()
-            
-        elif randomQuestion == 9: # Generování otázky na regulární jazyky
-            question = RegularLanguageQuestionGenerator()
-            
-        else: # Generování otázky na analytickou geometrii
-            question = AnalyticGeometryQuestionGenerator()
+        question_tuple = listOfQuestions[randomQuestion]
+        question = question_tuple[1]()
             
         question.generateQuestion()
         self.answer = question.answer
