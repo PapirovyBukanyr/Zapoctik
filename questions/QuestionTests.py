@@ -2,7 +2,7 @@ from .generators import *
 from .GenerateQuestion import GenerateQuestion
 import unittest
 from parameterized import parameterized
-from .ListOfQuestions import listOfQuestions
+from .listOfQuestions import listOfQuestions
 
 class QuestionTests(unittest.TestCase):
     """Testy na generátory otázek

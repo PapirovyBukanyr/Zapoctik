@@ -57,7 +57,15 @@ Celá logika se nachází ve složce `games/chess`. Řízení chodu celé hry m�
 
 #### Backend šachů s mlhou války
 
-Jedná se prakticky o totožnou hru, jako je ta předchozí, jenom třída `games/ChessWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovala pouze dostupná políčka.
+Jedná se prakticky o totožnou hru, jako je ta předchozí, jenom třída `games/chess/ChessWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovala pouze dostupná políčka.
+
+#### Backend zaminovaných šachů
+
+Totožné s předminulou hrou, jenom třída `games/chess/ChessMines` na začátku hry na šachovnici rozmístí miny, které zabijí figurku na místě. 
+
+#### Backend zaminovaných šachů s mlhou války 
+
+Identická s předchozí, navíc ale má mlhu války nachází se v `games/chess/ChessMinesWithFogOfWar`.
 
 #### Backend dámy
 
@@ -67,7 +75,15 @@ Většina logiky se nachází v modulu `games/checkers`. Hlavní třída, která
 
 #### Backend dámy s mlhou války
 
-Jedná se prakticky o totožnou hru, jako je ta předchozí, jenom třída `games/CheckersWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovala pouze dostupná políčka.
+Jedná se prakticky o totožnou hru, jako je ta předchozí, jenom třída `games/checkers/CheckersWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovala pouze dostupná políčka.
+
+#### Backend zaminované dámy
+
+Identické se zaminovánými šachy, aktorát se dědí z `games/checkers/Checkers` a výsledná třída je `games/checkers/CheckersMines`
+
+#### Backend zaminované dámy s mlhou války
+
+Identické s předchozím jenom je přidána mlha války. Nachází se ve třídě  `games/checkers/CheckersMinesWithFogOfWar`. 
 
 #### Backend piškvorek 3x3
 
@@ -101,13 +117,17 @@ Naše skupina došla k závěru, že je ve světě málo občanských válek a �
 - `games/humanDoNotWorry/pieces/GreenPiece`: zelená figurka
 - `games/humanDoNotWorry/pieces/WhitePiece`: bílá figurka
 
+#### Backend hry člověče nezlob se s mlhou války
+
+Tuto hru bych nepřál ani svému nejhoršímu nepříteli. Veškerá logika se dědí ze třídy `games/humanDoNotWorry` a jenom se ve třídě `games/humanDoNotWorryWithFogOfWar` přidává přepracovaná metoda na zakrývání obrazovky. 
+
 #### Backend hry pexeso
 
 Celá logika hry je v modulu `games/pexeso`, kde je hlavní třída `games/pexeso/Pexeso`, ve které je polovina logiky, druhá polovina se nacházi ve třídě `games/pexeso/PexesoBoard`, která dědí z `games/Board`. Ke hře se využívají ještě třídy `games/pexeso/PexesoCard`, které reprezentují jednotlivé kartičky a jejich stavy.
 
 ### Backend generování otázek
 
-Otázky se generují v modulech `questions`, kde je třída `questions/Question.py`, ze které všechny otázky dědí a která poskytuje základní představu o struktuře generátorů. Další důležitá třída je `questions/GenerateQuestion.py`, která slouží k obecnému vygenerování otázky. Otázky na konkrétní témata se pak generují v souborech:
+Otázky se generují v modulech `questions`, kde je třída `questions/Question.py`, ze které všechny otázky dědí a která poskytuje základní představu o struktuře generátorů. Další důležitá třída je `questions/GenerateQuestion.py`, která slouží k obecnému vygenerování otázky. Neposlední řadě je seznam `questions/listOfQuestions`, kde se dají snadno přidávat případně odstraňovat nově vzniklé generátory otázek. Otázky na konkrétní témata se pak generují v souborech:
 - `questions/generators/MatrixQuestionGenerator.py`: Generátor otázek na maticové operace.
 - `questions/generators/FractionQuestionGenerator.py`: Generátor otázek na zlomky a obecně dvojice čísel.
 - `questions/generators/DerivativeQuestionGenerator.py`: Generátor otázek na vyčíslování derivací.
@@ -118,6 +138,8 @@ Otázky se generují v modulech `questions`, kde je třída `questions/Question.
 - `questions/generators/OrdinalNumberQuestionGenerator.py`: Generátor otázek na ordinální čísla.
 - `questions/generators/KardinalNumberQuestionGenerator.py`: Generátor otázek na kardinální čísla.
 - `questions/generators/SetQuestionGenerator.py`: Generátor otázek na množiny.
+- `questions/generators/VectorQuestionGenerator.py`: Generátor otázek na vektory.
+- `questions/generators/ComplexQuestionGenerator.py`: Generátor otázek na komplexní čísla.
 
 ### Testy
 

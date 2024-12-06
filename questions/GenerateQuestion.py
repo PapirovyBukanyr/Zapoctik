@@ -1,7 +1,7 @@
 import random as rand
 from .Question import Question
 from .generators import *
-from .ListOfQuestions import listOfQuestions
+from .listOfQuestions import listOfQuestions
 
 
 class GenerateQuestion (Question):

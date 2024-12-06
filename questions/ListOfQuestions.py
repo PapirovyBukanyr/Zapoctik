@@ -1,5 +1,7 @@
 from .generators import *
 
+
+
 listOfQuestions = [
         ("Analytic geometry", AnalyticGeometryQuestionGenerator),
         ("Derivative", DerivativeQuestionGenerator),
@@ -15,3 +17,5 @@ listOfQuestions = [
         ("Vector", VectorQuestionGenerator),
         ("Complex number", ComplexQuestionGenerator)
     ]
+"""Seznam generátorů otázek. Každý generátor je dvojice, kde první prvek je název tématu a druhý prvek je generátor otázek.
+"""
