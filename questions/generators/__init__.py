@@ -9,4 +9,6 @@ from .SetQuestionGenerator import SetQuestionGenerator
 from .OrdinalNumberQuestionGenerator import OrdinalNumberQuestionGenerator
 from .KardinalNumberQuestionGenerator import KardinalNumberQuestionGenerator
 from .RegularLanguageQuestionGenerator import RegularLanguageQuestionGenerator
+from .VectorQuestionGenerator import VectorQuestionGenerator
+from .ComplexQuestionGenerator import ComplexQuestionGenerator
 

@@ -2,31 +2,14 @@ from .generators import *
 from .GenerateQuestion import GenerateQuestion
 import unittest
 from parameterized import parameterized
+from .ListOfQuestions import listOfQuestions
 
 class QuestionTests(unittest.TestCase):
     """Testy na generátory otázek
     """
     
     
-    allClasses = [
-        ("General use", GenerateQuestion),
-        ("Analytic geometry", AnalyticGeometryQuestionGenerator),
-        ("Derivative", DerivativeQuestionGenerator),
-        ("Fraction", FractionQuestionGenerator),
-        ("Infinitive series", InfinitiveSeriesQuestionGenerator),
-        ("Integral", IntegralQuestionGenerator),
-        ("Kardinal numbers", KardinalNumberQuestionGenerator),
-        ("Linear equation system", LinearEquationSystemQuestionGenerator),
-        ("Matrix", MatrixQuestionGenerator),
-        ("Ordinal numbers", OrdinalNumberQuestionGenerator),
-        ("Set", SetQuestionGenerator),
-        ("Regular language", RegularLanguageQuestionGenerator)
-    ]
-    """list: Seznam všech tříd generátorů otázek
-    """
-    
-    
-    @parameterized.expand(allClasses)
+    @parameterized.expand(listOfQuestions)
     def testNumberOfQuestions(self, name, generator_class):
         """Testuje, zda se generuje nenulový počet otázek
 
@@ -38,7 +21,7 @@ class QuestionTests(unittest.TestCase):
         self.assertGreater(generator.numberOfQuestions, 0)
         
     
-    @parameterized.expand(allClasses)
+    @parameterized.expand(listOfQuestions)
     def testGenerateQuestion(self, name, generator_class):
         """Testuje, zda se vygeneruje otázka
         
@@ -57,7 +40,7 @@ class QuestionTests(unittest.TestCase):
             self.assertNotEqual(generator.questionLatex, "")
         
         
-    @parameterized.expand(allClasses)
+    @parameterized.expand(listOfQuestions)
     def testDoupovcuvOperator(self, name, generator_class):
         """Testuje, zda se vygeneruje odpověď
 
@@ -73,7 +56,7 @@ class QuestionTests(unittest.TestCase):
             self.assertNotEqual(generator.doupovcuvOperator(), "")
             
 
-    @parameterized.expand(allClasses)
+    @parameterized.expand(listOfQuestions)
     def testCheckAnswer(self, name, generator_class):
         """Testuje, zda je odpověď správná
         
@@ -90,7 +73,7 @@ class QuestionTests(unittest.TestCase):
             self.assertTrue(generator.checkAnswer(generator.doupovcuvOperator().lower()))
         
 
-    @parameterized.expand(allClasses)
+    @parameterized.expand(listOfQuestions)
     def testWrongAnswer(self, name, generator_class):
         """Testuje, zda je odpověď špatná
         
@@ -104,7 +87,7 @@ class QuestionTests(unittest.TestCase):
             generator.generateQuestion(i)
             self.assertFalse(generator.checkAnswer("Wrong answer"))
             
-    @parameterized.expand(allClasses)
+    @parameterized.expand(listOfQuestions)
     def testTimeSet(self, name, generator_class):
         generator = generator_class()
         
@@ -113,7 +96,7 @@ class QuestionTests(unittest.TestCase):
             self.assertIsNotNone(generator.time)
             self.assertGreater(generator.time, 0)
             
-    @parameterized.expand(allClasses)
+    @parameterized.expand(listOfQuestions)
     def testHoderova(self, name, generator_class):
         generator = generator_class()
         
