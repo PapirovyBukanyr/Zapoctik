@@ -1,0 +1,3321 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage{listings}
+\usepackage{color}
+\definecolor{keyword}{rgb}{0.0, 0.5, 0.0}
+\lstset{basicstyle=\ttfamily,keywordstyle=\color{keyword},commentstyle=\itshape\color{blue},escapeinside={\%*}{*)}}
+\begin{document}
+\title{Dokumentace do projektu do matematickÃ©ho softwaru}
+\author{PÅ™Ã­HoDa}
+\date{\today}
+\maketitle
+\section*{Class: Board}
+\textit{Tøída reprezentující hrací desku hry
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy Board
+        }
+
+\subsection*{Method: \_populateBoard}
+\textit{Inicializace herní desky
+        }
+
+\subsection*{Method: \_str\_}
+\textit{Vytvoøí string hrací desky na vıpis do konzole
+        }
+
+\subsection*{Method: getListOfBoard}
+\textit{Vrací šachovnici jako list
+
+Returns:
+    List of Struct : List, kde kadı øádek je list obsahující figury na daném øádku}
+
+\subsubsection*{Returns}
+List of Struct : List, kde kadı øádek je list obsahující figury na daném øádku
+
+\subsection*{Method: \_getitem\_}
+\textit{Pro monost pøstupovat k poli board jako board[row,col] místo board.board[row][col]
+
+Args:
+    index: Tuple dvou integerù, (row, col)
+    
+Returns:
+    Figuru na urèeném místì na šachovnici, pøípadnì None, pokud je prázdné}
+
+\subsubsection*{Args}
+index: Tuple dvou integerù, (row, col)
+
+\subsubsection*{Returns}
+Figuru na urèeném místì na šachovnici, pøípadnì None, pokud je prázdné
+
+\subsection*{Method: \_setitem\_}
+\textit{Nastaví políèko na šachovnici jako board[row,col] namísto board.board[row][col] 
+
+Args:
+    index ([int, int]): Tuple dvou integerù, (row, col)
+    value (any): Co se má nastavit na dané políèko}
+
+\subsubsection*{Args}
+index ([int, int]): Tuple dvou integerù, (row, col)
+    value (any): Co se má nastavit na dané políèko
+
+\section*{Class: ChallengeAccepted}
+\subsubsection*{Attribute: \_init\_}
+\subsubsection*{Attribute: getBoard}
+\subsubsection*{Attribute: getField}
+\subsubsection*{Attribute: moveMole}
+\subsubsection*{Attribute: makeMove}
+\subsubsection*{Attribute: checkEnd}
+\subsubsection*{Attribute: printToTerminal}
+\section*{Class: Checkers}
+\textit{Tøída reprezentující hru dáma
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy hry dáma
+        }
+
+\subsection*{Method: getBoard}
+\textit{Funkce pro získání hrací desky
+
+Args:
+    color (Enum Colors, optional): barva hráèe na tahu. Vıchozí nastavení je na pravidelném støídání.
+    
+Returns:
+    List of List of [int, int]: hrací deska}
+
+\subsubsection*{Args}
+color (Enum Colors, optional): barva hráèe na tahu. Vıchozí nastavení je na pravidelném støídání.
+
+\subsubsection*{Returns}
+List of List of [int, int]: hrací deska
+
+\subsection*{Method: choosePiece}
+\textit{Funkce pro vyber figurky, kterou chce hrac hrat
+
+Args:
+    index ([int,int]): pozice figurky, kterou chce hrac hrat
+    color (Enum Colors, optional): barva hráèe na tahu. Vıchozí nastavení je na pravidelném støídání.
+
+Returns:
+    List of [int, int]: seznam dostupnıch pozic, kam mùe hráè hrát}
+
+\subsubsection*{Args}
+index ([int,int]): pozice figurky, kterou chce hrac hrat
+    color (Enum Colors, optional): barva hráèe na tahu. Vıchozí nastavení je na pravidelném støídání.
+
+\subsubsection*{Returns}
+List of [int, int]: seznam dostupnıch pozic, kam mùe hráè hrát
+
+\subsection*{Method: makeMove}
+\textit{Funkce pro provedení tahu figurkou
+
+Args:
+    index ([int,int]): pozice, kam chce hráè hrát
+    color (Enum Colors, optional): barva hráèe na tahu. Vıchozí nastavení je na pravidelném støídání.
+    rightClick (bool, optional): True, pokud se jedná o pravé tlaèítko myši. Vıchozí nastavení je False.
+    
+Returns:
+    bool: True, pokud se tah podaøil, jinak False}
+
+\subsubsection*{Args}
+index ([int,int]): pozice, kam chce hráè hrát
+    color (Enum Colors, optional): barva hráèe na tahu. Vıchozí nastavení je na pravidelném støídání.
+    rightClick (bool, optional): True, pokud se jedná o pravé tlaèítko myši. Vıchozí nastavení je False.
+
+\subsubsection*{Returns}
+bool: True, pokud se tah podaøil, jinak False
+
+\subsection*{Method: reset}
+\textit{Funkce pro resetování hry
+        }
+
+\subsection*{Method: checkEnd}
+\textit{Funkce pro kontrolu konce hry
+
+Returns:
+    string: Vrací vítìze "{barva} won", pokud hra skonèila, jinak None}
+
+\subsubsection*{Returns}
+string: Vrací vítìze "{barva} won", pokud hra skonèila, jinak None
+
+\subsection*{Method: \_endOfTurn}
+\textit{Funkce pro ukonèení tahu
+        }
+
+\subsection*{Method: possibleMoves}
+\textit{Funkce pro získání monıch tahù pro hráèe, primárnì pro rozšíøení Fog Of War
+
+Args:
+    color (Enum Colors): barva hráèe, pro kterého se mají tahy získat
+    
+Returns:
+    List of [int, int]: seznam monıch tahù}
+
+\subsubsection*{Args}
+color (Enum Colors): barva hráèe, pro kterého se mají tahy získat
+
+\subsubsection*{Returns}
+List of [int, int]: seznam monıch tahù
+
+\subsection*{Method: killPiece}
+\textit{Funkce pro odstranìní figurky z hrací desky
+
+Args:
+    piecePosition ([int, int]): pozice figurky, která má bıt odstranìna}
+
+\subsubsection*{Args}
+piecePosition ([int, int]): pozice figurky, která má bıt odstranìna
+
+\subsection*{Method: \_printToTerminal}
+\textit{Funkce pro vıpis stavu hry na terminál
+        }
+
+\section*{Class: CheckersBoard}
+\textit{Tøída reprezentující šachovnici pro hru dáma. Dìdí z tøídy Board.
+  }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy CheckersBoard. Vytvoøí šachovnici a umístí na ni všechny figurky do poèáteèní polohy.
+    }
+
+\subsection*{Method: \_getitem\_}
+\textit{Vrací figuru na urèeném místì na šachovnici, nebo None, pokud je políèko prázdné. 
+
+Args:
+    index [int, int]: Tuple dvou integerù, (row, col), oba 0-7}
+
+\subsubsection*{Args}
+index [int, int]: Tuple dvou integerù, (row, col), oba 0-7
+
+\subsection*{Method: \_setitem\_}
+\textit{Nastaví políèko na šachovnici jako board[row,col] namísto board.board[row][col] 
+
+Args:
+    index ([int, int]): Tuple dvou integerù, (row, col), oba 0-7
+    value (Piece): Instance tøídy Piece, nebo None, pokud má bıt políèko prázdné
+    
+Returns:
+    bool: True, pokud se podaøilo nastavit políèko, jinak False}
+
+\subsubsection*{Args}
+index ([int, int]): Tuple dvou integerù, (row, col), oba 0-7
+    value (Piece): Instance tøídy Piece, nebo None, pokud má bıt políèko prázdné
+
+\subsubsection*{Returns}
+bool: True, pokud se podaøilo nastavit políèko, jinak False
+
+\subsection*{Method: \_str\_}
+\textit{Vrací string reprezentaci šachovnice. Kadé políèko je reprezentováno jako string, kterı je tvoøen z informací o barvì a symbolu figury, nebo jako string "\_", pokud je políèko prázdné. Políèka jsou oddìlena mezerou a jednotlivé øádky jsou oddìleny znakem nového øádku (
+).
+    
+    Returns:
+        string: string reprezentace šachovnice
+    }
+
+\subsubsection*{Returns}
+string: string reprezentace šachovnice
+
+\subsection*{Method: \_populateBoard}
+\textit{Nastaví šachovnici do poèáteèního stavu. Bílı je dole a èernı nahoøe.
+    }
+
+\subsection*{Method: pieceList}
+\textit{Vrací list všech figurek dané barvy na šachovnici.
+
+Args:
+    color (Enum Colors): Barva figurek, které chceme najít (Colors.WHITE nebo Colors.BLACK)
+    
+Returns: 
+    List of Pieces: List figurek dané barvy}
+
+\subsubsection*{Args}
+color (Enum Colors): Barva figurek, které chceme najít (Colors.WHITE nebo Colors.BLACK)
+
+\subsubsection*{Returns}
+List of Pieces: List figurek dané barvy
+
+\subsection*{Method: getListOfBoard}
+\textit{Vrací list všech figurek na šachovnici.
+
+Returns: 
+    List of Fields: List figurek na šachovnici}
+
+\subsubsection*{Returns}
+List of Fields: List figurek na šachovnici
+
+\section*{Class: CheckersMines}
+\textit{Hra dáma s minami.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Inicializace hry.
+        }
+
+\subsection*{Method: \_placeMines}
+\textit{Umístí miny na náhodné pozice.
+        }
+
+\subsection*{Method: getBoard}
+\textit{Vrátí hrací desku.
+        }
+
+\subsection*{Method: makeMove}
+\textit{Zpracuje tah.
+        }
+
+\section*{Class: CheckersMinesWithFogOfWar}
+\textit{Tøída CheckersWithFogOfWar slouí k reprezentaci hry Dáma s mlhou války.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy CheckersWithFogOfWar
+        }
+
+\subsection*{Method: getBoard}
+\textit{Vrací zakrytou šachovnici
+
+Args:
+    color (Enum Colors): Barva hráèe na tahu
+
+Returns:
+    Array of Field: zakrytá šachovnice}
+
+\subsubsection*{Args}
+color (Enum Colors): Barva hráèe na tahu
+
+\subsubsection*{Returns}
+Array of Field: zakrytá šachovnice
+
+\section*{Class: Pawn}
+\textit{Tøída reprezentující pìšáka
+    }
+
+\subsection*{Method: \_str\_}
+\textit{Funkce na vıpis figurky
+
+Returns:
+    str: P + barva figurky}
+
+\subsubsection*{Returns}
+str: P + barva figurky
+
+\subsection*{Method: possibleMoves}
+\textit{Funkce najde všechny moné tahy figurky
+
+Args:
+    board (two-dimensional array of ints): hrací deska
+    
+Returns:
+    [int,int]: pole monıch tahù}
+
+\subsubsection*{Args}
+board (two-dimensional array of ints): hrací deska
+
+\subsubsection*{Returns}
+[int,int]: pole monıch tahù
+
+\subsection*{Method: possibleJumps}
+\textit{Funkce najde všechny jednoduché skoky z pozice
+
+Args:
+    board (two-dimensional array of ints): hrací deska
+    position ([int,int]], optional): _description_. Defaults to None.
+
+Returns:
+    [int,int]: pole monıch skokù}
+
+\subsubsection*{Args}
+board (two-dimensional array of ints): hrací deska
+    position ([int,int]], optional): _description_. Defaults to None.
+
+\subsubsection*{Returns}
+[int,int]: pole monıch skokù
+
+\subsection*{Method: trackJumps}
+\textit{Funkce na zjištìní pøeskoèenıch figurek
+
+Args:
+    endPosition ([int, int]): koncová pozice
+
+Returns:
+    [int, int]: pozice pøeskoeèené figurky}
+
+\subsubsection*{Args}
+endPosition ([int, int]): koncová pozice
+
+\subsubsection*{Returns}
+[int, int]: pozice pøeskoeèené figurky
+
+\section*{Class: Piece}
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy Piece
+
+Args:
+    color (Enum Colors): poadovaná barva figurky
+    position ([int,int]): vıchozí pozice figurky}
+
+\subsubsection*{Args}
+color (Enum Colors): poadovaná barva figurky
+    position ([int,int]): vıchozí pozice figurky
+
+\subsection*{Method: possibleMoves}
+\textit{Metoda pro zjištìní monıch tahù figurky
+
+Args:
+    board (Board): hrací deska, na které se figurka nachází}
+
+\subsubsection*{Args}
+board (Board): hrací deska, na které se figurka nachází
+
+\subsection*{Method: possibleJumps}
+\textit{Metoda pro zjištìní monıch skokù figurky
+
+Args:
+    board (Board): hrací deska, na které se figurka nachází
+    position ([int, int], optional): pozice, ze které se má skákat. Vıchozí hodnota je None, co znamená, e se skáèe ze souèasné pozice figurky}
+
+\subsubsection*{Args}
+board (Board): hrací deska, na které se figurka nachází
+    position ([int, int], optional): pozice, ze které se má skákat. Vıchozí hodnota je None, co znamená, e se skáèe ze souèasné pozice figurky
+
+\subsection*{Method: trackJumps}
+\textit{Metoda pro zjištìní monıch skokù figurky
+
+Args:
+    board (Board): hrací deska, na které se figurka nachází
+    endPosition ([int, int]): pozice, kam se má skákat}
+
+\subsubsection*{Args}
+board (Board): hrací deska, na které se figurka nachází
+    endPosition ([int, int]): pozice, kam se má skákat
+
+\subsection*{Method: row}
+\textit{Vlastnost pro získání øádku, na kterém se figurka nachází
+
+Returns:
+    int: øádek, na kterém se figurka nachází}
+
+\subsubsection*{Returns}
+int: øádek, na kterém se figurka nachází
+
+\subsection*{Method: col}
+\textit{Vlastnost pro získání sloupce, na kterém se figurka nachází
+
+Returns:
+    int: sloupec, na kterém se figurka nachází}
+
+\subsubsection*{Returns}
+int: sloupec, na kterém se figurka nachází
+
+\section*{Class: Queen}
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy Queen
+
+Args:
+    pawn (Pawn): Pìšák, kterı se má promìnit na dámu}
+
+\subsubsection*{Args}
+pawn (Pawn): Pìšák, kterı se má promìnit na dámu
+
+\subsection*{Method: \_str\_}
+\textit{Vrací string reprezentaci dámy
+
+Returns:
+    string: string reprezentace dámy}
+
+\subsubsection*{Returns}
+string: string reprezentace dámy
+
+\subsection*{Method: possibleMoves}
+\textit{Vrací seznam monıch tahù dámy
+
+Args:
+    board (CheckersBoard): šachovnice, na které se dáma nachází
+
+Returns:
+    List of [int, int] : seznam monıch tahù dámy}
+
+\subsubsection*{Args}
+board (CheckersBoard): šachovnice, na které se dáma nachází
+
+\subsubsection*{Returns}
+List of [int, int] : seznam monıch tahù dámy
+
+\subsection*{Method: possibleJumps}
+\textit{Vrací seznam monıch prvních skokù dámy
+
+Args:
+    board (CheckersBoard): šachovnice, na které se dáma nachází
+    position ([int, int], optional): pozice, ze které se má skákat. Vıchozí hodnota je None, co znamená, e se skáèe ze souèasné pozice dámy
+    
+Returns:
+    List of [int, int]: seznam monıch prvních skokù dámy}
+
+\subsubsection*{Args}
+board (CheckersBoard): šachovnice, na které se dáma nachází
+    position ([int, int], optional): pozice, ze které se má skákat. Vıchozí hodnota je None, co znamená, e se skáèe ze souèasné pozice dámy
+
+\subsubsection*{Returns}
+List of [int, int]: seznam monıch prvních skokù dámy
+
+\subsection*{Method: trackJumps}
+\textit{Vrací seznam pozic figurek, které dáma pøeskoèí, ne se dostane na koncovou pozici
+
+Args:
+    endPosition ([int, int]): koncová pozice, na kterou se má dáma dostat
+    
+Returns:
+    List of [int, int]: seznam pozic figurek, které dáma pøeskoèí, ne se dostane na koncovou pozici}
+
+\subsubsection*{Args}
+endPosition ([int, int]): koncová pozice, na kterou se má dáma dostat
+
+\subsubsection*{Returns}
+List of [int, int]: seznam pozic figurek, které dáma pøeskoèí, ne se dostane na koncovou pozici
+
+\section*{Class: CheckersWithFogOfWar}
+\textit{Tøída CheckersWithFogOfWar slouí k reprezentaci hry Dáma s mlhou války.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy CheckersWithFogOfWar
+        }
+
+\subsection*{Method: getBoard}
+\textit{Vrací zakrytou šachovnici
+
+Args:
+    color (Enum Colors): Barva hráèe na tahu
+
+Returns:
+    Array of Field: zakrytá šachovnice}
+
+\subsubsection*{Args}
+color (Enum Colors): Barva hráèe na tahu
+
+\subsubsection*{Returns}
+Array of Field: zakrytá šachovnice
+
+\section*{Class: Chess}
+\textit{Tøída reprezentující hru šachy
+  }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy šachù
+    }
+
+\subsection*{Method: getBoard}
+\textit{Vrátí šachovnici v aktuálním stavu jako dvourozmìrné pole Field
+
+Args:
+    color (Enum Colors): Barva hráèe, pro kterého se má šachovnice vykreslit
+    
+Returns:
+    list of list of Field: šachovnice}
+
+\subsubsection*{Args}
+color (Enum Colors): Barva hráèe, pro kterého se má šachovnice vykreslit
+
+\subsubsection*{Returns}
+list of list of Field: šachovnice
+
+\subsection*{Method: choosePiece}
+\textit{Funkce pro vyber figurky, kterou chce hrac hrat
+
+Args:
+    positionToPlay ([int, int]): pozice figurky, kterou chce hrac hrat
+    color (Enum Colors): Barva hrace, ktery chce hrat
+
+Returns:
+    (list of [int, int]): dostupne pozice, kam muze hrac hrat}
+
+\subsubsection*{Args}
+positionToPlay ([int, int]): pozice figurky, kterou chce hrac hrat
+    color (Enum Colors): Barva hrace, ktery chce hrat
+
+\subsubsection*{Returns}
+(list of [int, int]): dostupne pozice, kam muze hrac hrat
+
+\subsection*{Method: makeMove}
+\textit{Provedení tahu hrace
+
+Args:
+    playedMove ([int, int]): pozice, kam chce hrac hrat
+    color (Enum Colors): Barva hrace, ktery chce hrat
+    rightClick (bool): True, pokud hrac klikl pravym tlacitkem mysi, jinak False
+
+Returns:
+    bool: tah se zdaøil nebo ne
+    string: "Promote" pokud je potreba provest vylepseni pesaka}
+
+\subsubsection*{Args}
+playedMove ([int, int]): pozice, kam chce hrac hrat
+    color (Enum Colors): Barva hrace, ktery chce hrat
+    rightClick (bool): True, pokud hrac klikl pravym tlacitkem mysi, jinak False
+
+\subsubsection*{Returns}
+bool: tah se zdaøil nebo ne
+    string: "Promote" pokud je potreba provest vylepseni pesaka
+
+\subsection*{Method: promote}
+\textit{Promote pesaka
+
+Args:
+    newFigure (string): figurka, na kterou se ma pesak zmenit ("Q", "R", "B", "N")
+    
+Returns:
+    bool: podle toho zda se tah podaril nebo ne
+    string: pokud hra skoncila}
+
+\subsubsection*{Args}
+newFigure (string): figurka, na kterou se ma pesak zmenit ("Q", "R", "B", "N")
+
+\subsubsection*{Returns}
+bool: podle toho zda se tah podaril nebo ne
+    string: pokud hra skoncila
+
+\subsection*{Method: \_endOfMove}
+\textit{Konec tahu
+
+Returns:
+    True: novy stav sachovnice po tahu
+    string: string pokud hra skoncila}
+
+\subsubsection*{Returns}
+True: novy stav sachovnice po tahu
+    string: string pokud hra skoncila
+
+\subsection*{Method: possibleMoves}
+\textit{Vrati mozne tahy pro hrace, primárnì pro rozšíøení Fog Of War
+
+Args:
+    color (Enum Colors): barva hrace, pro ktereho se maji tahy vypsat
+    
+Returns:
+    list of [int, int]: seznam moznych tahu}
+
+\subsubsection*{Args}
+color (Enum Colors): barva hrace, pro ktereho se maji tahy vypsat
+
+\subsubsection*{Returns}
+list of [int, int]: seznam moznych tahu
+
+\subsection*{Method: checkEnd}
+\textit{Kontrola konce hry
+
+Returns:
+    string: "Draw by fifty-move rule" pokud bylo 50 tahu bez pohybu pesaku nebo braneni
+    string: "Draw by threefold repetition" pokud se stejna pozice opakovala 3x
+    string: "{color} won" pokud byl vyhozen kral
+    None: pokud hra neskoncila}
+
+\subsubsection*{Returns}
+string: "Draw by fifty-move rule" pokud bylo 50 tahu bez pohybu pesaku nebo braneni
+    string: "Draw by threefold repetition" pokud se stejna pozice opakovala 3x
+    string: "{color} won" pokud byl vyhozen kral
+    None: pokud hra neskoncila
+
+\subsection*{Method: killPiece}
+\textit{Vyhození figurky z hrací desky
+
+Args:
+    piecePosition ([int, int]): pozice figurky, kterou chceme vyhodit}
+
+\subsubsection*{Args}
+piecePosition ([int, int]): pozice figurky, kterou chceme vyhodit
+
+\subsection*{Method: \_printToTerminal}
+\textit{Vytiskne hrací desku do konzole
+    }
+
+\section*{Class: ChessBoard}
+\textit{Tøída reprezentující šachovnici s figurkami. Dìdí od tøídy Board. 
+  }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy ChessBoard. Vytvoøí šachovnici 8x8 a umístí na ni všechny figury ve standardním poøadí.
+    }
+
+\subsection*{Method: \_getitem\_}
+\textit{Vrací figuru na urèeném místì na šachovnici, nebo None, pokud je políèko prázdné. 
+
+Args:
+    index [int, int]: Tuple dvou integerù, (row, col), oba 0-7
+
+Returns:
+    Piece: Instance tøídy Piece, nebo None, pokud je políèko prázdné}
+
+\subsubsection*{Args}
+index [int, int]: Tuple dvou integerù, (row, col), oba 0-7
+
+\subsubsection*{Returns}
+Piece: Instance tøídy Piece, nebo None, pokud je políèko prázdné
+
+\subsection*{Method: \_setitem\_}
+\textit{Nastaví políèko na šachovnici jako board[row,col] namísto board.board[row][col] 
+
+Args:
+    index ([int, int]): Tuple dvou integerù, (row, col), oba 0-7
+    value (Piece): Instance tøídy Piece, nebo None, pokud má bıt políèko prázdné
+    
+Returns:
+    bool: True, pokud se podaøilo nastavit políèko, jinak False}
+
+\subsubsection*{Args}
+index ([int, int]): Tuple dvou integerù, (row, col), oba 0-7
+    value (Piece): Instance tøídy Piece, nebo None, pokud má bıt políèko prázdné
+
+\subsubsection*{Returns}
+bool: True, pokud se podaøilo nastavit políèko, jinak False
+
+\subsection*{Method: \_str\_}
+\textit{Vrací string reprezentaci šachovnice. Kadé políèko je reprezentováno jako string, kterı je tvoøen z informací o barvì a symbolu figury, nebo jako string "\_", pokud je políèko prázdné. Políèka jsou oddìlena mezerou a jednotlivé øádky jsou oddìleny znakem nového øádku (
+).
+    }
+
+\subsection*{Method: \_populateBoard}
+\textit{Nastaví šachovnici do normálního stavu. Všichni pìšáci jsou v druhém a sedmém øádku, všechny ostatní figury jsou v prvním a osmém øádku. Barva figurek je v souladu s konvencí, e bílı je dole a èernı nahoøe.
+    }
+
+\subsection*{Method: pieceList}
+\textit{Vrací list všech figurek dané barvy na šachovnici.
+
+Args:
+    color (Enum Colors): Barva figurek, které chceme najít (Colors.WHITE nebo Colors.BLACK)
+    
+Returns: 
+    List of Pieces: List figurek dané barvy}
+
+\subsubsection*{Args}
+color (Enum Colors): Barva figurek, které chceme najít (Colors.WHITE nebo Colors.BLACK)
+
+\subsubsection*{Returns}
+List of Pieces: List figurek dané barvy
+
+\subsection*{Method: copy}
+\textit{Vrátí kopii šachovnice. Kadá figura z originální šachovnice je nahrazena její kopií.
+
+Returns:
+    ChessBoard: Kopie šachovnice}
+
+\subsubsection*{Returns}
+ChessBoard: Kopie šachovnice
+
+\subsection*{Method: compare}
+\textit{Porovná dvì šachovnice.
+Tato metoda porovná dvì šachovnice a vrátí True, pokud jsou stejné. Jinak vrátí False.
+
+Args: 
+    board: Šachovnice, která se má porovnat s aktuální šachovnicí
+
+Returns: 
+    Boolean:True, pokud jsou šachovnice stejné, jinak False}
+
+\subsubsection*{Args}
+board: Šachovnice, která se má porovnat s aktuální šachovnicí
+
+\subsubsection*{Returns}
+Boolean:True, pokud jsou šachovnice stejné, jinak False
+
+\subsection*{Method: getListOfBoard}
+\textit{Vrátí šachovnici jako list of Field.
+
+Returns:
+    List of Struct Field: šachovnice jako list of Field}
+
+\subsubsection*{Returns}
+List of Struct Field: šachovnice jako list of Field
+
+\section*{Class: ChessMines}
+\textit{Hra šachy s minami.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Inicializace hry.
+        }
+
+\subsection*{Method: \_placeMines}
+\textit{Umístí miny na náhodné pozice.
+        }
+
+\subsection*{Method: getBoard}
+\textit{Vrátí hrací desku.
+        }
+
+\subsection*{Method: makeMove}
+\textit{Zpracuje tah.
+        }
+
+\section*{Class: ChessMinesWithFogOfWar}
+\textit{Hra šachy s minami a mlhou války.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy ChessMinesWithFogOfWar
+        }
+
+\subsection*{Method: getBoard}
+\textit{Vrátí hrací desku.
+        }
+
+\section*{Class: Bishop}
+\textit{Tøída reprezentující figurku støelce v šachu. Dìdí od tøídy Piece.
+  }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy Bishop. Volá konstruktor tøídy Piece.
+    }
+
+\subsection*{Method: copy}
+\textit{Vytvoøí kopii instance tøídy Bishop.
+    }
+
+\subsection*{Method: possibleMoves}
+\textit{Vrátí seznam monıch tahù pro støelce. 
+    }
+
+\section*{Class: King}
+\textit{Tøída reprezentující figurku krále v šachu. Dìdí od tøídy Piece.
+  }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy King. Volá konstruktor tøídy Piece.
+    }
+
+\subsection*{Method: copy}
+\textit{Vytvoøí kopii instance tøídy King.
+    }
+
+\subsection*{Method: move}
+\textit{Zkontroluje, zda je moné provést tah králem a provede ho.
+
+Args:
+  board - šachovnice
+  end - cílová pozice tahu}
+
+\subsubsection*{Args}
+board - šachovnice
+  end - cílová pozice tahu
+
+\subsection*{Method: possibleMoves}
+\textit{Vrátí seznam monıch tahù pro krále. 
+    }
+
+\section*{Class: Knight}
+\textit{Tøída reprezentující figurku jezdce v šachu. Dìdí od tøídy Piece.
+  }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy Knight. Volá konstruktor tøídy Piece
+
+Args:
+  color (Colors): barva figurky
+  position ([int, int]): pozice figurky}
+
+\subsubsection*{Args}
+color (Colors): barva figurky
+  position ([int, int]): pozice figurky
+
+\subsection*{Method: copy}
+\textit{Vytvoøí kopii instance tøídy Knight.
+    }
+
+\subsection*{Method: possibleMoves}
+\textit{Vrátí seznam monıch tahù pro jezdce.
+
+Args:
+  board (dict): šachovnice}
+
+\subsubsection*{Args}
+board (dict): šachovnice
+
+\section*{Class: Pawn}
+\textit{Tøída reprezentující pìšce v šachu. Dìdí od tøídy Piece.
+  }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy Pawn. Volá konstruktor tøídy Piece.
+    }
+
+\subsection*{Method: copy}
+\textit{Vytvoøí kopii instance tøídy Pawn.
+    }
+
+\subsection*{Method: move}
+\textit{Zkontroluje, zda je moné provést tah pìšcem a provede ho.
+
+Args:
+  board (dict): šachovnice
+  end ([int, int]): cílová pozice tahu}
+
+\subsubsection*{Args}
+board (dict): šachovnice
+  end ([int, int]): cílová pozice tahu
+
+\subsection*{Method: possibleMoves}
+\textit{Vrátí seznam monıch tahù pro pìšce.
+
+Args:
+  board (dict): šachovnice}
+
+\subsubsection*{Args}
+board (dict): šachovnice
+
+\section*{Class: Piece}
+\textit{Tøída reprezentující jednu figurku na šachovnici.
+  }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy Piece. Nastaví barvu a pozici figurky.
+    }
+
+\subsection*{Method: move}
+\textit{Metoda pro pohnutí figurky po šachovnici
+
+Args:
+    board (Board): Sachovnice, na kterou se tah províde
+    end ([row, col]): Policko, kam se tah províde}
+
+\subsubsection*{Args}
+board (Board): Sachovnice, na kterou se tah províde
+    end ([row, col]): Policko, kam se tah províde
+
+\subsection*{Method: row}
+\textit{Vrací øádek, na kterém se figurka nachází
+
+Returns:
+    int: Øádek figurky}
+
+\subsubsection*{Returns}
+int: Øádek figurky
+
+\subsection*{Method: col}
+\textit{Vrací sloupec, na kterém se figurka nachází
+
+Returns:
+    int: Sloupec figurky}
+
+\subsubsection*{Returns}
+int: Sloupec figurky
+
+\subsection*{Method: possibleMoves}
+\textit{Funkce pro vypsání všech monıch tahù danou figurkou
+
+Args:
+    board (Board): Sachovnice, na kterou se tah províde
+
+Returns:
+    (list of [row, col]): Seznam všech monıch tahù ve formátu}
+
+\subsubsection*{Args}
+board (Board): Sachovnice, na kterou se tah províde
+
+\subsubsection*{Returns}
+(list of [row, col]): Seznam všech monıch tahù ve formátu
+
+\subsection*{Method: copy}
+\textit{Vraci kopii objektu. Pouziva se, kdybychom chteli mit kopii objektu, bez toho, aby se menil puvodni objekt.
+Returns:
+    (Piece): Kopie objektu}
+
+\subsubsection*{Returns}
+(Piece): Kopie objektu
+
+\section*{Class: Queen}
+\textit{Tøída reprezentující figurku královny v šachu. Dìdí od tøídy Piece.
+  }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy Queen. Volá konstruktor tøídy Piece.
+    }
+
+\subsection*{Method: copy}
+\textit{Vytvoøí kopii instance tøídy Queen.
+    }
+
+\subsection*{Method: possibleMoves}
+\textit{Vrátí seznam monıch tahù pro královnu. 
+    }
+
+\section*{Class: Rook}
+\textit{Tøída reprezentující figurku vìe v šachu. Dìdí od tøídy Piece.
+  }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy Rook. Volá konstruktor tøídy Piece.
+    }
+
+\subsection*{Method: copy}
+\textit{Vytvoøí kopii instance tøídy Rook.
+    }
+
+\subsection*{Method: possibleMoves}
+\textit{Vrátí seznam monıch tahù pro vì.
+
+Args:
+  board (dict): šachovnice}
+
+\subsubsection*{Args}
+board (dict): šachovnice
+
+\section*{Class: ChessTrackGame}
+\textit{Hra ChessTrackGame.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Inicializace hry.
+        }
+
+\subsection*{Method: getBoard}
+\textit{Vrácení hrací desky.
+
+Args:
+    color (Enum Colors): Barva hráèe.
+
+Returns:
+    ChessTrackGameBoard: Hrací deska.}
+
+\subsubsection*{Args}
+color (Enum Colors): Barva hráèe.
+
+\subsubsection*{Returns}
+ChessTrackGameBoard: Hrací deska.
+
+\subsection*{Method: makeMove}
+\textit{Provedení tahu.
+
+Args:
+    position ([int,int]]): Pozice, na kterou se má kámen umístit.
+    color (Enum Colors): Barva kamene.
+    rightClick (bool): True, pokud se jedná o pravé tlaèítko myši.
+    
+Returns:
+    bool: True, pokud je tah platnı, jinak False.}
+
+\subsubsection*{Args}
+position ([int,int]]): Pozice, na kterou se má kámen umístit.
+    color (Enum Colors): Barva kamene.
+    rightClick (bool): True, pokud se jedná o pravé tlaèítko myši.
+
+\subsubsection*{Returns}
+bool: True, pokud je tah platnı, jinak False.
+
+\subsection*{Method: checkEnd}
+\textit{Kontrola konce hry.
+
+Returns:
+    Enum EndGame: Vısledek hry.}
+
+\subsubsection*{Returns}
+Enum EndGame: Vısledek hry.
+
+\subsection*{Method: \_printToTerminal}
+\textit{Vypsání hrací desky do terminálu.
+        }
+
+\section*{Class: ChessTrackGameBoard}
+\textit{Hrací deska hry ChessTrackGame.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Inicializace hrací desky.
+        }
+
+\subsection*{Method: \_populateBoard}
+\textit{Inicializace hrací desky.
+        }
+
+\subsection*{Method: \_spinBoard}
+\textit{Otoèení hrací desky.
+        }
+
+\subsection*{Method: \_placeStone}
+\textit{Umístìní kamene na desku.
+
+Args:
+    position ([int,int]]): Pozice, na kterou se má kámen umístit.
+    color (Enum Colors): Barva kamene.}
+
+\subsubsection*{Args}
+position ([int,int]]): Pozice, na kterou se má kámen umístit.
+    color (Enum Colors): Barva kamene.
+
+\subsection*{Method: makeMove}
+\textit{Provedení tahu.
+
+Args:
+    position ([int,int]]): Pozice, na kterou se má kámen umístit.
+    color (Enum Colors): Barva kamene.}
+
+\subsubsection*{Args}
+position ([int,int]]): Pozice, na kterou se má kámen umístit.
+    color (Enum Colors): Barva kamene.
+
+\subsection*{Method: getListOfBoard}
+\textit{Vrátí seznam seznamù reprezentující hrací desku.
+
+Returns:
+    list: Seznam seznamù reprezentující hrací desku.}
+
+\subsubsection*{Returns}
+list: Seznam seznamù reprezentující hrací desku.
+
+\subsection*{Method: checkEnd}
+\textit{Kontrola konce hry.
+
+Returns:
+    str: Vısledek hry.}
+
+\subsubsection*{Returns}
+str: Vısledek hry.
+
+\subsection*{Method: \_checkWinner}
+\textit{Kontrola vıherce.
+
+Returns:
+    str: Vısledek hry.}
+
+\subsubsection*{Returns}
+str: Vısledek hry.
+
+\section*{Class: ChessWithFogOfWar}
+\textit{Tøída ChessWithFogOfWar slouí k reprezentaci hry Šachy s mlhou války.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy ChessWithFogOfWar
+        }
+
+\subsection*{Method: getBoard}
+\textit{Vrací zakrytou šachovnici
+
+Args:   
+    color (Enum Colors): Barva hráèe na tahu
+
+Returns:
+    Array of Field: zakrytá šachovnice}
+
+\subsubsection*{Args}
+color (Enum Colors): Barva hráèe na tahu
+
+\subsubsection*{Returns}
+Array of Field: zakrytá šachovnice
+
+\section*{Class: ConnectFour}
+\textit{Hrací deska pro hru ConnectFour 
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Inicializace hry ConnectFour
+        }
+
+\subsection*{Method: getBoard}
+\textit{Vrací hrací desku
+
+Args:
+    color (Enum, optional): Barva hráèe. Defaults to None.
+
+Returns:
+    List of Struct: Hrací deska}
+
+\subsubsection*{Args}
+color (Enum, optional): Barva hráèe. Defaults to None.
+
+\subsubsection*{Returns}
+List of Struct: Hrací deska
+
+\subsection*{Method: makeMove}
+\textit{Provedení tahu
+
+Args:
+    position ([int,int]): Pozice tahu
+    color (Enum, optional): Barva hráèe. Defaults to None.
+    rightClick (bool, optional): True, pokud se jedná o pravé tlaèítko myši. Defaults to False.
+
+Returns:
+    bool: True, pokud se tah podaøil, jinak False}
+
+\subsubsection*{Args}
+position ([int,int]): Pozice tahu
+    color (Enum, optional): Barva hráèe. Defaults to None.
+    rightClick (bool, optional): True, pokud se jedná o pravé tlaèítko myši. Defaults to False.
+
+\subsubsection*{Returns}
+bool: True, pokud se tah podaøil, jinak False
+
+\subsection*{Method: checkEnd}
+\textit{Zjištìní konce hry
+
+Returns:
+    Enum: Barva vítìze}
+
+\subsubsection*{Returns}
+Enum: Barva vítìze
+
+\subsection*{Method: \_printToTerminal}
+\textit{Vıpis hrací desky do konzole
+        }
+
+\section*{Class: ConnectFourBoard}
+\textit{Hrací deska pro hru ConnectFour 
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Inicializace hry ConnectFour
+        }
+
+\subsection*{Method: \_str\_}
+\textit{Vytvoøí string hrací desky na vıpis do konzole
+        }
+
+\subsection*{Method: \_populateBoard}
+\textit{Inicializace herní desky
+        }
+
+\subsection*{Method: findMove}
+\textit{Provedení tahu
+
+Args:
+    position ([int,int]): Pozice tahu
+    up (bool, optional): Smìr zjišování umístìní. Defaults to False, tedy dolù.
+    
+Returns:
+    [int,int]: Pozice, kam se má umístit kámen            }
+
+\subsubsection*{Args}
+position ([int,int]): Pozice tahu
+    up (bool, optional): Smìr zjišování umístìní. Defaults to False, tedy dolù.
+
+\subsubsection*{Returns}
+[int,int]: Pozice, kam se má umístit kámen
+
+\subsection*{Method: makeMove}
+\textit{Provedení tahu
+
+Args:
+    position ([int,int]): Pozice tahu
+    color (Enum): Barva hráèe
+    
+Returns:
+    bool: True, pokud se tah podaøil, jinak False}
+
+\subsubsection*{Args}
+position ([int,int]): Pozice tahu
+    color (Enum): Barva hráèe
+
+\subsubsection*{Returns}
+bool: True, pokud se tah podaøil, jinak False
+
+\subsection*{Method: isFull}
+\textit{Zjistí, zda je herní deska plná
+
+Returns:
+    bool: True, pokud je deska plná, jinak False}
+
+\subsubsection*{Returns}
+bool: True, pokud je deska plná, jinak False
+
+\subsection*{Method: checkEnd}
+\textit{Zjistí, zda je konec hry
+
+Args:
+    position ([int,int]): Pozice tahu
+    color (Enum): Barva hráèe
+    
+Returns:
+    bool: True, pokud je konec hry, jinak False}
+
+\subsubsection*{Args}
+position ([int,int]): Pozice tahu
+    color (Enum): Barva hráèe
+
+\subsubsection*{Returns}
+bool: True, pokud je konec hry, jinak False
+
+\subsection*{Method: checkWin}
+\textit{Zjistí, zda hráè vyhrál
+
+Args:
+    color (Enum): Barva hráèe
+    
+Returns:
+    bool: True, pokud hráè vyhrál, jinak False}
+
+\subsubsection*{Args}
+color (Enum): Barva hráèe
+
+\subsubsection*{Returns}
+bool: True, pokud hráè vyhrál, jinak False
+
+\subsection*{Method: checkHorizontal}
+\textit{Zjistí, zda hráè vyhrál horizontálnì
+
+Args:
+    color (Enum): Barva hráèe
+    
+Returns:
+    bool: True, pokud hráè vyhrál horizontálnì, jinak False}
+
+\subsubsection*{Args}
+color (Enum): Barva hráèe
+
+\subsubsection*{Returns}
+bool: True, pokud hráè vyhrál horizontálnì, jinak False
+
+\subsection*{Method: checkVertical}
+\textit{Zjistí, zda hráè vyhrál vertikálnì
+
+Args:
+    color (Enum): Barva hráèe
+    
+Returns:
+    bool: True, pokud hráè vyhrál vertikálnì, jinak False}
+
+\subsubsection*{Args}
+color (Enum): Barva hráèe
+
+\subsubsection*{Returns}
+bool: True, pokud hráè vyhrál vertikálnì, jinak False
+
+\subsection*{Method: checkDiagonal}
+\textit{Zjistí, zda hráè vyhrál diagonálnì
+
+Args:
+    color (Enum): Barva hráèe
+    
+Returns:
+    bool: True, pokud hráè vyhrál diagonálnì, jinak False}
+
+\subsubsection*{Args}
+color (Enum): Barva hráèe
+
+\subsubsection*{Returns}
+bool: True, pokud hráè vyhrál diagonálnì, jinak False
+
+\subsection*{Method: getListOfBoard}
+\textit{Vrací šachovnici jako list
+
+Returns:
+    List of Struct : List, kde kadı øádek je list obsahující figury na daném øádku}
+
+\subsubsection*{Returns}
+List of Struct : List, kde kadı øádek je list obsahující figury na daném øádku
+
+\section*{Class: Field}
+\textit{Tøída reprezentující políèko na šachovnici
+  }
+
+\section*{Class: Figures}
+\textit{Enum pro typy figurek
+  }
+
+\subsubsection*{Attribute: PAWN}
+\subsubsection*{Attribute: ROOK}
+\subsubsection*{Attribute: BISHOP}
+\subsubsection*{Attribute: KNIGHT}
+\subsubsection*{Attribute: QUEEN}
+\subsubsection*{Attribute: KING}
+\subsubsection*{Attribute: X}
+\subsubsection*{Attribute: O}
+\subsubsection*{Attribute: FLAG}
+\subsubsection*{Attribute: EXPLOSION}
+\subsubsection*{Attribute: MINE}
+\subsubsection*{Attribute: ONE}
+\subsubsection*{Attribute: TWO}
+\subsubsection*{Attribute: THREE}
+\subsubsection*{Attribute: FOUR}
+\subsubsection*{Attribute: FIVE}
+\subsubsection*{Attribute: SIX}
+\subsubsection*{Attribute: SEVEN}
+\subsubsection*{Attribute: EIGHT}
+\subsubsection*{Attribute: SHADOW}
+\subsubsection*{Attribute: MOLE}
+\subsubsection*{Attribute: LOGO}
+\section*{Class: Colors}
+\textit{Enum pro barvy
+  }
+
+\subsubsection*{Attribute: WHITE}
+\subsubsection*{Attribute: BLACK}
+\subsubsection*{Attribute: RED}
+\subsubsection*{Attribute: GREEN}
+\subsection*{Method: \_str\_}
+\textit{Vrací string reprezentaci barvy
+
+Returns:
+    String: reprezentovaná barva}
+
+\subsubsection*{Returns}
+String: reprezentovaná barva
+
+\subsection*{Method: changeColor}
+\textit{Vrátí inverzní barvu
+
+Returns:
+    Enum Colors: inverzní barva}
+
+\subsubsection*{Returns}
+Enum Colors: inverzní barva
+
+\subsection*{Method: changeColorFour}
+\textit{Vrátí další barvu
+
+Returns:
+    Enum Colors: další barva}
+
+\subsubsection*{Returns}
+Enum Colors: další barva
+
+\section*{Class: GameTemplate}
+\textit{Tøída GameTemplate slouí k reprezentaci šablony hry.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy GameTemplate
+        }
+
+\section*{Class: GameTests}
+\textit{Testy na hry
+    }
+
+\subsection*{Method: testInitialBoard}
+\textit{Testuje, zda se vytvoøí hrací pole
+
+Args:
+    name (string): jméno hry
+    game_class (game): tøída hry}
+
+\subsubsection*{Args}
+name (string): jméno hry
+    game_class (game): tøída hry
+
+\subsection*{Method: testChoosePiece}
+\textit{Testuje, zda se figurka dá vybrat
+
+Args:
+    name (string): jméno hry
+    game_class (game): tøída hry
+    position ([int, int]): pozice figurky, se kterou se má pohnout
+    color (Enum Colors): barva na tahu}
+
+\subsubsection*{Args}
+name (string): jméno hry
+    game_class (game): tøída hry
+    position ([int, int]): pozice figurky, se kterou se má pohnout
+    color (Enum Colors): barva na tahu
+
+\subsection*{Method: testChooseWrongPiece}
+\textit{Testuje, zda se figurka nedá vybrat
+
+Args:
+    name (string): jméno hry
+    game_class (game): tøída hry
+    position ([int, int]): pozice figurky, se kterou se má pohnout
+    color (Enum Colors): barva na tahu}
+
+\subsubsection*{Args}
+name (string): jméno hry
+    game_class (game): tøída hry
+    position ([int, int]): pozice figurky, se kterou se má pohnout
+    color (Enum Colors): barva na tahu
+
+\subsection*{Method: testChooseUnablePiece}
+\textit{Testuje, zda se figurka nedá vybrat
+
+Args:
+    name (string): jméno hry
+    game_class (game): tøída hry
+    position ([int, int]): pozice figurky, se kterou se má pohnout
+    color (Enum Colors): barva na tahu}
+
+\subsubsection*{Args}
+name (string): jméno hry
+    game_class (game): tøída hry
+    position ([int, int]): pozice figurky, se kterou se má pohnout
+    color (Enum Colors): barva na tahu
+
+\subsection*{Method: testMakeMove}
+\textit{Testuje, zda se pohyb provede
+
+Args:
+    name (string): jméno hry
+    game_class (game): tøída hry
+    choose_position ([int, int]): pozice figurky, se kterou se má pohnout
+    color (Enum Colors): barva na tahu
+    move_position ([int, int]): pozice, kam se má figurka pohnout}
+
+\subsubsection*{Args}
+name (string): jméno hry
+    game_class (game): tøída hry
+    choose_position ([int, int]): pozice figurky, se kterou se má pohnout
+    color (Enum Colors): barva na tahu
+    move_position ([int, int]): pozice, kam se má figurka pohnout
+
+\subsection*{Method: testMakeWrongMove}
+\textit{Testuje, zda se pohyb nelze provést
+
+Args:
+    name (string): jméno hry
+    game_class (game): tøída hry
+    choose_position ([int, int]): pozice figurky, se kterou se má pohnout
+    color (Enum Colors): barva na tahu
+    move_position ([int, int]): pozice, kam se má figurka pohnout}
+
+\subsubsection*{Args}
+name (string): jméno hry
+    game_class (game): tøída hry
+    choose_position ([int, int]): pozice figurky, se kterou se má pohnout
+    color (Enum Colors): barva na tahu
+    move_position ([int, int]): pozice, kam se má figurka pohnout
+
+\subsection*{Method: testMakeUnableMove}
+\textit{Testuje, zda se pohyb nelze provést
+
+Args:
+    name (string): jméno hry
+    game_class (game): tøída hry
+    choose_position ([int, int]): pozice figurky, se kterou se má pohnout
+    color (Enum Colors): barva na tahu
+    move_position ([int, int]): pozice, kam se má figurka pohnout}
+
+\subsubsection*{Args}
+name (string): jméno hry
+    game_class (game): tøída hry
+    choose_position ([int, int]): pozice figurky, se kterou se má pohnout
+    color (Enum Colors): barva na tahu
+    move_position ([int, int]): pozice, kam se má figurka pohnout
+
+\subsection*{Method: testCheckEnd}
+\textit{Testuje, zda hra skonèila
+
+Args:
+    name (string): jméno hry
+    game_class (game): tøída hry}
+
+\subsubsection*{Args}
+name (string): jméno hry
+    game_class (game): tøída hry
+
+\subsection*{Method: testWithChoosingPiece}
+\textit{Testuje, zda je definováno vybírání figurky
+
+Args:
+    name (string): jméno hry
+    game_class (game): tøída hry}
+
+\subsubsection*{Args}
+name (string): jméno hry
+    game_class (game): tøída hry
+
+\subsection*{Method: testFog}
+\textit{Testuje, zda je definován mlhovı efekt
+
+Args:
+    name (string): jméno hry
+    game_class (game): tøída hry}
+
+\subsubsection*{Args}
+name (string): jméno hry
+    game_class (game): tøída hry
+
+\subsection*{Method: testNumberOfPlayers}
+\textit{Testuje, zda je definován poèet hráèù
+
+Args:
+    name (string): jméno hry
+    game_class (game): tøída hry}
+
+\subsubsection*{Args}
+name (string): jméno hry
+    game_class (game): tøída hry
+
+\subsection*{Method: testSimulateFullGame}
+\textit{Testuje, zda se hra zahraje do konce
+
+Args:
+    name (string): jméno hry
+    game_class (game): tøída hry}
+
+\subsubsection*{Args}
+name (string): jméno hry
+    game_class (game): tøída hry
+
+\section*{Class: HumanDoNotWorry}
+\textit{Tøída pro hru èlovìèe, nezlob se.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy hry èlovìèe, nezlob se.
+        }
+
+\subsection*{Method: getBoard}
+\textit{Metoda vrátí hrací desku.
+
+Args:
+    color (Enum Colors, optional): Barva hráèe na tahu. Defaults to None.
+
+Returns:
+    List of list of field: Hrací deska}
+
+\subsubsection*{Args}
+color (Enum Colors, optional): Barva hráèe na tahu. Defaults to None.
+
+\subsubsection*{Returns}
+List of list of field: Hrací deska
+
+\subsection*{Method: choosePiece}
+\textit{Metoda zvolí figurku, kterou se bude hrát.
+
+Args:
+    position (int): Pozice figurky
+    color (Enum Colors, optional): Barva hráèe. Defaults to None.
+
+Returns:
+    bool: True, pokud se podaøilo zvolit figurku, jinak False}
+
+\subsubsection*{Args}
+position (int): Pozice figurky
+    color (Enum Colors, optional): Barva hráèe. Defaults to None.
+
+\subsubsection*{Returns}
+bool: True, pokud se podaøilo zvolit figurku, jinak False
+
+\subsection*{Method: makeMove}
+\textit{Metoda provede tah figurkou.
+
+Args:
+    position ([int,int]): Pozice figurky
+    color (Enum Colors, optional): Barva hráèe. Defaults to None.
+    rightClick (bool, optional): True, pokud se jedná o pravé tlaèítko myši. Defaults to False.
+
+Returns:
+    bool: True, pokud se podaøilo provést tah, jinak False}
+
+\subsubsection*{Args}
+position ([int,int]): Pozice figurky
+    color (Enum Colors, optional): Barva hráèe. Defaults to None.
+    rightClick (bool, optional): True, pokud se jedná o pravé tlaèítko myši. Defaults to False.
+
+\subsubsection*{Returns}
+bool: True, pokud se podaøilo provést tah, jinak False
+
+\subsection*{Method: \_makeStandartMove}
+\textit{Metoda provede standardní tah figurkou.
+
+Args:
+    row (int): øádek
+    col (int): sloupec}
+
+\subsubsection*{Args}
+row (int): øádek
+    col (int): sloupec
+
+\subsection*{Method: \_placeToFinal}
+\textit{Metoda umístí figurku do cíle.
+
+Args:
+    board (Board): Hrací deska
+    piece (Piece): Figurka}
+
+\subsubsection*{Args}
+board (Board): Hrací deska
+    piece (Piece): Figurka
+
+\subsection*{Method: checkEnd}
+\textit{Metoda zkontroluje, zda hra skonèila.
+
+Returns:
+    string: Vrátí barvu hráèe, kterı vyhrál, jinak None}
+
+\subsubsection*{Returns}
+string: Vrátí barvu hráèe, kterı vyhrál, jinak None
+
+\subsection*{Method: rollDice}
+\textit{Metoda hodí kostkou.
+
+Returns:
+    int: Hodnota kostky}
+
+\subsubsection*{Returns}
+int: Hodnota kostky
+
+\subsection*{Method: \_printToTerminal}
+\textit{Metoda vytiskne hrací desku na obrazovku.
+        }
+
+\section*{Class: HumanDoNotWorryBoard}
+\textit{Tøída HumanDoNotWorryBoard slouí k reprezentaci hrací desky hry èlovìèe, nezlob se.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy HumanDoNotWorryBoard.
+        }
+
+\subsection*{Method: \_str\_}
+\textit{Vrátí textovou reprezentaci instance tøídy HumanDoNotWorryBoard.
+        }
+
+\subsection*{Method: isDeployed}
+\textit{Metoda, která zjistí, zda je alespoò jedna figurka zadané barvy nasazena.
+
+Args:
+    color (Colors): Barva figurky}
+
+\subsubsection*{Args}
+color (Colors): Barva figurky
+
+\subsection*{Method: \_populateBoard}
+\textit{Metoda, která naplní hrací desku figurkami.
+        }
+
+\subsection*{Method: getListOfBoard}
+\textit{Metoda, která vrátí seznam seznamù reprezentující hrací desku.
+
+Returns:
+    List of List of Field: Seznam seznamù reprezentující hrací desku}
+
+\subsubsection*{Returns}
+List of List of Field: Seznam seznamù reprezentující hrací desku
+
+\section*{Class: BlackPiece}
+\textit{Tøída BlackPiece slouí k reprezentaci jedné èerné figurky.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy BlackPiece.
+
+Args:
+    position ([int,int]): Pozice figurky}
+
+\subsubsection*{Args}
+position ([int,int]): Pozice figurky
+
+\subsection*{Method: \_str\_}
+\textit{Vrací textovou reprezentaci instance tøídy BlackPiece.
+
+Returns:
+    str: Textová reprezentace instance tøídy BlackPiece}
+
+\subsubsection*{Returns}
+str: Textová reprezentace instance tøídy BlackPiece
+
+\section*{Class: GreenPiece}
+\textit{Tøída GreenPiece slouí k reprezentaci jedné zelené figurky.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy GreenPiece.
+
+Args:
+    position ([int,int]): Pozice figurky}
+
+\subsubsection*{Args}
+position ([int,int]): Pozice figurky
+
+\subsection*{Method: \_str\_}
+\textit{Vrací textovou reprezentaci instance tøídy GreenPiece.
+
+Returns:
+    str: Textová reprezentace instance tøídy GreenPiece}
+
+\subsubsection*{Returns}
+str: Textová reprezentace instance tøídy GreenPiece
+
+\section*{Class: Piece}
+\textit{Tøída Piece slouí k reprezentaci jedné herní figurky.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy Piece.
+
+Args:
+    color (Colors): Barva figurky
+    position ([int,int]): Pozice figurky}
+
+\subsubsection*{Args}
+color (Colors): Barva figurky
+    position ([int,int]): Pozice figurky
+
+\subsection*{Method: returnHome}
+\textit{Metoda vrátí figurku domù.
+        }
+
+\subsection*{Method: possibleMoves}
+\textit{Metoda vrátí seznam monıch tahù figurky.
+
+Args:
+    number (int): Poèet oèek hodìnıch na kostce
+    
+Returns:
+    List of [int,int]: Seznam monıch tahù figurky}
+
+\subsubsection*{Args}
+number (int): Poèet oèek hodìnıch na kostce
+
+\subsubsection*{Returns}
+List of [int,int]: Seznam monıch tahù figurky
+
+\subsection*{Method: makeStandartMove}
+\textit{Metoda provede standardní tah figurkou.
+
+Args:
+    board (Board): Hrací deska
+    position ([int,int]): Pozice figurky}
+
+\subsubsection*{Args}
+board (Board): Hrací deska
+    position ([int,int]): Pozice figurky
+
+\section*{Class: RedPiece}
+\textit{Tøída RedPiece slouí k reprezentaci jedné èervené figurky.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy RedPiece.
+
+Args:
+    position ([int,int]): Pozice figurky}
+
+\subsubsection*{Args}
+position ([int,int]): Pozice figurky
+
+\subsection*{Method: \_str\_}
+\textit{Vrací textovou reprezentaci instance tøídy RedPiece.
+
+Returns:
+    str: Textová reprezentace instance tøídy RedPiece}
+
+\subsubsection*{Returns}
+str: Textová reprezentace instance tøídy RedPiece
+
+\section*{Class: WhitePiece}
+\textit{Tøída WhitePiece slouí k reprezentaci jedné bílé figurky.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy WhitePiece.
+
+Args:
+    position ([int,int]): Pozice figurky}
+
+\subsubsection*{Args}
+position ([int,int]): Pozice figurky
+
+\subsection*{Method: \_str\_}
+\textit{Vrací textovou reprezentaci instance tøídy WhitePiece.
+
+Returns:
+    str: Textová reprezentace instance tøídy WhitePiece}
+
+\subsubsection*{Returns}
+str: Textová reprezentace instance tøídy WhitePiece
+
+\section*{Class: Game}
+\textit{Tøída reprezentující hru v seznamu her pro frontend
+    }
+
+\section*{Class: ListOfGames}
+\textit{Tøída reprezentující seznam her pro frontend
+    }
+
+\subsection*{Method: getListOfGames}
+\textit{Vrací seznam her pro frontend
+
+Returns:
+    List[Game]: seznam her}
+
+\subsubsection*{Returns}
+List[Game]: seznam her
+
+\section*{Class: MathGame}
+\textit{Tøída reprezentující hru MathGame
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy matematické hry. Vytvoøí novou hru a nastaví poèáteèní hodnoty.
+        }
+
+\subsection*{Method: getBoard}
+\textit{Vrátí šachovnici ve formì dvourozmìrného pole objektù Field
+
+Args:
+    color (Enum Colors, optional): Barva hráèe. Defaults to None.
+
+Returns:
+    list: dvourozmìrné pole objektù Field}
+
+\subsubsection*{Args}
+color (Enum Colors, optional): Barva hráèe. Defaults to None.
+
+\subsubsection*{Returns}
+list: dvourozmìrné pole objektù Field
+
+\subsection*{Method: choosePiece}
+\textit{Vrátí moné tahy pro danou pozici
+
+Args:
+    position ([int,int]): pozice figury
+    color (Enum Colors, optional): Barva figury. Defaults to None.
+
+Returns:
+    List of List of int: List monıch tahù figury, prázdnı list pokud tah není monı}
+
+\subsubsection*{Args}
+position ([int,int]): pozice figury
+    color (Enum Colors, optional): Barva figury. Defaults to None.
+
+\subsubsection*{Returns}
+List of List of int: List monıch tahù figury, prázdnı list pokud tah není monı
+
+\subsection*{Method: makeMove}
+\textit{Pøesune figuru na jinou pozici
+
+Args:
+    move ([int,int]): nová pozice figury
+    color (Enum Colors, optional): Barva figury. Defaults to None.
+    rightClick (bool, optional): True, pokud hráè klikl pravım tlaèítkem myši, jina False. Defaults to False.
+    
+Returns:
+    bool: True, pokud se tah podaøil, jinak False
+    List of List of int: List monıch tahù figury, pokud se dá pokraèovat v pohybu}
+
+\subsubsection*{Args}
+move ([int,int]): nová pozice figury
+    color (Enum Colors, optional): Barva figury. Defaults to None.
+    rightClick (bool, optional): True, pokud hráè klikl pravım tlaèítkem myši, jina False. Defaults to False.
+
+\subsubsection*{Returns}
+bool: True, pokud se tah podaøil, jinak False
+    List of List of int: List monıch tahù figury, pokud se dá pokraèovat v pohybu
+
+\subsection*{Method: checkEnd}
+\textit{Zkontroluje, zda hra skonèila
+
+Returns:
+    String: Vrací vısledek hry, pokud hra skonèila, jinak None}
+
+\subsubsection*{Returns}
+String: Vrací vısledek hry, pokud hra skonèila, jinak None
+
+\subsection*{Method: \_printToTerminal}
+\textit{Vytiskne aktuální stav hry na terminál
+        }
+
+\section*{Class: MathGameBoard}
+\textit{Tøída reprezentující šachovnici pro matematickou hru. Šachovnice je 8x8 a obsahuje figury typu Colors a "TASK". Figury typu Colors jsou na šachovnici reprezentovány barvou, figury typu "TASK" jsou úkoly, které je potøeba splnit. 
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy herní desky pro matematickou hru. Vytvoøí novou šachovnici a nastaví poèáteèní hodnoty.
+      }
+
+\subsection*{Method: \_getitem\_}
+\textit{Vrací figuru na urèeném místì na šachovnici, nebo None, pokud je políèko prázdné. 
+
+Args:
+    index [int, int]: Tuple dvou integerù, (row, col), oba 0-7}
+
+\subsubsection*{Args}
+index [int, int]: Tuple dvou integerù, (row, col), oba 0-7
+
+\subsection*{Method: \_setitem\_}
+\textit{Nastaví políèko na šachovnici jako board[row,col] namísto board.board[row][col] 
+
+Args:
+    index ([int, int]): Tuple dvou integerù, (row, col), oba 0-7
+    value (Piece): Instance tøídy Piece, nebo None, pokud má bıt políèko prázdné
+
+Returns:
+    bool: True, pokud se podaøilo nastavit políèko, jinak False}
+
+\subsubsection*{Args}
+index ([int, int]): Tuple dvou integerù, (row, col), oba 0-7
+    value (Piece): Instance tøídy Piece, nebo None, pokud má bıt políèko prázdné
+
+\subsubsection*{Returns}
+bool: True, pokud se podaøilo nastavit políèko, jinak False
+
+\subsection*{Method: \_str\_}
+\textit{Vrací string reprezentaci šachovnice. Kadé políèko je reprezentováno jako string, kterı je tvoøen z informací o barvì a symbolu figury, nebo jako string "\_", pokud je políèko prázdné. Políèka jsou oddìlena mezerou a jednotlivé øádky jsou oddìleny znakem nového øádku (
+).
+      
+      Returns:
+          String: String reprezentace šachovnice
+      }
+
+\subsubsection*{Returns}
+String: String reprezentace šachovnice
+
+\subsection*{Method: \_populateBoard}
+\textit{Nastaví šachovnici do poèáteèního stavu. Bílı je vpravo dole a èernı vlevo nahoøe.}
+
+\subsection*{Method: TasksLeft}
+\textit{Vrací poèet zbıvajících úkolù na šachovnici.
+
+Returns:
+    int: Poèet zbıvajících úkolù}
+
+\subsubsection*{Returns}
+int: Poèet zbıvajících úkolù
+
+\subsection*{Method: getPosition}
+\textit{Vrací pozici figury dané barvy.
+
+Args:
+    color (Enum Colors): Barva figurek, které chceme najít (Colors.WHITE nebo Colors.BLACK)
+
+Returns: 
+    [int, int]: Pozice figury na šachovnici}
+
+\subsubsection*{Args}
+color (Enum Colors): Barva figurek, které chceme najít (Colors.WHITE nebo Colors.BLACK)
+
+\subsubsection*{Returns}
+[int, int]: Pozice figury na šachovnici
+
+\subsection*{Method: getPosibleMoves}
+\textit{Vrací moné tahy figury na dané pozici.
+
+Args:
+    position ([int, int]): Pozice figury na šachovnici
+
+Returns:
+    List of [int, int]: List monıch tahù figury}
+
+\subsubsection*{Args}
+position ([int, int]): Pozice figury na šachovnici
+
+\subsubsection*{Returns}
+List of [int, int]: List monıch tahù figury
+
+\subsection*{Method: movePiece}
+\textit{Pøesune figuru na jiné místo na šachovnici.
+
+Args:
+    move ([int, int]): Nová pozice figury
+    color (Enum Colors): Barva figury, kterou chceme pøesunout}
+
+\subsubsection*{Args}
+move ([int, int]): Nová pozice figury
+    color (Enum Colors): Barva figury, kterou chceme pøesunout
+
+\subsection*{Method: getListOfBoard}
+\textit{Vrací list všech figurek na šachovnici.
+
+Returns: 
+    List of Fields: List figurek na šachovnici}
+
+\subsubsection*{Returns}
+List of Fields: List figurek na šachovnici
+
+\section*{Class: Mines}
+\textit{Tøída reprezentující hru Miny
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Inicializace hry Miny
+        }
+
+\subsection*{Method: makeMove}
+\textit{Provede tah hráèe
+
+Args:
+    position ([int, int]): pozice, kam se má hráè pohnout
+    color (Enum Colors): barva na tahu
+    rightClick (bool): True, pokud hráè klikl pravım tlaèítkem myši, jinak False
+    
+Returns:
+    bool: úspìšnost tahu}
+
+\subsubsection*{Args}
+position ([int, int]): pozice, kam se má hráè pohnout
+    color (Enum Colors): barva na tahu
+    rightClick (bool): True, pokud hráè klikl pravım tlaèítkem myši, jinak False
+
+\subsubsection*{Returns}
+bool: úspìšnost tahu
+
+\subsection*{Method: makeUncoverMove}
+\textit{Provede tah 
+
+Args:
+    position ([int, int]): pozice, kam se má hráè pohnout
+    color (Enum Colors): barva na tahu
+    
+Returns:
+    bool: úspìšnost tahu}
+
+\subsubsection*{Args}
+position ([int, int]): pozice, kam se má hráè pohnout
+    color (Enum Colors): barva na tahu
+
+\subsubsection*{Returns}
+bool: úspìšnost tahu
+
+\subsection*{Method: checkEnd}
+\textit{Zkontroluje, zda hra skonèila
+
+Returns:
+    None: pokud hra neskonèila
+    string: vısledek hry}
+
+\subsubsection*{Returns}
+None: pokud hra neskonèila
+    string: vısledek hry
+
+\subsection*{Method: placeFlag}
+\textit{Umístí vlajku na danou pozici
+
+Args:
+    position ([int, int]): pozice, kam se má vlajka umístit
+    color (Enum Colors): barva na tahu
+    
+Returns:
+    bool: úspìšnost umístìní vlajky}
+
+\subsubsection*{Args}
+position ([int, int]): pozice, kam se má vlajka umístit
+    color (Enum Colors): barva na tahu
+
+\subsubsection*{Returns}
+bool: úspìšnost umístìní vlajky
+
+\subsection*{Method: getBoard}
+\textit{Vrátí herní desku
+
+Args:
+    color (Enum Colors, optional): Barva, která je na tahu. Vıchozí je None.
+
+Returns:
+    list: herní deska}
+
+\subsubsection*{Args}
+color (Enum Colors, optional): Barva, která je na tahu. Vıchozí je None.
+
+\subsubsection*{Returns}
+list: herní deska
+
+\subsection*{Method: \_printToTerminal}
+\textit{Vypíše herní desku do konzole
+        }
+
+\section*{Class: MinesBoard}
+\textit{Tøída reprezentující hrací desku hry Miny
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Inicializace hrací desky Miny
+
+Args:
+    numberOfMines (int): poèet min na hrací desce}
+
+\subsubsection*{Args}
+numberOfMines (int): poèet min na hrací desce
+
+\subsection*{Method: \_populateBoard}
+\textit{Naplní hrací desku minami
+        }
+
+\subsection*{Method: \_placeMines}
+\textit{Umístí miny na hrací desku
+        }
+
+\subsection*{Method: countMinesAroundSymbol}
+\textit{Spoèítá miny kolem symbolu
+
+Args:
+    row (int): øádek
+    col (int): sloupec
+    
+Returns:
+    int: poèet min kolem symbolu}
+
+\subsubsection*{Args}
+row (int): øádek
+    col (int): sloupec
+
+\subsubsection*{Returns}
+int: poèet min kolem symbolu
+
+\subsection*{Method: minesRemaining}
+\textit{Spoèítá zbıvající neoznaèené miny na hrací desce
+
+Returns:
+    int: poèet zbıvajících neoznaèenıch min}
+
+\subsubsection*{Returns}
+int: poèet zbıvajících neoznaèenıch min
+
+\subsection*{Method: flagsPlanted}
+\textit{Spoèítá poèet vlajek na hrací desce
+
+Returns:
+    int: poèet vlajek}
+
+\subsubsection*{Returns}
+int: poèet vlajek
+
+\subsection*{Method: makeMove}
+\textit{Provede tah na hrací desce
+
+Args:
+    row (int): øádek
+    col (int): sloupec
+    
+Returns:
+    bool: True, pokud tah byl úspìšnı, jinak False}
+
+\subsubsection*{Args}
+row (int): øádek
+    col (int): sloupec
+
+\subsubsection*{Returns}
+bool: True, pokud tah byl úspìšnı, jinak False
+
+\subsection*{Method: \_showBoard}
+\textit{Odkryje dostupné symboly na hrací desce po odkrytí políèka
+
+Args:
+    row (int): øádek
+    col (int): sloupec}
+
+\subsubsection*{Args}
+row (int): øádek
+    col (int): sloupec
+
+\subsection*{Method: placeFlag}
+\textit{Umístí vlajku na hrací desku
+
+Args:
+    row (int): øádek
+    col (int): sloupec
+    
+Returns:
+    bool: False, pokud se vlajka neumístí
+    int: -1, pokud se správná vlajka odstraní, 1, pokud se vlajka umístí správnì a 0, pokud se vlajka odstraní nebo pøidá na špatné místo}
+
+\subsubsection*{Args}
+row (int): øádek
+    col (int): sloupec
+
+\subsubsection*{Returns}
+bool: False, pokud se vlajka neumístí
+    int: -1, pokud se správná vlajka odstraní, 1, pokud se vlajka umístí správnì a 0, pokud se vlajka odstraní nebo pøidá na špatné místo
+
+\subsection*{Method: \_str\_}
+\textit{Vygeneruje textovou reprezentaci hrací desky
+
+Returns:
+    string: textová reprezentace hrací desky}
+
+\subsubsection*{Returns}
+string: textová reprezentace hrací desky
+
+\section*{Class: Pexeso}
+\textit{Tøída reprezentující hru Pexeso
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Inicializace hry Pexeso
+        }
+
+\subsection*{Method: getBoard}
+\textit{Vrátí hrací plochu
+
+Args:
+    color (Enum Colors): barva hráèe
+
+Returns:
+    list: hrací plocha}
+
+\subsubsection*{Args}
+color (Enum Colors): barva hráèe
+
+\subsubsection*{Returns}
+list: hrací plocha
+
+\subsection*{Method: makeMove}
+\textit{Provede tah
+
+Args:
+    position ([int, int]): pozice, kterou chce hráè otoèit
+    color (Enum Colors): barva na tahu
+    rightClick (bool): True, pokud hráè klikl pravım tlaèítkem myši, jinak False
+    
+Returns:
+    bool: úspìšnost tahu}
+
+\subsubsection*{Args}
+position ([int, int]): pozice, kterou chce hráè otoèit
+    color (Enum Colors): barva na tahu
+    rightClick (bool): True, pokud hráè klikl pravım tlaèítkem myši, jinak False
+
+\subsubsection*{Returns}
+bool: úspìšnost tahu
+
+\subsection*{Method: checkEnd}
+\textit{Zkontroluje, zda hra skonèila
+
+Returns:
+    None: pokud hra neskonèila
+    string: vısledek hry}
+
+\subsubsection*{Returns}
+None: pokud hra neskonèila
+    string: vısledek hry
+
+\subsection*{Method: \_printToTerminal}
+\textit{Funkce pro vypsání hrací plochy do terminálu
+        }
+
+\section*{Class: PexesoBoard}
+\textit{Reprezentace hrací desky hry Pexeso
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Inicializace hrací desky
+        }
+
+\subsection*{Method: \_populateBoard}
+\textit{Vygeneruje náhodné kartièky na hrací desku
+        }
+
+\subsection*{Method: shuffleBoard}
+\textit{Zamíchá kartièky na hrací desce
+        }
+
+\subsection*{Method: hideCards}
+\textit{Schovej všechny kartièky
+        }
+
+\subsection*{Method: \_str\_}
+\textit{Vrátí textovou reprezentaci hrací desky
+        }
+
+\subsection*{Method: makeMove}
+\textit{Provede tah
+        }
+
+\subsection*{Method: isRevealed}
+\textit{Vrátí, zda je kartièka na dané pozici odhalena
+
+Args:
+    position ([int, int]): pozice kartièky
+    
+Returns:
+    bool: zda je kartièka odhalena}
+
+\subsubsection*{Args}
+position ([int, int]): pozice kartièky
+
+\subsubsection*{Returns}
+bool: zda je kartièka odhalena
+
+\subsection*{Method: isCompleted}
+\textit{Vrátí, zda je kartièka na dané pozici uhodnuta
+
+Args:
+    position ([int, int]): pozice kartièky
+    
+Returns:
+    bool: zda je kartièka uhodnuta}
+
+\subsubsection*{Args}
+position ([int, int]): pozice kartièky
+
+\subsubsection*{Returns}
+bool: zda je kartièka uhodnuta
+
+\subsection*{Method: getListOfBoard}
+\textit{Vrátí hrací plochu
+        }
+
+\section*{Class: PexesoCard}
+\textit{Reprezentace jedné kartièky hry Pexeso
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Inicializace kartièky
+
+Args:
+    symbol (Field): symbol kartièky
+    odhalena (bool): zda je kartièka odhalena}
+
+\subsubsection*{Args}
+symbol (Field): symbol kartièky
+    odhalena (bool): zda je kartièka odhalena
+
+\subsection*{Method: getSymbol}
+\textit{Vrátí symbol kartièky
+
+Returns:
+    Field: symbol kartièky}
+
+\subsubsection*{Returns}
+Field: symbol kartièky
+
+\subsection*{Method: equals}
+\textit{Porovná symboly dvou kartièek
+
+Args:
+    other (PexesoCard): druhá kartièka
+
+Returns:
+    bool: zda jsou symboly stejné}
+
+\subsubsection*{Args}
+other (PexesoCard): druhá kartièka
+
+\subsubsection*{Returns}
+bool: zda jsou symboly stejné
+
+\subsection*{Method: turn}
+\textit{Otoèí kartièku
+        }
+
+\subsection*{Method: hide}
+\textit{Schovej kartièku
+        }
+
+\subsection*{Method: reveal}
+\textit{Odhal kartièku
+        }
+
+\subsection*{Method: match}
+\textit{Oznaè kartièku jako vyøešenou
+        }
+
+\section*{Class: TicTacToe}
+\textit{Tøída reprezentující hru Piškvorky
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Inicializace hry
+        }
+
+\subsection*{Method: getBoard}
+\textit{Vrátí hrací desku
+
+Args:
+    color (Enum Colors, optional): barva hráèe na tahu. Vıchozí nastavení je na pravidelném støídání.
+
+Returns:
+    List: hrací deska}
+
+\subsubsection*{Args}
+color (Enum Colors, optional): barva hráèe na tahu. Vıchozí nastavení je na pravidelném støídání.
+
+\subsubsection*{Returns}
+List: hrací deska
+
+\subsection*{Method: makeMove}
+\textit{Metoda na zahrání tahu
+
+Args:
+    index ([int,int]): pozice kterou chce hráè obsadit
+    player (Enum Colors, optional): Hráè co má bıt na tahu. Vıchozí je nastaveno na støídání.
+    rightClick (bool, optional): True, pokud se jedná o pravé tlaèítko myši. Defaults to False.
+
+Returns:
+    Boolean: true pokud se tah podaøil, jinak false}
+
+\subsubsection*{Args}
+index ([int,int]): pozice kterou chce hráè obsadit
+    player (Enum Colors, optional): Hráè co má bıt na tahu. Vıchozí je nastaveno na støídání.
+    rightClick (bool, optional): True, pokud se jedná o pravé tlaèítko myši. Defaults to False.
+
+\subsubsection*{Returns}
+Boolean: true pokud se tah podaøil, jinak false
+
+\subsection*{Method: checkEnd}
+\textit{Kontroluje jestli hra skonèila
+
+Returns:
+    String: "Draw" pokud je remíza
+    String: "{barva} won" pokud nìkdo vyhrál
+    None: pokud hra neskonèila}
+
+\subsubsection*{Returns}
+String: "Draw" pokud je remíza
+    String: "{barva} won" pokud nìkdo vyhrál
+    None: pokud hra neskonèila
+
+\subsection*{Method: reset}
+\textit{Resetuje hru
+        }
+
+\subsection*{Method: \_printToTerminal}
+\textit{Vytiskne hrací desku do konzole
+        }
+
+\subsection*{Method: \_checkWinner}
+\textit{Kontroluje jestli nìkdo vyhrál
+
+Returns:
+    Enum Colors: barva hráèe, kterı vyhrál
+    None: pokud nikdo nevyhrál}
+
+\subsubsection*{Returns}
+Enum Colors: barva hráèe, kterı vyhrál
+    None: pokud nikdo nevyhrál
+
+\subsection*{Method: \_checkDraw}
+\textit{Kontroluje jestli je remíza
+
+Returns:
+    Boolean: true pokud je remíza, jinak false}
+
+\subsubsection*{Returns}
+Boolean: true pokud je remíza, jinak false
+
+\section*{Class: TicTacToeBoard}
+\textit{Tøída reprezentující hrací desku hry Piškvorky
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy TicTacToeBoard
+        }
+
+\subsection*{Method: \_populateBoard}
+\textit{Inicializace herní desky
+        }
+
+\subsection*{Method: \_str\_}
+\textit{Vytiskne hrací desku do konzole
+        }
+
+\subsection*{Method: getListOfBoard}
+\textit{Vrací seznam políèek na hrací desce
+
+Returns:
+    List of Struct Field: _description_}
+
+\subsubsection*{Returns}
+List of Struct Field: _description_
+
+\section*{Class: ClickableLabel}
+\textit{Tøída ClickableLabel slouí k vytvoøení klikatelného labelu, kterı mùe vyslat signál o kliknutí na dané políèko
+    }
+
+\subsubsection*{Attribute: clicked}
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy ClickableLabel 
+        }
+
+\subsection*{Method: mousePressEvent}
+\textit{Metoda, která se zavolá pøi kliknutí na dané políèko
+        }
+
+\section*{Class: GameView}
+\textit{Tøída GameView slouí k zobrazení hry na grafickém rozhraní pomocí PyQt5
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor
+
+Args:
+    game (game): Hra, kterou chceme zobrazit}
+
+\subsubsection*{Args}
+game (game): Hra, kterou chceme zobrazit
+
+\subsection*{Method: set_piece_image}
+\textit{Funkce pro nastavení obrázku figurky na dané pozici
+
+Args:
+    row (int): øádek
+    col (int): sloupec
+    filePath (string): cesta k obrázku}
+
+\subsubsection*{Args}
+row (int): øádek
+    col (int): sloupec
+    filePath (string): cesta k obrázku
+
+\subsection*{Method: create_board}
+\textit{Funkce pro vytvoøení herní desky
+        }
+
+\subsection*{Method: show_question}
+\textit{Funkce pro zobrazení otázky
+        }
+
+\subsection*{Method: handle_answer}
+\textit{Funkce pro zpracování odpovìdi na otázku
+
+Args:
+    correct (bool): Byla odpovìï správná?}
+
+\subsubsection*{Args}
+correct (bool): Byla odpovìï správná?
+
+\subsection*{Method: handle_square_click}
+\textit{Funkce pro obsluhu kliknutí na políèko
+
+Args:
+    row (int): øádek
+    col (int): sloupec
+    button (string): tlaèítko, které bylo stisknuto}
+
+\subsubsection*{Args}
+row (int): øádek
+    col (int): sloupec
+    button (string): tlaèítko, které bylo stisknuto
+
+\subsection*{Method: choose_piece}
+\textit{Funkce pro vıbìr figurky
+
+Args:
+    row (int): øádek
+    col (int): sloupec}
+
+\subsubsection*{Args}
+row (int): øádek
+    col (int): sloupec
+
+\subsection*{Method: make_move}
+\textit{Funkce pro provedení tahu
+
+Args:
+    row (int): øádek
+    col (int): sloupec}
+
+\subsubsection*{Args}
+row (int): øádek
+    col (int): sloupec
+
+\subsection*{Method: highlight_square}
+\textit{Funkce pro zvıraznìní políèka
+
+Args:
+    row (int): øádek
+    col (int): sloupec}
+
+\subsubsection*{Args}
+row (int): øádek
+    col (int): sloupec
+
+\subsection*{Method: update_board}
+\textit{Funkce pro aktualizaci herní desky
+
+Args:
+    isFirst (bool, optional): Je to první aktualizace?. Defaults to False.}
+
+\subsubsection*{Args}
+isFirst (bool, optional): Je to první aktualizace?. Defaults to False.
+
+\subsection*{Method: remove_board}
+\textit{Funkce pro odstranìní herní desky
+        }
+
+\subsection*{Method: game_ended}
+\textit{Funkce pro zobrazení dialogového okna s vısledkem hry
+
+Args:
+    message (string): Vısledek hry}
+
+\subsubsection*{Args}
+message (string): Vısledek hry
+
+\subsection*{Method: promote_pawn}
+\textit{Funkce pro vıbìr figurky, na kterou se má pesák zmìnit
+        }
+
+\section*{Class: GetResource}
+\textit{Tøída GetResource slouí k získání cesty k obrázku, kterı reprezentuje danı zdroj.
+    }
+
+\subsection*{Method: getResource}
+\textit{Metoda na základì zadaného zdroje vrátí cestu k obrázku, kterı reprezentuje danı zdroj.
+
+Args:
+    resource (str): Zdroj, pro kterı chceme získat cestu k obrázku.
+
+Returns:
+    str: cesta k obrázku, kterı reprezentuje zadanı zdroj.}
+
+\subsubsection*{Args}
+resource (str): Zdroj, pro kterı chceme získat cestu k obrázku.
+
+\subsubsection*{Returns}
+str: cesta k obrázku, kterı reprezentuje zadanı zdroj.
+
+\section*{Class: MainView}
+\textit{Tøída MainView slouí k zobrazení hlavního menu aplikace.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy
+        }
+
+\subsection*{Method: start_game}
+\textit{Spustí hru dle jména hry
+
+Args:
+    game (Game): objekt Game, kterı obsahuje název hry a objekt hry}
+
+\subsubsection*{Args}
+game (Game): objekt Game, kterı obsahuje název hry a objekt hry
+
+\section*{Class: GenerateQuestion}
+\textit{Tøída na generování otázek
+Pro generování otázek pouij metodu generateQuestion
+Pro kontrolu odpovìdí pouij metodu checkAnswer s parametrem answer
+Pro získání správné odpovìdi pouij funkci doupovcuvOperator
+Vısledky se zaokrouhlují na celá èísla!!!}
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy GenerateQuestion
+        }
+
+\subsection*{Method: generateQuestion}
+\textit{Metoda na generování otázek
+
+Args: 
+    n (int): Èíslo otázky, defaultnì náhodné
+
+Returns:
+    string, string (questionText, questionLatex): otázka}
+
+\subsubsection*{Args}
+n (int): Èíslo otázky, defaultnì náhodné
+
+\subsubsection*{Returns}
+string, string (questionText, questionLatex): otázka
+
+\section*{Class: AnalyticGeometryQuestionGenerator}
+\textit{Generátor otázek na analytickou geometrii
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy AnalyticGeometryQuestionGenerator
+        }
+
+\subsection*{Method: generateQuestion}
+\textit{Generování náhodné otázky na analytickou geometrii
+
+Args:
+    n (int): Èíslo otázky, defaultnì náhodné
+
+Returns:
+    AnalyticGeometryQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí}
+
+\subsubsection*{Args}
+n (int): Èíslo otázky, defaultnì náhodné
+
+\subsubsection*{Returns}
+AnalyticGeometryQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí
+
+\section*{Class: DerivativeQuestionGenerator}
+\textit{Generátor otázek na derivace
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy DerivativeQuestionGenerator
+        }
+
+\subsection*{Method: generatePolynomial}
+\textit{Generování náhodného polynomu
+
+Args:
+    degree (int): stupeò polynomu
+    
+Returns:
+    sympy symbol: polynom }
+
+\subsubsection*{Args}
+degree (int): stupeò polynomu
+
+\subsubsection*{Returns}
+sympy symbol: polynom
+
+\subsection*{Method: generateQuestion}
+\textit{Generování náhodné otázky na derivace
+
+Args:
+    n (int): Èíslo otázky, defaultnì náhodné
+    
+Returns:
+    DerivativeQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí}
+
+\subsubsection*{Args}
+n (int): Èíslo otázky, defaultnì náhodné
+
+\subsubsection*{Returns}
+DerivativeQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí
+
+\section*{Class: FractionQuestionGenerator}
+\textit{Generátor otázek na zlomky
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy FractionQuestionGenerator
+        }
+
+\subsection*{Method: generateFraction}
+\textit{Vygenerování náhodné dvojice èísel
+
+Returns:
+    int, int: (numerator, denominator), kde numerator je èitatel v rozmezí 10-100 a denominator jmenovatel v rozmezí 1-10}
+
+\subsubsection*{Returns}
+int, int: (numerator, denominator), kde numerator je èitatel v rozmezí 10-100 a denominator jmenovatel v rozmezí 1-10
+
+\subsection*{Method: simplifyFraction}
+\textit{Zjednodušení zlomku
+
+Args:
+    numerator (int): èitatel 
+    denominator (int): jmenovatel
+Returns:
+    int, int: (numerator, denominator), kde numerator je èitatel a denominator jmenovatel zjednodušeného zlomku}
+
+\subsubsection*{Args}
+numerator (int): èitatel 
+    denominator (int): jmenovatel
+
+\subsubsection*{Returns}
+int, int: (numerator, denominator), kde numerator je èitatel a denominator jmenovatel zjednodušeného zlomku
+
+\subsection*{Method: lowestCommonMultiple}
+\textit{Vıpoèet nejmenšího spoleèného násobku
+
+Args:
+    a (int): první èíslo
+    b (int): druhé èíslo
+
+Returns:
+    int: Nejmenší spoleènı násobek}
+
+\subsubsection*{Args}
+a (int): první èíslo
+    b (int): druhé èíslo
+
+\subsubsection*{Returns}
+int: Nejmenší spoleènı násobek
+
+\subsection*{Method: greatestCommonDivisor}
+\textit{Vıpoèet nejvìtšího spoleèného dìlitele
+
+Args:
+    a (int): první èíslo
+    b (int): druhé èíslo
+Returns:
+    int: Nejvìtší spoleènı dìlitel}
+
+\subsubsection*{Args}
+a (int): první èíslo
+    b (int): druhé èíslo
+
+\subsubsection*{Returns}
+int: Nejvìtší spoleènı dìlitel
+
+\subsection*{Method: fractionToString}
+\textit{Pøevedení zlomku na string
+
+Args:
+    numerator (int): èitatel 
+    denominator (int): jmenovatel
+    
+Returns:
+    String: reprezentace zlomku v latexu}
+
+\subsubsection*{Args}
+numerator (int): èitatel 
+    denominator (int): jmenovatel
+
+\subsubsection*{Returns}
+String: reprezentace zlomku v latexu
+
+\subsection*{Method: fractionToAnswer}
+\textit{Pøevedení zlomku na string
+
+Args:
+    numerator (int): èitatel 
+    denominator (int): jmenovatel
+    
+Returns:
+    String: reprezentace zlomku ve formátu "a/b"}
+
+\subsubsection*{Args}
+numerator (int): èitatel 
+    denominator (int): jmenovatel
+
+\subsubsection*{Returns}
+String: reprezentace zlomku ve formátu "a/b"
+
+\subsection*{Method: generateQuestion}
+\textit{Vygenerování náhodné otázky na zlomky
+
+Args:
+    n (int): Èíslo otázky, defaultnì náhodné
+
+Returns:
+    FractionQuestionGenerator: Samo sebe s vygenerovanou otázkou a odpovìdí}
+
+\subsubsection*{Args}
+n (int): Èíslo otázky, defaultnì náhodné
+
+\subsubsection*{Returns}
+FractionQuestionGenerator: Samo sebe s vygenerovanou otázkou a odpovìdí
+
+\section*{Class: InfinitiveSeriesQuestionGenerator}
+\textit{Generátor otázek na konvergenci nekoneènıch øad
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy nekoneènıch øad
+        }
+
+\subsection*{Method: generateQuestion}
+\textit{Generování náhodné otázky na konvergenci nekoneènıch øad
+
+Args:
+    n (int): Èíslo otázky, defaultnì náhodné
+
+Returns:
+    InfinitiveSeriesQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí}
+
+\subsubsection*{Args}
+n (int): Èíslo otázky, defaultnì náhodné
+
+\subsubsection*{Returns}
+InfinitiveSeriesQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí
+
+\section*{Class: IntegralQuestionGenerator}
+\textit{Generátor otázek na urèení hodnoty integrálu
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy IntegralQuestionGenerator
+        }
+
+\subsection*{Method: generateQuestion}
+\textit{Generování náhodné otázky na urèení hodnoty integrálu
+
+Args:
+    n (int): Èíslo otázky, defaultnì náhodné
+
+Returns:
+    IntegralQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí}
+
+\subsubsection*{Args}
+n (int): Èíslo otázky, defaultnì náhodné
+
+\subsubsection*{Returns}
+IntegralQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí
+
+\section*{Class: KardinalNumberQuestionGenerator}
+\textit{Generátor otázek na kardinální èísla
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy otázek na kardinální èísla
+        }
+
+\subsection*{Method: generateQuestion}
+\textit{Generování náhodné otázky na kardinální èísla
+
+Args:
+    n (int): Èíslo otázky, defaultnì náhodné
+    
+Returns:
+    KardinalNumberQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí}
+
+\subsubsection*{Args}
+n (int): Èíslo otázky, defaultnì náhodné
+
+\subsubsection*{Returns}
+KardinalNumberQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí
+
+\section*{Class: LinearEquationSystemQuestionGenerator}
+\textit{Generátor otázek na lineární soustavy rovnic
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy soustav lineárních rovnic
+        }
+
+\subsection*{Method: generateLinearEquationSystem}
+\textit{Vygenerování lineární soustavy rovnic
+
+Args:
+    num_equations (int): poèet chtìnıch rovnic
+    num_variables (int): poèet chtìnıch promìnnıch
+
+Returns:
+    sympy equations, sympy symbols: Vygenerované rovnice a jejich promìnné}
+
+\subsubsection*{Args}
+num_equations (int): poèet chtìnıch rovnic
+    num_variables (int): poèet chtìnıch promìnnıch
+
+\subsubsection*{Returns}
+sympy equations, sympy symbols: Vygenerované rovnice a jejich promìnné
+
+\subsection*{Method: convert_to_latex}
+\textit{Metoda na konverzi rovnic do latexu
+
+Args:
+    equations (sympy equations): vstupní rovnice
+
+Returns:
+    string: latexovı zápis rovnic ve formátu string}
+
+\subsubsection*{Args}
+equations (sympy equations): vstupní rovnice
+
+\subsubsection*{Returns}
+string: latexovı zápis rovnic ve formátu string
+
+\subsection*{Method: generateQuestion}
+\textit{Metoda na generování otázky
+
+Args:
+    n (int): Èíslo otázky, defaultnì náhodné
+
+Returns:
+    LinearEquationSystemQuestionGenerator: Funkce vrací sebe sama s vygenerovanou otázkou}
+
+\subsubsection*{Args}
+n (int): Èíslo otázky, defaultnì náhodné
+
+\subsubsection*{Returns}
+LinearEquationSystemQuestionGenerator: Funkce vrací sebe sama s vygenerovanou otázkou
+
+\section*{Class: MatrixQuestionGenerator}
+\textit{Generátor otázek na matice
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy matice
+        }
+
+\subsection*{Method: generateRegularMatrix}
+\textit{Generování regulární matice
+
+Args:
+    n (int): Velikost matice, defaultnì náhodnì mezi 2 a 4
+
+Returns:
+    numpy array int: Náhodná regulární matice}
+
+\subsubsection*{Args}
+n (int): Velikost matice, defaultnì náhodnì mezi 2 a 4
+
+\subsubsection*{Returns}
+numpy array int: Náhodná regulární matice
+
+\subsection*{Method: calculateDeterminant}
+\textit{Vıpoèet determinantu matice
+
+Args:
+    matrix (numpy array int):  matice, ve tvaru numpy array intù
+    
+Returns:
+    float: Hodnota determinantu matice}
+
+\subsubsection*{Args}
+matrix (numpy array int):  matice, ve tvaru numpy array intù
+
+\subsubsection*{Returns}
+float: Hodnota determinantu matice
+
+\subsection*{Method: calculateInverseMatrix}
+\textit{Vıpoèet inverzní matice
+
+Args:
+    matrix (numpy array int): matice
+
+Returns:
+    numpy array int: inverzní matice}
+
+\subsubsection*{Args}
+matrix (numpy array int): matice
+
+\subsubsection*{Returns}
+numpy array int: inverzní matice
+
+\subsection*{Method: calculateRank}
+\textit{Vıpoèet øádu matice
+
+Args:
+    matrix (numpy array int): matice
+
+Returns:
+    int: øád matice}
+
+\subsubsection*{Args}
+matrix (numpy array int): matice
+
+\subsubsection*{Returns}
+int: øád matice
+
+\subsection*{Method: calculateEigenvalues}
+\textit{Vıpoèet vlastních èísel matice
+
+Args:
+    matrix (numpy array int): matice
+
+Returns:
+    float: souèet vlastní èísla matice}
+
+\subsubsection*{Args}
+matrix (numpy array int): matice
+
+\subsubsection*{Returns}
+float: souèet vlastní èísla matice
+
+\subsection*{Method: getLatexMatrix}
+\textit{Metoda pro vygenerování matice ve formátu LaTeX
+
+Args:
+    matrix (numpy.ndarray): matice
+
+Returns:
+    string: matice ve formátu LaTeX}
+
+\subsubsection*{Args}
+matrix (numpy.ndarray): matice
+
+\subsubsection*{Returns}
+string: matice ve formátu LaTeX
+
+\subsection*{Method: generateQuestion}
+\textit{Metoda na generování otázek na matice
+
+Returns:
+    MatrixQuestionGenerator: Vrací sebe sama s vygenerovanımi otázkami}
+
+\subsubsection*{Returns}
+MatrixQuestionGenerator: Vrací sebe sama s vygenerovanımi otázkami
+
+\section*{Class: OrdinalNumberQuestionGenerator}
+\textit{Generátor otázek na ordinální èísla
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy otázek na ordinální èísla
+        }
+
+\subsection*{Method: generateQuestion}
+\textit{Generování náhodné otázky na uspoøádaná èísla
+
+Args:
+    n (int): Èíslo otázky, defaultnì náhodné
+
+Returns:
+    OrdinalNumberQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí}
+
+\subsubsection*{Args}
+n (int): Èíslo otázky, defaultnì náhodné
+
+\subsubsection*{Returns}
+OrdinalNumberQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí
+
+\section*{Class: RegularLanguageQuestionGenerator}
+\textit{Generátor otázek na regulární jazyky
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy regulárních jazykù
+        }
+
+\subsection*{Method: generateQuestion}
+\textit{Generování náhodné otázky na regulární jazyky
+
+Args:
+    n (int): Èíslo otázky, defaultnì náhodné
+
+Returns:
+    RegularLanguageQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí}
+
+\subsubsection*{Args}
+n (int): Èíslo otázky, defaultnì náhodné
+
+\subsubsection*{Returns}
+RegularLanguageQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí
+
+\section*{Class: SetQuestionGenerator}
+\textit{Generátor otázek na mnoiny
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy otázek na mnoiny
+        }
+
+\subsection*{Method: generateQuestion}
+\textit{Generování náhodné otázky na mnoiny
+
+Args:
+    n (int): Èíslo otázky, defaultnì náhodné
+
+Returns:
+    SetQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí}
+
+\subsubsection*{Args}
+n (int): Èíslo otázky, defaultnì náhodné
+
+\subsubsection*{Returns}
+SetQuestionGenerator: Vrací samo sebe s vygenerovanou otázkou a odpovìdí
+
+\section*{Class: Question}
+\textit{Tøída pøedpisu otázky
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy Question
+        }
+
+\subsection*{Method: \_str\_}
+\textit{Metoda na vıpis otázky s odpovìdí
+
+Returns:
+    string: Vrátí otázku a odpovìï }
+
+\subsubsection*{Returns}
+string: Vrátí otázku a odpovìï
+
+\subsection*{Method: checkAnswer}
+\textit{Metoda na kontrolu odpovìdi
+
+Args:
+    string: answer - zadaná odpovìï
+    
+Returns:
+    bool: true pokud je odpovìï správná}
+
+\subsubsection*{Args}
+string: answer - zadaná odpovìï
+
+\subsubsection*{Returns}
+bool: true pokud je odpovìï správná
+
+\subsection*{Method: doupovcuvOperator}
+\textit{Metoda na získání odpovìdi
+
+Returns:
+    string: odpovìï}
+
+\subsubsection*{Returns}
+string: odpovìï
+
+\subsection*{Method: generateQuestion}
+\textit{Funkce na generování otázky
+
+Returns:
+    string, string: Vrací otázku}
+
+\subsubsection*{Returns}
+string, string: Vrací otázku
+
+\section*{Class: QuestionTests}
+\textit{Testy na generátory otázek
+    }
+
+\subsubsection*{Attribute: allClasses}
+\subsection*{Method: testNumberOfQuestions}
+\textit{Testuje, zda se generuje nenulovı poèet otázek
+
+Args:
+    name (string): jméno generátoru
+    generator_class (Question): tøída generátoru}
+
+\subsubsection*{Args}
+name (string): jméno generátoru
+    generator_class (Question): tøída generátoru
+
+\subsection*{Method: testGenerateQuestion}
+\textit{Testuje, zda se vygeneruje otázka
+
+Args:
+    name (string): jméno generátoru
+    generator_class (Question): tøída generátoru}
+
+\subsubsection*{Args}
+name (string): jméno generátoru
+    generator_class (Question): tøída generátoru
+
+\subsection*{Method: testDoupovcuvOperator}
+\textit{Testuje, zda se vygeneruje odpovìï
+
+Args:
+    name (string): jméno generátoru
+    generator_class (Question): tøída generátoru}
+
+\subsubsection*{Args}
+name (string): jméno generátoru
+    generator_class (Question): tøída generátoru
+
+\subsection*{Method: testCheckAnswer}
+\textit{Testuje, zda je odpovìï správná
+
+Args:
+    name (string): jméno generátoru
+    generator_class (Question): tøída generátoru}
+
+\subsubsection*{Args}
+name (string): jméno generátoru
+    generator_class (Question): tøída generátoru
+
+\subsection*{Method: testWrongAnswer}
+\textit{Testuje, zda je odpovìï špatná
+
+Args:
+    name (string): jméno generátoru
+    generator_class (Question): tøída generátoru}
+
+\subsubsection*{Args}
+name (string): jméno generátoru
+    generator_class (Question): tøída generátoru
+
+\subsection*{Method: testTimeSet}
+\subsection*{Method: testHoderova}
+\section*{Class: MathQuestion}
+\textit{Tøída MathQuestion slouí k zobrazení matematické otázky.
+    }
+
+\subsection*{Method: \_init\_}
+\textit{Konstruktor tøídy
+
+Args:
+    question (Question): Otázka, která se má zobrazit
+    color (Colors): Barva hráèe, kterı má odpovídat
+    fullscreen (bool): Zda se má zobrazit na celou obrazovku
+    callback (function): Funkce, která se má zavolat po zodpovìzení otázky}
+
+\subsubsection*{Args}
+question (Question): Otázka, která se má zobrazit
+    color (Colors): Barva hráèe, kterı má odpovídat
+    fullscreen (bool): Zda se má zobrazit na celou obrazovku
+    callback (function): Funkce, která se má zavolat po zodpovìzení otázky
+
+\subsection*{Method: update_timer}
+\textit{Metoda na aktualizaci èasovaèe
+        }
+
+\subsection*{Method: time_out}
+\textit{Metoda na oznámení, e èas vypršel
+        }
+
+\subsection*{Method: check_answer}
+\textit{Metoda na kontrolu odpovìdi
+        }
+
+\subsection*{Method: kill_yourself}
+\textit{Metoda pro ukonèení okna galantní cestou
+        }
+
+\subsection*{Method: render_latex_to_katex}
+\textit{Metoda na vytvoøení rovnic ve formátu LaTeX
+
+Args:
+    latexEq (string): rovnice, které se mají vykreslit v LaTeXu}
+
+\subsubsection*{Args}
+latexEq (string): rovnice, které se mají vykreslit v LaTeXu
+
+\end{document}
