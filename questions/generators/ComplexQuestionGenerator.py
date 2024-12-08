@@ -74,7 +74,7 @@ class ComplexQuestionGenerator(Question):
             self.answer = self.absoluteValue(complexNumber.imag)
             
         elif randomQuestion == 3:
-            self.questionText = f"Určete komplexně sdružené komplexní číslo k číslu (odpověď zadejte ve tvaru a+bi, a, bi):"
+            self.questionText = f"Určete komplexně sdružené komplexní číslo k číslu (odpověď zadejte ve tvaru a.0+b.0i, a.0, b.0i):"
             self.questionLatex = f"{self.complexNumberToLatex(complexNumber)}"
             self.answer = self.complexNumberToLatex(complexNumber.conjugate())
             
