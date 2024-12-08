@@ -56,7 +56,6 @@ class ComplexQuestionGenerator(Question):
             randomQuestion = n
             
         complexNumber = self.generateComplexNumber()
-        print (complexNumber)
         
         if randomQuestion == 0:
             self.questionText = f"Vypočtěte absolutní hodnotu komplexního čísla:"
