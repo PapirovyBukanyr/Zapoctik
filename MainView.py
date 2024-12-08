@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QSpacerItem, QSizePolicy
 from GameView import *
 from games import *
-from PyQt5.QtGui import QFontDatabase
+from PyQt5.QtGui import QIcon
 
 class MainView(QWidget):
     """Třída MainView slouží k zobrazení hlavního menu aplikace.
@@ -14,6 +14,9 @@ class MainView(QWidget):
         super().__init__()
         self.setWindowTitle("Zápočtík Games")
         self.setFixedSize(500, 400)
+        icon = QIcon("resources/logo.ico")  
+        self.setWindowIcon(icon)
+
         self.setStyleSheet("""
         QMainWindow {
             background-color: #FFFFFF;

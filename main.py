@@ -1,6 +1,7 @@
 from MainView import MainView
 import sys
 from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QIcon
 
 
 print("""

@@ -6,6 +6,7 @@ from QuestionView import MathQuestion
 from questions import GenerateQuestion
 from games import *
 import gc
+from PyQt5.QtGui import QIcon
 
 class ClickableLabel(QLabel):
     """Třída ClickableLabel slouží k vytvoření klikatelného labelu, který může vyslat signál o kliknutí na dané políčko
@@ -52,6 +53,8 @@ class GameView(QWidget):
         self.player = Colors.WHITE
         self.selectedPiece = False
         self.answered = False
+        icon = QIcon("resources/logo.ico")
+        self.setWindowIcon(icon)
 
         self.setStyleSheet("""
         QMainWindow {
