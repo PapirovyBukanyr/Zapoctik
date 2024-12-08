@@ -14,6 +14,12 @@ Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky 
 
 ## Použití
 
+### Pokud využívate podporovaný Windows:
+
+Spusťte soubor `launcher.exe`
+
+### Pokud využívate podporovaný Windows, ale bojíte se `launcher.exe` souboru:
+
 1. **Ujistěte se, že máte verzi Pythonu alespoň 3.10 nebo novější**
 
 2. **Instalace závislostí**:
@@ -38,6 +44,9 @@ Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky 
     python tests.py
     ```
 
+### Jiné operační systémy nebo nepodporované verze Windows:
+
+Improvizujte!
 
 ## Složky a Soubory
 
