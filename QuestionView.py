@@ -181,13 +181,13 @@ class MathQuestion(QWidget):
             x_offset = (canvas.shape[1] - width) // 2
             canvas[y_offset:y_offset+height, x_offset:x_offset+width] = resized_image
 
-            cv2.imshow("Tupa Ovce", canvas)
+            cv2.imshow("DERIVACE", canvas)
             key = cv2.waitKey(int(delay * 1000))
 
             height = min(height + scaling_step, max_height)
             width = min(width + scaling_step, max_width)
 
-        cv2.imshow("Tupa Ovce", original_image)
+        cv2.imshow("DERIVACE", original_image)
         cv2.waitKey(3000)
 
 
