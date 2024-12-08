@@ -5,6 +5,7 @@ from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtCore import QTimer
 import cv2
 import numpy as np
+from PyQt5.QtGui import QIcon
 
 class MathQuestion(QWidget):
     """Třída MathQuestion slouží k zobrazení matematické otázky.
@@ -24,7 +25,9 @@ class MathQuestion(QWidget):
         self.question = question
         self.callback = callback
         self.color = color  
-        self.remaining_time = 60
+        self.remaining_time = question.time
+        icon = QIcon("resources/logo.ico")  
+        self.setWindowIcon(icon)
 
         self.setStyleSheet("""
         QMainWindow {

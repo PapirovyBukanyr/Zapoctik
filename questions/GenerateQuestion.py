@@ -42,6 +42,7 @@ class GenerateQuestion (Question):
         self.questionText = question.questionText
         self.questionLatex = question.questionLatex
         self.hoderovaDanger = question.hoderovaDanger
+        self.time = question.time
         
         return self
     
