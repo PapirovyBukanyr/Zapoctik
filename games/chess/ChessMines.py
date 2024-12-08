@@ -3,12 +3,18 @@ from ..Enums import *
 import random
 
 class ChessMines(Chess):
-    """Hra šachy s minami.
+    """
+    Hra šachy s minami.
+    
+    Attributes:
+        mines (list of [int, int]): seznam min
+        explosion ([int, int]): pozice exploze
     """
     
     
     def __init__(self):
-        """Inicializace hry.
+        """
+        Inicializace hry.
         """
         super().__init__()
         self.__placeMines()
@@ -16,7 +22,8 @@ class ChessMines(Chess):
         
         
     def __placeMines(self):
-        """Umístí miny na náhodné pozice.
+        """
+        Umístí miny na náhodné pozice.
         """
         self.mines = []
         for _ in range(random.randint(8, 24)):
@@ -31,7 +38,8 @@ class ChessMines(Chess):
             
     
     def getBoard(self, color=None):
-        """Vrátí hrací desku.
+        """
+        Vrátí hrací desku.
         """
         board = super().getBoard()
         
@@ -42,7 +50,8 @@ class ChessMines(Chess):
     
     
     def makeMove(self, move, color=None, rightClick=False):
-        """Zpracuje tah.
+        """
+        Zpracuje tah.
         """
         if rightClick:
             return False

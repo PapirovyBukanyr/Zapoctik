@@ -1,12 +1,18 @@
 from .Piece import *
 
 class Pawn(Piece):
-    """Třída reprezentující pěšáka
+    """
+    Třída reprezentující pěšáka
+    
+    Attributes:
+        color (Colors): barva figurky
+        position ([int,int]): pozice figurky
     """      
         
         
     def __str__(self):
-        """Funkce na výpis figurky
+        """
+        Funkce na výpis figurky
 
         Returns:
             str: P + barva figurky

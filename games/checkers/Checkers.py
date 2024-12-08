@@ -4,12 +4,23 @@ from .CheckersBoard import CheckersBoard
 from ..GameTemplate import GameTemplate
 
 class Checkers (GameTemplate):
-    """Třída reprezentující hru dáma
+    """
+    Třída reprezentující hru dáma
+    
+    Attributes:
+        withChoosePiece (bool): True, pokud je v hře možné vybrat figurku, jinak False
+        numberOfPlayers (int): počet hráčů
+        fog (bool): True, pokud je ve hře Fog Of War, jinak False
+        __board (CheckersBoard): hrací deska
+        __currentPlayer (Enum Colors): barva hráče na tahu
+        __pieceToPlay (Piece): figurka, kterou hráč chce hrát
+        __firstMove (bool): True, pokud je první tah, jinak False
     """
     
     
     def __init__(self):
-        """Konstruktor třídy hry dáma
+        """
+        Konstruktor třídy hry dáma
         """
         super().__init__()
         self.withChoosePiece = True
@@ -20,7 +31,8 @@ class Checkers (GameTemplate):
         
         
     def getBoard(self, color=None):
-        """Funkce pro získání hrací desky
+        """
+        Funkce pro získání hrací desky
         
         Args:
             color (Enum Colors, optional): barva hráče na tahu. Výchozí nastavení je na pravidelném střídání.
@@ -32,7 +44,8 @@ class Checkers (GameTemplate):
     
     
     def choosePiece(self, index, color = None):
-        """Funkce pro vyber figurky, kterou chce hrac hrat
+        """
+        Funkce pro vyber figurky, kterou chce hrac hrat
 
         Args:
             index ([int,int]): pozice figurky, kterou chce hrac hrat
@@ -66,7 +79,8 @@ class Checkers (GameTemplate):
         
     
     def makeMove(self, index, color = None, rightClick = False):
-        """Funkce pro provedení tahu figurkou
+        """
+        Funkce pro provedení tahu figurkou
         
         Args:
             index ([int,int]): pozice, kam chce hráč hrát
@@ -124,14 +138,16 @@ class Checkers (GameTemplate):
     
     
     def reset(self):
-        """Funkce pro resetování hry
+        """
+        Funkce pro resetování hry
         """
         self.__board = CheckersBoard()
         self.__currentPlayer = Colors.WHITE
         
         
     def checkEnd(self):
-        """Funkce pro kontrolu konce hry
+        """
+        Funkce pro kontrolu konce hry
         
         Returns:
             string: Vrací vítěze "{barva} won", pokud hra skončila, jinak None
@@ -158,7 +174,8 @@ class Checkers (GameTemplate):
         
         
     def __endOfTurn(self):
-        """Funkce pro ukončení tahu
+        """
+        Funkce pro ukončení tahu
         """
         self.__currentPlayer = self.__currentPlayer.changeColor()
         
@@ -172,7 +189,8 @@ class Checkers (GameTemplate):
     
     
     def possibleMoves(self, color):
-        """Funkce pro získání možných tahů pro hráče, primárně pro rozšíření Fog Of War
+        """
+        Funkce pro získání možných tahů pro hráče, primárně pro rozšíření Fog Of War
         
         Args:
             color (Enum Colors): barva hráče, pro kterého se mají tahy získat
@@ -194,7 +212,8 @@ class Checkers (GameTemplate):
     
     
     def killPiece(self, piecePosition):
-        """Funkce pro odstranění figurky z hrací desky
+        """
+        Funkce pro odstranění figurky z hrací desky
         
         Args:
             piecePosition ([int, int]): pozice figurky, která má být odstraněna
@@ -203,6 +222,7 @@ class Checkers (GameTemplate):
     
     
     def __printToTerminal(self):
-        """Funkce pro výpis stavu hry na terminál
+        """
+        Funkce pro výpis stavu hry na terminál
         """
         print(self.__board.__str__())

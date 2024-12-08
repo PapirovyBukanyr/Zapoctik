@@ -2,19 +2,29 @@ from .CheckersMines import CheckersMines
 from ..Enums import *
 
 class CheckersMinesWithFogOfWar(CheckersMines):
-    """Třída CheckersWithFogOfWar slouží k reprezentaci hry Dáma s mlhou války.
+    """
+    Třída CheckersWithFogOfWar slouží k reprezentaci hry Dáma s mlhou války.
+    
+    Attributes:
+        mines (List of [int, int]): seznam pozic min
+        explosion ([int, int]): pozice exploze
+        withChoosePiece (bool): True, pokud je v hře možné vybrat figurku, jinak False
+        numberOfPlayers (int): počet hráčů
+        fog (bool): True, pokud je ve hře Fog Of War, jinak False
     """
     
     
     def __init__(self):
-        """Konstruktor třídy CheckersWithFogOfWar
+        """
+        Konstruktor třídy CheckersWithFogOfWar
         """
         super().__init__()
         self.fog = True
     
     
     def getBoard(self, color):
-        """Vrací zakrytou šachovnici
+        """
+        Vrací zakrytou šachovnici
         
         Args:
             color (Enum Colors): Barva hráče na tahu

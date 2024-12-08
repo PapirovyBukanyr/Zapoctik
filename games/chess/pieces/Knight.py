@@ -1,11 +1,20 @@
 from .Piece import *
 
 class Knight(Piece):
-  """Třída reprezentující figurku jezdce v šachu. Dědí od třídy Piece.
+  """
+  Třída reprezentující figurku jezdce v šachu. Dědí od třídy Piece.
+  
+  Attributes:
+    color (Colors): barva figurky
+    position ([int,int]): pozice figurky
+    symbol (str): symbol figurky
+    value (int): hodnota figurky
   """
   
+  
   def __init__(self, color, position):
-    """Konstruktor třídy Knight. Volá konstruktor třídy Piece
+    """
+    Konstruktor třídy Knight. Volá konstruktor třídy Piece
     
     Args:
       color (Colors): barva figurky
@@ -15,17 +24,26 @@ class Knight(Piece):
     self.symbol = "N"
     self.value = 3
     
+    
   def copy(self):
-    """Vytvoří kopii instance třídy Knight.
+    """
+    Vytvoří kopii instance třídy Knight.
+    
+    Returns:
+      Knight: kopie instance třídy Knight
     """
     return Knight(self.color, self.position)
   
   
   def possibleMoves(self, board):
-    """Vrátí seznam možných tahů pro jezdce.
+    """
+    Vrátí seznam možných tahů pro jezdce.
     
     Args:
       board (dict): šachovnice
+      
+    Returns:
+      List of [int,int]: seznam možných tahů  
     """
     possibleMoves = []
     

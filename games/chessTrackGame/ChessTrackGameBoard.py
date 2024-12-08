@@ -2,12 +2,18 @@ from ..Board import Board
 from ..Enums import *
 
 class ChessTrackGameBoard(Board):
-    """Hrací deska hry ChessTrackGame.
+    """
+    Hrací deska hry ChessTrackGame.
+    
+    Attributes:
+        board (list): Hrací deska
+        moves (int): Počet tahů
     """
     
     
     def __init__(self):
-        """Inicializace hrací desky.
+        """
+        Inicializace hrací desky.
         """
         super().__init__()
         self.moves = 0
@@ -15,13 +21,15 @@ class ChessTrackGameBoard(Board):
         
         
     def __populateBoard(self):
-        """Inicializace hrací desky.
+        """
+        Inicializace hrací desky.
         """
         self.board = [[None for _ in range(4)] for _ in range(4)]
         
         
     def __spinBoard(self):
-        """Otočení hrací desky.
+        """
+        Otočení hrací desky.
         """
         board = [[None for _ in range(4)] for _ in range(4)]
         
@@ -44,7 +52,8 @@ class ChessTrackGameBoard(Board):
         
         
     def __placeStone(self, position, color):
-        """Umístění kamene na desku.
+        """
+        Umístění kamene na desku.
         
         Args:
             position ([int,int]]): Pozice, na kterou se má kámen umístit.
@@ -58,7 +67,8 @@ class ChessTrackGameBoard(Board):
         
         
     def makeMove(self, position, color):
-        """Provedení tahu.
+        """
+        Provedení tahu.
         
         Args:
             position ([int,int]]): Pozice, na kterou se má kámen umístit.
@@ -69,7 +79,8 @@ class ChessTrackGameBoard(Board):
         
         
     def getListOfBoard(self):
-        """Vrátí seznam seznamů reprezentující hrací desku.
+        """
+        Vrátí seznam seznamů reprezentující hrací desku.
         
         Returns:
             list: Seznam seznamů reprezentující hrací desku.
@@ -88,7 +99,8 @@ class ChessTrackGameBoard(Board):
     
     
     def checkEnd(self):
-        """Kontrola konce hry.
+        """
+        Kontrola konce hry.
         
         Returns:
             str: Výsledek hry.
@@ -100,7 +112,8 @@ class ChessTrackGameBoard(Board):
     
     
     def __checkWinner(self):
-        """Kontrola výherce.
+        """
+        Kontrola výherce.
         
         Returns:
             str: Výsledek hry.

@@ -3,11 +3,21 @@ from .pieces import *
 from ..GameTemplate import GameTemplate
 
 class Chess (GameTemplate):
-  """Třída reprezentující hru šachy
+  """
+  Třída reprezentující hru šachy
+  
+  Attributes:
+    withChoosePiece (bool): True, pokud se má hráči zobrazovat možnost vybrat figurku, jinak False
+    __movesSinceLastImportantMove (int): Počet tahů od posledního důležitého tahu
+    __board (ChessBoard): Šachovnice
+    __playedPiece (Piece): Figurka, kterou hráč právě hraje
+    __positionsList (list of ChessBoard): Seznam všech pozic na šachovnici
+    __isMoving (Colors): Barva hráče, který je na tahu
   """
   
   def __init__(self):
-    """ Konstruktor třídy šachů
+    """ 
+    Konstruktor třídy šachů
     """
     super().__init__()
     self.withChoosePiece = True
@@ -19,7 +29,8 @@ class Chess (GameTemplate):
         
   
   def getBoard(self, color=None):
-    """Vrátí šachovnici v aktuálním stavu jako dvourozměrné pole Field
+    """
+    Vrátí šachovnici v aktuálním stavu jako dvourozměrné pole Field
     
     Args:
         color (Enum Colors): Barva hráče, pro kterého se má šachovnice vykreslit
@@ -31,7 +42,8 @@ class Chess (GameTemplate):
   
   
   def choosePiece (self, positionToPlay, color = None):
-    """Funkce pro vyber figurky, kterou chce hrac hrat
+    """
+    Funkce pro vyber figurky, kterou chce hrac hrat
 
     Args:
         positionToPlay ([int, int]): pozice figurky, kterou chce hrac hrat
@@ -55,7 +67,8 @@ class Chess (GameTemplate):
 
 
   def makeMove(self, playedMove, color = None, rightClick = False):
-    """Provedení tahu hrace
+    """
+    Provedení tahu hrace
 
     Args:
         playedMove ([int, int]): pozice, kam chce hrac hrat
@@ -92,7 +105,8 @@ class Chess (GameTemplate):
 
 
   def promote(self, newFigure):
-    """Promote pesaka
+    """
+    Promote pesaka
 
     Args:
         newFigure (string): figurka, na kterou se ma pesak zmenit ("Q", "R", "B", "N")
@@ -131,7 +145,8 @@ class Chess (GameTemplate):
     
     
   def __endOfMove(self):
-    """Konec tahu
+    """
+    Konec tahu
     
     Returns:
         True: novy stav sachovnice po tahu
@@ -145,7 +160,8 @@ class Chess (GameTemplate):
   
   
   def possibleMoves(self, color):
-    """Vrati mozne tahy pro hrace, primárně pro rozšíření Fog Of War
+    """
+    Vrati mozne tahy pro hrace, primárně pro rozšíření Fog Of War
 
     Args:
         color (Enum Colors): barva hrace, pro ktereho se maji tahy vypsat
@@ -163,7 +179,8 @@ class Chess (GameTemplate):
 
 
   def checkEnd(self):
-    """Kontrola konce hry
+    """
+    Kontrola konce hry
     
     Returns:
         string: "Draw by fifty-move rule" pokud bylo 50 tahu bez pohybu pesaku nebo braneni
@@ -204,7 +221,8 @@ class Chess (GameTemplate):
   
   
   def killPiece(self, piecePosition):
-    """Vyhození figurky z hrací desky
+    """
+    Vyhození figurky z hrací desky
     
     Args:
         piecePosition ([int, int]): pozice figurky, kterou chceme vyhodit
@@ -213,7 +231,8 @@ class Chess (GameTemplate):
   
       
   def __printToTerminal(self):  
-    """Vytiskne hrací desku do konzole
+    """
+    Vytiskne hrací desku do konzole
     """
     print(self.__board ) 
     

@@ -1,18 +1,34 @@
 from .Piece import *
 
 class King(Piece):
-  """Třída reprezentující figurku krále v šachu. Dědí od třídy Piece.
+  """
+  Třída reprezentující figurku krále v šachu. Dědí od třídy Piece.
+  
+  Attributes:
+    color (Colors): barva figurky
+    position ([int,int]): pozice figurky
+    symbol (str): symbol figurky
+    hasMoved (bool): True, pokud figurka už byla pohnuta, jinak False
   """
   
   
   def __init__(self, color, position):
-    """Konstruktor třídy King. Volá konstruktor třídy Piece.
+    """
+    Konstruktor třídy King. Volá konstruktor třídy Piece.
+    
+    Args:
+      color (Colors): barva figurky
+      position ([int,int]): pozice figurky
     """
     super().__init__(color, position)
     self.symbol = "K"
     
   def copy(self):
-    """Vytvoří kopii instance třídy King.
+    """
+    Vytvoří kopii instance třídy King.
+    
+    Returns:
+      King: kopie instance třídy King
     """
     copy = King(self.color, self.position)
     copy.hasMoved = self.hasMoved
@@ -21,7 +37,8 @@ class King(Piece):
   
   
   def move(self, board, end):
-    """Zkontroluje, zda je možné provést tah králem a provede ho.
+    """
+    Zkontroluje, zda je možné provést tah králem a provede ho.
     
     Args:
       board - šachovnice
@@ -37,7 +54,14 @@ class King(Piece):
     
     
   def possibleMoves(self, board):
-    """Vrátí seznam možných tahů pro krále. 
+    """
+    Vrátí seznam možných tahů pro krále. 
+    
+    Args:
+      board (Board): šachovnice, na které se figurka nachází
+      
+    Returns:
+      List of [int, int] : seznam možných tahů krále
     """
     possibleMoves = []
     

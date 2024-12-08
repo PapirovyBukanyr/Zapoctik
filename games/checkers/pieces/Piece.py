@@ -2,8 +2,18 @@ import abc as ABC
 from ...Enums import *
 
 class Piece (ABC.ABC):
+    """
+    Třída reprezentující figurku na šachovnici
+    
+    Attributes:
+        color (Colors): barva figurky
+        position ([int,int]): pozice figurky
+    """
+    
+    
     def __init__(self, color, position):
-        """Konstruktor třídy Piece
+        """
+        Konstruktor třídy Piece
 
         Args:
             color (Enum Colors): požadovaná barva figurky
@@ -14,7 +24,8 @@ class Piece (ABC.ABC):
         
         
     def possibleMoves(self, board):
-        """Metoda pro zjištění možných tahů figurky
+        """
+        Metoda pro zjištění možných tahů figurky
 
         Args:
             board (Board): hrací deska, na které se figurka nachází

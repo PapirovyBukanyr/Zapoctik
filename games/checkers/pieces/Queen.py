@@ -1,8 +1,18 @@
 from .Piece import *
 
 class Queen(Piece):
+    """
+    Třída reprezentující dámu
+    
+    Attributes:
+        color (Colors): barva figurky
+        position ([int,int]): pozice figurky
+    """
+    
+    
     def __init__(self, pawn):
-        """Konstruktor třídy Queen
+        """
+        Konstruktor třídy Queen
 
         Args:
             pawn (Pawn): Pěšák, který se má proměnit na dámu
@@ -11,7 +21,8 @@ class Queen(Piece):
         
         
     def __str__(self):
-        """Vrací string reprezentaci dámy
+        """
+        Vrací string reprezentaci dámy
 
         Returns:
             string: string reprezentace dámy
@@ -20,7 +31,8 @@ class Queen(Piece):
         
         
     def possibleMoves(self, board):
-        """Vrací seznam možných tahů dámy
+        """
+        Vrací seznam možných tahů dámy
 
         Args:
             board (CheckersBoard): šachovnice, na které se dáma nachází
@@ -52,7 +64,8 @@ class Queen(Piece):
     
     
     def possibleJumps(self, board, position = None):
-        """Vrací seznam možných prvních skoků dámy
+        """
+        Vrací seznam možných prvních skoků dámy
         
         Args:
             board (CheckersBoard): šachovnice, na které se dáma nachází
@@ -91,7 +104,8 @@ class Queen(Piece):
     
     
     def trackJumps(self, endPosition):
-        """Vrací seznam pozic figurek, které dáma přeskočí, než se dostane na koncovou pozici
+        """
+        Vrací seznam pozic figurek, které dáma přeskočí, než se dostane na koncovou pozici
         
         Args:
             endPosition ([int, int]): koncová pozice, na kterou se má dáma dostat

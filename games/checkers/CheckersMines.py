@@ -3,12 +3,21 @@ from ..Enums import *
 import random
 
 class CheckersMines(Checkers):
-    """Hra dáma s minami.
+    """
+    Hra dáma s minami.
+    
+    Attributes:
+        mines (List of [int, int]): seznam pozic min
+        explosion ([int, int]): pozice exploze
+        withChoosePiece (bool): True, pokud je v hře možné vybrat figurku, jinak False
+        numberOfPlayers (int): počet hráčů
+        fog (bool): True, pokud je ve hře Fog Of War, jinak False
     """
     
     
     def __init__(self):
-        """Inicializace hry.
+        """
+        Inicializace hry.
         """
         super().__init__()
         self.__placeMines()
@@ -16,7 +25,8 @@ class CheckersMines(Checkers):
         
         
     def __placeMines(self):
-        """Umístí miny na náhodné pozice.
+        """
+        Umístí miny na náhodné pozice.
         """
         self.mines = []
         for _ in range(12):
@@ -31,7 +41,8 @@ class CheckersMines(Checkers):
             
     
     def getBoard(self, color=None):
-        """Vrátí hrací desku.
+        """
+        Vrátí hrací desku.
         """
         board = super().getBoard()
         
@@ -42,7 +53,8 @@ class CheckersMines(Checkers):
     
     
     def makeMove(self, move, color=None, rightClick=False):
-        """Zpracuje tah.
+        """
+        Zpracuje tah.
         """
         if rightClick:
             return False

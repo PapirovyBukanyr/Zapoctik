@@ -3,12 +3,18 @@ from ..Enums import *
 from ..GameTemplate import GameTemplate
 
 class ChessTrackGame(GameTemplate):
-    """Hra ChessTrackGame.
+    """
+    Hra ChessTrackGame.
+    
+    Attributes:
+        board (ChessTrackGameBoard): Hrací deska
+        currentPlayer (Enum Colors): Barva hráče, který je na tahu
     """
     
     
     def __init__(self):
-        """Inicializace hry.
+        """
+        Inicializace hry.
         """
         super().__init__()
         self.board = ChessTrackGameBoard()
@@ -16,7 +22,8 @@ class ChessTrackGame(GameTemplate):
         
         
     def getBoard(self, color = None):
-        """Vrácení hrací desky.
+        """
+        Vrácení hrací desky.
         
         Args:
             color (Enum Colors): Barva hráče.
@@ -28,7 +35,8 @@ class ChessTrackGame(GameTemplate):
         
         
     def makeMove(self, position, color = None, rightClick = False): 
-        """Provedení tahu.
+        """
+        Provedení tahu.
         
         Args:
             position ([int,int]]): Pozice, na kterou se má kámen umístit.
@@ -56,16 +64,18 @@ class ChessTrackGame(GameTemplate):
     
     
     def checkEnd(self):
-        """Kontrola konce hry.
+        """
+        Kontrola konce hry.
         
         Returns:
-            Enum EndGame: Výsledek hry.
+            String: Který hráč vyhrál, pokud hra skončila, jinak None.
         """
         return self.board.checkEnd()
     
     
     def __printToTerminal(self):
-        """Vypsání hrací desky do terminálu.
+        """
+        Vypsání hrací desky do terminálu.
         """        
         for i in range(4):
             for j in range(4):

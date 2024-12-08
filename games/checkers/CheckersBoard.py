@@ -3,18 +3,24 @@ from ..Board import *
 from ..Enums import *
 
 class CheckersBoard (Board):
-  """Třída reprezentující šachovnici pro hru dáma. Dědí z třídy Board.
+  """
+  Třída reprezentující šachovnici pro hru dáma. Dědí z třídy Board.
+  
+  Attributes:
+      board (List of List of Pieces): hrací deska, kde None reprezentuje prázdné políčko
   """
   
   
   def __init__(self):
-    """Konstruktor třídy CheckersBoard. Vytvoří šachovnici a umístí na ni všechny figurky do počáteční polohy.
+    """
+    Konstruktor třídy CheckersBoard. Vytvoří šachovnici a umístí na ni všechny figurky do počáteční polohy.
     """
     super().__init__()
     self.__populateBoard()
     
   def __getitem__(self, index):
-    """Vrací figuru na určeném místě na šachovnici, nebo None, pokud je políčko prázdné. 
+    """
+    Vrací figuru na určeném místě na šachovnici, nebo None, pokud je políčko prázdné. 
     
     Args:
         index [int, int]: Tuple dvou integerů, (row, col), oba 0-7
@@ -31,7 +37,8 @@ class CheckersBoard (Board):
   
   
   def __setitem__(self, index, value):
-    """Nastaví políčko na šachovnici jako board[row,col] namísto board.board[row][col] 
+    """
+    Nastaví políčko na šachovnici jako board[row,col] namísto board.board[row][col] 
     
     Args:
         index ([int, int]): Tuple dvou integerů, (row, col), oba 0-7
@@ -48,7 +55,8 @@ class CheckersBoard (Board):
     
     
   def __str__(self):
-    """Vrací string reprezentaci šachovnice. Každé políčko je reprezentováno jako string, který je tvořen z informací o barvě a symbolu figury, nebo jako string "__", pokud je políčko prázdné. Políčka jsou oddělena mezerou a jednotlivé řádky jsou odděleny znakem nového řádku (\n).
+    """
+    Vrací string reprezentaci šachovnice. Každé políčko je reprezentováno jako string, který je tvořen z informací o barvě a symbolu figury, nebo jako string "__", pokud je políčko prázdné. Políčka jsou oddělena mezerou a jednotlivé řádky jsou odděleny znakem nového řádku (\n).
     
     Returns:
         string: string reprezentace šachovnice
@@ -76,7 +84,8 @@ class CheckersBoard (Board):
   
   
   def __populateBoard(self):
-    """Nastaví šachovnici do počátečního stavu. Bílý je dole a černý nahoře.
+    """
+    Nastaví šachovnici do počátečního stavu. Bílý je dole a černý nahoře.
     """
     self.board = [[None for i in range(8)] for j in range(8)]
     
@@ -95,7 +104,8 @@ class CheckersBoard (Board):
     
     
   def pieceList(self, color):
-    """Vrací list všech figurek dané barvy na šachovnici.
+    """
+    Vrací list všech figurek dané barvy na šachovnici.
     
     Args:
         color (Enum Colors): Barva figurek, které chceme najít (Colors.WHITE nebo Colors.BLACK)
@@ -115,7 +125,8 @@ class CheckersBoard (Board):
     return pieceList
   
   def getListOfBoard(self):
-    """Vrací list všech figurek na šachovnici.
+    """
+    Vrací list všech figurek na šachovnici.
     
     Returns: 
         List of Fields: List figurek na šachovnici

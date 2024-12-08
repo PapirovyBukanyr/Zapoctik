@@ -1,25 +1,46 @@
 from .Piece import *
 
 class Bishop(Piece):
-  """Třída reprezentující figurku střelce v šachu. Dědí od třídy Piece.
+  """
+  Třída reprezentující figurku střelce v šachu. Dědí od třídy Piece.
+  
+  Attributes:
+    color (Colors): barva figurky
+    position ([int,int]): pozice figurky
+    symbol (str): symbol figurky
+    value (int): hodnota figurky
   """
   
   
   def __init__(self, color, position):
-    """Konstruktor třídy Bishop. Volá konstruktor třídy Piece.
+    """
+    Konstruktor třídy Bishop. Volá konstruktor třídy Piece.
+    
+    Args:
+      color (Colors): barva figurky
+      position ([int,int]): pozice figurky
     """
     super().__init__(color, position)
     self.symbol = "B"
     self.value = 3
     
+    
   def copy(self):
-    """Vytvoří kopii instance třídy Bishop.
+    """
+    Vytvoří kopii instance třídy Bishop.
+    
+    Returns:
+      Bishop: kopie instance třídy Bishop
     """
     return Bishop(self.color, self.position)
   
   
   def possibleMoves(self, board):
-    """Vrátí seznam možných tahů pro střelce. 
+    """
+    Vrátí seznam možných tahů pro střelce. 
+    
+    Args:
+      board (Board): šachovnice, na které se figurka nachází
     """
     possibleMoves = []
     

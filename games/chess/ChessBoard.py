@@ -2,12 +2,17 @@ from .pieces import *
 from ..Board import *
 
 class ChessBoard (Board):
-  """ Třída reprezentující šachovnici s figurkami. Dědí od třídy Board. 
+  """ 
+  Třída reprezentující šachovnici s figurkami. Dědí od třídy Board. 
+  
+  Attributes:
+    board (list of list of Piece): Dvourozměrné pole, které reprezentuje šachovnici. Každé políčko obsahuje instanci třídy Piece, nebo None, pokud je políčko prázdné.
   """
   
   
   def __init__(self):
-    """Konstruktor třídy ChessBoard. Vytvoří šachovnici 8x8 a umístí na ni všechny figury ve standardním pořadí.
+    """
+    Konstruktor třídy ChessBoard. Vytvoří šachovnici 8x8 a umístí na ni všechny figury ve standardním pořadí.
     """
     super().__init__()
     self.board = [[None for _ in range(8)] for _ in range(8)]
@@ -15,7 +20,8 @@ class ChessBoard (Board):
     
     
   def __getitem__(self, index):
-    """Vrací figuru na určeném místě na šachovnici, nebo None, pokud je políčko prázdné. 
+    """
+    Vrací figuru na určeném místě na šachovnici, nebo None, pokud je políčko prázdné. 
     
     Args:
         index [int, int]: Tuple dvou integerů, (row, col), oba 0-7
@@ -30,7 +36,8 @@ class ChessBoard (Board):
   
   
   def __setitem__(self, index, value):
-    """Nastaví políčko na šachovnici jako board[row,col] namísto board.board[row][col] 
+    """
+    Nastaví políčko na šachovnici jako board[row,col] namísto board.board[row][col] 
     
     Args:
         index ([int, int]): Tuple dvou integerů, (row, col), oba 0-7
@@ -47,7 +54,8 @@ class ChessBoard (Board):
     
     
   def __str__(self):
-    """Vrací string reprezentaci šachovnice. Každé políčko je reprezentováno jako string, který je tvořen z informací o barvě a symbolu figury, nebo jako string "__", pokud je políčko prázdné. Políčka jsou oddělena mezerou a jednotlivé řádky jsou odděleny znakem nového řádku (\n).
+    """
+    Vrací string reprezentaci šachovnice. Každé políčko je reprezentováno jako string, který je tvořen z informací o barvě a symbolu figury, nebo jako string "__", pokud je políčko prázdné. Políčka jsou oddělena mezerou a jednotlivé řádky jsou odděleny znakem nového řádku (\n).
     """
     result = ""
     
@@ -66,7 +74,8 @@ class ChessBoard (Board):
   
   
   def __populateBoard(self):
-    """Nastaví šachovnici do normálního stavu. Všichni pěšáci jsou v druhém a sedmém řádku, všechny ostatní figury jsou v prvním a osmém řádku. Barva figurek je v souladu s konvencí, že bílý je dole a černý nahoře.
+    """
+    Nastaví šachovnici do normálního stavu. Všichni pěšáci jsou v druhém a sedmém řádku, všechny ostatní figury jsou v prvním a osmém řádku. Barva figurek je v souladu s konvencí, že bílý je dole a černý nahoře.
     """
     for i in range(8):
       self.board[1][i] = Pawn(Colors.BLACK, [1,i])

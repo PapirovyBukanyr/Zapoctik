@@ -1,19 +1,31 @@
 from ...Enums import *
 
 class Piece:
-  """Třída reprezentující jednu figurku na šachovnici.
+  """
+  Třída reprezentující jednu figurku na šachovnici.
+  
+  Attributes:
+    color (Colors): Barva figurky
+    position ([int,int]): Pozice figurky
+    hasMoved (bool): True, pokud figurka už byla pohnuta, jinak False
+    lastMoveWasDouble (bool): True, pokud poslední tah figurkou byl dvojitý, jinak False
+    value (int): Hodnota figurky
   """
   
   
   def __init__(self, color, position):
-    """Konstruktor třídy Piece. Nastaví barvu a pozici figurky.
+    """
+    Konstruktor třídy Piece. Nastaví barvu a pozici figurky.
+    
+    Args: 
+        color (Colors): Barva figurky
+        position ([int, int]): Pozice figurky
     """
     self.color = color
     self.position = position
     self.hasMoved = False
     self.lastMoveWasDouble = False
     self.value = 0
-    self.image = None
     
   def move(self, board, end):
     """
@@ -39,7 +51,8 @@ class Piece:
         
   @property
   def row (self):
-    """Vrací řádek, na kterém se figurka nachází
+    """
+    Vrací řádek, na kterém se figurka nachází
 
     Returns:
         int: Řádek figurky
@@ -49,7 +62,8 @@ class Piece:
   
   @property
   def col (self):
-    """Vrací sloupec, na kterém se figurka nachází
+    """
+    Vrací sloupec, na kterém se figurka nachází
     
     Returns:
         int: Sloupec figurky
@@ -73,6 +87,7 @@ class Piece:
   def copy(self):
     """
     Vraci kopii objektu. Pouziva se, kdybychom chteli mit kopii objektu, bez toho, aby se menil puvodni objekt.
+    
     Returns:
         (Piece): Kopie objektu
     """

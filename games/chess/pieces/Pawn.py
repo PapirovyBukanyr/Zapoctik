@@ -1,12 +1,26 @@
 from .Piece import *
 
 class Pawn(Piece):
-  """Třída reprezentující pěšce v šachu. Dědí od třídy Piece.
+  """
+  Třída reprezentující pěšce v šachu. Dědí od třídy Piece.
+  
+  Attributes:
+    color (Colors): barva figurky
+    position ([int,int]): pozice figurky
+    symbol (str): symbol figurky
+    value (int): hodnota figurky
+    hasMoved (bool): True, pokud figurka už byla pohnuta, jinak False
+    lastMoveWasDouble (bool): True, pokud poslední tah figurkou byl dvojitý, jinak False
   """
   
   
   def __init__(self, color, position):
-    """Konstruktor třídy Pawn. Volá konstruktor třídy Piece.
+    """
+    Konstruktor třídy Pawn. Volá konstruktor třídy Piece.
+    
+    Args:
+      color (Colors): barva figurky
+      position ([int, int]): pozice figurky
     """
     super().__init__(color, position)
     self.symbol = "P"
@@ -14,7 +28,11 @@ class Pawn(Piece):
     
 
   def copy(self):
-    """Vytvoří kopii instance třídy Pawn.
+    """
+    Vytvoří kopii instance třídy Pawn.
+    
+    Returns:
+      Pawn: kopie instance třídy Pawn
     """
     copy = Pawn(self.color, self.position)
     copy.hasMoved = self.hasMoved
@@ -24,7 +42,8 @@ class Pawn(Piece):
   
   
   def move(self, board, end):
-    """Zkontroluje, zda je možné provést tah pěšcem a provede ho.
+    """
+    Zkontroluje, zda je možné provést tah pěšcem a provede ho.
     
     Args:
       board (dict): šachovnice
@@ -52,10 +71,14 @@ class Pawn(Piece):
       
       
   def possibleMoves(self, board):
-    """Vrátí seznam možných tahů pro pěšce.
+    """
+    Vrátí seznam možných tahů pro pěšce.
     
     Args:
       board (dict): šachovnice
+      
+    Returns:
+      List of [int,int]: seznam možných tahů
     """
     possibleMoves = []
     

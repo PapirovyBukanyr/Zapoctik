@@ -47,9 +47,10 @@ class ChallengeAccepted (GameTemplate): __init__=lambda s: None if None == [supe
 
 
 
-"""Třída ChallengeAccepted slouží k reprezentaci hry Hledání krtka.
+"""
+Třída ChallengeAccepted slouží k reprezentaci hry Hledání krtka.
 
-Attributes:
+Methods:
     won (Enum Colors): Barva, která vyhrála hru
     chosen (list): Pozice, kterou hráč vybral
     position (list): Pozice krtka
