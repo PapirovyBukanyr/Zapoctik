@@ -1,6 +1,7 @@
 from .ConnectFourBoard import *
+from ..GameTemplate import GameTemplate
 
-class ConnectFour:
+class ConnectFour (GameTemplate):
     """ Hrací deska pro hru ConnectFour 
     """
     
@@ -8,18 +9,16 @@ class ConnectFour:
     def __init__(self):
         """Inicializace hry ConnectFour
         """
+        super().__init__()
         self.board = ConnectFourBoard()
         self.player = Colors.WHITE
-    
-    
-    def __str__(self):
-        """Vrátí název hry
-        """
-        return "ConnectFour"
     
         
     def getBoard(self, color = None):
         """Vrací hrací desku
+        
+        Args:
+            color (Enum, optional): Barva hráče. Defaults to None.
         
         Returns:
             List of Struct: Hrací deska
@@ -27,17 +26,22 @@ class ConnectFour:
         return self.board.getListOfBoard()
     
     
-    def makeMove(self, position, color = None):
+    def makeMove(self, position, color = None, rightClick = False):
         """Provedení tahu
         
         Args:
             position ([int,int]): Pozice tahu
             color (Enum, optional): Barva hráče. Defaults to None.
+            rightClick (bool, optional): True, pokud se jedná o pravé tlačítko myši. Defaults to False.
         
         Returns:
             bool: True, pokud se tah podařil, jinak False
         """
+        if rightClick:
+            return False
+        
         position = [position[1], position[0]]
+        
         if position[0] < 0 or position[0] > 6 or position[1] < 0 or position[1] > 5:
             return False
         

@@ -13,8 +13,8 @@ class MainView(QWidget):
         """
         super().__init__()
         self.setWindowTitle("Zápočtík Games")
-        self.setFixedSize(400, 300)
-        icon = QIcon("resources/logo.jpg")  
+        self.setFixedSize(500, 400)
+        icon = QIcon("resources/logo.ico")  
         self.setWindowIcon(icon)
 
         self.setStyleSheet("""
@@ -94,6 +94,6 @@ class MainView(QWidget):
         Args:
             game (Game): objekt Game, který obsahuje název hry a objekt hry
         """
-        self.gameWindow = GameView(game.game)
+        self.gameWindow = GameView(game.game, game.name)
         self.gameWindow.show()
         self.showMinimized()

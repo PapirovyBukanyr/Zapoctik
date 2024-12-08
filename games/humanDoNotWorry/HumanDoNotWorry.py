@@ -1,9 +1,9 @@
-from .HumanDoNotWorryBoard import HumanDoNotWorryBoard
-from ..Enums import *
+from .HumanDoNotWorryBoard import *
 import random
 from .pieces import *
+from ..GameTemplate import GameTemplate
 
-class HumanDoNotWorry:
+class HumanDoNotWorry (GameTemplate):
     """Třída pro hru člověče, nezlob se.
     """
     
@@ -11,25 +11,23 @@ class HumanDoNotWorry:
     def __init__(self):
         """Konstruktor třídy hry člověče, nezlob se.
         """
+        super().__init__()
+        self.number = None
+        self.numberOfPlayers = 4
+        self.withChoosePiece = True
         self.board = HumanDoNotWorryBoard()
         self.players = []
         self.currentPlayer = Colors.WHITE
         self.selectedPiece = None
         self.rolled = False
         self.passTurn = False
-      
-        
-    def __str__(self):
-        """Vrátí textovou reprezentaci instance třídy HumanDoNotWorry.
-        
-        Returns:
-            str: Textová reprezentace instance třídy HumanDoNotWorry
-        """
-        return "Člověče, nezlob se"
           
         
     def getBoard(self, color = None):
         """Metoda vrátí hrací desku.
+        
+        Args:
+            color (Enum Colors, optional): Barva hráče na tahu. Defaults to None.
         
         Returns:
             List of list of field: Hrací deska
@@ -42,10 +40,11 @@ class HumanDoNotWorry:
         
         Args:
             position (int): Pozice figurky
+            color (Enum Colors, optional): Barva hráče. Defaults to None.
         
         Returns:
             bool: True, pokud se podařilo zvolit figurku, jinak False
-        """
+        """        
         if color is not None:
             self.currentPlayer = color
             
@@ -88,15 +87,21 @@ class HumanDoNotWorry:
         return []
     
     
-    def makeMove(self, position, color = None):
+    def makeMove(self, position, color = None, rightClick = False):
         """Metoda provede tah figurkou.
         
         Args:
             position ([int,int]): Pozice figurky
+            color (Enum Colors, optional): Barva hráče. Defaults to None.
+            rightClick (bool, optional): True, pokud se jedná o pravé tlačítko myši. Defaults to False.
         
         Returns:
             bool: True, pokud se podařilo provést tah, jinak False
         """
+        if rightClick:
+            return False
+        
+        
         if color is not None:
             self.currentPlayer = color
             
@@ -234,4 +239,28 @@ class HumanDoNotWorry:
         """Metoda vytiskne hrací desku na obrazovku.
         """
         print(self.board)
+        
+        
+    def possibleMoves(self, color):
+        """Metoda vrátí možné tahy.
+        
+        Args:
+            colors (Enum Colors): Barva hráče
+        
+        Returns:
+            List of list of int: Možné tahy
+        """
+        if self.number is None:
+            return []
+        
+        for i in range(len(self.board.board)):
+            for j in range(len(self.board.board[0])):
+                try:
+                    if self.board[i, j].color == color:
+                        return self.board[i, j].possibleMoves(self.number, self.board)
+                    
+                except:
+                    pass
+        
+        return []
         

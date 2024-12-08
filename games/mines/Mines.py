@@ -1,7 +1,8 @@
 from .MinesBoard import *
 import random
+from ..GameTemplate import GameTemplate
 
-class Mines:
+class Mines (GameTemplate):
     """Třída reprezentující hru Miny
     """
     
@@ -9,6 +10,7 @@ class Mines:
     def __init__(self):
         """Inicializace hry Miny
         """
+        super().__init__()
         self.__numberOfMines = random.randint(15,20)
         self.__board = MinesBoard(self.__numberOfMines)
         self.__firstMove = True
@@ -59,13 +61,6 @@ class Mines:
         
         return result
         
-    def __str__(self):
-        """Vrátí jméno hry
-        
-        Returns:
-            string: jméno hry
-        """
-        return "Miny"
     
     def checkEnd(self):
         """Zkontroluje, zda hra skončila
@@ -90,6 +85,7 @@ class Mines:
         else:
             return None
         
+        
     def placeFlag(self, position, color = Colors.WHITE):
         """Umístí vlajku na danou pozici
         
@@ -113,9 +109,13 @@ class Mines:
         self.__printToTerminal()
         
         return True
+    
         
     def getBoard(self, color=None):
         """Vrátí herní desku
+        
+        Args:
+            color (Enum Colors, optional): Barva, která je na tahu. Výchozí je None.
         
         Returns:
             list: herní deska

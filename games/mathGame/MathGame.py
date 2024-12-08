@@ -1,6 +1,7 @@
 from .MathGameBoard import *
+from ..GameTemplate import GameTemplate
 
-class MathGame:
+class MathGame (GameTemplate):
     """Třída reprezentující hru MathGame
     """
     
@@ -8,23 +9,18 @@ class MathGame:
     def __init__(self):
         """Konstruktor třídy matematické hry. Vytvoří novou hru a nastaví počáteční hodnoty.
         """
+        super().__init__()
         self.__score = 0
         self.__board = MathGameBoard()
         self.__onTurn = Colors.WHITE
         self.__firstTime = False
         
         
-    def __str__(self):
-        """Vrátí název hry
-
-        Returns:
-            String: název hry
-        """
-        return "Matematická hra"
-        
-        
     def getBoard(self, color=None):
         """Vrátí šachovnici ve formě dvourozměrného pole objektů Field
+        
+        Args:
+            color (Enum Colors, optional): Barva hráče. Defaults to None.
         
         Returns:
             list: dvourozměrné pole objektů Field
@@ -57,6 +53,7 @@ class MathGame:
         Args:
             move ([int,int]): nová pozice figury
             color (Enum Colors, optional): Barva figury. Defaults to None.
+            rightClick (bool, optional): True, pokud hráč klikl pravým tlačítkem myši, jina False. Defaults to False.
             
         Returns:
             bool: True, pokud se tah podařil, jinak False

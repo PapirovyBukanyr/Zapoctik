@@ -1,7 +1,8 @@
 from ..Enums import Colors 
 from .TicTacToeBoard import TicTacToeBoard
+from ..GameTemplate import GameTemplate
 
-class TicTacToe:    
+class TicTacToe (GameTemplate):    
     """Třída reprezentující hru Piškvorky
     """
     
@@ -9,21 +10,16 @@ class TicTacToe:
     def __init__(self):
         """Inicializace hry
         """
+        super().__init__()
         self.__board = TicTacToeBoard()
         self.__current_player = Colors.BLACK
         
         
-    def __str__(self):
-        """Vrátí název hry
-
-        Returns:
-            String: název hry
-        """
-        return "Piškvorky"
-        
-        
     def getBoard(self, color=None):
         """Vrátí hrací desku
+        
+        Args:
+            color (Enum Colors, optional): barva hráče na tahu. Výchozí nastavení je na pravidelném střídání.
 
         Returns:
             List: hrací deska
@@ -37,6 +33,7 @@ class TicTacToe:
         Args:
             index ([int,int]): pozice kterou chce hráč obsadit
             player (Enum Colors, optional): Hráč co má být na tahu. Výchozí je nastaveno na střídání.
+            rightClick (bool, optional): True, pokud se jedná o pravé tlačítko myši. Defaults to False.
 
         Returns:
             Boolean: true pokud se tah podařil, jinak false

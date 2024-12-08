@@ -37,14 +37,14 @@ class GameView(QWidget):
     """
     
     
-    def __init__(self, game):
+    def __init__(self, game, name):
         """Konstruktor
 
         Args:
             game (game): Hra, kterou chceme zobrazit
         """
         super().__init__()
-        self.setWindowTitle(game.__str__())
+        self.setWindowTitle(name)
         self.setGeometry(100, 100, 400, 400)  
         self.layout = QVBoxLayout()
         self.board_layout = None
@@ -111,7 +111,7 @@ class GameView(QWidget):
         self.update_board()
         question = GenerateQuestion()
         question.generateQuestion()
-        fullscreen = True if isinstance(self.game, ChessWithFogOfWar) or isinstance(self.game, CheckersWithFogOfWar) else False
+        fullscreen = self.game.fog
         self.questionView = MathQuestion(question, self.player, fullscreen, lambda correct: self.handle_answer(correct))
         self.questionView.show()
         
@@ -129,10 +129,12 @@ class GameView(QWidget):
             return
         
         self.questionView.close()
-        if isinstance(self.game, HumanDoNotWorry):
+        if self.game.numberOfPlayers == 4:
             self.player = self.player.changeColorFour()
-        else:
+        elif self.game.numberOfPlayers == 2:
             self.player = self.player.changeColor()
+        else :
+            raise Exception("Invalid number of players")
         self.show_question()
         
     
@@ -145,7 +147,7 @@ class GameView(QWidget):
             button (string): tlačítko, které bylo stisknuto
         """
         if self.answered:                
-                if self.selectedPiece == False and (isinstance(self.game, Checkers) or isinstance(self.game, Chess) or isinstance(self.game, MathGame)):
+                if self.selectedPiece == False and self.game.withChoosePiece and button == "left":
                     self.choose_piece(row, col)
                 
                 else:
@@ -211,10 +213,12 @@ class GameView(QWidget):
             self.game_ended(self.game.checkEnd())
         
         else:
-            if isinstance(self.game, HumanDoNotWorry):
+            if self.game.numberOfPlayers == 4:
                 self.player = self.player.changeColorFour()
-            else:
+            elif self.game.numberOfPlayers == 2:
                 self.player = self.player.changeColor()
+            else :
+                raise Exception("Invalid number of players")
             self.answered = False
             self.show_question()
     

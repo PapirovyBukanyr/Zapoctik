@@ -9,12 +9,24 @@ class Question (ABC):
     def __init__(self):
         """Konstruktor třídy Question
         """
-        self.questionText = ""
-        self.questionLatex = ""
+        self.questionText = "" 
+        """Text otázky, nesmí obsahovat LaTeX"""
+        
+        self.questionLatex = "" 
+        """LaTeX otázky na zobrazení"""
+        
         self.answer = ""
+        """Odpověď na otázku, při kontrole se zaokrouhluje na celá čísla"""
+        
         self.numberOfQuestions = 0
-        self.time = 60
-        self.hoderovaDanger = False
+        """Počet otázek"""
+        
+        self.time = 60 
+        """Časový limit na otázku v sekundách"""
+        
+        self.hoderovaDanger = False 
+        """Otázka je Hoderova danger"""
+
 
     def __str__(self):
         """Metoda na výpis otázky s odpovědí
@@ -22,7 +34,7 @@ class Question (ABC):
         Returns:
             string: Vrátí otázku a odpověď 
         """
-        return f"Otázka: {self.questionText}{self.questionLatex}\nOdpověď: {self.answer}"
+        return f"Otázka: {self.questionText}\n{self.questionLatex}\nOdpověď: {self.answer}"
     
     
     def checkAnswer(self, answer):

@@ -14,7 +14,7 @@ class MatrixQuestionGenerator(Question):
         self.numberOfQuestions = 4
      
     
-    def generateRegularMatrix(self, n = random.randint(1, 3)):
+    def generateRegularMatrix(self, n = None):
         """Generování regulární matice
         
         Args:
@@ -23,6 +23,10 @@ class MatrixQuestionGenerator(Question):
         Returns:
             numpy array int: Náhodná regulární matice
         """
+        if n is None or n not in range(1, 4):
+            n = random.randint(1, 3)
+            
+        
         matrix = np.zeros((n,n))
         
         while self.calculateDeterminant(matrix) == 0:

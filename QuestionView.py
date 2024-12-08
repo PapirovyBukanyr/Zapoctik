@@ -111,14 +111,14 @@ class MathQuestion(QWidget):
     def time_out(self):
         """Metoda na oznámení, že čas vypršel
         """
+        if self.fullscreen:
+            self.showNormal()
         msg_box = QMessageBox()
         self.callback(False)
         msg_box.setText("Vypršel čas! Správná odpověď je: " + self.question.doupovcuvOperator())
         msg_box.setWindowTitle("Čas vypršel")
         msg_box.exec_()
         self.kill_yourself()
-
-
 
 
     def check_answer(self):
@@ -128,6 +128,8 @@ class MathQuestion(QWidget):
         answer = self.answer_input.text()
                 
         msg_box = QMessageBox()
+        if self.fullscreen:
+            self.showNormal()
         
         if self.question.checkAnswer(answer):
             self.callback(True)
@@ -154,13 +156,15 @@ class MathQuestion(QWidget):
             
         msg_box.setWindowTitle("Vyhodnocení odpovědi")
         msg_box.exec_()
-        self.close()
-    
+        self.kill_yourself()
+        
     
     def kill_yourself(self):
         """ Metoda pro ukončení okna galantní cestou
         """
         self.timer.stop()
+        if self.fullscreen:
+            self.showNormal()
         self.close()
 
     def jumpscare(self):
