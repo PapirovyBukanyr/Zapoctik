@@ -13,7 +13,7 @@ class MainView(QWidget):
         """Konstruktor třídy
         """
         super().__init__()
-        self.setWindowTitle("Zápočtík Games")
+        self.setWindowTitle("PříHoDa Games")
         self.setFixedSize(500, 400)
         icon = QIcon("resources/logo.ico")  
         self.setWindowIcon(icon)
@@ -62,7 +62,7 @@ class MainView(QWidget):
 
         main_layout = QVBoxLayout()
 
-        title = QLabel("Zápočtík Games")
+        title = QLabel("Příhoda Games")
         title.setObjectName("AppName")  
         title.setAlignment(Qt.AlignCenter)  
         main_layout.addWidget(title)
