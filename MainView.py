@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QSpacerItem, QSizePolicy
 from GameView import *
 from games import *
+import random
 from PyQt5.QtGui import QIcon
 
 class MainView(QWidget):
@@ -73,6 +74,8 @@ class MainView(QWidget):
         
         games = ListOfGames.getListOfGames()
         
+        games.append(Game("Náhodná hra ❓", "Náhodně vybere jednu z her", None))
+        
         for i, game in enumerate(games):
             button = QPushButton(game.name)
             button.clicked.connect(lambda checked, g=game: self.start_game(g))
@@ -94,6 +97,8 @@ class MainView(QWidget):
         Args:
             game (Game): objekt Game, který obsahuje název hry a objekt hry
         """
+        if game.game is None:
+            game = random.choice(ListOfGames.getListOfGames()[:-1])
         self.gameWindow = GameView(game.game, game.name)
         self.gameWindow.show()
         self.showMinimized()
