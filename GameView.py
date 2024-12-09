@@ -6,6 +6,7 @@ from QuestionView import MathQuestion
 from questions import GenerateQuestion
 from games import *
 import gc
+from PyQt5.QtGui import QIcon
 
 class ClickableLabel(QLabel):
     """Třída ClickableLabel slouží k vytvoření klikatelného labelu, který může vyslat signál o kliknutí na dané políčko
@@ -22,7 +23,6 @@ class ClickableLabel(QLabel):
         super().__init__(*args, **kwargs)
         self.row = row
         self.col = col
-        self.isHighlighted = False
 
     def mousePressEvent(self, event):
         """Metoda, která se zavolá při kliknutí na dané políčko
@@ -38,14 +38,14 @@ class GameView(QWidget):
     """
     
     
-    def __init__(self, game):
+    def __init__(self, game, name):
         """Konstruktor
 
         Args:
             game (game): Hra, kterou chceme zobrazit
         """
         super().__init__()
-        self.setWindowTitle(game.__str__())
+        self.setWindowTitle(name)
         self.setGeometry(100, 100, 400, 400)  
         self.layout = QVBoxLayout()
         self.board_layout = None
@@ -53,6 +53,8 @@ class GameView(QWidget):
         self.player = Colors.WHITE
         self.selectedPiece = False
         self.answered = False
+        icon = QIcon("resources/logo.ico")
+        self.setWindowIcon(icon)
 
         self.setStyleSheet("""
         QMainWindow {
@@ -112,7 +114,7 @@ class GameView(QWidget):
         self.update_board()
         question = GenerateQuestion()
         question.generateQuestion()
-        fullscreen = True if isinstance(self.game, ChessWithFogOfWar) or isinstance(self.game, CheckersWithFogOfWar) else False
+        fullscreen = self.game.fog
         self.questionView = MathQuestion(question, self.player, fullscreen, lambda correct: self.handle_answer(correct))
         self.questionView.show()
         
@@ -130,7 +132,12 @@ class GameView(QWidget):
             return
         
         self.questionView.close()
-        self.player = self.player.changeColor()
+        if self.game.numberOfPlayers == 4:
+            self.player = self.player.changeColorFour()
+        elif self.game.numberOfPlayers == 2:
+            self.player = self.player.changeColor()
+        else :
+            raise Exception("Invalid number of players")
         self.show_question()
         
     
@@ -142,28 +149,12 @@ class GameView(QWidget):
             col (int): sloupec
             button (string): tlačítko, které bylo stisknuto
         """
-        if self.answered:
-            if button == "right":
-                if isinstance(self.game, Mines):
-                    self.game.placeFlag([row, col], self.player)
-                    self.update_board()
-                    
-                    if self.game.checkEnd() != None:
-                        self.game_ended(self.game.checkEnd())
-                        
-                    self.player = self.player.changeColor()
-                    self.answered = False
-                    self.show_question()
-                    
-            if button == "left":
-                if self.selectedPiece == False and (isinstance(self.game, Checkers) or isinstance(self.game, Chess) or isinstance(self.game, MathGame)):
+        if self.answered:                
+                if self.selectedPiece == False and self.game.withChoosePiece and button == "left":
                     self.choose_piece(row, col)
                 
                 else:
-                    self.make_move(row, col)
-        
-        else:
-            self.show_question()
+                    self.make_move(row, col, False if button == "left" else True)
             
     
     def choose_piece(self, row, col):
@@ -174,21 +165,29 @@ class GameView(QWidget):
             col (int): sloupec
         """
         self.update_board()
+        moves = self.game.choosePiece([row, col], self.player)
         
-        for move in self.game.choosePiece([row, col], self.player):
-            self.highlight_square(move[0], move[1])
+        if moves == []:
+            return
+        
+        if isinstance(moves[0], int):
+            self.highlight_square(moves[0], moves[1])
+            
+        else:
+            for move in moves:
+                self.highlight_square(move[0], move[1])
         
         self.selectedPiece = True
         
         
-    def make_move(self, row, col):
+    def make_move(self, row, col, rightClick = False):
         """Funkce pro provedení tahu
         
         Args:
             row (int): řádek
             col (int): sloupec
         """
-        result = self.game.makeMove([row, col], self.player)
+        result = self.game.makeMove([row, col], self.player, rightClick)
         
         if result == "Promote":
             self.promote_pawn()
@@ -214,7 +213,12 @@ class GameView(QWidget):
             self.game_ended(self.game.checkEnd())
         
         else:
-            self.player = self.player.changeColor()
+            if self.game.numberOfPlayers == 4:
+                self.player = self.player.changeColorFour()
+            elif self.game.numberOfPlayers == 2:
+                self.player = self.player.changeColor()
+            else :
+                raise Exception("Invalid number of players")
             self.answered = False
             self.show_question()
     

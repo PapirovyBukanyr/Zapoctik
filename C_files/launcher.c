@@ -1,6 +1,6 @@
 #include <stdlib.h> 
 #include <stdio.h>  
-#include "C_files/pyc_killer.h"
+#include "pyc_killer.h"
 
 /** 
  * Spusti skript pyc_killer.exe, ktery odstrani vsechny soubory s priponou .pyc v adresari a jeho podadresarich.
@@ -69,7 +69,12 @@ int main() {
 
     printf("Spoustim skript main.py...\n");
     if (system("python main.py") != 0) {
-        printf("Chyba pri spousteni skriptu main.py!\n");
+
+        printf("\nNeco se pokazilo...\n");
+        printf("...muze za to Marek!\n\n");
+        printf("Stiskni libovolnou klavesu (enter) pro spusteni genocidy souboru.\n");
+        getchar();
+
         call_pyc_killer_3000();
         return 2;
     }
@@ -79,6 +84,11 @@ int main() {
     if (call_pyc_killer_3000() != 0) {
         return 3; 
     }
+
+    printf("\nPro dnesek jsem s tvym vykonem spokojen, takze zadne soubory nesmazu...\n");
+    printf("...ale zitra to bude jina!\n\n");
+    printf("Stiskni libovolnou klavesu (enter) pro ukonceni.\n");
+    getchar();
 
     return 0; 
 }

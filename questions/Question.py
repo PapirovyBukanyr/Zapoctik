@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import numpy as np
 
 class Question (ABC):
     """Třída předpisu otázky
@@ -8,12 +9,24 @@ class Question (ABC):
     def __init__(self):
         """Konstruktor třídy Question
         """
-        self.questionText = ""
-        self.questionLatex = ""
+        self.questionText = "" 
+        """Text otázky, nesmí obsahovat LaTeX"""
+        
+        self.questionLatex = "" 
+        """LaTeX otázky na zobrazení"""
+        
         self.answer = ""
+        """Odpověď na otázku, při kontrole se zaokrouhluje na celá čísla"""
+        
         self.numberOfQuestions = 0
-        self.time = 60
-        self.hoderovaDanger = False
+        """Počet otázek"""
+        
+        self.time = 60 
+        """Časový limit na otázku v sekundách"""
+        
+        self.hoderovaDanger = False 
+        """Otázka je Hoderova danger"""
+
 
     def __str__(self):
         """Metoda na výpis otázky s odpovědí
@@ -21,7 +34,7 @@ class Question (ABC):
         Returns:
             string: Vrátí otázku a odpověď 
         """
-        return f"Otázka: {self.questionText}{self.questionLatex}\nOdpověď: {self.answer}"
+        return f"Otázka: {self.questionText}\n{self.questionLatex}\nOdpověď: {self.answer}"
     
     
     def checkAnswer(self, answer):
@@ -34,7 +47,7 @@ class Question (ABC):
             bool: true pokud je odpověď správná
         """
         try:
-            self.answer = round(self.answer).__str__()
+            self.answer = int(np.round(self.answer)).__str__()
             
         except:
             self.answer = self.answer.__str__()
@@ -49,7 +62,7 @@ class Question (ABC):
             string: odpověď
         """
         try:
-            answer = round(self.answer).__str__()
+            answer = int(np.round(self.answer)).__str__()
             
         except:
             answer = self.answer.__str__()

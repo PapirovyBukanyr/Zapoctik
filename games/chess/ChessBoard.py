@@ -72,22 +72,9 @@ class ChessBoard (Board):
       self.board[1][i] = Pawn(Colors.BLACK, [1,i])
       self.board[6][i] = Pawn(Colors.WHITE, [6,i])
       
-    for i in [0,7]:
-      self.board[0][i] = Rook(Colors.BLACK, [0,i])
-      self.board[7][i] = Rook(Colors.WHITE, [7,i])
+    self.board[0] = [Rook(Colors.BLACK, [0,0]), Knight(Colors.BLACK, [0,1]), Bishop(Colors.BLACK, [0,2]), Queen(Colors.BLACK, [0,3]), King(Colors.BLACK, [0,4]), Bishop(Colors.BLACK, [0,5]), Knight(Colors.BLACK, [0,6]), Rook(Colors.BLACK, [0,7])]
+    self.board[7] = [Rook(Colors.WHITE, [7,0]), Knight(Colors.WHITE, [7,1]), Bishop(Colors.WHITE, [7,2]), Queen(Colors.WHITE, [7,3]), King(Colors.WHITE, [7,4]), Bishop(Colors.WHITE, [7,5]), Knight(Colors.WHITE, [7,6]), Rook(Colors.WHITE, [7,7])]
     
-    for i in [1,6]:
-      self.board[0][i] = Knight(Colors.BLACK, [0,i])
-      self.board[7][i] = Knight(Colors.WHITE, [7,i]) 
-      
-    for i in [2,5]:
-      self.board[0][i] = Bishop(Colors.BLACK, [0,i])
-      self.board[7][i] = Bishop(Colors.WHITE, [7,i])
-    
-    self.board[0][3] = Queen(Colors.BLACK, [0,3])
-    self.board[0][4] = King(Colors.BLACK, [0,4])
-    self.board[7][3] = Queen(Colors.WHITE, [7,3])
-    self.board[7][4] = King(Colors.WHITE, [7,4])
     
     
   def pieceList(self, color):

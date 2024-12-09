@@ -1,41 +1,28 @@
 import unittest
 from parameterized import parameterized
-from games import Chess, Checkers, TicTacToe, MathGame, Mines, ChessWithFogOfWar, CheckersWithFogOfWar, ChallengeAccepted
+from games import *
 import random
-from .Enums import Colors
-
+ 
 class GameTests(unittest.TestCase):
     """Testy na hry
     """
     
     
-    __allClasses = [
-        ("Chess", Chess),
-        ("Checkers", Checkers),
-        ("TicTacToe", TicTacToe),
-        ("MathGame", MathGame),
-        ("Mines", Mines),
-        ("ChessWithFogOfWar", ChessWithFogOfWar),
-        ("CheckersWithFogOfWar", CheckersWithFogOfWar),
-        ("Filipova výzva", ChallengeAccepted)     
-    ]
-    """list: Seznam všech tříd her
-    """
-    
-    
-    @parameterized.expand(__allClasses)
-    def testInitialBoard(self, name, game_class):
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testInitialBoard(self, game):
         """Testuje, zda se vytvoří hrací pole
         
         Args:
             name (string): jméno hry
             game_class (game): třída hry
         """
-        game = game_class()
+        game = game.game
         self.assertIsNotNone(game.getBoard(Colors.WHITE))
         self.assertIsNotNone(game.getBoard(Colors.BLACK))
         self.assertNotEqual(game.getBoard(Colors.WHITE), [])
         self.assertNotEqual(game.getBoard(Colors.BLACK), [])
+        
+
 
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE),
@@ -108,7 +95,9 @@ class GameTests(unittest.TestCase):
         ("TicTacToe", TicTacToe, [0, 0], None, [0, 0]),
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [7, 6]),
         ("Mines", Mines, [0, 0], None, [1, 1]),
-        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [0, 0])
+        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [0, 0]),
+        ("Connect four", ConnectFour, [0, 0], None, [0, 0]),
+        ("Chess track game", ChessTrackGame, [0, 0], None, [1, 1])
     ])
     def testMakeMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb provede
@@ -125,7 +114,8 @@ class GameTests(unittest.TestCase):
         if choose_position and color:
             game.choosePiece(choose_position, color)
             
-        self.assertTrue(game.makeMove(move_position, color))
+        self.assertTrue(game.makeMove(move_position, color, False))
+        
         
     @parameterized.expand([
         ("Chess", Chess, [6, 0], Colors.WHITE, [-1, -1]),
@@ -135,7 +125,8 @@ class GameTests(unittest.TestCase):
         ("TicTacToe", TicTacToe, [-1, -1], None, [-1, -1]),
         ("MathGame", MathGame, [7, 7], Colors.WHITE, [8, 8]),
         ("Mines", Mines, [0, 0], None, [-1, -1]),
-        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [-1, -1])
+        ("Filipova výzva", ChallengeAccepted, [0, 0], None, [-1, -1]),
+        ("Connect four", ConnectFour, [0, 0], None, [-1, -1])
     ])
     def testMakeWrongMove(self, name, game_class, choose_position, color, move_position):
         """Testuje, zda se pohyb nelze provést
@@ -180,35 +171,71 @@ class GameTests(unittest.TestCase):
         self.assertFalse(game.makeMove(move_position, color))
         
 
-    @parameterized.expand(__allClasses)
-    def testCheckEnd(self, name, game_class):
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testCheckEnd(self, game):
         """Testuje, zda hra skončila
 
         Args:
             name (string): jméno hry
             game_class (game): třída hry
         """
-        game = game_class()
+        game = game.game
         self.assertIsNone(game.checkEnd())
         
+        
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testWithChoosingPiece(self, game):
+        """Testuje, zda je definováno vybírání figurky
+
+        Args:
+            name (string): jméno hry
+            game_class (game): třída hry
+        """
+        game = game.game
+        self.assertIsNotNone(game.withChoosePiece)    
+        
+        
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testFog(self, game):
+        """Testuje, zda je definován mlhový efekt
+        
+        Args:
+            name (string): jméno hry
+            game_class (game): třída hry
+        """
+        game = game.game
+        self.assertIsNotNone(game.fog)
+        
+        
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testNumberOfPlayers(self, game):
+        """Testuje, zda je definován počet hráčů
+
+        Args:
+            name (string): jméno hry
+            game_class (game): třída hry
+        """
+        game = game.game
+        self.assertIsNotNone(game.numberOfPlayers)
+        
     
-    @parameterized.expand(__allClasses)
-    def testSimulateFullGame(self, name, game_class):
+    @parameterized.expand(ListOfGames.getListOfGames())
+    def testSimulateFullGame(self, game):
         """Testuje, zda se hra zahraje do konce
 
         Args:
             name (string): jméno hry
             game_class (game): třída hry
         """
-        game = game_class()
+        game = game.game
         colorOnMove = Colors.WHITE
         counter = 0
         limit = 10000
 
         while game.checkEnd() is None and counter < limit:
             move = []
-
-            if self.isGameWithChoosingPiece(game):
+            
+            if game.withChoosePiece:
                 while move == []:
                     move = game.choosePiece([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
                 
@@ -220,7 +247,7 @@ class GameTests(unittest.TestCase):
             newMove = False
             
             while newMove != True:
-                if self.isGameWithChoosingPiece(game):
+                if game.withChoosePiece:
                     newMove = game.makeMove(move, colorOnMove)
                     if not isinstance(newMove,bool) and not isinstance(newMove, str) and isinstance(newMove[0], list) and isinstance(newMove[0][0], int):
                         move = random.choice(newMove)
@@ -234,22 +261,15 @@ class GameTests(unittest.TestCase):
                 
                 else:
                     newMove = game.makeMove([random.randint(0, 10), random.randint(0, 15)], colorOnMove)
-
-            colorOnMove = colorOnMove.changeColor()
+           
             counter += 1
+            
+            if isinstance(game, HumanDoNotWorry):
+                colorOnMove = colorOnMove.changeColorFour()
+            else:
+                colorOnMove = colorOnMove.changeColor()
+            
             
         print(game.checkEnd())
         self.assertGreater(limit, counter)
     
-    
-    def isGameWithChoosingPiece(self, game):
-        """Zjistí, zda hra vyžaduje výběr figurky
-
-        Args:
-            game (game): hra
-
-        Returns:
-            bool: True, pokud hra vyžaduje výběr figurky
-        """
-        return isinstance(game, Chess) or isinstance(game, Checkers) or isinstance(game, MathGame) or isinstance(game, ChessWithFogOfWar) or isinstance(game, CheckersWithFogOfWar)
-

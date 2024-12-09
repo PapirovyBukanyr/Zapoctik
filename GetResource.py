@@ -25,6 +25,12 @@ class GetResource:
                     
                     case Colors.BLACK:
                         return "resources//pawnB.png"
+                    
+                    case Colors.RED:
+                        return "resources//pawnR.png"
+                    
+                    case Colors.GREEN:
+                        return "resources//pawnG.png"
             
             case Figures.ROOK:
                 match(color):
@@ -110,5 +116,8 @@ class GetResource:
             
             case Figures.MOLE:
                 return "resources//mole.jpg"
+            
+            case Figures.LOGO:
+                return "resources//logo.png"
                 
         

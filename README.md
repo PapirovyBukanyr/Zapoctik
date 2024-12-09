@@ -4,7 +4,7 @@ Snad ten zápočet dostaneme
 
 ## Celkový popis
 
-Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky her (Šachy) a zahrát si je. Aby to nebylo tak snadné, tak před každým kolem se mu zobrazí matematická otázka, na kterou bude muset vymyslet odpověď.
+Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky her a zahrát si je. Aby to nebylo tak snadné, tak před každým kolem se mu zobrazí matematická otázka, na kterou bude muset vymyslet odpověď.
 
 ## Autoři
  
@@ -13,6 +13,12 @@ Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky 
  - Marek Přibyl
 
 ## Použití
+
+### Pokud využívate podporovaný Windows:
+
+Spusťte soubor `launcher.exe`
+
+### Pokud využívate podporovaný Windows, ale bojíte se `launcher.exe` souboru:
 
 1. **Ujistěte se, že máte verzi Pythonu alespoň 3.10 nebo novější**
 
@@ -38,12 +44,15 @@ Hráč po spuštění aplikace bude mít možnost vybrat si z široké nabídky 
     python tests.py
     ```
 
+### Jiné operační systémy nebo nepodporované verze Windows:
+
+Improvizujte!
 
 ## Složky a Soubory
 
 ### Backend her
 
-Všechny hry se nachází v modulu `games`. Každá hra používá jednotnou brací desku `games/Board.py`. Společný je také soubor `games/Enums.py`, který obsahuje třídy typu enum "Figure" (co za figurku má frontend vykreslit), Colors (Barvy jsou "WHITE" a "BLACK") a "Field" (datová struktura kombinující předchozí dvě, určená ke komunikaci s Frontendem)
+Všechny hry se nachází v modulu `games`. Každá hra používá jednotnou brací desku `games/Board.py`. Společný je také soubor `games/Enums.py`, který obsahuje třídy typu enum "Figure" (co za figurku má frontend vykreslit), Colors (Barvy jsou "WHITE", "BLACK", "RED" a "GREEN") a "Field" (datová struktura kombinující předchozí dvě, určená ke komunikaci s Frontendem). Všechny hry jsou vypsány ve třídě `games/ListOfGames` a pokud je vytvořena nějaká nová, stačí jí tam snadno připsat, o zbytek se postará sama aplikace. Ta jednotivé hry reprezentuje třídou `games/Game`, která má vlastnost název, popis a objekt hry samotné.
 
 #### Backend šachů
 
@@ -57,7 +66,15 @@ Celá logika se nachází ve složce `games/chess`. Řízení chodu celé hry m�
 
 #### Backend šachů s mlhou války
 
-Jedná se prakticky o totožnou hru, jako je ta předchozí, jenom třída `games/ChessWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovala pouze dostupná políčka.
+Jedná se prakticky o totožnou hru, jako je ta předchozí, jenom třída `games/chess/ChessWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovala pouze dostupná políčka.
+
+#### Backend zaminovaných šachů
+
+Totožné s předminulou hrou, jenom třída `games/chess/ChessMines` na začátku hry na šachovnici rozmístí miny, které zabijí figurku na místě. 
+
+#### Backend zaminovaných šachů s mlhou války 
+
+Identická s předchozí, navíc ale má mlhu války nachází se v `games/chess/ChessMinesWithFogOfWar`.
 
 #### Backend dámy
 
@@ -67,11 +84,27 @@ Většina logiky se nachází v modulu `games/checkers`. Hlavní třída, která
 
 #### Backend dámy s mlhou války
 
-Jedná se prakticky o totožnou hru, jako je ta předchozí, jenom třída `games/CheckersWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovala pouze dostupná políčka.
+Jedná se prakticky o totožnou hru, jako je ta předchozí, jenom třída `games/checkers/CheckersWithFogOfWar` modifikuje metodu getBoard tak, aby se zobrazovala pouze dostupná políčka.
+
+#### Backend zaminované dámy
+
+Identické se zaminovánými šachy, aktorát se dědí z `games/checkers/Checkers` a výsledná třída je `games/checkers/CheckersMines`
+
+#### Backend zaminované dámy s mlhou války
+
+Identické s předchozím jenom je přidána mlha války. Nachází se ve třídě  `games/checkers/CheckersMinesWithFogOfWar`. 
 
 #### Backend piškvorek 3x3
 
-Většina backendu piškvorek se nachází v souboru `games/ticTacToe`, hlavní třída je `games/ticTacToe/TicTacToe.py`, ve které je většina logiky, dále tam je třída `games/ticTacToe/TicTacToeBoard.py`, která dědí z `games/Board.py`.
+Většina backendu piškvorek se nachází ve složce `games/ticTacToe`, hlavní třída je `games/ticTacToe/TicTacToe`, ve které je většina logiky, dále tam je třída `games/ticTacToe/TicTacToeBoard`, která dědí z `games/Board`.
+
+#### Backend rotujících piškvorek
+
+Celá logika hry je v modulu `games/chessTrackGame`, kde je hlavní třída `games/chessTrackGame/ChessTrackGame`, ve které je polovina logiky, druhá polovina se nacházi ve třídě `games/chessTrackGame/ChessTrackGameBoard`, která dědí z `games/Board`. Princip hry je, že po každém zahraném tahu se herní deska pootočí se stejnou obvodovou rychlostí (vnitřní i vnější se posunou o jedno pole), cílem je propojit čtyři stejné symboly horizontálně nebo vertikálně (diagonály nejsou v původní hře akceptovány, tak je neakceptujeme ani my).
+
+#### Backend ConnectFour
+
+Celá logika hry je v modulu `games/connectFour`, kde je hlavní třída `games/ConnectFour/connectFour`, ve které je polovina logiky, druhá polovina se nacházi ve třídě `games/ConnectFour/connectFourBoard`, která dědí z `games/Board`. Princip hry jsou klasické piškvorky, akorát se začíná od spodního řádku a symboly nelze umístit do vzduchu.
 
 #### Backend matematické hry
 
@@ -85,9 +118,25 @@ Cílem hry je najít krtka, což je černý pěšák, na zakryté šachovnici. T
 
 Veškerá logika hry je v `games/mines`. Hlavní třída je `games/mines/Mines`, kde je definována veškerá logika hry. Herní deska je definována ve třídě `games/mines/MinesBoard`, která stejně jako ostatní herní desky dědí z `games/Board`. Princip hry je lehce upraven pro dva hráče. To v praxi znamená, že za správně umístěnou vlaječku hráč získá bod, za odebrání správné vlaječky bod ztratí. Kdo má nakonec nejvíc bodů vítězí. 
 
+#### Backend hry Člověče, nezlob se
+
+Naše skupina došla k závěru, že je ve světě málo občanských válek a že by se s tím mělo něco udělat. Proto jsme vytvořili tuto hru, kde se na nasazování hází pouze jednou, před každým hodem se musí zodpovědět otázka, ale kde se stačí dostat na cílovou čáru (nemusí se řešit prostor v domečku). Na šestku se znovu nehází. Veškerá logika hry se nachází v modulu `games/humanDoNotWorry`. Hlavní třída je `games/humanDoNotWorry/HumanDoNotWorry`. Herní deska `games/humanDoNotWorry/HumanDoNotWorryBoard` dědí z `games/Board`.  Jednotlivé figurky dědí ze třídy `games/humanDoNotWorry/pieces/Piece`. Konkrétně to jsou:
+- `games/humanDoNotWorry/pieces/RedPiece`: červená figurka
+- `games/humanDoNotWorry/pieces/BlackPiece`: černá figurka
+- `games/humanDoNotWorry/pieces/GreenPiece`: zelená figurka
+- `games/humanDoNotWorry/pieces/WhitePiece`: bílá figurka
+
+#### Backend hry člověče nezlob se s mlhou války
+
+Tuto hru bych nepřál ani svému nejhoršímu nepříteli. Veškerá logika se dědí ze třídy `games/humanDoNotWorry` a jenom se ve třídě `games/humanDoNotWorryWithFogOfWar` přidává přepracovaná metoda na zakrývání obrazovky. 
+
+#### Backend hry pexeso
+
+Celá logika hry je v modulu `games/pexeso`, kde je hlavní třída `games/pexeso/Pexeso`, ve které je polovina logiky, druhá polovina se nacházi ve třídě `games/pexeso/PexesoBoard`, která dědí z `games/Board`. Ke hře se využívají ještě třídy `games/pexeso/PexesoCard`, které reprezentují jednotlivé kartičky a jejich stavy.
+
 ### Backend generování otázek
 
-Otázky se generují v modulech `questions`, kde je třída `questions/Question.py`, ze které všechny otázky dědí a která poskytuje základní představu o struktuře generátorů. Další důležitá třída je `questions/GenerateQuestion.py`, která slouží k obecnému vygenerování otázky. Otázky na konkrétní témata se pak generují v souborech:
+Otázky se generují v modulech `questions`, kde je třída `questions/Question.py`, ze které všechny otázky dědí a která poskytuje základní představu o struktuře generátorů. Další důležitá třída je `questions/GenerateQuestion.py`, která slouží k obecnému vygenerování otázky. Neposlední řadě je seznam `questions/listOfQuestions`, kde se dají snadno přidávat případně odstraňovat nově vzniklé generátory otázek. Otázky na konkrétní témata se pak generují v souborech:
 - `questions/generators/MatrixQuestionGenerator.py`: Generátor otázek na maticové operace.
 - `questions/generators/FractionQuestionGenerator.py`: Generátor otázek na zlomky a obecně dvojice čísel.
 - `questions/generators/DerivativeQuestionGenerator.py`: Generátor otázek na vyčíslování derivací.
@@ -98,6 +147,8 @@ Otázky se generují v modulech `questions`, kde je třída `questions/Question.
 - `questions/generators/OrdinalNumberQuestionGenerator.py`: Generátor otázek na ordinální čísla.
 - `questions/generators/KardinalNumberQuestionGenerator.py`: Generátor otázek na kardinální čísla.
 - `questions/generators/SetQuestionGenerator.py`: Generátor otázek na množiny.
+- `questions/generators/VectorQuestionGenerator.py`: Generátor otázek na vektory.
+- `questions/generators/ComplexQuestionGenerator.py`: Generátor otázek na komplexní čísla.
 
 ### Testy
 

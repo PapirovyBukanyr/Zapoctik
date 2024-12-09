@@ -1,8 +1,9 @@
 from ..Enums import Colors
 from .pieces import *
 from .CheckersBoard import CheckersBoard
+from ..GameTemplate import GameTemplate
 
-class Checkers:
+class Checkers (GameTemplate):
     """Třída reprezentující hru dáma
     """
     
@@ -10,19 +11,12 @@ class Checkers:
     def __init__(self):
         """Konstruktor třídy hry dáma
         """
+        super().__init__()
+        self.withChoosePiece = True
         self.__board = CheckersBoard()
         self.__currentPlayer = Colors.WHITE
         self.__pieceToPlay = None
         self.__firstMove = True
-    
-    
-    def __str__(self):
-        """Vrátí název hry
-
-        Returns:
-            String: název hry
-        """
-        return "Dáma"
         
         
     def getBoard(self, color=None):
@@ -71,15 +65,19 @@ class Checkers:
             return []
         
     
-    def makeMove(self, index, color = None):
+    def makeMove(self, index, color = None, rightClick = False):
         """Funkce pro provedení tahu figurkou
         
         Args:
             index ([int,int]): pozice, kam chce hráč hrát
+            color (Enum Colors, optional): barva hráče na tahu. Výchozí nastavení je na pravidelném střídání.
+            rightClick (bool, optional): True, pokud se jedná o pravé tlačítko myši. Výchozí nastavení je False.
             
         Returns:
             bool: True, pokud se tah podařil, jinak False
         """
+        if rightClick:
+            return False
         
         if self.__pieceToPlay == None:
             return False 
@@ -131,6 +129,7 @@ class Checkers:
         self.__board = CheckersBoard()
         self.__currentPlayer = Colors.WHITE
         
+        
     def checkEnd(self):
         """Funkce pro kontrolu konce hry
         
@@ -171,6 +170,7 @@ class Checkers:
         
         return True
     
+    
     def possibleMoves(self, color):
         """Funkce pro získání možných tahů pro hráče, primárně pro rozšíření Fog Of War
         
@@ -191,6 +191,16 @@ class Checkers:
                 listOfMoves.append(piece.trackJumps(jump))
                 
         return listOfMoves
+    
+    
+    def killPiece(self, piecePosition):
+        """Funkce pro odstranění figurky z hrací desky
+        
+        Args:
+            piecePosition ([int, int]): pozice figurky, která má být odstraněna
+        """
+        self.__board[piecePosition[0], piecePosition[1]] = None
+    
     
     def __printToTerminal(self):
         """Funkce pro výpis stavu hry na terminál

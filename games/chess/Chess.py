@@ -1,32 +1,34 @@
 from .ChessBoard import ChessBoard
 from .pieces import *
+from ..GameTemplate import GameTemplate
 
-class Chess:
+class Chess (GameTemplate):
   """Třída reprezentující hru šachy
   """
   
   def __init__(self):
     """ Konstruktor třídy šachů
     """
+    super().__init__()
+    self.withChoosePiece = True
     self.__movesSinceLastImportantMove = 0
     self.__board = ChessBoard()
     self.__playedPiece = None
     self.__positionsList = [self.__board.copy()]  
     self.__isMoving = Colors.WHITE
-    
-  def __str__(self):
-        """Vrátí název hry
-
-        Returns:
-            String: název hry
-        """
-        return "Šachy"
         
   
   def getBoard(self, color=None):
     """Vrátí šachovnici v aktuálním stavu jako dvourozměrné pole Field
+    
+    Args:
+        color (Enum Colors): Barva hráče, pro kterého se má šachovnice vykreslit
+        
+    Returns:
+        list of list of Field: šachovnice
     """
     return self.__board.getListOfBoard()
+  
   
   def choosePiece (self, positionToPlay, color = None):
     """Funkce pro vyber figurky, kterou chce hrac hrat
@@ -52,16 +54,20 @@ class Chess:
       return []
 
 
-  def makeMove(self, playedMove, color = None):
+  def makeMove(self, playedMove, color = None, rightClick = False):
     """Provedení tahu hrace
 
     Args:
         playedMove ([int, int]): pozice, kam chce hrac hrat
+        color (Enum Colors): Barva hrace, ktery chce hrat
+        rightClick (bool): True, pokud hrac klikl pravym tlacitkem mysi, jinak False
 
     Returns:
         bool: tah se zdařil nebo ne
         string: "Promote" pokud je potreba provest vylepseni pesaka
     """
+    if rightClick:
+      return False
     
     if self.__playedPiece is None:
       return False
@@ -137,6 +143,7 @@ class Chess:
     
     return True
   
+  
   def possibleMoves(self, color):
     """Vrati mozne tahy pro hrace, primárně pro rozšíření Fog Of War
 
@@ -153,6 +160,7 @@ class Chess:
         listOfMoves.append(move)
     
     return listOfMoves
+
 
   def checkEnd(self):
     """Kontrola konce hry
@@ -193,6 +201,16 @@ class Chess:
         return f"{color} won"
       
     return None
+  
+  
+  def killPiece(self, piecePosition):
+    """Vyhození figurky z hrací desky
+    
+    Args:
+        piecePosition ([int, int]): pozice figurky, kterou chceme vyhodit
+    """
+    self.__board[piecePosition] = None
+  
       
   def __printToTerminal(self):  
     """Vytiskne hrací desku do konzole
