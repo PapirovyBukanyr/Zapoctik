@@ -62,7 +62,7 @@ class MainView(QWidget):
 
         main_layout = QVBoxLayout()
 
-        title = QLabel("Příhoda Games")
+        title = QLabel("PříHoDa Games")
         title.setObjectName("AppName")  
         title.setAlignment(Qt.AlignCenter)  
         main_layout.addWidget(title)
