@@ -170,6 +170,12 @@ class MathQuestion(QWidget):
             self.showNormal()
         self.close()
 
+
+    def closeEvent(self, event):
+        self.kill_yourself()
+        event.accept()
+
+
     def jumpscare(self):
         original_image = cv2.imread("resources/jumpscare.jpg")
         if original_image is None:
