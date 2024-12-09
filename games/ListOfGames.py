@@ -81,7 +81,7 @@ class ListOfGames:
                     MathGame()),
                 
                 Game("Hledání krtka 🐀",
-                    "Hledání krtka je hra pro dva hráče. Cílem hry je najít krtka. Hra končí, když je krtka nalezen. Ten za sebou zanechává stopu.",
+                    "Hledání krtka je hra pro dva hráče. Cílem hry je najít krtka. Hra končí, když je krtek nalezen. Ten za sebou zanechává stopu.",
                     ChallengeAccepted()), 
                 
                 Game("Pexeso 🃏",
@@ -89,6 +89,6 @@ class ListOfGames:
                      Pexeso()),
                 
                 Game("Miny 💣",
-                    "Miny jsou hra pro dva hráče. Cílem hry je najít všechny miny a označit je vlajkou. Hra končí, když jsou všechny miny označeny, nebo když hráč najde minu. Vyhraje ten co položív více vlajek nebo neodpálí minu.",
+                    "Miny jsou hra pro dva hráče. Cílem hry je najít všechny miny a označit je vlajkou. Hra končí, když jsou všechny miny označeny nebo když hráč stoupne na minu. Vyhraje ten, co položí více vlajek nebo neodpálí minu.",
                     Mines())          
         ]  

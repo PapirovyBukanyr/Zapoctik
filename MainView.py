@@ -74,7 +74,7 @@ class MainView(QWidget):
         
         games = ListOfGames.getListOfGames()
         
-        games.append(Game("Náhodná hra ❓", "Náhodně vybere jednu z her", None))
+        games.append(Game("Náhodná hra ❓", "Náhodně vybere jednu z her.", None))
         
         for i, game in enumerate(games):
             button = QPushButton(game.name)

@@ -65,12 +65,12 @@ class ComplexQuestionGenerator(Question):
         elif randomQuestion == 1:
             self.questionText = f"Určete reálnou část komplexního čísla:"
             self.questionLatex = f"{self.complexNumberToLatex(complexNumber)}"
-            self.answer = self.absoluteValue(complexNumber.real)
+            self.answer = round(complexNumber.real)
             
         elif randomQuestion == 2:
             self.questionText = f"Určete imaginární část komplexního čísla:"
             self.questionLatex = f"{self.complexNumberToLatex(complexNumber)}"
-            self.answer = self.absoluteValue(complexNumber.imag)
+            self.answer = round(complexNumber.imag)
             
         elif randomQuestion == 3:
             self.questionText = f"Určete komplexně sdružené komplexní číslo k číslu (odpověď zadejte ve tvaru a+bi, a, bi):"
@@ -80,6 +80,6 @@ class ComplexQuestionGenerator(Question):
         elif randomQuestion == 4:
             self.questionText = f"Určete hodnotu výrazu:"
             self.questionLatex = f"({self.complexNumberToLatex(complexNumber)})\\\\cdot({self.complexNumberToLatex(complexNumber.conjugate())})"
-            self.answer = self.absoluteValue(complexNumber)**2
+            self.answer = round(complexNumber.real**2 + complexNumber.imag**2)
         
         return self
