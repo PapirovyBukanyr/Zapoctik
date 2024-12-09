@@ -14,6 +14,7 @@ class MathGame (GameTemplate):
         self.__board = MathGameBoard()
         self.__onTurn = Colors.WHITE
         self.__firstTime = False
+        self.withChoosePiece = True
         
         
     def getBoard(self, color=None):
