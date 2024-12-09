@@ -29,15 +29,15 @@ class ComplexQuestionGenerator(Question):
         """Převod komplexního čísla na LaTeX
         """
         if number.imag == 0:
-            return f"{number.real}"
+            return f"{round(number.real)}"
         
         if number.real == 0:
-            return f"{number.imag}i"
+            return f"{round(number.imag)}i"
         
         if number.imag < 0:
-            return f"{number.real}{number.imag}i"
+            return f"{round(number.real)}{round(number.imag)}i"
         
-        return f"{number.real}+{number.imag}i"
+        return f"{round(number.real)}+{round(number.imag)}i"
     
     
     def absoluteValue(self, number):
@@ -65,21 +65,21 @@ class ComplexQuestionGenerator(Question):
         elif randomQuestion == 1:
             self.questionText = f"Určete reálnou část komplexního čísla:"
             self.questionLatex = f"{self.complexNumberToLatex(complexNumber)}"
-            self.answer = self.absoluteValue(complexNumber.real)
+            self.answer = round(complexNumber.real)
             
         elif randomQuestion == 2:
             self.questionText = f"Určete imaginární část komplexního čísla:"
             self.questionLatex = f"{self.complexNumberToLatex(complexNumber)}"
-            self.answer = self.absoluteValue(complexNumber.imag)
+            self.answer = round(complexNumber.imag)
             
         elif randomQuestion == 3:
-            self.questionText = f"Určete komplexně sdružené komplexní číslo k číslu (odpověď zadejte ve tvaru a.0+b.0i, a.0, b.0i):"
+            self.questionText = f"Určete komplexně sdružené komplexní číslo k číslu (odpověď zadejte ve tvaru a+bi, a, bi):"
             self.questionLatex = f"{self.complexNumberToLatex(complexNumber)}"
             self.answer = self.complexNumberToLatex(complexNumber.conjugate())
             
         elif randomQuestion == 4:
             self.questionText = f"Určete hodnotu výrazu:"
             self.questionLatex = f"({self.complexNumberToLatex(complexNumber)})\\\\cdot({self.complexNumberToLatex(complexNumber.conjugate())})"
-            self.answer = self.absoluteValue(complexNumber)**2
+            self.answer = round(complexNumber.real**2 + complexNumber.imag**2)
         
         return self

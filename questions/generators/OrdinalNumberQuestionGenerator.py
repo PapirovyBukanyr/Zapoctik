@@ -99,7 +99,7 @@ class OrdinalNumberQuestionGenerator(Question):
                     self.answer = "1"
                     
                 else:
-                    self.answer = f"w^{a}"
+                    self.answer = f"w"
                 
             else:
                 self.answer = a ** b

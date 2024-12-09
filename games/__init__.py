@@ -12,6 +12,7 @@ from .connectFour import ConnectFour
 from .pexeso import Pexeso
 from .humanDoNotWorry import HumanDoNotWorry
 from .humanDoNotWorry import HumanDoNotWorryWithFogOfWar
+from .ListOfGames import Game
 
 # musi byt posledni, jinak velky spatny
 from .ListOfGames import ListOfGames 

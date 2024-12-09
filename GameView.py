@@ -107,6 +107,10 @@ class GameView(QWidget):
                 self.board_layout.addWidget(label, row, col) 
                 self.uiBoard[row][col] = label
                 
+    
+    def closeEvent(self, event):
+        self.questionView.kill_yourself()
+        event.accept()
                 
     def show_question(self):
         """Funkce pro zobrazení otázky
@@ -128,10 +132,10 @@ class GameView(QWidget):
         self.answered = correct
         
         if correct:
-            self.questionView.close()
+            self.questionView.kill_yourself()
             return
         
-        self.questionView.close()
+        self.questionView.kill_yourself()
         if self.game.numberOfPlayers == 4:
             self.player = self.player.changeColorFour()
         elif self.game.numberOfPlayers == 2:
@@ -273,7 +277,7 @@ class GameView(QWidget):
         Args:
             message (string): Výsledek hry
         """
-        if isinstance(self.game, TicTacToe):
+        if isinstance(self.game, TicTacToe) or isinstance(self.game, ConnectFour) or isinstance(self.game, chessTrackGame):
             if message == "B won":
                 message = "Vyhrál hráč O"
                 
@@ -289,6 +293,12 @@ class GameView(QWidget):
                 
             elif message == "B won":
                 message = "Vyhrál hráč černý"
+                
+            elif message == "G won":
+                message = "Vyhrál hráč zelený"
+                
+            elif message == "R won":
+                message = "Vyhrál hráč červený"
                 
             else:
                 message = "Remíza"
