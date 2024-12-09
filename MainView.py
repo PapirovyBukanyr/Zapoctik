@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QSpacerItem, QSizePolicy
 from GameView import *
 from games import *
+import random
 from PyQt5.QtGui import QIcon
 
 class MainView(QWidget):
@@ -12,7 +13,7 @@ class MainView(QWidget):
         """Konstruktor třídy
         """
         super().__init__()
-        self.setWindowTitle("Zápočtík Games")
+        self.setWindowTitle("PříHoDa Games")
         self.setFixedSize(500, 400)
         icon = QIcon("resources/logo.ico")  
         self.setWindowIcon(icon)
@@ -61,7 +62,7 @@ class MainView(QWidget):
 
         main_layout = QVBoxLayout()
 
-        title = QLabel("Zápočtík Games")
+        title = QLabel("PříHoDa Games")
         title.setObjectName("AppName")  
         title.setAlignment(Qt.AlignCenter)  
         main_layout.addWidget(title)
@@ -72,6 +73,8 @@ class MainView(QWidget):
         grid_layout = QGridLayout()
         
         games = ListOfGames.getListOfGames()
+        
+        games.append(Game("Náhodná hra ❓", "Náhodně vybere jednu z her", None))
         
         for i, game in enumerate(games):
             button = QPushButton(game.name)
@@ -94,6 +97,8 @@ class MainView(QWidget):
         Args:
             game (Game): objekt Game, který obsahuje název hry a objekt hry
         """
+        if game.game is None:
+            game = random.choice(ListOfGames.getListOfGames()[:-1])
         self.gameWindow = GameView(game.game, game.name)
         self.gameWindow.show()
         self.showMinimized()
