@@ -155,9 +155,6 @@ class GameView(QWidget):
                 
                 else:
                     self.make_move(row, col, False if button == "left" else True)
-        
-        else:
-            self.show_question()
             
     
     def choose_piece(self, row, col):
