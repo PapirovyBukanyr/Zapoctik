@@ -132,7 +132,7 @@ class GameView(QWidget):
         self.answered = correct
         
         if correct:
-            self.questionView.close()
+            self.questionView.kill_yourself()
             return
         
         self.questionView.kill_yourself()
@@ -277,7 +277,7 @@ class GameView(QWidget):
         Args:
             message (string): Výsledek hry
         """
-        if isinstance(self.game, TicTacToe):
+        if isinstance(self.game, TicTacToe) or isinstance(self.game, ConnectFour) or isinstance(self.game, chessTrackGame):
             if message == "B won":
                 message = "Vyhrál hráč O"
                 
@@ -293,6 +293,12 @@ class GameView(QWidget):
                 
             elif message == "B won":
                 message = "Vyhrál hráč černý"
+                
+            elif message == "G won":
+                message = "Vyhrál hráč zelený"
+                
+            elif message == "R won":
+                message = "Vyhrál hráč červený"
                 
             else:
                 message = "Remíza"

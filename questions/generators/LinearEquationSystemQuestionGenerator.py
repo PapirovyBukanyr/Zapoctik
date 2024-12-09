@@ -77,7 +77,7 @@ class LinearEquationSystemQuestionGenerator(Question):
             self.questionLatex = self.convert_to_latex(equations)
     
         except:
-            self.generateQuestion()
+            return self.generateQuestion()
             
         return self
 
