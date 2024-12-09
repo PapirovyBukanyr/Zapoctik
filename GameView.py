@@ -107,6 +107,10 @@ class GameView(QWidget):
                 self.board_layout.addWidget(label, row, col) 
                 self.uiBoard[row][col] = label
                 
+    
+    def closeEvent(self, event):
+        self.questionView.kill_yourself()
+        event.accept()
                 
     def show_question(self):
         """Funkce pro zobrazení otázky
@@ -131,7 +135,7 @@ class GameView(QWidget):
             self.questionView.close()
             return
         
-        self.questionView.close()
+        self.questionView.kill_yourself()
         if self.game.numberOfPlayers == 4:
             self.player = self.player.changeColorFour()
         elif self.game.numberOfPlayers == 2:
