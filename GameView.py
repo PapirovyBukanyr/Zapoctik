@@ -277,7 +277,7 @@ class GameView(QWidget):
         Args:
             message (string): Výsledek hry
         """
-        if isinstance(self.game, TicTacToe) or isinstance(self.game, ConnectFour) or isinstance(self.game, chessTrackGame):
+        if isinstance(self.game, TicTacToe) or isinstance(self.game, ConnectFour) or isinstance(self.game, ChessTrackGame):
             if message == "B won":
                 message = "Vyhrál hráč O"
                 
